@@ -2,7 +2,6 @@ $Id$
 
 Things still to do:
 
-  * create installation directories before installing to them
   * build fixes on Slackware 8.0
   * make sure BSD building still works
   * make doing "pv" then ^Z then "bg" then "fg" not need another "fg"
