@@ -1,3 +1,6 @@
+0.6.1 - NOT YET RELEASED
+  + block devices now have their size read correctly, so pv /dev/hda1 works
+
 0.6.0 - 3 August 2003
   + doing ^Z then "bg" then "fg" now continues displaying
 
