@@ -1,6 +1,7 @@
-0.8.x - NOT YET RELEASED
+x - NOT YET RELEASED
+  - decimal values now accepted for rate and size, eg "-L 1.23M"
   - code cleanup
-  - decimal values now accepted for rate and size, eg "1.23M"
+  - developers: "make help" now lists Makefile targets
 
 0.8.6 - 29 June 2004
   - use uu_lock() for terminal locking on FreeBSD

@@ -2,14 +2,45 @@
 # Rules for all phony targets.
 #
 
-.PHONY: all dep depend depclean make check test \
-  clean distclean cvsclean \
-  index manhtml indent indentclean update-po \
+.PHONY: all help make dep depend test check \
+  clean depclean indentclean distclean cvsclean \
+  index manhtml indent update-po \
   doc dist release \
   install uninstall \
   rpm srpm deb
 
 all: $(alltarg) $(CATALOGS)
+
+help:
+	@echo 'This Makefile has the following utility targets:'
+	@echo
+	@echo '  all             build all binary targets'
+	@echo '  doc             regenerate text version of man page'
+	@echo '  install         install compiled package and manual'
+	@echo '  uninstall       uninstall the package'
+	@echo '  check / test    run standardised tests on the compiled binary'
+	@echo
+	@echo 'Developer targets:'
+	@echo
+	@echo '  make            rebuild the Makefile (after adding new files)'
+	@echo '  dep / depend    rebuild .d (dependency) files'
+	@echo '  clean           remove .o (object) and .c~ (backup) files'
+	@echo '  depclean        remove .d (dependency) files'
+	@echo '  indentclean     remove files left over from "make indent"'
+	@echo '  distclean       remove everything not distributed'
+	@echo '  cvsclean        remove everything not in CVS'
+	@echo
+	@echo '  index           generate an HTML index of source code'
+	@echo '  manhtml         output HTML man page to stdout'
+	@echo '  indent          reformat all source files with "indent"'
+	@echo '  update-po       update the .po files'
+	@echo
+	@echo '  dist            create a source tarball for distribution'
+	@echo '  rpm             build a binary RPM (passes $RPMFLAGS to RPM)'
+	@echo '  srpm            build a source RPM (passes $RPMFLAGS to RPM)'
+	@echo '  deb             build a binary Debian package'
+	@echo '  release         dist+rpm+srpm'
+	@echo
 
 make:
 	echo > $(srcdir)/autoconf/make/filelist.mk~
