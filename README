@@ -73,4 +73,7 @@ Credit is also due to:
   Boris Folgmann <http://www.folgmann.com/en/>
     - reported cursor handling bug
 
+  Mathias Gumz
+    - reported NLS bug
+
 -----------------------------------------------------------------------------

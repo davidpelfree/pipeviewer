@@ -27,8 +27,14 @@ struct msgtable_s {
 	char *msgstr;
 };
 
+#if ENABLE_NLS
 struct msgtable_s *minigettext__gettable(char *);
-
+#else				/* ENABLE_NLS */
+struct msgtable_s *minigettext__gettable(char *)
+{
+	return NULL;
+}
+#endif				/* ENABLE_NLS */
 
 char *minisetlocale(char *a, char *b)
 {
@@ -94,8 +100,13 @@ char *minigettext(char *msgid)
 		return msgid;
 
 	for (i = 0; table[i].msgid; i++) {
-		if (strcmp(table[i].msgid, msgid) == 0)
+		if (strcmp(table[i].msgid, msgid) == 0) {
+			if (table[i].msgstr == 0)
+				return msgid;
+			if (table[i].msgstr[0] == 0)
+				return msgid;
 			return table[i].msgstr;
+		}
 	}
 
 	return msgid;
