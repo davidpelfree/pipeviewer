@@ -14,8 +14,6 @@
 #endif
 #include "options.h"
 
-#define HAVE_IPC 1
-
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>

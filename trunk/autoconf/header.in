@@ -14,6 +14,9 @@
 /* Define if you have getopt. */
 #undef HAVE_GETOPT
 
+/* Define if <sys/ipc.h> is available. */
+#undef HAVE_SYS_IPC_H
+
 /* NLS stuff. */
 #undef ENABLE_NLS
 #undef HAVE_LIBINTL_H
@@ -50,6 +53,11 @@
 # define fstat64 fstat
 # define open64 open
 # define lseek64 lseek
+#endif
+
+#undef HAVE_IPC
+#ifdef HAVE_SYS_IPC_H
+#define HAVE_IPC 1
 #endif
 
 /* EOF */
