@@ -256,7 +256,9 @@ void cursor_init(opts_t options)
  */
 void cursor_needreinit(void)
 {
-	cursor__needreinit = 1;
+	cursor__needreinit += 2;
+	if (cursor__needreinit > 3)
+		cursor__needreinit = 3;
 }
 #endif
 
@@ -274,7 +276,14 @@ void cursor_reinit(void)
 
 	cursor_lock(STDERR_FILENO);
 
-	cursor__needreinit = 0;
+	cursor__needreinit--;
+	if (cursor__y_offset < 1)
+		cursor__needreinit = 0;
+
+	if (cursor__needreinit > 0) {
+		cursor_unlock(STDERR_FILENO);
+		return;
+	}
 
 	tcgetattr(STDERR_FILENO, &tty);
 	tcgetattr(STDERR_FILENO, &old_tty);
@@ -314,6 +323,8 @@ void cursor_update(opts_t options, char *str)
 		cursor__y_lastread = cursor__y_start;
 	}
 
+	if (cursor__needreinit > 0)
+		return;
 #endif				/* HAVE_IPC */
 
 	y = cursor__y_start;
