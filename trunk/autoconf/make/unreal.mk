@@ -169,7 +169,7 @@ rpm: dist
 	mkdir rpm/SPECS rpm/BUILD rpm/SOURCES rpm/RPMS
 	grep -hsv ^macrofiles /usr/lib/rpm/rpmrc /etc/rpmrc $$HOME/.rpmrc \
 	  >> rpmrc
-	rpmbuild --rcfile=rpmrc -tb $(package)-$(version).tar.gz
+	rpmbuild $(RPMFLAGS) --rcfile=rpmrc -tb $(package)-$(version).tar.gz
 	mv rpm/RPMS/*/$(package)-*.rpm .
 	rm -rf rpm rpmmacros rpmrc
 
