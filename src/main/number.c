@@ -30,6 +30,32 @@ long long getnum_ll(char *str)
 		n += (str[0] - '0');
 	}
 
+	if (str[0]) {
+		while ((str[0] == ' ') || (str[0] == '\t'))
+			str++;
+		switch (str[0]) {
+		case 'k':
+		case 'K':
+			n = n << 10;
+			break;
+		case 'm':
+		case 'M':
+			n = n << 20;
+			break;
+		case 'g':
+		case 'G':
+			n = n << 30;
+			break;
+		case 't':
+		case 'T':
+			n = n << 30;
+			n = n << 10;
+			break;
+		default:
+			break;
+		}
+	}
+
 	return n;
 }
 

@@ -224,6 +224,8 @@ limit the transfer rate of a pipe.
 @item -L @var{RATE}
 @itemx --rate-limit @var{RATE}
 Limit the transfer to a maximum of @var{RATE} bytes per second.
+A suffix of "k", "m", "g", or "t" can be added to denote
+kilobytes (*1024), megabytes, and so on.
 
 @cindex Wait
 @cindex Wait until transfer starts
@@ -240,7 +242,8 @@ processed.
 @item -s @var{SIZE}
 @itemx --size @var{SIZE}
 Assume the total amount of data to be transferred is @var{SIZE} bytes when
-calculating percentages and ETAs.
+calculating percentages and ETAs.  The same suffixes of "k", "m"
+etc can be used as with @code{-L}.
 
 @cindex Update interval
 @cindex Interval
