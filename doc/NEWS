@@ -1,3 +1,6 @@
+0.8.6 - NOT YET RELEASED
+  - use uu_lock() for terminal locking on FreeBSD
+
 0.8.5 - 2 May 2004
   - cursor positioning (-c) reliability improved on systems with IPC
   - minor fix: made test 005 more reliable
