@@ -6,6 +6,10 @@
  * segment contains an integer which is the original "y" co-ordinate of the
  * first `pv' process.
  *
+ * However, some OSes (FreeBSD and MacOS X so far) don't allow locking of a
+ * terminal, so we fall back to non-IPC behaviour if terminal locking
+ * doesn't work.
+ *
  * Copyright 2004 Andrew Wood, distributed under the Artistic License.
  */
 
@@ -40,6 +44,7 @@ static int *cursor__y_top = 0;		 /* pointer to Y coord of topmost `pv' */
 static int cursor__y_lastread = 0;	 /* last value of __y_top seen */
 static int cursor__y_offset = 0;	 /* our Y offset from this top position */
 static int cursor__needreinit = 0;	 /* set if we need to reinit cursor pos */
+static int cursor__noipc = 0;		 /* set if we can't use IPC */
 #endif				/* HAVE_IPC */
 static int cursor__y_start = 0;		 /* our initial Y coordinate */
 
@@ -57,7 +62,7 @@ static void cursor_lock(int fd)
 	lock.l_len = 1;
 	while (fcntl(fd, F_SETLKW, &lock) < 0) {
 		if (errno != EINTR) {
-			fprintf(stderr, "%s\n", strerror(errno));
+			cursor__noipc = 1;
 			return;
 		}
 	}
@@ -216,12 +221,14 @@ void cursor_init(opts_t options)
 		close(fd);
 		return;
 	}
-#else				/* ! HAVE_IPC */
 
-	/*
-	 * Get current cursor position + 1.
-	 */
-	{
+	if (cursor__noipc) {
+#else				/* ! HAVE_IPC */
+	if (1) {
+#endif				/* HAVE_IPC */
+		/*
+		 * Get current cursor position + 1.
+		 */
 		struct termios tty;
 		struct termios old_tty;
 		char cpr[32];		 /* RATS: ignore (checked) */
@@ -243,8 +250,6 @@ void cursor_init(opts_t options)
 		if (cursor__y_start < 1)
 			options->cursor = 0;
 	}
-
-#endif				/* HAVE_IPC */
 
 	close(fd);
 }
@@ -314,17 +319,19 @@ void cursor_update(opts_t options, char *str)
 	int y;
 
 #ifdef HAVE_IPC
-	if (cursor__needreinit)
-		cursor_reinit();
+	if (!cursor__noipc) {
+		if (cursor__needreinit)
+			cursor_reinit();
 
-	cursor_ipccount();
-	if (cursor__y_lastread != *cursor__y_top) {
-		cursor__y_start = *cursor__y_top;
-		cursor__y_lastread = cursor__y_start;
+		cursor_ipccount();
+		if (cursor__y_lastread != *cursor__y_top) {
+			cursor__y_start = *cursor__y_top;
+			cursor__y_lastread = cursor__y_start;
+		}
+
+		if (cursor__needreinit > 0)
+			return;
 	}
-
-	if (cursor__needreinit > 0)
-		return;
 #endif				/* HAVE_IPC */
 
 	y = cursor__y_start;
@@ -336,7 +343,10 @@ void cursor_update(opts_t options, char *str)
 	 * scroll the screen (only if we're the first `pv'), and then move
 	 * our initial Y co-ordinate up.
 	 */
-	if ((cursor__y_start + cursor__pvmax) > options->height) {
+	if (
+	 ((cursor__y_start + cursor__pvmax) > options->height)
+	 && (!cursor__noipc)
+	) {
 		int offs;
 
 		offs =
@@ -359,7 +369,8 @@ void cursor_update(opts_t options, char *str)
 		}
 	}
 
-	y = cursor__y_start + cursor__y_offset;
+	if (!cursor__noipc)
+		y = cursor__y_start + cursor__y_offset;
 #endif				/* HAVE_IPC */
 
 	cursor_lock(STDERR_FILENO);
@@ -386,7 +397,7 @@ void cursor_fini(opts_t options)
 	y = cursor__y_start;
 
 #ifdef HAVE_IPC
-	if (cursor__pvmax > 0)
+	if ((cursor__pvmax > 0) && (!cursor__noipc))
 		y += cursor__pvmax - 1;
 #endif				/* HAVE_IPC */
 
