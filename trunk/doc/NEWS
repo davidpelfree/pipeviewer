@@ -1,3 +1,6 @@
+0.x - NOT YET RELEASED
+  + bugfix in "make index" (only of interest to developers)
+
 0.6.3 - 22 December 2003
   + fixed transient bug that reported "resource unavailable" occasionally
 

@@ -64,7 +64,7 @@ echo '</UL></P>'
 for FILE in $FILELIST; do
 
 	DIR=`dirname $FILE`
-	FUNCDEFS=`cproto -f1 -I. -Iinclude -I$DIR $FILE 2>/dev/null \
+	FUNCDEFS=`cproto -f1 -I. -Isrc/include -I$DIR $FILE 2>/dev/null \
 		  | sed -n 's/^.*[ *]\([^ *(]*\)(.*$/\1/p'`
 	FILEHEAD="`sed -n -e \
 	          '1,/\*\//{/\/\*/,/\*\//{s/^[\/ *]//;s/^\*[\/]*//;p;};}' \
