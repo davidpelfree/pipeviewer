@@ -22,6 +22,7 @@
 static int sig__old_stderr;            /* see sig__ttou() */
 static struct timeval sig__tstp_time;  /* see sig__tstp() / __cont() */
 struct timeval sig__toffset;    /* total time spent stopped */
+sig_atomic_t sig__newsize = 0;  /* whether we need to get term size again */
 
 
 /*
@@ -68,6 +69,8 @@ void sig__cont(int s)
 	struct timeval tv;
 	struct termios t;
 
+	sig__newsize = 1;
+
 	if (sig__tstp_time.tv_sec == 0) {
 		tcgetattr(STDERR_FILENO, &t);
 		t.c_lflag |= TOSTOP;
@@ -100,6 +103,15 @@ void sig__cont(int s)
 	tcgetattr(STDERR_FILENO, &t);
 	t.c_lflag |= TOSTOP;
 	tcsetattr(STDERR_FILENO, TCSANOW, &t);
+}
+
+
+/*
+ * Handle SIGWINCH (window size changed) by setting a flag.
+ */
+void sig__winch(int s)
+{
+	sig__newsize = 1;
 }
 
 
@@ -151,11 +163,20 @@ void sig_init(void)
 	sigemptyset(&(sa.sa_mask));
 	sa.sa_flags = 0;
 	sigaction(SIGCONT, &sa, NULL);
+
+	/*
+	 * Handle SIGWINCH by setting a flag to let the main loop know it
+	 * has to reread the terminal size.
+	 */
+	sa.sa_handler = sig__winch;
+	sigemptyset(&(sa.sa_mask));
+	sa.sa_flags = 0;
+	sigaction(SIGWINCH, &sa, NULL);
 }
 
 
 /*
- * Block SIGTSTP and SIGCONT.
+ * Stop reacting to SIGTSTP and SIGCONT.
  */
 void sig_nopause(void)
 {
@@ -166,7 +187,7 @@ void sig_nopause(void)
 	sa.sa_flags = 0;
 	sigaction(SIGTSTP, &sa, NULL);
 
-	sa.sa_handler = SIG_IGN;
+	sa.sa_handler = SIG_DFL;
 	sigemptyset(&(sa.sa_mask));
 	sa.sa_flags = 0;
 	sigaction(SIGCONT, &sa, NULL);
