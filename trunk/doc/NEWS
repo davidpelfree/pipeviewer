@@ -1,0 +1,56 @@
+$Id$
+
+0.4.3 - NOT YET RELEASED
+  + bugfix: <=> indicator no longer sticks at right hand edge
+  + pause/resume support - don't count time while stopped
+  + stop output when resumed in the background
+
+0.4.0 - 27 November 2002
+  + allow decimal interval values, eg 0.1, 0.5, etc
+  + some simple tests added (`make check')
+  + smoother throughput limiting (--rate-limit), now done in 0.1sec chunks
+  + bounds-check interval values (-i) - max update interval now 10 minutes
+  + more reliable non-blocking output to keep display updated
+  + no longer rely on atoll()
+  + don't output final blank line if --numeric
+  + use fcntl() instead of flock() for Solaris compatibility
+
+0.3.0 - 25 November 2002
+  + handle broken output pipe gracefully
+  + continue updating display even when output pipe is blocking
+
+0.2.6 - 21 October 2002
+  + we now ignore EINTR on select()
+  + variable-size buffer (still need to add code to change size)
+  + added (tentative) support for internationalisation
+  + removed superfluous --no-progress, etc options
+  + optimised transfer by using bigger buffers, based on st_blksize
+  + added --wait option to wait until transfer begins before showing progress
+  + added --rate-limit option to limit rate to a maximum throughput
+  + added --quiet option (no output at all) to be used with --rate-limit
+
+0.2.5 - 23 July 2002
+  + added [FILE]... arguments, like `cat'
+  + function separation in code
+  + some bug fixes related to numeric overflow
+
+0.2.3 - 19 July 2002
+  + Texinfo manual written, man page updated
+  + byte counter added
+
+0.2.0 - 18 July 2002
+  + ETA counter added
+  + screen width estimation added
+  + progress bar added
+
+0.1.0 - 17 July 2002
+  + main loop created
+  + rate counter added
+  + elapsed time counter added
+  + percentage calculation added
+
+0.0.1 - 16 July 2002
+  + package created
+  + first draft of man page written
+
+$Id$

@@ -1,0 +1,62 @@
+/*!NOINDEX*/
+/*
+ * $Id$
+ */
+
+/* Define if you have the getopt_long function. */
+#undef HAVE_GETOPT_LONG
+
+/* Define if you have standard C headers. */
+#undef STDC_HEADERS
+
+/* Define if you have "config.h" (yes, you have). */
+#undef HAVE_CONFIG_H
+
+/* Define if debugging is to be compiled in. */
+#undef DEBUG
+
+/* NLS stuff. */
+#undef ENABLE_NLS
+#undef HAVE_CATGETS
+#undef HAVE_GETTEXT
+#undef HAVE_LC_MESSAGES
+#undef HAVE_STPCPY
+#undef HAVE_STRING_H
+#undef HAVE_LOCALE_H
+#undef STDC_HEADERS
+#undef HAVE_MALLOC_H
+#undef HAVE_NL_TYPES_H
+#undef HAVE_SETLOCALE
+#undef HAVE_SETLOCALE_NULL
+#undef LOCALEDIR
+#undef HAVE_SETENV
+#undef HAVE_PUTENV
+#undef HAVE_UNISTD_H
+
+#ifdef ENABLE_NLS
+# include <libintl.h>
+# ifdef HAVE_LOCALE_H
+#  include <locale.h>
+# endif
+# define _(String)	gettext (String)
+# define N_(String)	gettext_noop (String)
+#else
+# define _(String) (String)
+#endif
+
+/* The name of the program. */
+#define PROGRAM_NAME	"progname"
+
+/* The name of the package. */
+#define PACKAGE		""
+
+/* The current package version. */
+#define VERSION		"0.0.0"
+
+/* Various identification and legal drivel. */
+#define COPYRIGHT_YEAR   _("2002")
+#define COPYRIGHT_HOLDER _("Andrew Wood <andrew.wood@ivarch.com>")
+#define PROJECT_HOMEPAGE "http://www.ivarch.com/programs/" PROGRAM_NAME ".shtml"
+#define BUG_REPORTS_TO   _("Andrew Wood <andrew.wood@ivarch.com>")
+
+/* EOF $Id$ */
