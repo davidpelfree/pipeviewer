@@ -151,12 +151,13 @@ void cursor_fini(opts_t options)
  * the final update so the rate is given as an average over the whole
  * transfer; otherwise the rate is "sl"/"esec", i.e. the current rate.
  */
-void main_display(opts_t opts, double esec, long long sl, long long tot)
+void main_display(opts_t opts, long double esec, long long sl, long long tot)
 {
 	static long percentage = 0;
-	static double prev_esec = 0;
-	double sincelast;
-	long double rate, transferred;
+	static long double prev_esec = 0;
+	static long double prev_rate = 0;
+	static long double prev_trans = 0;
+	long double sincelast, rate, transferred;
 	long eta;
 	char display[1024];
 	char tmp[1024];
@@ -167,15 +168,20 @@ void main_display(opts_t opts, double esec, long long sl, long long tot)
 
 	if (sl >= 0) {
 		sincelast = esec - prev_esec;
-		prev_esec = esec;
-		if (sincelast <= 0)
-			sincelast = 1;
-		rate = sl / sincelast;
+		if (sincelast <= 0.01) {
+			rate = prev_rate;
+			prev_trans += sl;
+		} else {
+			rate = ((long double)sl + prev_trans) / sincelast;
+			prev_esec = esec;
+			prev_trans = 0;
+		}
 	} else {
 		if (esec < 0.000001)
 			esec = 0.000001;
-		rate = tot / esec;
+		rate = ((long double)tot) / (long double)esec;
 	}
+	prev_rate = rate;
 
 	if (rate > 0) percentage += 2;
 	if (percentage > 199) percentage = 0;
