@@ -67,5 +67,15 @@ make install
 %doc README doc/NEWS doc/TODO doc/COPYING
 
 %changelog
+* Mon Dec 22 2003 Andrew Wood <andrew.wood@ivarch.com>
+- Fixed a minor bug that occasionally reported "resource unavailable".
+
+* Wed Aug  6 2003 Andrew Wood <andrew.wood@ivarch.com>
+- Block devices now have their size read correctly, so pv /dev/hda1 works
+- Minor code cleanups (mainly removal of CVS "Id" tags)
+
+* Sun Aug  3 2003 Andrew Wood <andrew.wood@ivarch.com>
+- Doing ^Z then "bg" then "fg" now continues displaying
+
 * Tue Jul 16 2002 Andrew Wood <andrew.wood@ivarch.com>
-- first draft of spec file created
+- First draft of spec file created.
