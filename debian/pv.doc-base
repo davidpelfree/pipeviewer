@@ -4,7 +4,7 @@ Author: Andrew Wood
 Abstract: This manual describes what pv is
  and how it can be used to
  monitor the progress of data through a pipe.
-Section: shells
+Section: Apps/Tools
 
 Format: HTML
 Index: /usr/share/doc/pv/manual.html
