@@ -1,4 +1,4 @@
-.TH @UCPACKAGE@ 1 "February 2004" Linux "User Manuals"
+.TH @UCPACKAGE@ 1 "April 2004" Linux "User Manuals"
 .SH NAME
 @PACKAGE@ \- monitor the progress of data through a pipe
 .SH SYNOPSIS
@@ -128,7 +128,8 @@ option is being used on its own to just limit the transfer rate of a pipe.
 .B \-L RATE, \-\-rate-limit RATE
 Limit the transfer to a maximum of
 .B RATE
-bytes per second.
+bytes per second.  A suffix of "k", "m", "g", or "t" can be added to denote
+kilobytes (*1024), megabytes, and so on.
 .TP
 .B \-W, \-\-wait
 Wait until the first byte has been transferred before showing any progress
@@ -142,7 +143,9 @@ which require a passphrase before data can be processed.
 .B \-s SIZE, \-\-size SIZE
 Assume the total amount of data to be transferred is
 .B SIZE
-bytes when calculating percentages and ETAs.
+bytes when calculating percentages and ETAs.  The same suffixes of "k", "m"
+etc can be used as with
+.BR -s .
 .TP
 .B \-i SEC, \-\-interval SEC
 Wait

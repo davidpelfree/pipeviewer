@@ -1,3 +1,6 @@
+0.8.2 - NOT YET RELEASED
+  + allow k,m,g,t suffixes on numbers
+
 0.8.1 - 19 April 2004
   + bugfix in cursor positioning (-c)
 
