@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2004-04-24 23:25+0100\n"
+"POT-Creation-Date: 2004-04-27 23:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,43 +14,43 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/main/display.c:88
+#: src/main/cursor.c:53
 msgid "failed to open terminal"
 msgstr ""
 
-#: src/main/display.c:246
+#: src/main/display.c:157
 msgid "GB"
 msgstr ""
 
-#: src/main/display.c:249
+#: src/main/display.c:160
 msgid "MB"
 msgstr ""
 
-#: src/main/display.c:252
+#: src/main/display.c:163
 msgid "kB"
 msgstr ""
 
-#: src/main/display.c:254
+#: src/main/display.c:165
 msgid "B"
 msgstr ""
 
-#: src/main/display.c:269
+#: src/main/display.c:180
 msgid "GB/s"
 msgstr ""
 
-#: src/main/display.c:272
+#: src/main/display.c:183
 msgid "MB/s"
 msgstr ""
 
-#: src/main/display.c:275
+#: src/main/display.c:186
 msgid "kB/s"
 msgstr ""
 
-#: src/main/display.c:277
+#: src/main/display.c:188
 msgid "B/s "
 msgstr ""
 
-#: src/main/display.c:288
+#: src/main/display.c:199
 msgid "ETA"
 msgstr ""
 

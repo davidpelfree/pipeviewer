@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2004-04-24 23:25+0100\n"
+"POT-Creation-Date: 2004-04-27 23:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,43 +14,43 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/main/display.c:88
+#: src/main/cursor.c:53
 msgid "failed to open terminal"
 msgstr "erro abrindo o terminal"
 
-#: src/main/display.c:246
+#: src/main/display.c:157
 msgid "GB"
 msgstr "GB"
 
-#: src/main/display.c:249
+#: src/main/display.c:160
 msgid "MB"
 msgstr "MB"
 
-#: src/main/display.c:252
+#: src/main/display.c:163
 msgid "kB"
 msgstr "kB"
 
-#: src/main/display.c:254
+#: src/main/display.c:165
 msgid "B"
 msgstr "B"
 
-#: src/main/display.c:269
+#: src/main/display.c:180
 msgid "GB/s"
 msgstr "GB/s"
 
-#: src/main/display.c:272
+#: src/main/display.c:183
 msgid "MB/s"
 msgstr "MB/s"
 
-#: src/main/display.c:275
+#: src/main/display.c:186
 msgid "kB/s"
 msgstr "kB/s"
 
-#: src/main/display.c:277
+#: src/main/display.c:188
 msgid "B/s "
 msgstr "B/s "
 
-#: src/main/display.c:288
+#: src/main/display.c:199
 msgid "ETA"
 msgstr "ETA"
 
@@ -611,56 +611,3 @@ msgstr "Para maiores informações, por favor digite `%s --license'."
 #, fuzzy, c-format
 msgid "For more information, please run `%s -l'."
 msgstr "Para maiores informações, por favor digite `%s -l'."
-
-#~ msgid ""
-#~ "Parts of this program may be copyright (C) Free Software\n"
-#~ "Foundation, Inc. and are distributed under the terms of the\n"
-#~ "GNU Lesser General Public License."
-#~ msgstr ""
-#~ "Trechos deste programa podem ter copyright (C) da Free Software\n"
-#~ "Foundation, Inc. e por isso são distribuídos sob os termos da\n"
-#~ "Licença Pública Geral de Bibliotecas da GNU (LGPL)."
-
-#~ msgid ""
-#~ "For a copy of the GNU Lesser General Public License, please see\n"
-#~ "http://www.gnu.org/ or write to the Free Software Foundation, Inc.,\n"
-#~ "59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
-#~ msgstr ""
-#~ "Para obter uma cópia da Licença Pública Geral de Bibliotecas da GNU "
-#~ "(LGPL),\n"
-#~ "por favor acesso o site http://www.gnu.org/ ou escreva para:\n"
-#~ "Free Software Foundation, Inc.\n"
-#~ "59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
-
-#~ msgid "%s: option `%s' is ambiguous\n"
-#~ msgstr "%s: opção `%s' é ambígua\n"
-
-#~ msgid "%s: option `--%s' doesn't allow an argument\n"
-#~ msgstr "%s: opção `--%s' não utiliza argumentos\n"
-
-#~ msgid "%s: option `%c%s' doesn't allow an argument\n"
-#~ msgstr "%s: opção `%c%s' não utiliza argumentos\n"
-
-#~ msgid "%s: option `%s' requires an argument\n"
-#~ msgstr "%s: opção `%s' necessita de argumentos\n"
-
-#~ msgid "%s: unrecognized option `--%s'\n"
-#~ msgstr "%s: opção desconhecida `--%s'\n"
-
-#~ msgid "%s: unrecognized option `%c%s'\n"
-#~ msgstr "%s: opção desconhecida `%c%s'\n"
-
-#~ msgid "%s: illegal option -- %c\n"
-#~ msgstr "%s: opção inválida -- %c\n"
-
-#~ msgid "%s: invalid option -- %c\n"
-#~ msgstr "%s: opção inválida -- %c\n"
-
-#~ msgid "%s: option requires an argument -- %c\n"
-#~ msgstr "%s: opção necessita de argumentos -- %c\n"
-
-#~ msgid "%s: option `-W %s' is ambiguous\n"
-#~ msgstr "%s: opção `-W %s' é ambígua\n"
-
-#~ msgid "%s: option `-W %s' doesn't allow an argument\n"
-#~ msgstr "%s: opção `-W %s' não utiliza argumentos\n"
