@@ -139,7 +139,7 @@ void cursor_fini(opts_t options)
 		cursor__y = 10000;
 
 	sprintf(tmp, "\033[%dH\n", cursor__y);	/* RATS: ignore */
-	write(STDERR_FILENO, tmp, strlen(tmp));
+	write(STDERR_FILENO, tmp, strlen(tmp));	/* RATS: ignore */
 
 	lock.l_type = F_UNLCK;
 	lock.l_whence = SEEK_SET;
@@ -211,7 +211,7 @@ void main_display(opts_t opts, long double esec, long long sl,
 	if (display == NULL) {
 		dispbufsz = opts->width + 80;
 		if (opts->name)
-			dispbufsz += strlen(opts->name);
+			dispbufsz += strlen(opts->name);	/* RATS: ignore */
 		display = malloc(dispbufsz + 16);
 		if (display == NULL)
 			return;
@@ -227,7 +227,7 @@ void main_display(opts_t opts, long double esec, long long sl,
 		} else {
 			sprintf(display, "%ld\n", percentage);
 		}
-		write(STDERR_FILENO, display, strlen(display));
+		write(STDERR_FILENO, display, strlen(display));	/* RATS: ignore */
 		return;
 	}
 
@@ -297,8 +297,10 @@ void main_display(opts_t opts, long double esec, long long sl,
 			if (percentage > 100000)
 				percentage = 100000;
 			sprintf(tmp2, "%2ld%%", percentage);
-			avail = opts->width - strlen(display)
-			    - strlen(tmp) - strlen(tmp2) - 3;
+			avail = opts->width
+			    - strlen(display)	/* RATS: ignore */
+			    - strlen(tmp)	/* RATS: ignore */
+			    - strlen(tmp2) - 3;	/* RATS: ignore */
 			for (i = 0; i < (avail * percentage) / 100 - 1;
 			     i++) {
 				if (i < avail)
@@ -315,8 +317,9 @@ void main_display(opts_t opts, long double esec, long long sl,
 			strcat(display, tmp2);	/* RATS: ignore (OK) */
 		} else {
 			int p = percentage;
-			avail = opts->width - strlen(display)
-			    - strlen(tmp) - 5;
+			avail = opts->width
+			    - strlen(display)	/* RATS: ignore */
+			    - strlen(tmp) - 5;	/* RATS: ignore */
 			if (p > 100)
 				p = 200 - p;
 			for (i = 0; i < (avail * p) / 100; i++) {
@@ -340,15 +343,18 @@ void main_display(opts_t opts, long double esec, long long sl,
 		lock.l_len = 1;
 		fcntl(STDERR_FILENO, F_SETLKW, &lock);
 		sprintf(tmp, "\033[%dH", cursor__y);
-		write(STDERR_FILENO, tmp, strlen(tmp));
-		write(STDERR_FILENO, display, strlen(display));
+		write(STDERR_FILENO, tmp,
+		      strlen(tmp));		/* RATS: ignore */
+		write(STDERR_FILENO, display,
+		      strlen(display));		/* RATS: ignore */
 		lock.l_type = F_UNLCK;
 		lock.l_whence = SEEK_SET;
 		lock.l_start = 0;
 		lock.l_len = 1;
 		fcntl(STDERR_FILENO, F_SETLK, &lock);
 	} else {
-		write(STDERR_FILENO, display, strlen(display));
+		write(STDERR_FILENO, display,
+		      strlen(display));		/* RATS: ignore */
 		write(STDERR_FILENO, "\r", 1);
 	}
 
