@@ -31,6 +31,7 @@ struct opts_s {           /* structure describing run-time options */
 	unsigned long long size;       /* total size of data */
 	double interval;               /* interval between updates */
 	unsigned int width;            /* screen width */
+	unsigned int height;           /* screen height */
 	char *name;                    /* process name, if any */
 	int argc;                      /* number of non-option arguments */
 	char **argv;                   /* array of non-option arguments */

@@ -37,7 +37,7 @@ extern sig_atomic_t sig__newsize;
 /*
  * Fill in options->width with the current terminal size, if possible.
  */
-void get_width(opts_t options)
+void get_screensize(opts_t options)
 {
 #ifdef TIOCGWINSZ
 	struct winsize wsz;
@@ -45,6 +45,7 @@ void get_width(opts_t options)
 	if (isatty(STDERR_FILENO)) {
 		if (ioctl(STDERR_FILENO, TIOCGWINSZ, &wsz) == 0) {
 			options->width = wsz.ws_col;
+			options->height = wsz.ws_row;
 		}
 	}
 #endif
@@ -234,7 +235,7 @@ int main_loop(opts_t options)
 
 		if (sig__newsize) {
 			sig__newsize = 0;
-			get_width(options);
+			get_screensize(options);
 		}
 
 		main_display(options, elapsed, since_last, total_written);
@@ -291,11 +292,36 @@ int main(int argc, char **argv)
 		options->no_op = 1;
 	}
 
-	if (options->width == 0)
-		get_width(options);
+	if (options->width == 0) {
+		int tmpheight;
+		tmpheight = options->height;
+		get_screensize(options);
+		if (tmpheight > 0)
+			options->height = tmpheight;
+	}
 
+	if (options->height == 0) {
+		int tmpwidth;
+		tmpwidth = options->width;
+		get_screensize(options);
+		if (tmpwidth > 0)
+			options->width = tmpwidth;
+	}
+
+	/*
+	 * Width and height bounds checking (and defaults).
+	 */
 	if (options->width < 1)
 		options->width = 80;
+
+	if (options->height < 1)
+		options->height = 25;
+
+	if (options->width > 999999)
+		options->width = 999999;
+
+	if (options->height > 999999)
+		options->height = 999999;
 
 	/* Try and make standard output use non-blocking I/O */
 	fcntl(STDOUT_FILENO, F_SETFL,
