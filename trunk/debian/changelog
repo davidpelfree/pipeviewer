@@ -1,3 +1,9 @@
+pv (0.9.0-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Mon, 22 Nov 2004 21:59:27 +0100
+
 pv (0.8.6-1) unstable; urgency=low
 
   * New upstream release
