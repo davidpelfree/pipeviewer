@@ -35,7 +35,7 @@ sig_atomic_t sig__newsize = 0;		 /* whether we need to get term size again */
  * subsequent SIGCONT we can try writing to the terminal again, in case we
  * get backgrounded and later get foregrounded again.
  */
-void sig__ttou(int s)
+static void sig__ttou(int s)
 {
 	int fd;
 
@@ -55,7 +55,7 @@ void sig__ttou(int s)
  * Handle SIGTSTP (stop typed at tty) by storing the time the signal
  * happened for later use by sig__cont(), and then stopping the process.
  */
-void sig__tstp(int s)
+static void sig__tstp(int s)
 {
 	gettimeofday(&sig__tstp_time, NULL);
 	raise(SIGSTOP);
@@ -67,7 +67,7 @@ void sig__tstp(int s)
  * last SIGTSTP to the elapsed time offset, and by trying to write to the
  * terminal again (by replacing the /dev/null stderr with the old stderr).
  */
-void sig__cont(int s)
+static void sig__cont(int s)
 {
 	struct timeval tv;
 	struct termios t;
@@ -119,7 +119,7 @@ void sig__cont(int s)
 /*
  * Handle SIGWINCH (window size changed) by setting a flag.
  */
-void sig__winch(int s)
+static void sig__winch(int s)
 {
 	sig__newsize = 1;
 }
@@ -139,7 +139,8 @@ void sig_init(void)
 	sig__toffset.tv_usec = 0;
 
 	/*
-	 * Ignore SIGPIPE
+	 * Ignore SIGPIPE, so we don't die if stdout is a pipe and the other
+	 * end closes unexpectedly.
 	 */
 	sa.sa_handler = SIG_IGN;
 	sigemptyset(&(sa.sa_mask));
@@ -148,7 +149,7 @@ void sig_init(void)
 
 	/*
 	 * Handle SIGTTOU by continuing with output switched off, so that we
-	 * can be stopped and backgrounded without messing up the terminal
+	 * can be stopped and backgrounded without messing up the terminal.
 	 */
 	sa.sa_handler = sig__ttou;
 	sigemptyset(&(sa.sa_mask));
@@ -157,7 +158,7 @@ void sig_init(void)
 
 	/*
 	 * Handle SIGTSTP by storing the time the signal happened for later
-	 * use by sig__cont(), and then stopping the process
+	 * use by sig__cont(), and then stopping the process.
 	 */
 	sa.sa_handler = sig__tstp;
 	sigemptyset(&(sa.sa_mask));
@@ -167,7 +168,7 @@ void sig_init(void)
 	/*
 	 * Handle SIGCONT by adding the elapsed time since the last SIGTSTP
 	 * to the elapsed time offset, and by trying to write to the
-	 * terminal again
+	 * terminal again.
 	 */
 	sa.sa_handler = sig__cont;
 	sigemptyset(&(sa.sa_mask));
@@ -224,10 +225,10 @@ void sig_allowpause(void)
 
 
 /*
- * If we'd redirected stderr to /dev/null, check every second or so to see
- * whether we can write to the terminal again - this is so that if we get
- * backgrounded, then foregrounded again, we start writing to the terminal
- * again.
+ * If we have redirected stderr to /dev/null, check every second or so to
+ * see whether we can write to the terminal again - this is so that if we
+ * get backgrounded, then foregrounded again, we start writing to the
+ * terminal again.
  */
 void sig_checkbg(void)
 {

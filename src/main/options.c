@@ -28,13 +28,13 @@ int getnum_i(char *);
 /*
  * Free an opts_t object.
  */
-void parse_options__destroy(opts_t object)
+void opts_free(opts_t opts)
 {
-	if (!object)
+	if (!opts)
 		return;
-	if (object->argv)
-		free(object->argv);
-	free(object);
+	if (opts->argv)
+		free(opts->argv);
+	free(opts);
 }
 
 
@@ -48,7 +48,7 @@ void parse_options__destroy(opts_t object)
  * aren't copied anywhere, just the pointers are copied, so make sure the
  * command line data isn't overwritten or argv[1] free()d or whatever.
  */
-opts_t parse_options(int argc, char **argv)
+opts_t opts_parse(int argc, char **argv)
 {
 #ifdef HAVE_GETOPT_LONG
 	struct option long_options[] = {
@@ -77,10 +77,10 @@ opts_t parse_options(int argc, char **argv)
 #endif
 	char *short_options = "hlVpterbfnqcL:Ws:i:w:H:N:";
 	int c, numopts;
-	opts_t options;
+	opts_t opts;
 
-	options = calloc(1, sizeof(*options));
-	if (!options) {
+	opts = calloc(1, sizeof(*opts));
+	if (!opts) {
 		fprintf(stderr,		    /* RATS: ignore */
 			_("%s: option structure allocation failed (%s)"),
 			argv[0], strerror(errno));
@@ -88,25 +88,23 @@ opts_t parse_options(int argc, char **argv)
 		return 0;
 	}
 
-	options->program_name = argv[0];
+	opts->program_name = argv[0];
 
-	options->destructor = parse_options__destroy;
-
-	options->argc = 0;
-	options->argv = calloc(argc + 1, sizeof(char *));
-	if (!options->argv) {
+	opts->argc = 0;
+	opts->argv = calloc(argc + 1, sizeof(char *));
+	if (!opts->argv) {
 		fprintf(stderr,		    /* RATS: ignore */
 			_
 			("%s: option structure argv allocation failed (%s)"),
 			argv[0], strerror(errno));
 		fprintf(stderr, "\n");
-		options->destructor(options);
+		opts_free(opts);
 		return 0;
 	}
 
 	numopts = 0;
 
-	options->interval = 1;
+	opts->interval = 1;
 
 	do {
 #ifdef HAVE_GETOPT_LONG
@@ -122,73 +120,73 @@ opts_t parse_options(int argc, char **argv)
 		switch (c) {
 		case 'h':
 			display_help();
-			options->do_nothing = 1;
-			return options;
+			opts->do_nothing = 1;
+			return opts;
 			break;
 		case 'l':
 			display_license();
-			options->do_nothing = 1;
-			return options;
+			opts->do_nothing = 1;
+			return opts;
 			break;
 		case 'V':
 			display_version();
-			options->do_nothing = 1;
-			return options;
+			opts->do_nothing = 1;
+			return opts;
 			break;
 		case 'p':
-			options->progress = 1;
+			opts->progress = 1;
 			numopts++;
 			break;
 		case 't':
-			options->timer = 1;
+			opts->timer = 1;
 			numopts++;
 			break;
 		case 'e':
-			options->eta = 1;
+			opts->eta = 1;
 			numopts++;
 			break;
 		case 'r':
-			options->rate = 1;
+			opts->rate = 1;
 			numopts++;
 			break;
 		case 'b':
-			options->bytes = 1;
+			opts->bytes = 1;
 			numopts++;
 			break;
 		case 'f':
-			options->force = 1;
+			opts->force = 1;
 			break;
 		case 'n':
-			options->numeric = 1;
+			opts->numeric = 1;
 			numopts++;
 			break;
 		case 'q':
-			options->no_op = 1;
+			opts->no_op = 1;
 			numopts++;
 			break;
 		case 'c':
-			options->cursor = 1;
+			opts->cursor = 1;
 			break;
 		case 'L':
-			options->rate_limit = getnum_ll(optarg);
+			opts->rate_limit = getnum_ll(optarg);
 			break;
 		case 'W':
-			options->wait = 1;
+			opts->wait = 1;
 			break;
 		case 's':
-			options->size = getnum_ll(optarg);
+			opts->size = getnum_ll(optarg);
 			break;
 		case 'i':
-			options->interval = getnum_d(optarg);
+			opts->interval = getnum_d(optarg);
 			break;
 		case 'w':
-			options->width = getnum_i(optarg);
+			opts->width = getnum_i(optarg);
 			break;
 		case 'H':
-			options->height = getnum_i(optarg);
+			opts->height = getnum_i(optarg);
 			break;
 		case 'N':
-			options->name = optarg;
+			opts->name = optarg;
 			break;
 		default:
 #ifdef HAVE_GETOPT_LONG
@@ -201,32 +199,40 @@ opts_t parse_options(int argc, char **argv)
 				argv[0]);
 #endif
 			fprintf(stderr, "\n");
-			options->destructor(options);
+			opts_free(opts);
 			return 0;
 			break;
 		}
 
 	} while (c != -1);
 
+	/*
+	 * Default options: -pterb
+	 */
 	if (numopts == 0) {
-		options->progress = 1;
-		options->timer = 1;
-		options->eta = 1;
-		options->rate = 1;
-		options->bytes = 1;
+		opts->progress = 1;
+		opts->timer = 1;
+		opts->eta = 1;
+		opts->rate = 1;
+		opts->bytes = 1;
 	}
 
-	/* Interval must be at least 0.1 second at at most 10 minutes */
-	if (options->interval < 0.1)
-		options->interval = 0.1;
-	if (options->interval > 600)
-		options->interval = 600;
+	/*
+	 * Interval must be at least 0.1 second, and at most 10 minutes.
+	 */
+	if (opts->interval < 0.1)
+		opts->interval = 0.1;
+	if (opts->interval > 600)
+		opts->interval = 600;
 
+	/*
+	 * Store remaining command-line arguments.
+	 */
 	while (optind < argc) {
-		options->argv[options->argc++] = argv[optind++];
+		opts->argv[opts->argc++] = argv[optind++];
 	}
 
-	return options;
+	return opts;
 }
 
 /* EOF */

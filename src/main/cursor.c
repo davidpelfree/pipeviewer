@@ -74,7 +74,7 @@ static void cursor_lock(int fd)
 #ifdef USE_UU_LOCK
 			char *ttyfile;
 
-			ttyfile = ttyname(STDERR_FILENO);   /* RATS: ignore (unimportant) */
+			ttyfile = ttyname(STDERR_FILENO);	/* RATS: ignore (unimportant) */
 			if ((ttyfile) && (uu_lock(ttyfile) == 0)) {
 				cursor__uulock = 1;
 			} else {
@@ -99,7 +99,7 @@ static void cursor_unlock(int fd)
 #ifdef USE_UU_LOCK
 	if (cursor__uulock) {
 		char *ttyfile;
-		ttyfile = ttyname(STDERR_FILENO);   /* RATS: ignore (unimportant) */
+		ttyfile = ttyname(STDERR_FILENO);	/* RATS: ignore (unimportant) */
 		if (ttyfile) {
 			uu_unlock(ttyfile);
 		}
@@ -150,14 +150,19 @@ static void cursor_ipccount(void)
  * count" of one, and so no initialisation occurs. So, we lock the terminal
  * with cursor_lock() while we are attaching and checking.
  */
-static int cursor_ipcinit(opts_t options, char *ttyfile, int terminalfd)
+static int cursor_ipcinit(opts_t opts, char *ttyfile, int terminalfd)
 {
 	int key;
 
+	/*
+	 * Base the key for the shared memory segment on our current tty, so
+	 * we don't end up interfering in any way with instances of `pv'
+	 * running on another terminal.
+	 */
 	key = ftok(ttyfile, 'p');
 	if (key < 0) {
 		fprintf(stderr, "%s: %s: %s\n",
-			options->program_name,
+			opts->program_name,
 			_("failed to open terminal"), strerror(errno));
 		return 1;
 	}
@@ -165,7 +170,7 @@ static int cursor_ipcinit(opts_t options, char *ttyfile, int terminalfd)
 	cursor_lock(terminalfd);
 	if (cursor__noipc) {
 		fprintf(stderr, "%s: %s: %s\n",
-			options->program_name,
+			opts->program_name,
 			_("failed to lock terminal"), strerror(errno));
 		return 1;
 	}
@@ -173,7 +178,7 @@ static int cursor_ipcinit(opts_t options, char *ttyfile, int terminalfd)
 	cursor__shmid = shmget(key, sizeof(int), 0600 | IPC_CREAT);
 	if (cursor__shmid < 0) {
 		fprintf(stderr, "%s: %s: %s\n",
-			options->program_name,
+			opts->program_name,
 			_("failed to open terminal"), strerror(errno));
 		cursor_unlock(terminalfd);
 		return 1;
@@ -230,35 +235,40 @@ static int cursor_ipcinit(opts_t options, char *ttyfile, int terminalfd)
 /*
  * Initialise the terminal for cursor positioning.
  */
-void cursor_init(opts_t options)
+void cursor_init(opts_t opts)
 {
 	char *ttyfile;
 	int fd;
 
-	if (!options->cursor)
+	if (!opts->cursor)
 		return;
 
 	ttyfile = ttyname(STDERR_FILENO);   /* RATS: ignore (unimportant) */
 	if (!ttyfile) {
-		options->cursor = 0;
+		opts->cursor = 0;
 		return;
 	}
 
 	fd = open(ttyfile, O_RDWR);	    /* RATS: ignore (no race) */
 	if (fd < 0) {
 		fprintf(stderr, "%s: %s: %s\n",
-			options->program_name,
+			opts->program_name,
 			_("failed to open terminal"), strerror(errno));
-		options->cursor = 0;
+		opts->cursor = 0;
 		return;
 	}
 #ifdef HAVE_IPC
-	if (cursor_ipcinit(options, ttyfile, fd)) {
-		options->cursor = 0;
+	if (cursor_ipcinit(opts, ttyfile, fd)) {
+		opts->cursor = 0;
 		close(fd);
 		return;
 	}
 
+	/*
+	 * If we are not using IPC, then we need to get the current Y
+	 * co-ordinate. If we are using IPC, then the cursor_ipcinit()
+	 * function takes care of this in a more multi-process-friendly way.
+	 */
 	if (cursor__noipc) {
 #else				/* ! HAVE_IPC */
 	if (1) {
@@ -285,7 +295,7 @@ void cursor_init(opts_t options)
 		cursor_unlock(fd);
 
 		if (cursor__y_start < 1)
-			options->cursor = 0;
+			opts->cursor = 0;
 	}
 
 	close(fd);
@@ -314,7 +324,7 @@ void cursor_reinit(void)
 {
 	struct termios tty;
 	struct termios old_tty;
-	char cpr[32];		 /* RATS: ignore (checked) */
+	char cpr[32];			 /* RATS: ignore (checked) */
 
 	cursor_lock(STDERR_FILENO);
 
@@ -333,7 +343,7 @@ void cursor_reinit(void)
 	tcsetattr(STDERR_FILENO, TCSANOW | TCSAFLUSH, &tty);
 	write(STDERR_FILENO, "\033[6n", 4);
 	memset(cpr, 0, sizeof(cpr));
-	read(STDERR_FILENO, cpr, 6);   /* RATS: ignore (OK) */
+	read(STDERR_FILENO, cpr, 6);	    /* RATS: ignore (OK) */
 	cursor__y_start = getnum_i(cpr + 2);
 	tcsetattr(STDERR_FILENO, TCSANOW | TCSAFLUSH, &old_tty);
 
@@ -350,7 +360,7 @@ void cursor_reinit(void)
  * Output a single-line update, moving the cursor to the correct position to
  * do so.
  */
-void cursor_update(opts_t options, char *str)
+void cursor_update(opts_t opts, char *str)
 {
 	char pos[32];			 /* RATS: ignore (checked OK) */
 	int y;
@@ -380,23 +390,25 @@ void cursor_update(opts_t options, char *str)
 	 * scroll the screen (only if we're the first `pv'), and then move
 	 * our initial Y co-ordinate up.
 	 */
-	if (
-	 ((cursor__y_start + cursor__pvmax) > options->height)
-	 && (!cursor__noipc)
-	) {
+	if (((cursor__y_start + cursor__pvmax) > opts->height)
+	    && (!cursor__noipc)
+	    ) {
 		int offs;
 
 		offs =
-		    ((cursor__y_start + cursor__pvmax) - options->height);
+		    ((cursor__y_start + cursor__pvmax) - opts->height);
 
 		cursor__y_start -= offs;
 		if (cursor__y_start < 1)
 			cursor__y_start = 1;
 
+		/*
+		 * Scroll the screen if we're the first `pv'.
+		 */
 		if (cursor__y_offset == 0) {
 			cursor_lock(STDERR_FILENO);
 
-			sprintf(pos, "\033[%d;1H", options->height);
+			sprintf(pos, "\033[%d;1H", opts->height);
 			write(STDERR_FILENO, pos, strlen(pos));
 			for (; offs > 0; offs--) {
 				write(STDERR_FILENO, "\n", 1);
@@ -410,9 +422,15 @@ void cursor_update(opts_t options, char *str)
 		y = cursor__y_start + cursor__y_offset;
 #endif				/* HAVE_IPC */
 
-	cursor_lock(STDERR_FILENO);
-
+	/*
+	 * Keep the Y co-ordinate within sensible bounds, so we can never
+	 * overflow the "pos" buffer.
+	 */
+	if ((y < 1) || (y > 999999))
+		y = 1;
 	sprintf(pos, "\033[%d;1H", y);
+
+	cursor_lock(STDERR_FILENO);
 
 	write(STDERR_FILENO, pos, strlen(pos));	/* RATS: ignore */
 	write(STDERR_FILENO, str, strlen(str));	/* RATS: ignore */
@@ -424,12 +442,10 @@ void cursor_update(opts_t options, char *str)
 /*
  * Reposition the cursor to a final position.
  */
-void cursor_fini(opts_t options)
+void cursor_fini(opts_t opts)
 {
-	char pos[128];			 /* RATS: ignore (checked OK) */
+	char pos[32];			 /* RATS: ignore (checked OK) */
 	int y;
-
-	cursor_lock(STDERR_FILENO);
 
 	y = cursor__y_start;
 
@@ -438,17 +454,22 @@ void cursor_fini(opts_t options)
 		y += cursor__pvmax - 1;
 #endif				/* HAVE_IPC */
 
-	if (y > options->height)
-		y = options->height;
+	if (y > opts->height)
+		y = opts->height;
+
+	/*
+	 * Absolute bounds check.
+	 */
+	if ((y < 1) || (y > 999999))
+		y = 1;
 
 	sprintf(pos, "\033[%d;1H\n", y);    /* RATS: ignore */
-	write(STDERR_FILENO, pos, strlen(pos));	/* RATS: ignore */
 
-	cursor_unlock(STDERR_FILENO);
-
-#ifdef HAVE_IPC
 	cursor_lock(STDERR_FILENO);
 
+	write(STDERR_FILENO, pos, strlen(pos));	/* RATS: ignore */
+
+#ifdef HAVE_IPC
 	cursor_ipccount();
 	shmdt(cursor__y_top);
 
@@ -459,8 +480,9 @@ void cursor_fini(opts_t options)
 	if (cursor__pvcount < 2)
 		shmctl(cursor__shmid, IPC_RMID, 0);
 
-	cursor_unlock(STDERR_FILENO);
 #endif				/* HAVE_IPC */
+
+	cursor_unlock(STDERR_FILENO);
 }
 
 /* EOF */
