@@ -44,6 +44,7 @@ INSTALL_DATA = @INSTALL_DATA@
 UNINSTALL = rm -f
 
 LDFLAGS = -r
+LINKFLAGS = @LDFLAGS@
 DEFS = @DEFS@ -DLOCALEDIR=\"$(localedir)\" -DGNULOCALEDIR=\"$(gnulocaledir)\" -DLOCALE_ALIAS_PATH=\"$(aliaspath)\" 
 CFLAGS = @CFLAGS@
 CPPFLAGS = @CPPFLAGS@ -I$(srcdir)/src/include -Isrc/include $(DEFS)
