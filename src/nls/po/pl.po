@@ -219,8 +219,8 @@ msgstr "-h, --help            wy¶wietl te informacje z pomoc± i wyjd¼"
 msgid ""
 "-l, --license         show the license this program is distributed under"
 msgstr ""
-"-l, --license          wy¶wietl informacje o licencji pod któr± "
-"program                       jest rozprowadzany"
+"-l, --license         wy¶wietl informacje o licencji pod któr± program\n"
+"                        jest rozprowadzany"
 
 #: src/main/help.c:45
 msgid "-V, --version         show version information and exit"
