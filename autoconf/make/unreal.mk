@@ -16,7 +16,7 @@ make:
 	echo > $(srcdir)/autoconf/make/filelist.mk~
 	echo > $(srcdir)/autoconf/make/modules.mk~
 	cd $(srcdir); \
-	sh autoconf/scripts/makemake.sh \
+	bash autoconf/scripts/makemake.sh \
 	     autoconf/make/filelist.mk~ \
 	     autoconf/make/modules.mk~
 	sh ./config.status
@@ -67,9 +67,9 @@ cvsclean: distclean
 	rm -f configure
 	rm -f src/nls/po/*.gmo src/nls/po/*.mo
 	rm -f src/nls/pofiles.made src/nls/cat-id-tbl.c
-	echo -n > $(srcdir)/autoconf/make/depend.mk~
-	echo -n > $(srcdir)/autoconf/make/filelist.mk~
-	echo -n > $(srcdir)/autoconf/make/modules.mk~
+	echo > $(srcdir)/autoconf/make/depend.mk~
+	echo > $(srcdir)/autoconf/make/filelist.mk~
+	echo > $(srcdir)/autoconf/make/modules.mk~
 
 doc: doc/$(package).info doc/manual.html doc/quickref.txt
 
