@@ -118,9 +118,15 @@ check test: $(alltarg)
 	done; rm -f $$TMP1 $$TMP2; exit $$FAIL
 
 install: all doc
+	$(srcdir)/autoconf/scripts/mkinstalldirs \
+	  "$(RPM_BUILD_ROOT)/$(bindir)"
+	$(srcdir)/autoconf/scripts/mkinstalldirs \
+	  "$(RPM_BUILD_ROOT)/$(mandir)/man1"
+	$(srcdir)/autoconf/scripts/mkinstalldirs \
+	  "$(RPM_BUILD_ROOT)/$(infodir)"
 	$(INSTALL) -m 755 $(package) \
 	                  "$(RPM_BUILD_ROOT)/$(bindir)/$(package)"
-	$(INSTALL) -m 644 $(srcdir)/doc/quickref.1 \
+	$(INSTALL) -m 644 doc/quickref.1 \
 	                  "$(RPM_BUILD_ROOT)/$(mandir)/man1/$(package).1"
 	$(INSTALL) -m 644 doc/$(package).info \
 	                  "$(RPM_BUILD_ROOT)/$(infodir)/$(package).info"
