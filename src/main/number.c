@@ -2,8 +2,6 @@
  * Functions for converting strings to numbers.
  *
  * Copyright 2002 Andrew Wood, distributed under the Artistic License.
- *
- * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
@@ -69,4 +67,4 @@ int getnum_i(char *str)
 	return (int)getnum_ll(str);
 }
 
-/* EOF $Id$ */
+/* EOF */

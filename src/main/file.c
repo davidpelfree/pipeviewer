@@ -2,8 +2,6 @@
  * Functions for opening and closing files.
  *
  * Copyright 2002 Andrew Wood, distributed under the Artistic License.
- *
- * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
@@ -127,4 +125,4 @@ int main_nextfd(opts_t options, int filenum, int oldfd)
 	return -1;
 }
 
-/* EOF $Id$ */
+/* EOF */

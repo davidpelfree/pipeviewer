@@ -2,8 +2,6 @@
  * Signal handling functions.
  *
  * Copyright 2002 Andrew Wood, distributed under the Artistic License.
- *
- * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
@@ -212,4 +210,4 @@ void sig_allowpause(void)
 	sigaction(SIGCONT, &sa, NULL);
 }
 
-/* EOF $Id$ */
+/* EOF */

@@ -2,8 +2,6 @@
  * Output command-line help to stdout.
  *
  * Copyright 2002 Andrew Wood, distributed under the Artistic License.
- *
- * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
@@ -47,4 +45,4 @@ _("-V, --version         show version information and exit"));
 	printf("\n");
 }
 
-/* EOF $Id$ */
+/* EOF */

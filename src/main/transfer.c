@@ -2,8 +2,6 @@
  * Functions for transferring between file descriptors.
  *
  * Copyright 2002 Andrew Wood, distributed under the Artistic License.
- *
- * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
@@ -153,4 +151,4 @@ long main_transfer(opts_t options, int fd, int *eof_in, int *eof_out, unsigned l
 	return written;
 }
 
-/* EOF $Id$ */
+/* EOF */

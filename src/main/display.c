@@ -2,8 +2,6 @@
  * Display functions.
  *
  * Copyright 2002 Andrew Wood, distributed under the Artistic License.
- *
- * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
@@ -318,4 +316,4 @@ void main_display(opts_t opts, long double esec, long long sl, long long tot)
 
 }
 
-/* EOF $Id$ */
+/* EOF */

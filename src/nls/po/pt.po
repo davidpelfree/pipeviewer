@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-02-27 23:49+0000\n"
+"POT-Creation-Date: 2003-05-04 19:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,72 +73,72 @@ msgstr "%s: opção `-W %s' é ambígua\n"
 msgid "%s: option `-W %s' doesn't allow an argument\n"
 msgstr "%s: opção `-W %s' não utiliza argumentos\n"
 
-#: src/main/display.c:89
+#: src/main/display.c:87
 msgid "failed to open terminal"
 msgstr "erro abrindo o terminal"
 
-#: src/main/display.c:215
+#: src/main/display.c:213
 msgid "GB"
 msgstr "GB"
 
-#: src/main/display.c:218
+#: src/main/display.c:216
 msgid "MB"
 msgstr "MB"
 
-#: src/main/display.c:221
+#: src/main/display.c:219
 msgid "kB"
 msgstr "kB"
 
-#: src/main/display.c:223
+#: src/main/display.c:221
 msgid "B"
 msgstr "B"
 
-#: src/main/display.c:238
+#: src/main/display.c:236
 msgid "GB/s"
 msgstr "GB/s"
 
-#: src/main/display.c:241
+#: src/main/display.c:239
 msgid "MB/s"
 msgstr "MB/s"
 
-#: src/main/display.c:244
+#: src/main/display.c:242
 msgid "kB/s"
 msgstr "kB/s"
 
-#: src/main/display.c:246
+#: src/main/display.c:244
 msgid "B/s "
 msgstr "B/s "
 
-#: src/main/display.c:257
+#: src/main/display.c:255
 msgid "ETA"
 msgstr "ETA"
 
-#: src/main/file.c:75
+#: src/main/file.c:73
 msgid "failed to close file"
 msgstr "erro fechando o arquivo"
 
-#: src/main/file.c:92
+#: src/main/file.c:90
 msgid "failed to read file"
 msgstr "erro lendo o arquivo"
 
-#: src/main/file.c:101
+#: src/main/file.c:99
 msgid "failed to stat file"
 msgstr "erro obtendo informações do arquivo"
 
-#: src/main/file.c:111
+#: src/main/file.c:109
 msgid "failed to stat output file"
 msgstr "erro obtendo informações do arquivo de saída"
 
-#: src/main/file.c:124
+#: src/main/file.c:122
 msgid "input file is output file"
 msgstr "os arquivos de entrada e saída são o mesmo"
 
-#: src/main/help.c:21
+#: src/main/help.c:19
 #, c-format
 msgid "Usage: %s [OPTION] [FILE]..."
 msgstr "Uso: %s [OPÇÕES] [ARQUIVOS]..."
 
-#: src/main/help.c:23
+#: src/main/help.c:21
 msgid ""
 "Concatenate FILE(s), or standard input, to standard output,\n"
 "with monitoring."
@@ -146,96 +146,96 @@ msgstr ""
 "Concatena ARQUIVO(s) ou a entrada padrão e grava na saída padrão,\n"
 "com monitoramento."
 
-#: src/main/help.c:27
+#: src/main/help.c:25
 msgid "-p, --progress        show progress bar"
 msgstr "-p, --progress        exibe barra de progressão"
 
-#: src/main/help.c:28
+#: src/main/help.c:26
 msgid "-t, --timer           show elapsed time"
 msgstr "-t, --timer           exibe tempo passado"
 
-#: src/main/help.c:29
+#: src/main/help.c:27
 msgid "-e, --eta             show estimated time of arrival (completion)"
 msgstr "-e, --eta             exibe o tempo estimado de término"
 
-#: src/main/help.c:30
+#: src/main/help.c:28
 msgid "-r, --rate            show data transfer rate counter"
 msgstr "-r, --rate            exibe a taxa de transferência"
 
-#: src/main/help.c:31
+#: src/main/help.c:29
 msgid "-b, --bytes           show number of bytes transferred"
 msgstr "-b, --bytes           exibe a quantidade de bytes transferidos"
 
-#: src/main/help.c:32
+#: src/main/help.c:30
 msgid "-f, --force           output even if standard error is not a terminal"
 msgstr ""
 "-f, --force           gera dados mesmo que a saída de erro seja redirecionada"
 
-#: src/main/help.c:33
+#: src/main/help.c:31
 msgid "-n, --numeric         output percentages, not visual information"
 msgstr ""
 "-n, --numeric         exibe apenas as porcentagens, sem informações visuais"
 
-#: src/main/help.c:34
+#: src/main/help.c:32
 msgid "-q, --quiet           do not output any transfer information at all"
 msgstr ""
 "-q, --quiet           executa programa sem exibir quaisquer informações"
 
-#: src/main/help.c:35
+#: src/main/help.c:33
 msgid "-c, --cursor          use cursor positioning escape sequences"
 msgstr ""
 "-c, --cursor          utiliza caracteres de escape para posicionar o cursor"
 
-#: src/main/help.c:36
+#: src/main/help.c:34
 msgid "-L, --rate-limit RATE limit transfer to RATE bytes per second"
 msgstr "-L, --rate-limit RATE limita a transferência a RATE bytes por segundo"
 
-#: src/main/help.c:37
+#: src/main/help.c:35
 msgid "-W, --wait            display nothing until first byte transferred"
 msgstr "-W, --wait            não exibe nada até iniciar o processamento"
 
-#: src/main/help.c:38
+#: src/main/help.c:36
 msgid "-s, --size SIZE       set estimated data size to SIZE bytes"
 msgstr ""
 "-s, --size SIZE       seta a quantidade estimada de dados em SIZE bytes"
 
-#: src/main/help.c:39
+#: src/main/help.c:37
 msgid "-i, --interval SEC    update every SEC seconds"
 msgstr "-i, --interval SEC    atualiza informações a cada SEC segundos"
 
-#: src/main/help.c:40
+#: src/main/help.c:38
 msgid "-w, --width WIDTH     assume terminal is WIDTH characters wide"
 msgstr ""
 "-w, --width WIDTH     assume que terminal possui WIDTH caracteres de largura"
 
-#: src/main/help.c:41
+#: src/main/help.c:39
 msgid "-N, --name NAME       prefix visual information with NAME"
 msgstr "-N, --name NAME       exibe NAME antes das demais informações"
 
-#: src/main/help.c:43
+#: src/main/help.c:41
 msgid "-h, --help            show this help and exit"
 msgstr "-h, --help            exibe esta tela de ajuda e termina"
 
-#: src/main/help.c:44
+#: src/main/help.c:42
 msgid ""
 "-l, --license         show the license this program is distributed under"
 msgstr "-l, --license         exibe a licença em vigor neste programa"
 
-#: src/main/help.c:45
+#: src/main/help.c:43
 msgid "-V, --version         show version information and exit"
 msgstr "-V, --version         exibe a versão e termina"
 
-#: src/main/help.c:46
+#: src/main/help.c:44
 #, c-format
 msgid "Please report any bugs to %s."
 msgstr "Por favor, reporte quaisquer defeitos para %s."
 
-#: src/main/license.c:21
+#: src/main/license.c:19
 #, c-format
 msgid "%s %s - Copyright (C) %s %s"
 msgstr "%s %s - Copyright (C) %s %s"
 
-#: src/main/license.c:24
+#: src/main/license.c:22
 msgid ""
 "This program is Open Source software, and is being distributed under the\n"
 "terms of the Artistic License."
@@ -243,7 +243,7 @@ msgstr ""
 "Este é um programa Open Source, distribuído sob os termos da Licença\n"
 "Artística."
 
-#: src/main/license.c:27
+#: src/main/license.c:25
 msgid ""
 "Parts of this program may be copyright (C) Free Software\n"
 "Foundation, Inc. and are distributed under the terms of the\n"
@@ -253,7 +253,7 @@ msgstr ""
 "Foundation, Inc. e por isso são distribuídos sob os termos da\n"
 "Licença Pública Geral de Bibliotecas da GNU (LGPL)."
 
-#: src/main/license.c:34
+#: src/main/license.c:32
 msgid ""
 "The Artistic License\n"
 "\n"
@@ -278,7 +278,7 @@ msgstr ""
 "   de uma forma mais ou menos personalizada, além do direito de fazer\n"
 "   modificações razoáveis no produto.\n"
 
-#: src/main/license.c:45
+#: src/main/license.c:43
 msgid ""
 "   Definitions:\n"
 "\n"
@@ -294,7 +294,7 @@ msgstr ""
 "       criados através de modificações em seu código-fonte.\n"
 "\n"
 
-#: src/main/license.c:51
+#: src/main/license.c:49
 msgid ""
 "     * \"Standard Version\" refers to such a Package if it has not been\n"
 "       modified, or has been modified in accordance with the wishes of\n"
@@ -306,7 +306,7 @@ msgstr ""
 "       Detentor dos Direitos.\n"
 "\n"
 
-#: src/main/license.c:55
+#: src/main/license.c:53
 msgid ""
 "     * \"Copyright Holder\" is whoever is named in the copyright or\n"
 "       copyrights for the package.\n"
@@ -316,7 +316,7 @@ msgstr ""
 "       pacote.\n"
 "\n"
 
-#: src/main/license.c:58
+#: src/main/license.c:56
 msgid ""
 "     * \"You\" is you, if you're thinking about copying or distributing\n"
 "       this Package.\n"
@@ -326,7 +326,7 @@ msgstr ""
 "       este Pacote.\n"
 "\n"
 
-#: src/main/license.c:61
+#: src/main/license.c:59
 msgid ""
 "     * \"Reasonable copying fee\" is whatever you can justify on the basis\n"
 "       of media cost, duplication charges, time of people involved, and\n"
@@ -343,7 +343,7 @@ msgstr ""
 "       possa pagá-lo.)\n"
 "\n"
 
-#: src/main/license.c:67
+#: src/main/license.c:65
 msgid ""
 "     * \"Freely Available\" means that no fee is charged for the item\n"
 "       itself, though there may be fees involved in handling the item. It\n"
@@ -357,7 +357,7 @@ msgstr ""
 "      redistribuí-lo sob as mesmas condições as quais o recebeu.\n"
 "\n"
 
-#: src/main/license.c:72
+#: src/main/license.c:70
 msgid ""
 "   1. You may make and give away verbatim copies of the source form of\n"
 "   the Standard Version of this Package without restriction, provided\n"
@@ -371,7 +371,7 @@ msgstr ""
 "   associadas.\n"
 "\n"
 
-#: src/main/license.c:77
+#: src/main/license.c:75
 msgid ""
 "   2. You may apply bug fixes, portability fixes and other modifications\n"
 "   derived from the Public Domain or from the Copyright Holder. A Package\n"
@@ -382,7 +382,7 @@ msgstr ""
 "   derivadas do Domínio Público ou do Detentor dos Direitos. Um Pacote\n"
 "   assim modificado continuará a ser considerado como Versão Original.\n"
 
-#: src/main/license.c:81
+#: src/main/license.c:79
 msgid ""
 "   3. You may otherwise modify your copy of this Package in any way,\n"
 "   provided that you insert a prominent notice in each changed file\n"
@@ -396,7 +396,7 @@ msgstr ""
 "   ao menos UM dos ítens a seguir:\n"
 "\n"
 
-#: src/main/license.c:86
+#: src/main/license.c:84
 msgid ""
 "     a) place your modifications in the Public Domain or otherwise make\n"
 "     them Freely Available, such as by posting said modifications to\n"
@@ -413,7 +413,7 @@ msgstr ""
 "     modificações na Versão Original do Pacote.\n"
 "\n"
 
-#: src/main/license.c:93
+#: src/main/license.c:91
 msgid ""
 "     b) use the modified Package only within your corporation or\n"
 "     organization.\n"
@@ -435,7 +435,7 @@ msgstr ""
 "     no qual conste claramente em que esta difere da Versão Original.\n"
 "\n"
 
-#: src/main/license.c:103
+#: src/main/license.c:101
 msgid ""
 "   4. You may distribute the programs of this Package in object code or\n"
 "   executable form, provided that you do at least ONE of the following:\n"
@@ -459,7 +459,7 @@ msgstr ""
 "     b) distribua junto os códigos-fontes do Pacote com suas modificações.\n"
 "\n"
 
-#: src/main/license.c:113
+#: src/main/license.c:111
 msgid ""
 "     c) accompany any non-standard executables with their corresponding\n"
 "     Standard Version executables, giving the non-standard executables\n"
@@ -480,7 +480,7 @@ msgstr ""
 "     Direitos.\n"
 "\n"
 
-#: src/main/license.c:121
+#: src/main/license.c:119
 msgid ""
 "   5. You may charge a reasonable copying fee for any distribution of\n"
 "   this Package. You may charge any fee you choose for support of this\n"
@@ -500,7 +500,7 @@ msgstr ""
 "   Pacote como seu produto.\n"
 "\n"
 
-#: src/main/license.c:129
+#: src/main/license.c:127
 msgid ""
 "   6. The scripts and library files supplied as input to or produced as\n"
 "   output from the programs of this Package do not automatically fall\n"
@@ -516,7 +516,7 @@ msgstr ""
 "   distribuição deste Pacote.\n"
 "\n"
 
-#: src/main/license.c:135
+#: src/main/license.c:133
 msgid ""
 "   7. C or perl subroutines supplied by you and linked into this Package\n"
 "   shall not be considered part of this Package.\n"
@@ -526,7 +526,7 @@ msgstr ""
 "   não serão consideradas partes do mesmo.\n"
 "\n"
 
-#: src/main/license.c:138
+#: src/main/license.c:136
 msgid ""
 "   8. The name of the Copyright Holder may not be used to endorse or\n"
 "   promote products derived from this software without specific prior\n"
@@ -538,7 +538,7 @@ msgstr ""
 "   permissão escrita.\n"
 "\n"
 
-#: src/main/license.c:142
+#: src/main/license.c:140
 msgid ""
 "   9. THIS PACKAGE IS PROVIDED \"AS IS\" AND WITHOUT ANY EXPRESS OR IMPLIED\n"
 "   WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF\n"
@@ -553,7 +553,7 @@ msgstr ""
 "\n"
 "   FIM"
 
-#: src/main/license.c:151
+#: src/main/license.c:149
 msgid ""
 "For a copy of the GNU Lesser General Public License, please see\n"
 "http://www.gnu.org/ or write to the Free Software Foundation, Inc.,\n"
@@ -564,7 +564,7 @@ msgstr ""
 "Free Software Foundation, Inc.\n"
 "59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
 
-#: src/main/license.c:158
+#: src/main/license.c:156
 #, c-format
 msgid ""
 "If that scrolled by too quickly, you may want to pipe it to a\n"
@@ -573,48 +573,48 @@ msgstr ""
 "Caso a rolagem de texto seja muito rápida, você pode redirecionar a saída\n"
 "para um paginador como `more' ou `less', exemplo: `%s --license | more'."
 
-#: src/main/options.c:81
+#: src/main/options.c:79
 #, c-format
 msgid "%s: option structure allocation failed (%s)"
 msgstr "%s: erro na alocação da estrutura de opções (%s)"
 
-#: src/main/options.c:96
+#: src/main/options.c:94
 #, c-format
 msgid "%s: option structure argv allocation failed (%s)"
 msgstr "%s: erro na alocação da estrutura de opções argv (%s)"
 
-#: src/main/options.c:183
+#: src/main/options.c:181
 #, c-format
 msgid "Try `%s --help' for more information."
 msgstr "Tente `%s --help' para maiores informações."
 
-#: src/main/transfer.c:67
+#: src/main/transfer.c:65
 msgid "buffer allocation failed"
 msgstr "erro alocando o buffer"
 
-#: src/main/transfer.c:103
+#: src/main/transfer.c:101
 msgid "select call failed"
 msgstr "erro na chamada da função select"
 
-#: src/main/transfer.c:116
+#: src/main/transfer.c:114
 msgid "read failed"
 msgstr "erro de leitura"
 
-#: src/main/transfer.c:135
+#: src/main/transfer.c:133
 msgid "write failed"
 msgstr "erro de gravação"
 
-#: src/main/version.c:21
+#: src/main/version.c:19
 #, c-format
 msgid "%s %s - Copyright(C) %s %s"
 msgstr "%s %s - Copyright(C) %s %s"
 
-#: src/main/version.c:24
+#: src/main/version.c:22
 #, c-format
 msgid "Web site: %s"
 msgstr "Site: %s"
 
-#: src/main/version.c:26
+#: src/main/version.c:24
 msgid ""
 "This program is free software, and is being distributed under the\n"
 "terms of the Artistic License."
@@ -622,7 +622,7 @@ msgstr ""
 "Este programa é um software livre, distribuído sob os termos da\n"
 "Licença Artística."
 
-#: src/main/version.c:30
+#: src/main/version.c:28
 msgid ""
 "This program is distributed in the hope that it will be useful,\n"
 "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
@@ -632,7 +632,7 @@ msgstr ""
 "porém SEM QUAISQUER GARANTIAS; sem inclusive as garantias implícitas de\n"
 "COMERCIALIZAÇÃO e ADEQUAÇÃO A OBJETIVOS PARTICULARES."
 
-#: src/main/version.c:34
+#: src/main/version.c:32
 #, c-format
 msgid "For more information, please run `%s --license'."
 msgstr "Para maiores informações, por favor digite `%s --license'."

@@ -2,8 +2,6 @@
  * Global program option structure and the parsing function prototype.
  *
  * Copyright 2002 Andrew Wood, distributed under the Artistic License.
- *
- * $Id$
  */
 
 #ifndef _OPTIONS_H
@@ -49,4 +47,4 @@ extern opts_t parse_options(int, char **);
 
 #endif /* _OPTIONS_H */
 
-/* EOF $Id$ */
+/* EOF */
