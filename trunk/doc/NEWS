@@ -1,7 +1,8 @@
 0.x.x - NOT YET RELEASED
   + replaced GNU getopt with my library code
-  + replaced GNU gettext with a very minimal replacement
+  + replaced GNU gettext with my very minimal replacement
   + use DESTDIR instead of RPM_BUILD_ROOT for optional installation prefix
+  + looked for flaws using RATS, cleaned up code
 
 0.7.0 - 8 February 2004
   + display buffer management fixes (thanks Cédric Delfosse)

@@ -75,7 +75,7 @@ void cursor_init(opts_t options)
 	struct termios tty;
 	struct termios old_tty;
 	struct flock lock;
-	char tmp[32];
+	char tmp[32];			 /* RATS: ignore (checked OK) */
 	int fd;
 
 	if (!options->cursor)
@@ -102,7 +102,7 @@ void cursor_init(opts_t options)
 	tcsetattr(fd, TCSANOW | TCSAFLUSH, &tty);
 	write(fd, "\n\n\n\n\033M\033M\033M\033[6n", 14);
 	memset(tmp, 0, sizeof(tmp));
-	read(fd, tmp, 6);
+	read(fd, tmp, 6);		    /* RATS: ignore (OK) */
 	cursor__y = getnum_i(tmp + 2);
 	tcsetattr(fd, TCSANOW | TCSAFLUSH, &old_tty);
 
@@ -124,7 +124,7 @@ void cursor_init(opts_t options)
  */
 void cursor_fini(opts_t options)
 {
-	char tmp[32];
+	char tmp[128];			 /* RATS: ignore (checked OK) */
 	struct flock lock;
 
 	lock.l_type = F_WRLCK;
@@ -133,7 +133,12 @@ void cursor_fini(opts_t options)
 	lock.l_len = 1;
 	fcntl(STDERR_FILENO, F_SETLKW, &lock);
 
-	sprintf(tmp, "\033[%dH\n", cursor__y);
+	if (cursor__y < 0)
+		cursor__y = 0;
+	if (cursor__y > 10000)
+		cursor__y = 10000;
+
+	sprintf(tmp, "\033[%dH\n", cursor__y);	/* RATS: ignore */
 	write(STDERR_FILENO, tmp, strlen(tmp));
 
 	lock.l_type = F_UNLCK;
@@ -160,8 +165,8 @@ void main_display(opts_t opts, long double esec, long long sl,
 	static long dispbufsz = 0;
 	long double sincelast, rate, transferred;
 	long eta;
-	char tmp[1024];
-	char tmp2[8];
+	char tmp[1024];			 /* RATS: ignore (checked OK) */
+	char tmp2[64];			 /* RATS: ignore (checked OK) */
 	char *suffix;
 	int avail, i;
 	struct flock lock;
@@ -232,7 +237,7 @@ void main_display(opts_t opts, long double esec, long long sl,
 	display[0] = 0;
 
 	if (opts->name)
-		sprintf(display, "%9s: ", opts->name);
+		sprintf(display, "%9s: ", opts->name);	/* RATS: ignore (OK) */
 
 	if (opts->bytes) {
 		transferred = tot;
@@ -248,7 +253,7 @@ void main_display(opts_t opts, long double esec, long long sl,
 		} else {
 			suffix = _("B");
 		}
-		sprintf(tmp, "%4.3Lg%s ", transferred, suffix);
+		sprintf(tmp, "%4.3Lg%.16s ", transferred, suffix);
 		strcat(display, tmp);
 	}
 
@@ -271,7 +276,7 @@ void main_display(opts_t opts, long double esec, long long sl,
 		} else {
 			suffix = _("B/s ");
 		}
-		sprintf(tmp, "[%4.3Lg%s] ", rate, suffix);
+		sprintf(tmp, "[%4.3Lg%.16s] ", rate, suffix);
 		strcat(display, tmp);
 	}
 
@@ -280,13 +285,17 @@ void main_display(opts_t opts, long double esec, long long sl,
 		if (eta < 0) {
 			eta = 0;
 		}
-		sprintf(tmp, " %s %ld:%02ld:%02ld", _("ETA"),
+		sprintf(tmp, " %.16s %ld:%02ld:%02ld", _("ETA"),
 			eta / 3600, (eta / 60) % 60, eta % 60);
 	}
 
 	if (opts->progress) {
 		strcat(display, "[");
 		if (opts->size > 0) {
+			if (percentage < 0)
+				percentage = 0;
+			if (percentage > 100000)
+				percentage = 100000;
 			sprintf(tmp2, "%2ld%%", percentage);
 			avail = opts->width - strlen(display)
 			    - strlen(tmp) - strlen(tmp2) - 3;
