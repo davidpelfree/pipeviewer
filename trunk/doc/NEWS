@@ -1,8 +1,9 @@
 $Id$
 
-0.5.1 - NOT YET RELEASED
+0.5.3 - NOT YET RELEASED
   + added Polish translation
   + moved doc/debian to ./debian at insistence of common sense
+  + minor Solaris 8 compatibility fixes
 
 0.5.0 - 15 April 2003
   + added French translation thanks to Stéphane Lacasse

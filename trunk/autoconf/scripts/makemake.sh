@@ -42,7 +42,7 @@ modules=`$FIND src -mindepth 1 -type d -name "[^_]*" -print  \
          | while read DIR; do \
            CONTENT=\$(/bin/ls -d \$DIR/* \
                      | grep -v -e '.po' -e '.gmo' -e '.mo' -e '.h' \
-                     | tail -n 1); \
+                     | sed -n '$p'); \
            [ -n "\$CONTENT" ] || continue; \
            echo \$DIR; \
 	   done
@@ -67,7 +67,7 @@ for i in $modules; do
                | while read DIR; do \
                  CONTENT=\$(/bin/ls -d \$DIR/* \
                             | grep -v -e '.po' -e '.gmo' -e '.mo' -e '.h' \
-                            | tail -n 1); \
+                            | sed -n '$p'); \
                   [ -n "\$CONTENT" ] || continue; \
                   echo \$DIR; \
        	          done \
