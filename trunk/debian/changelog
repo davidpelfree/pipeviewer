@@ -1,3 +1,16 @@
+pv (0.5.9-1) unstable; urgency=low
+
+  * New upstream release
+  * Update Standards-Version to 3.6.0
+
+ -- Cédric Delfosse <cedric@debian.org>  Wed, 30 Jul 2003 22:17:51 +0200
+
+pv (0.5.3-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Mon,  5 May 2003 20:58:08 +0200
+
 pv (0.5.0-1) unstable; urgency=low
 
   * New upstream release
@@ -6,11 +19,14 @@ pv (0.5.0-1) unstable; urgency=low
 
 pv (0.4.9-1) unstable; urgency=low
 
-  * Imported Debian changes into main source tree
-  * Updated to version 0.4.9
-  * LFS support added. (closes: Bug#180986)
+  * New upstream release
+  * Large file support (closes: Bug#180986)
+  * Added LDFLAGS in the ./configure line of debian/rules
+  * Remove more files from doc/ for the clean target in debian/rules
+  * Added texinfo to Build-Depends in debian/control
+  * Modified long description so that it is 80 characters wide
 
- -- Andrew Wood <andrew.wood@ivarch.com>  Tue, 18 Feb 2003 19:40:37 +0000
+ -- Cédric Delfosse <cedric@debian.org>  Wed, 19 Feb 2003 20:41:12 +0100
 
 pv (0.4.5-1) unstable; urgency=low
 

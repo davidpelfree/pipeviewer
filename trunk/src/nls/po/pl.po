@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-05-04 19:39+0100\n"
+"POT-Creation-Date: 2003-08-03 20:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,43 +72,43 @@ msgstr "%s: opcja `-W %s' jest niejednoznaczna\n"
 msgid "%s: option `-W %s' doesn't allow an argument\n"
 msgstr "%s: opcja `-W %s' nie przyjmuje argumentów\n"
 
-#: src/main/display.c:87
+#: src/main/display.c:88
 msgid "failed to open terminal"
 msgstr "nie uda³o siê otworzyæ terminala"
 
-#: src/main/display.c:213
+#: src/main/display.c:216
 msgid "GB"
 msgstr "GB"
 
-#: src/main/display.c:216
+#: src/main/display.c:219
 msgid "MB"
 msgstr "MB"
 
-#: src/main/display.c:219
+#: src/main/display.c:222
 msgid "kB"
 msgstr "kB"
 
-#: src/main/display.c:221
+#: src/main/display.c:224
 msgid "B"
 msgstr "B"
 
-#: src/main/display.c:236
+#: src/main/display.c:239
 msgid "GB/s"
 msgstr "GB/s"
 
-#: src/main/display.c:239
+#: src/main/display.c:242
 msgid "MB/s"
 msgstr "MB/s"
 
-#: src/main/display.c:242
+#: src/main/display.c:245
 msgid "kB/s"
 msgstr "kB/s"
 
-#: src/main/display.c:244
+#: src/main/display.c:247
 msgid "B/s "
 msgstr "B/s"
 
-#: src/main/display.c:255
+#: src/main/display.c:258
 msgid "ETA"
 msgstr "ETA"
 
