@@ -110,7 +110,7 @@ check test: $(alltarg)
 	export PROG TMP1 TMP2; \
 	for SCRIPT in $(srcdir)/tests/*; do \
 	  test -f $$SCRIPT || continue; \
-	  echo -n `basename $$SCRIPT`:" "; \
+	  echo `basename $$SCRIPT`: | tr "\n" ' '; \
 	  STATUS=0; \
 	  sh -e $$SCRIPT || STATUS=1; \
 	  test $$STATUS -eq 1 && FAIL=1; \
