@@ -16,12 +16,15 @@ echo > autoconf/make/depend.mk~
 echo > autoconf/make/filelist.mk~
 echo > autoconf/make/modules.mk~
 
+MAKE=make
+which gmake >/dev/null 2>&1 && MAKE=gmake
+
 rm -rf .gen
 mkdir .gen
 cd .gen
 sh ../configure
-make make
-make dep
+$MAKE make
+$MAKE dep
 cd ..
 rm -rf .gen
 
