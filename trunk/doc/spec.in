@@ -76,6 +76,9 @@ fi
 %doc README doc/NEWS doc/TODO doc/COPYING
 
 %changelog
+* Tue Jun 29 2004 Andrew Wood <andrew.wood@ivarch.com>
+- A port of the terminal locking code to FreeBSD.
+
 * Sun May  2 2004 Andrew Wood <andrew.wood@ivarch.com>
 - Major reliability improvements to the cursor positioning.
 
