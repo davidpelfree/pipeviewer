@@ -76,7 +76,7 @@ fi
 %doc README doc/NEWS doc/TODO doc/COPYING
 
 %changelog
-* Wed Apr 28 2004 Andrew Wood <andrew.wood@ivarch.com>
+* Sun May  2 2004 Andrew Wood <andrew.wood@ivarch.com>
 - Major reliability improvements to the cursor positioning.
 
 * Sat Apr 24 2004 Andrew Wood <andrew.wood@ivarch.com>

@@ -63,7 +63,7 @@ this permission notice may be stated in a translation approved by Andrew Wood.
 @node Top, Overview, , (dir)
 @top Pipe Viewer
 
-This edition of the @cite{PV manual}, last updated 28 April 2004,
+This edition of the @cite{PV manual}, last updated 2 May 2004,
 documents @code{@PACKAGE@} version @VERSION@.
 @end ifinfo
 
