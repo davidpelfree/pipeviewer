@@ -75,15 +75,15 @@ dnl
 ALL_LINGUAS="de fr pl pt"
 if test "$NLS_SUPPORT" = "yes"; then
   AC_DEFINE(ENABLE_NLS)
+  AC_PATH_PROG(MSGFMT, msgfmt, msgfmt)
+  AC_PATH_PROG(GMSGFMT, gmsgfmt, $MSGFMT)
+  AC_PATH_PROG(XGETTEXT, xgettext, xgettext)
   if test "$STATIC_NLS" = "yes"; then
     CATALOGS=""
     NLSOBJ="src/nls/table.o"
   else
     AC_CHECK_LIB(intl, main)
     AC_CHECK_LIB(i, main)
-    AC_PATH_PROG(MSGFMT, msgfmt, msgfmt)
-    AC_PATH_PROG(GMSGFMT, gmsgfmt, $MSGFMT)
-    AC_PATH_PROG(XGETTEXT, xgettext, xgettext)
   fi
   CATOBJEXT=.mo
   INSTOBJEXT=.mo

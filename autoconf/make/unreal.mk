@@ -116,20 +116,20 @@ check test: $(alltarg)
 
 install: all doc
 	$(srcdir)/autoconf/scripts/mkinstalldirs \
-	  "$(RPM_BUILD_ROOT)/$(bindir)"
+	  "$(DESTDIR)/$(bindir)"
 	$(srcdir)/autoconf/scripts/mkinstalldirs \
-	  "$(RPM_BUILD_ROOT)/$(mandir)/man1"
+	  "$(DESTDIR)/$(mandir)/man1"
 	$(srcdir)/autoconf/scripts/mkinstalldirs \
-	  "$(RPM_BUILD_ROOT)/$(infodir)"
+	  "$(DESTDIR)/$(infodir)"
 	$(INSTALL) -m 755 $(package) \
-	                  "$(RPM_BUILD_ROOT)/$(bindir)/$(package)"
+	                  "$(DESTDIR)/$(bindir)/$(package)"
 	$(INSTALL) -m 644 doc/quickref.1 \
-	                  "$(RPM_BUILD_ROOT)/$(mandir)/man1/$(package).1"
+	                  "$(DESTDIR)/$(mandir)/man1/$(package).1"
 	$(INSTALL) -m 644 doc/$(package).info \
-	                  "$(RPM_BUILD_ROOT)/$(infodir)/$(package).info"
-	$(DO_GZIP) "$(RPM_BUILD_ROOT)/$(mandir)/man1/$(package).1"      || :
-	$(DO_GZIP) "$(RPM_BUILD_ROOT)/$(infodir)/$(package).info"       || :
-	if test -n "$(CATALOGS)"; then; \
+	                  "$(DESTDIR)/$(infodir)/$(package).info"
+	$(DO_GZIP) "$(DESTDIR)/$(mandir)/man1/$(package).1"      || :
+	$(DO_GZIP) "$(DESTDIR)/$(infodir)/$(package).info"       || :
+	if test -n "$(CATALOGS)"; then \
 	  catalogs='$(CATALOGS)'; \
 	  for cat in $$catalogs; do \
 	    name=`echo $$cat | sed 's,^.*/,,g'`; \
@@ -139,18 +139,18 @@ install: all doc
 	      destdir=$(localedir); \
 	    fi; \
 	    lang=`echo $$name | sed 's/$(CATOBJEXT)$$//'`; \
-	    dir=$(RPM_BUILD_ROOT)/$$destdir/$$lang/LC_MESSAGES; \
+	    dir=$(DESTDIR)/$$destdir/$$lang/LC_MESSAGES; \
 	    $(srcdir)/autoconf/scripts/mkinstalldirs $$dir; \
 	    $(INSTALL_DATA) $$cat $$dir/$(PACKAGE)$(INSTOBJEXT); \
 	  done; \
 	fi
 
 uninstall:
-	$(UNINSTALL) "$(RPM_BUILD_ROOT)/$(mandir)/man1/$(package).1"
-	$(UNINSTALL) "$(RPM_BUILD_ROOT)/$(infodir)/$(package).info"
-	$(UNINSTALL) "$(RPM_BUILD_ROOT)/$(mandir)/man1/$(package).1.gz"
-	$(UNINSTALL) "$(RPM_BUILD_ROOT)/$(infodir)/$(package).info.gz"
-	if test -n "$(CATALOGS)"; then; \
+	$(UNINSTALL) "$(DESTDIR)/$(mandir)/man1/$(package).1"
+	$(UNINSTALL) "$(DESTDIR)/$(infodir)/$(package).info"
+	$(UNINSTALL) "$(DESTDIR)/$(mandir)/man1/$(package).1.gz"
+	$(UNINSTALL) "$(DESTDIR)/$(infodir)/$(package).info.gz"
+	if test -n "$(CATALOGS)"; then \
 	  catalogs='$(CATALOGS)'; \
 	  for cat in $$catalogs; do \
 	    name=`echo $$cat | sed 's,^.*/,,g'`; \
@@ -160,7 +160,7 @@ uninstall:
 	      destdir=$(localedir); \
 	    fi; \
 	    lang=`echo $$name | sed 's/$(CATOBJEXT)$$//'`; \
-	    dir=$(RPM_BUILD_ROOT)/$$destdir/$$lang/LC_MESSAGES; \
+	    dir=$(DESTDIR)/$$destdir/$$lang/LC_MESSAGES; \
 	    $(UNINSTALL) $$dir/$(PACKAGE)$(INSTOBJEXT); \
 	  done; \
 	fi
