@@ -26,7 +26,7 @@ void display_license(void)
 	printf("\n\n");
 	printf(_("Parts of this program may be copyright (C) Free Software\n"
 	  "Foundation, Inc. and are distributed under the terms of the\n"
-	  "GNU Library General Public License."));
+	  "GNU Lesser General Public License."));
 	printf("\n\n");
 	printf("----------------------------------------------------------");
 	printf("\n\n");
@@ -148,7 +148,7 @@ void display_license(void)
 	printf("----------------------------------------------------------");
 	printf("\n\n");
 	printf(_(
-"For a copy of the GNU Library General Public License, please see\n"
+"For a copy of the GNU Lesser General Public License, please see\n"
 "http://www.gnu.org/ or write to the Free Software Foundation, Inc.,\n"
 "59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."));
 	printf("\n\n");

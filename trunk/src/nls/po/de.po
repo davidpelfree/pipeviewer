@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2003-02-18 20:00+0000\n"
+"POT-Creation-Date: 2003-02-27 22:26+0000\n"
 "Content-Type: text/plain; charset=iso-8859-15\n"
 "Date: 1999-06-01 15:18:29+0100\n"
 "From: Andrew Wood <ivarch@ubik>\n"
@@ -79,170 +79,187 @@ msgstr "%s: Option `-W %s' erwartet kein Argument\n"
 
 #: src/main/display.c:89
 msgid "failed to open terminal"
-msgstr ""
+msgstr "Terminal konnte nicht geöffnet werden"
 
 #: src/main/display.c:215
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 #: src/main/display.c:218
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 #: src/main/display.c:221
 msgid "kB"
-msgstr ""
+msgstr "kB"
 
 #: src/main/display.c:223
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: src/main/display.c:238
 msgid "GB/s"
-msgstr ""
+msgstr "GB/s"
 
 #: src/main/display.c:241
 msgid "MB/s"
-msgstr ""
+msgstr "MB/s"
 
 #: src/main/display.c:244
 msgid "kB/s"
-msgstr ""
+msgstr "kB/s"
 
 #: src/main/display.c:246
 msgid "B/s "
-msgstr ""
+msgstr "B/s "
 
 #: src/main/display.c:257
 msgid "ETA"
-msgstr ""
+msgstr "ETA"
 
 #: src/main/file.c:75
 msgid "failed to close file"
-msgstr ""
+msgstr "Datei konnte nicht geschlossen werden"
 
 #: src/main/file.c:92
 msgid "failed to read file"
-msgstr ""
+msgstr "Datei konnte nicht gelesen werden"
 
 #: src/main/file.c:101
 msgid "failed to stat file"
-msgstr ""
+msgstr "Dateiinformationen konnten nicht gelesen werden"
 
 #: src/main/file.c:111
 msgid "failed to stat output file"
-msgstr ""
+msgstr "Dateiinformationen für Ausgabe-Datei konnten nicht gelesen werden"
 
 #: src/main/file.c:124
 msgid "input file is output file"
-msgstr ""
+msgstr "Eingabe-Datei ist Ausgabe-Datei"
 
 #: src/main/help.c:21
 #, c-format
 msgid "Usage: %s [OPTION] [FILE]..."
-msgstr ""
+msgstr "Syntax: %s [OPTION] [DATEI]..."
 
 #: src/main/help.c:23
 msgid ""
 "Concatenate FILE(s), or standard input, to standard output,\n"
 "with monitoring."
 msgstr ""
+"Verbindet DATEI(en) oder den Standard-Eingabe-Kanal mit dem\n"
+"Standard-Ausgabe-Kanal und misst den Datenstrom."
 
 #: src/main/help.c:27
 msgid "-p, --progress        show progress bar"
-msgstr ""
+msgstr "-p, --progress        Fortschritts-Anzeige"
 
 #: src/main/help.c:28
 msgid "-t, --timer           show elapsed time"
-msgstr ""
+msgstr "-t, --timer           zeige die verstrichene Zeit an"
 
 #: src/main/help.c:29
 msgid "-e, --eta             show estimated time of arrival (completion)"
-msgstr ""
+msgstr "-e, --eta             zeige die erwartete Zeit bis zum Ende an"
 
 #: src/main/help.c:30
 msgid "-r, --rate            show data transfer rate counter"
-msgstr ""
+msgstr "-r, --rate            zeige die Datentransferrate an"
 
 #: src/main/help.c:31
 msgid "-b, --bytes           show number of bytes transferred"
 msgstr ""
+"-b, --bytes           zeige die Anzahl von Bytes, die transferiert worden\n"
+"                        sind"
 
 #: src/main/help.c:32
 msgid "-f, --force           output even if standard error is not a terminal"
 msgstr ""
+"-f, --force           Ausgabe auch dann erzwingen, wenn der Fehlerausgabe-\n"
+"                        Kanal kein Terminal ist"
 
 #: src/main/help.c:33
 msgid "-n, --numeric         output percentages, not visual information"
 msgstr ""
+"-n, --numeric         Ausgabe von Prozent-Angaben statt visueller Darstellung"
 
 #: src/main/help.c:34
 msgid "-q, --quiet           do not output any transfer information at all"
-msgstr ""
+msgstr "-q, --quiet           sämtliche Transferinformationen unterdrücken"
 
 #: src/main/help.c:35
 msgid "-c, --cursor          use cursor positioning escape sequences"
 msgstr ""
+"-c, --cursor          benutze Escape-Sequenzen zur Cursor-Positionierung"
 
 #: src/main/help.c:36
 msgid "-L, --rate-limit RATE limit transfer to RATE bytes per second"
 msgstr ""
+"-L, --rate-limit RATE beschränke die Transferrate auf RATE Byte pro Sekunde"
 
 #: src/main/help.c:37
 msgid "-W, --wait            display nothing until first byte transferred"
 msgstr ""
+"-W, --wait            keine Ausgabe bevor das erste Byte übertragen wurde"
 
 #: src/main/help.c:38
 msgid "-s, --size SIZE       set estimated data size to SIZE bytes"
-msgstr ""
+msgstr "-s, --size SIZE       setze erwartete Daten-Länge auf SIZE Byte"
 
 #: src/main/help.c:39
 msgid "-i, --interval SEC    update every SEC seconds"
-msgstr ""
+msgstr "-i, --interval SEC    aktualisiere Ausgabe nach SEC Sekunden Intervall"
 
 #: src/main/help.c:40
 msgid "-w, --width WIDTH     assume terminal is WIDTH characters wide"
-msgstr ""
+msgstr "-w, --width WIDTH     setze Terminal-Breite auf WIDTH Zeichen"
 
 #: src/main/help.c:41
 msgid "-N, --name NAME       prefix visual information with NAME"
-msgstr ""
+msgstr "-N, --name NAME       setze den NAMEn für visuelle Darstellung"
 
 #: src/main/help.c:43
 msgid "-h, --help            show this help and exit"
-msgstr ""
+msgstr "-h, --help            zeige diese Hilfe und beende"
 
 #: src/main/help.c:44
 msgid ""
 "-l, --license         show the license this program is distributed under"
 msgstr ""
+"-l, --license         zeige die Lizenz unter der dieses Programm verbreitet\n"
+"                        wird"
 
 #: src/main/help.c:45
 msgid "-V, --version         show version information and exit"
-msgstr ""
+msgstr "-V, --version         zeige Versionsinformationen und beende"
 
 #: src/main/help.c:46
 #, c-format
 msgid "Please report any bugs to %s."
-msgstr ""
+msgstr "Bitte senden Sie Fehlerberichte an %s."
 
 #: src/main/license.c:21
 #, c-format
 msgid "%s %s - Copyright (C) %s %s"
-msgstr ""
+msgstr "%s %s - Copyright (C) %s %s"
 
 #: src/main/license.c:24
 msgid ""
 "This program is Open Source software, and is being distributed under the\n"
 "terms of the Artistic License."
 msgstr ""
+"Dieses Programm ist Open Source Software und wird unter den Bedingungen\n"
+"der Artistic License verbreitet."
 
 #: src/main/license.c:27
 msgid ""
 "Parts of this program may be copyright (C) Free Software\n"
 "Foundation, Inc. and are distributed under the terms of the\n"
-"GNU Library General Public License."
+"GNU Lesser General Public License."
 msgstr ""
+"Teile dieses Programms stehen unter dem Copright (C) der\n"
+"Free Software Foundation, Inc. und werden unter den Bedingungen\n"
+"der GNU Lesser General Public License verbreitet."
 
 #: src/main/license.c:34
 msgid ""
@@ -435,7 +452,7 @@ msgstr ""
 
 #: src/main/license.c:151
 msgid ""
-"For a copy of the GNU Library General Public License, please see\n"
+"For a copy of the GNU Lesser General Public License, please see\n"
 "http://www.gnu.org/ or write to the Free Software Foundation, Inc.,\n"
 "59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
 msgstr ""
@@ -447,124 +464,54 @@ msgid ""
 "pager such as `more' or `less', eg `%s --license | more'."
 msgstr ""
 
-#: src/main/options.c:79
-msgid "help"
-msgstr ""
-
-#: src/main/options.c:80
-msgid "license"
-msgstr ""
-
 #: src/main/options.c:81
-msgid "version"
-msgstr ""
-
-#: src/main/options.c:82
-msgid "progress"
-msgstr ""
-
-#: src/main/options.c:83
-msgid "timer"
-msgstr ""
-
-#: src/main/options.c:84
-msgid "eta"
-msgstr ""
-
-#: src/main/options.c:85
-msgid "rate"
-msgstr ""
-
-#: src/main/options.c:86
-msgid "bytes"
-msgstr ""
-
-#: src/main/options.c:87
-msgid "force"
-msgstr ""
-
-#: src/main/options.c:88
-msgid "numeric"
-msgstr ""
-
-#: src/main/options.c:89
-msgid "quiet"
-msgstr ""
-
-#: src/main/options.c:90
-msgid "cursor"
-msgstr ""
-
-#: src/main/options.c:91
-msgid "rate-limit"
-msgstr ""
-
-#: src/main/options.c:92
-msgid "wait"
-msgstr ""
-
-#: src/main/options.c:93
-msgid "size"
-msgstr ""
-
-#: src/main/options.c:94
-msgid "interval"
-msgstr ""
-
-#: src/main/options.c:95
-msgid "width"
-msgstr ""
-
-#: src/main/options.c:96
-msgid "name"
-msgstr ""
-
-#: src/main/options.c:101
 #, c-format
 msgid "%s: option structure allocation failed (%s)"
 msgstr ""
 
-#: src/main/options.c:116
+#: src/main/options.c:96
 #, c-format
 msgid "%s: option structure argv allocation failed (%s)"
 msgstr ""
 
-#: src/main/options.c:203
+#: src/main/options.c:183
 #, c-format
 msgid "Try `%s --help' for more information."
-msgstr ""
+msgstr "`%s --help' zeigt weitere Informationen an."
 
 #: src/main/transfer.c:67
 msgid "buffer allocation failed"
-msgstr ""
+msgstr "Puffer konnte nicht allokiert werden"
 
 #: src/main/transfer.c:103
 msgid "select call failed"
-msgstr ""
+msgstr "select-Aufruf fehlgeschlagen"
 
 #: src/main/transfer.c:116
 msgid "read failed"
-msgstr ""
+msgstr "read-Aufruf fehlgeschlagen"
 
 #: src/main/transfer.c:135
 msgid "write failed"
-msgstr ""
+msgstr "write-Aufruf fehlgeschlagen"
 
 #: src/main/version.c:21
 #, c-format
 msgid "%s %s - Copyright(C) %s %s"
-msgstr ""
+msgstr "%s %s - Copyright(C) %s %s"
 
 #: src/main/version.c:24
 #, c-format
 msgid "Web site: %s"
-msgstr ""
+msgstr "Web-Site: %s"
 
 #: src/main/version.c:26
 msgid ""
 "This program is free software, and is being distributed under the\n"
 "terms of the Artistic License."
 msgstr ""
+"Dieses Programm ist freie Software und wird unter den Bedingungen\n"
+"der Artistic License verbreitet."
 
 #: src/main/version.c:30
 msgid ""
@@ -572,8 +519,11 @@ msgid ""
 "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
 "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
 msgstr ""
+"Dieses Programm wird verbreitet unter der Annahme dass es nützlich ist,\n"
+"aber OHNE JEGLICHE GARANTIE; insbesondere ohne der impliziten Garantie\n"
+"einer MARKTGÄNGIGKEIT oder EIGNUNG ZU EINEM BESTIMMTEN ZWECK."
 
 #: src/main/version.c:34
 #, c-format
 msgid "For more information, please run `%s --license'."
-msgstr ""
+msgstr "Starten Sie `%s --license', um weitere Informationen anzuzeigen."

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-02-18 20:00+0000\n"
+"POT-Creation-Date: 2003-02-27 22:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -247,7 +247,7 @@ msgstr ""
 msgid ""
 "Parts of this program may be copyright (C) Free Software\n"
 "Foundation, Inc. and are distributed under the terms of the\n"
-"GNU Library General Public License."
+"GNU Lesser General Public License."
 msgstr ""
 "Trechos deste programa podem ter copyright (C) da Free Software\n"
 "Foundation, Inc. e por isso são distribuídos sob os termos da\n"
@@ -555,7 +555,7 @@ msgstr ""
 
 #: src/main/license.c:151
 msgid ""
-"For a copy of the GNU Library General Public License, please see\n"
+"For a copy of the GNU Lesser General Public License, please see\n"
 "http://www.gnu.org/ or write to the Free Software Foundation, Inc.,\n"
 "59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
 msgstr ""
@@ -573,89 +573,17 @@ msgstr ""
 "Caso a rolagem de texto seja muito rápida, você pode redirecionar a saída\n"
 "para um paginador como `more' ou `less', exemplo: `%s --license | more'."
 
-#: src/main/options.c:79
-msgid "help"
-msgstr "help"
-
-#: src/main/options.c:80
-msgid "license"
-msgstr "license"
-
 #: src/main/options.c:81
-msgid "version"
-msgstr "version"
-
-#: src/main/options.c:82
-msgid "progress"
-msgstr "progress"
-
-#: src/main/options.c:83
-msgid "timer"
-msgstr "timer"
-
-#: src/main/options.c:84
-msgid "eta"
-msgstr "eta"
-
-#: src/main/options.c:85
-msgid "rate"
-msgstr "rate"
-
-#: src/main/options.c:86
-msgid "bytes"
-msgstr "bytes"
-
-#: src/main/options.c:87
-msgid "force"
-msgstr "force"
-
-#: src/main/options.c:88
-msgid "numeric"
-msgstr "numeric"
-
-#: src/main/options.c:89
-msgid "quiet"
-msgstr "quiet"
-
-#: src/main/options.c:90
-msgid "cursor"
-msgstr "cursor"
-
-#: src/main/options.c:91
-msgid "rate-limit"
-msgstr "rate-limit"
-
-#: src/main/options.c:92
-msgid "wait"
-msgstr "wait"
-
-#: src/main/options.c:93
-msgid "size"
-msgstr "size"
-
-#: src/main/options.c:94
-msgid "interval"
-msgstr "interval"
-
-#: src/main/options.c:95
-msgid "width"
-msgstr "width"
-
-#: src/main/options.c:96
-msgid "name"
-msgstr "name"
-
-#: src/main/options.c:101
 #, c-format
 msgid "%s: option structure allocation failed (%s)"
 msgstr "%s: erro na alocação da estrutura de opções (%s)"
 
-#: src/main/options.c:116
+#: src/main/options.c:96
 #, c-format
 msgid "%s: option structure argv allocation failed (%s)"
 msgstr "%s: erro na alocação da estrutura de opções argv (%s)"
 
-#: src/main/options.c:203
+#: src/main/options.c:183
 #, c-format
 msgid "Try `%s --help' for more information."
 msgstr "Tente `%s --help' para maiores informações."
