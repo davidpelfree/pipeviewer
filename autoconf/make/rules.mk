@@ -67,7 +67,7 @@ $(srcdir)/src/nls/po/$(PACKAGE).pot: $(allsrc)
 	fi
 
 src/nls/cat-id-tbl.c: $(srcdir)/src/nls/po/$(PACKAGE).pot
-	sed -f $(srcdir)/autoconf/scripts/po2tbl.sed $< \
+	echo | sed -f $(srcdir)/autoconf/scripts/po2tbl.sed $< \
 	| sed -e "s/@PACKAGE NAME@/$(PACKAGE)/" > $@
 	chmod 644 $@
 
