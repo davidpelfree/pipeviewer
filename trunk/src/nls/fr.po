@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2004-04-29 18:36+0100\n"
+"POT-Creation-Date: 2004-04-29 19:11+0100\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Date: 1999-06-01 15:18:29+0100\n"
 "From: Andrew Wood <ivarch@ubik>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "nls/intl/textdomain.c src/nls/intl-cat/cat-compat.c src/nls/intl-gett/intl-"
 "compat.c\n"
 
-#: src/main/cursor.c:118 src/main/cursor.c:128 src/main/cursor.c:200
+#: src/main/cursor.c:123 src/main/cursor.c:133 src/main/cursor.c:205
 msgid "failed to open terminal"
 msgstr "l'ouverture du terminal a échoué"
 
