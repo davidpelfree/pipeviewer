@@ -10,7 +10,11 @@
 #include "config.h"
 #endif
 
-#include <ctype.h>
+
+static int my_isdigit(char c)
+{
+	return ((c >= '0') && (c <= '9'));
+}
 
 
 /*
@@ -20,9 +24,9 @@ long long getnum_ll(char *str)
 {
 	long long n = 0;
 
-	while (str[0] != 0 && (!isdigit(str[0]))) str++;
+	while (str[0] != 0 && (!my_isdigit(str[0]))) str++;
 
-	for (; isdigit(str[0]); str++) {
+	for (; my_isdigit(str[0]); str++) {
 		n = n * 10;
 		n += (str[0] - '0');
 	}
@@ -39,16 +43,16 @@ double getnum_d(char *str)
 	double n = 0.0;
 	double step = 1;
 
-	while (str[0] != 0 && (!isdigit(str[0]))) str++;
+	while (str[0] != 0 && (!my_isdigit(str[0]))) str++;
 
-	for (; isdigit(str[0]); str++) {
+	for (; my_isdigit(str[0]); str++) {
 		n = n * 10;
 		n += (str[0] - '0');
 	}
 
 	if ((str[0] != '.') && (str[0] != ',')) return n;
 
-	for (; isdigit(str[0]) && step < 1000000; str++) {
+	for (; my_isdigit(str[0]) && step < 1000000; str++) {
 		step = step * 10;
 		n += (str[0] - '0') / step;
 	}

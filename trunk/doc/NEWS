@@ -1,6 +1,7 @@
 $Id$
 
-0.4.8
+0.4.9
+  + support for >2GB files added where available (Debian bug #180986)
   + added doc/debian dir (from Cédric Delfosse)
   + added "make rpm" and "make deb" targets to build RPM and Debian packages
   + added a "make pv-static" rule to build a statically linked version

@@ -170,7 +170,7 @@ rpm: dist
 	grep -hsv ^macrofiles /usr/lib/rpm/rpmrc /etc/rpmrc $$HOME/.rpmrc \
 	  >> rpmrc
 	rpmbuild --rcfile=rpmrc -tb $(package)-$(version).tar.gz
-	mv rpm/RPMS/*/$(package)*rpm .
+	mv rpm/RPMS/*/$(package)-*.rpm .
 	rm -rf rpm rpmmacros rpmrc
 
 deb: dist

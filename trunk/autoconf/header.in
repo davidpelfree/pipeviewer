@@ -59,4 +59,14 @@
 #define PROJECT_HOMEPAGE "http://www.ivarch.com/programs/" PROGRAM_NAME ".shtml"
 #define BUG_REPORTS_TO   _("Andrew Wood <andrew.wood@ivarch.com>")
 
+/* LFS support. */
+#undef ENABLE_LARGEFILE
+#ifdef ENABLE_LARGEFILE
+# define __USE_LARGEFILE64
+#else
+# define stat64 stat
+# define fstat64 fstat
+# define open64 open
+#endif
+
 /* EOF $Id$ */

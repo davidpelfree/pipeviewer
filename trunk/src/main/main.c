@@ -67,7 +67,7 @@ int main_loop(opts_t options)
 	struct timeval start_time, next_update, next_reset, cur_time;
 	struct timeval init_time;
 	long double elapsed, tilreset;
-	struct stat sb;
+	struct stat64 sb;
 	int fd, n;
 
 	fd = -1;
@@ -104,7 +104,7 @@ int main_loop(opts_t options)
 		fd = main_nextfd(options, n, -1);
 		if (fd < 0)
 			return 1;
-		if (fstat(fd, &sb) == 0) {
+		if (fstat64(fd, &sb) == 0) {
 			main_transfer_bufsize (sb.st_blksize * 32);
 		}
 	}
