@@ -35,7 +35,7 @@ void sig__ttou(int s)
 {
 	int fd;
 
-	fd = open("/dev/null", O_RDWR);
+	fd = open("/dev/null", O_RDWR);	    /* RATS: ignore (no race) */
 	if (fd < 0)
 		return;
 
