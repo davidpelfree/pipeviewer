@@ -1,7 +1,8 @@
 $Id$
 
 0.5.3 - NOT YET RELEASED
-  + added Polish translation
+  + added Polish translation thanks to Bartosz Feñski
+    <fenio@o2.pl> <http://skawina.eu.org/>
   + moved doc/debian to ./debian at insistence of common sense
   + minor Solaris 8 compatibility fixes
 

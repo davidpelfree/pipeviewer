@@ -110,8 +110,9 @@ msgstr "B/s"
 
 #: src/main/display.c:257
 msgid "ETA"
-msgstr "Przewidywany czas ukoñczenia"
+msgstr "ETA"
 
+# "Przewidywany czas ukoñczenia" for ETA is too long
 #: src/main/file.c:75
 msgid "failed to close file"
 msgstr "nie uda³o siê zamkn±æ pliku"

@@ -2,7 +2,6 @@ $Id$
 
 Things still to do:
 
-  * get alternative Polish translation for "ETA"
   * build fixes on Slackware 8.0
   * make sure BSD building still works
   * make doing "pv" then ^Z then "bg" then "fg" not need another "fg"
