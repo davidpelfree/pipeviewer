@@ -6,7 +6,9 @@ Things still to do:
   * build fixes on Slackware 8.0
   * make sure BSD building still works
   * make doing "pv" then ^Z then "bg" then "fg" not need another "fg"
-  * translations (please email me if you speak another language!)
+  * Welsh translation
+  * Norwegian translation
+  * Swedish translation
 
 Any assistance would be appreciated.
 

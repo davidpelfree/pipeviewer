@@ -11,13 +11,13 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Type: text/plain; charset=ISO-8859-14\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/getopt/getopt.c:679
 #, c-format
 msgid "%s: option `%s' is ambiguous\n"
-msgstr "%s\n"
+msgstr ""
 
 #: src/getopt/getopt.c:703
 #, c-format
@@ -477,7 +477,7 @@ msgstr ""
 #: src/main/version.c:21
 #, c-format
 msgid "%s %s - Copyright(C) %s %s"
-msgstr ""
+msgstr "%s %s - Hawlfraint (C) %s %s"
 
 #: src/main/version.c:24
 #, c-format
