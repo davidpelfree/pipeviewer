@@ -254,13 +254,13 @@ void main_display(opts_t opts, long double esec, long long sl,
 			suffix = _("B");
 		}
 		sprintf(tmp, "%4.3Lg%.16s ", transferred, suffix);
-		strcat(display, tmp);
+		strcat(display, tmp);	    /* RATS: ignore (OK) */
 	}
 
 	if (opts->timer) {
 		sprintf(tmp, "%ld:%02ld:%02ld ", ((long) esec) / 3600,
 			(((long) esec) / 60) % 60, ((long) esec) % 60);
-		strcat(display, tmp);
+		strcat(display, tmp);	    /* RATS: ignore (OK) */
 	}
 
 	if (opts->rate) {
@@ -277,7 +277,7 @@ void main_display(opts_t opts, long double esec, long long sl,
 			suffix = _("B/s ");
 		}
 		sprintf(tmp, "[%4.3Lg%.16s] ", rate, suffix);
-		strcat(display, tmp);
+		strcat(display, tmp);	    /* RATS: ignore (OK) */
 	}
 
 	tmp[0] = 0;
@@ -312,7 +312,7 @@ void main_display(opts_t opts, long double esec, long long sl,
 				strcat(display, " ");
 			}
 			strcat(display, "] ");
-			strcat(display, tmp2);
+			strcat(display, tmp2);	/* RATS: ignore (OK) */
 		} else {
 			int p = percentage;
 			avail = opts->width - strlen(display)
@@ -331,7 +331,7 @@ void main_display(opts_t opts, long double esec, long long sl,
 		}
 	}
 
-	strcat(display, tmp);
+	strcat(display, tmp);		    /* RATS: ignore (OK) */
 
 	if (opts->cursor) {
 		lock.l_type = F_WRLCK;
