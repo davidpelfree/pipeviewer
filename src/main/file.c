@@ -29,20 +29,20 @@
  */
 void main_getsize(opts_t options)
 {
-	struct stat sb;
+	struct stat64 sb;
 	int i;
 
 	options->size = 0;
 
 	if (options->argc < 1) {
-		if (fstat(STDIN_FILENO, &sb) == 0)
+		if (fstat64(STDIN_FILENO, &sb) == 0)
 			options->size = sb.st_size;
 		return;
 	}
 
 	for (i = 0; i < options->argc; i++) {
 		if (strcmp(options->argv[i], "-") == 0) {
-			if (fstat(STDIN_FILENO, &sb) == 0) {
+			if (fstat64(STDIN_FILENO, &sb) == 0) {
 				options->size = sb.st_size;
 			} else {
 				options->size = 0;
@@ -50,7 +50,7 @@ void main_getsize(opts_t options)
 			}
 		}
 
-		if (stat(options->argv[i], &sb) == 0) {
+		if (stat64(options->argv[i], &sb) == 0) {
 			options->size += sb.st_size;
 		}
 	}
@@ -64,8 +64,8 @@ void main_getsize(opts_t options)
  */
 int main_nextfd(opts_t options, int filenum, int oldfd)
 {
-	struct stat isb;
-	struct stat osb;
+	struct stat64 isb;
+	struct stat64 osb;
 	int fd;
 
 	if (oldfd > 0) {
@@ -85,7 +85,7 @@ int main_nextfd(opts_t options, int filenum, int oldfd)
 		return STDIN_FILENO;
 	}
 
-	fd = open(options->argv[filenum], O_RDONLY);
+	fd = open64(options->argv[filenum], O_RDONLY);
 	if (fd < 0) {
 		fprintf(stderr, "%s: %s: %s: %s\n",
 			options->program_name,
@@ -95,7 +95,7 @@ int main_nextfd(opts_t options, int filenum, int oldfd)
 		return -1;
 	}
 
-	if (fstat(fd, &isb)) {
+	if (fstat64(fd, &isb)) {
 		fprintf(stderr, "%s: %s: %s: %s\n",
 			options->program_name,
 			_("failed to stat file"),
@@ -105,7 +105,7 @@ int main_nextfd(opts_t options, int filenum, int oldfd)
 		return -1;
 	}
 
-	if (fstat(STDOUT_FILENO, &osb)) {
+	if (fstat64(STDOUT_FILENO, &osb)) {
 		fprintf(stderr, "%s: %s: %s\n",
 			options->program_name,
 			_("failed to stat output file"),

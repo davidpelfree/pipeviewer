@@ -36,6 +36,13 @@ AC_ARG_ENABLE(debug, [  --enable-debug          compile in debugging support],
     AC_DEFINE(DEBUG)
   fi
 )
+LFS_SUPPORT="no"
+AC_ARG_ENABLE(lfs, [  --disable-lfs           disable LFS support],
+  if test "$enable_lfs" = "yes"; then
+    LFS_SUPPORT="yes"
+  fi,
+  LFS_SUPPORT="yes"
+)
 
 ALL_LINGUAS="cz de fr no pl pt sk sv"
 
@@ -55,6 +62,9 @@ dnl Check for various library functions.
 dnl
 AC_CHECK_FUNCS(getopt_long, needgetopt="", needgetopt="src/getopt.o")
 AC_SUBST(needgetopt)
+if test "$LFS_SUPPORT" = "yes"; then
+  AC_CHECK_FUNCS(open64, AC_DEFINE(ENABLE_LARGEFILE))
+fi
 
 dnl Check for various header files and set various other macros.
 dnl

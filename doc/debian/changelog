@@ -1,9 +1,10 @@
-pv (0.4.8-1) unstable; urgency=low
+pv (0.4.9-1) unstable; urgency=low
 
   * Imported Debian changes into main source tree
-  * Updated to version 0.4.8
+  * Updated to version 0.4.9
+  * LFS support added. (closes: Bug#180986)
 
- -- Andrew Wood <andrew.wood@ivarch.com>  Sat,  1 Feb 2003 21:22:55 +0000
+ -- Andrew Wood <andrew.wood@ivarch.com>  Tue, 18 Feb 2003 19:40:37 +0000
 
 pv (0.4.5-1) unstable; urgency=low
 
