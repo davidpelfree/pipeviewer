@@ -1,7 +1,6 @@
 #
 # Compilation rules.
 #
-# $Id$
 
 .SUFFIXES: .c .d .o
 

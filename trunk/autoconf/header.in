@@ -1,6 +1,6 @@
 /*!NOINDEX*/
 /*
- * $Id$
+ * Autoconf's config.h template.
  */
 
 /* Define if you have the getopt_long function. */
@@ -70,4 +70,4 @@
 # define lseek64 lseek
 #endif
 
-/* EOF $Id$ */
+/* EOF */

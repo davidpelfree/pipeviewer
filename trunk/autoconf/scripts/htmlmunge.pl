@@ -2,7 +2,6 @@
 #
 # Change some of the crappier things about texi2html's formatting.
 #
-# $Id$
 
 $body = 0;
 
@@ -32,4 +31,4 @@ while (<>) {
 	print;
 }
 
-# EOF $Id$
+# EOF

@@ -1,8 +1,6 @@
 #!/bin/sh
 #
 # Check that numeric output outputs some percentages.
-#
-# $Id$
 
 dd if=/dev/zero bs=100 count=1 2>/dev/null \
 | $PROG -s 100 -n -i 0.2 -L 100 >/dev/null 2>$TMP1
@@ -10,4 +8,4 @@ test `wc -l < $TMP1` -gt 8
 test `wc -l < $TMP1` -lt 13
 test `sed -n '$p' < $TMP1` -eq 100
 
-# EOF $Id$
+# EOF

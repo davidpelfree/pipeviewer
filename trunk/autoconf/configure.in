@@ -1,6 +1,4 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl
-dnl $Id$
 
 AC_INIT(src/main/version.c)
 
@@ -102,4 +100,4 @@ AC_OUTPUT(Makefile:$mk_segments doc/lsm:doc/lsm.in
   done
 , subdirs="$subdirs")
 
-dnl EOF $Id$
+dnl EOF

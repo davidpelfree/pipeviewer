@@ -1,7 +1,6 @@
 #
 # Targets.
 #
-# $Id$
 
 objgetopt = @needgetopt@
 intldeps = @INTLDEPS@
@@ -13,4 +12,4 @@ $(package): src/main.o $(intldeps) $(intlobjs) $(objgetopt)
 $(package)-static: src/main.o $(intldeps) $(intlobjs) $(objgetopt)
 	$(CC) $(LINKFLAGS) $(CFLAGS) -static -o $@ src/main.o $(objgetopt) $(LIBS)
 
-# EOF $Id$
+# EOF

@@ -9,7 +9,6 @@
 #
 # The directory "src/include" is never scanned; neither are CVS directories.
 #
-# $Id$
 
 outlist=$1
 outlink=$2
@@ -97,4 +96,4 @@ echo $alldep | sed -e 's/ / \\!/g' | tr '!' '\n' >> $outlist
 echo >> $outlist
 echo >> $outlink
 
-# EOF $Id$
+# EOF

@@ -2,8 +2,6 @@
 #
 # Script to autogenerate the `configure' script, and rebuild the dependency
 # list.
-#
-# $Id$
 
 set -e
 
@@ -28,4 +26,4 @@ $MAKE dep
 cd ..
 rm -rf .gen
 
-# EOF $Id$
+# EOF

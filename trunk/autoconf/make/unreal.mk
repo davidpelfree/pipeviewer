@@ -1,7 +1,6 @@
 #
 # Rules for all phony targets.
 #
-# $Id$
 
 .PHONY: all dep depend depclean make check test \
   clean distclean cvsclean \

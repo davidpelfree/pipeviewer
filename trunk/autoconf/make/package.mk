@@ -1,7 +1,6 @@
 #
 # Package name, version, and distribution files.
 #
-# $Id$
 
 package = @PACKAGE@
 version = @VERSION@
@@ -16,4 +15,4 @@ $(srcdir)/src		\
 $(srcdir)/debian	\
 $(srcdir)/tests
 
-# EOF $Id$
+# EOF
