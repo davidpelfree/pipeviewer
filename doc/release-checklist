@@ -6,6 +6,7 @@ Before releasing a new version, go through this checklist:
   - check doc/spec.in is up to date (changelog)
   - check manual is up to date
   - make indent indentclean
+  - make update-po
   - make test
   - commit to CVS
   - wipe build directory, re-run generate.sh and configure
