@@ -78,11 +78,10 @@ index:
 manhtml:
 	@man2html ./doc/quickref.1 \
 	| sed -e '1,/<BODY/d' -e '/<\/BODY/,$$d' \
-	      -e 's|<H3|<H5|ig;s|<H2|<H4|ig' \
-	      -e 's|</H3|</H5|ig;s|</H2|</H4|ig' \
-	      -e 's|<A HREF="[^#][^>]*>\([^<]*\)</A>|\1|ig' \
+	      -e 's|<A [^>]*>&nbsp;</A>||ig' \
+	      -e 's|<A [^>]*>\([^<]*\)</A>|\1|ig' \
 	      -e '/<H1/d' -e 's|\(</H[0-9]>\)|\1<P>|ig' \
-	| sed '1,/<HR/d' 
+	| sed -e '1,/<HR/d' -e '/<H2>Index/,/<HR/d'
 
 dist: doc update-po
 	rm -rf $(package)-$(version)
