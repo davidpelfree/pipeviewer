@@ -17,6 +17,10 @@
 #include <fcntl.h>
 #include <sys/time.h>
 
+#ifdef HAVE_IPC
+void cursor_needreinit(void);
+#endif
+
 
 static int sig__old_stderr;		 /* see sig__ttou() */
 static struct timeval sig__tstp_time;	 /* see sig__tstp() / __cont() */
@@ -74,6 +78,9 @@ void sig__cont(int s)
 		tcgetattr(STDERR_FILENO, &t);
 		t.c_lflag |= TOSTOP;
 		tcsetattr(STDERR_FILENO, TCSANOW, &t);
+#ifdef HAVE_IPC
+		cursor_needreinit();
+#endif
 		return;
 	}
 
@@ -102,6 +109,10 @@ void sig__cont(int s)
 	tcgetattr(STDERR_FILENO, &t);
 	t.c_lflag |= TOSTOP;
 	tcsetattr(STDERR_FILENO, TCSANOW, &t);
+
+#ifdef HAVE_IPC
+	cursor_needreinit();
+#endif
 }
 
 
@@ -238,6 +249,10 @@ void sig_checkbg(void)
 	tcgetattr(STDERR_FILENO, &t);
 	t.c_lflag |= TOSTOP;
 	tcsetattr(STDERR_FILENO, TCSANOW, &t);
+
+#ifdef HAVE_IPC
+	cursor_needreinit();
+#endif
 }
 
 /* EOF */
