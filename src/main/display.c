@@ -192,8 +192,8 @@ void main_display(opts_t opts, long double esec, long long sl,
 		 * does mean that the timer will stop at a 100,000 hours,
 		 * but since that's 11 years, it shouldn't be a problem.
 		 */
-		if (esec > (long double)360000000.0L)
-			esec = (long double)360000000.0L;
+		if (esec > (long double) 360000000.0L)
+			esec = (long double) 360000000.0L;
 
 		sprintf(prefix, "%ld:%02ld:%02ld ", ((long) esec) / 3600,
 			(((long) esec) / 60) % 60, ((long) esec) % 60);
@@ -233,8 +233,8 @@ void main_display(opts_t opts, long double esec, long long sl,
 		 * Bounds check, so we don't overrun the suffix buffer. This
 		 * means the ETA will always be less than 100,000 hours.
 		 */
-		if (eta > (long)360000000L)
-			eta = (long)360000000L;
+		if (eta > (long) 360000000L)
+			eta = (long) 360000000L;
 
 		sprintf(suffix, " %.16s %ld:%02ld:%02ld", _("ETA"),
 			eta / 3600, (eta / 60) % 60, eta % 60);

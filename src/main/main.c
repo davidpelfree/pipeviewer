@@ -123,7 +123,8 @@ static int main_loop(opts_t opts)
 				cansend = 0;
 		}
 
-		written = main_transfer(opts, fd, &eof_in, &eof_out, cansend);
+		written =
+		    main_transfer(opts, fd, &eof_in, &eof_out, cansend);
 		if (written < 0)
 			return 1;
 
@@ -190,10 +191,8 @@ static int main_loop(opts_t opts)
 			next_update.tv_sec = start_time.tv_sec
 			    + (long) opts->interval;
 			next_update.tv_usec = start_time.tv_usec
-			    +
-			    ((opts->interval -
-			      ((long) opts->interval))
-			     * 1000000);
+			    + ((opts->interval - ((long) opts->interval))
+			       * 1000000);
 			if (next_update.tv_usec >= 1000000) {
 				next_update.tv_sec++;
 				next_update.tv_usec -= 1000000;

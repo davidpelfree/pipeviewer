@@ -395,8 +395,7 @@ void cursor_update(opts_t opts, char *str)
 	    ) {
 		int offs;
 
-		offs =
-		    ((cursor__y_start + cursor__pvmax) - opts->height);
+		offs = ((cursor__y_start + cursor__pvmax) - opts->height);
 
 		cursor__y_start -= offs;
 		if (cursor__y_start < 1)
@@ -471,7 +470,7 @@ void cursor_fini(opts_t opts)
 
 #ifdef HAVE_IPC
 	cursor_ipccount();
-	shmdt((void *)cursor__y_top);
+	shmdt((void *) cursor__y_top);
 
 	/*
 	 * If we are the last instance detaching from the shared memory,
