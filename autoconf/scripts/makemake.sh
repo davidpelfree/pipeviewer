@@ -15,7 +15,9 @@ outlist=$1
 outlink=$2
 
 FIND=find
+GREP=grep
 which gfind >/dev/null 2>&1 && FIND=gfind
+which ggrep >/dev/null 2>&1 && GREP=ggrep
 
 echo '# Automatically generated file listings' > $outlist
 echo '#' >> $outlist
@@ -38,10 +40,10 @@ echo `echo $allsrc | wc -w | tr -d ' '` found
 echo -n "Scanning for modules: "
 
 modules=`$FIND src -mindepth 1 -type d -name "[^_]*" -print  \
-         | grep -v '^src/include' | grep -v 'CVS' \
+         | $GREP -v '^src/include' | $GREP -v 'CVS' \
          | while read DIR; do \
            CONTENT=\$(/bin/ls -d \$DIR/* \
-                     | grep -v -e '.po' -e '.gmo' -e '.mo' -e '.h' \
+                     | $GREP -v -e '.po' -e '.gmo' -e '.mo' -e '.h' \
                      | sed -n '$p'); \
            [ -n "\$CONTENT" ] || continue; \
            echo \$DIR; \
@@ -63,10 +65,10 @@ for i in $modules; do
         | sed -e 's@\.c$@.o@' | tr '\n' ' '`
   deps="$deps `$FIND $i -type d -name "[^_]*" \
                -maxdepth 1 -mindepth 1 -print \
-               | grep -v 'CVS' \
+               | $GREP -v 'CVS' \
                | while read DIR; do \
                  CONTENT=\$(/bin/ls -d \$DIR/* \
-                            | grep -v -e '.po' -e '.gmo' -e '.mo' -e '.h' \
+                            | $GREP -v -e '.po' -e '.gmo' -e '.mo' -e '.h' \
                             | sed -n '$p'); \
                   [ -n "\$CONTENT" ] || continue; \
                   echo \$DIR; \
