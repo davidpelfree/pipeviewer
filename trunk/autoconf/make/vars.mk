@@ -47,7 +47,7 @@ LDFLAGS = -r
 DEFS = @DEFS@ -DLOCALEDIR=\"$(localedir)\" -DGNULOCALEDIR=\"$(gnulocaledir)\" -DLOCALE_ALIAS_PATH=\"$(aliaspath)\" 
 CFLAGS = @CFLAGS@
 CPPFLAGS = @CPPFLAGS@ -I$(srcdir)/src/include -Isrc/include $(DEFS)
-LIBS = @LIBS@ @INTLLIBS@
+LIBS = @LIBS@ @INTLDEPS@ @INTLOBJS@
 
 alltarg = @PACKAGE@
 
