@@ -1,5 +1,8 @@
 $Id$
 
+0.4.5 - NOT YET RELEASED
+  + added Portuguese (Brazilian) translation thanks to Eduardo Aguiar
+
 0.4.4 - 7 December 2002
   + pause/resume support - don't count time while stopped
   + stop output when resumed in the background
