@@ -17,19 +17,13 @@ VPATH = $(srcdir)
 
 localedir = $(datadir)/locale
 gnulocaledir = $(prefix)/share/locale
-gettextsrcdir = $(prefix)/share/gettext
-aliaspath = $(localedir):.
 
-msgformat = @msgformat@
-GMOFILES = @GMOFILES@
-POFILES = @POFILES@
 CATALOGS = @CATALOGS@
-GENCAT = @GENCAT@
+POFILES = @POFILES@
 GMSGFMT = @GMSGFMT@
 MSGFMT = @MSGFMT@
 XGETTEXT = @XGETTEXT@
 MSGMERGE = msgmerge
-POSUB = @POSUB@
 CATOBJEXT = @CATOBJEXT@
 INSTOBJEXT = @INSTOBJEXT@
 
@@ -44,10 +38,10 @@ UNINSTALL = rm -f
 
 LDFLAGS = -r
 LINKFLAGS = @LDFLAGS@
-DEFS = @DEFS@ -DLOCALEDIR=\"$(localedir)\" -DGNULOCALEDIR=\"$(gnulocaledir)\" -DLOCALE_ALIAS_PATH=\"$(aliaspath)\" 
+DEFS = @DEFS@ -DLOCALEDIR=\"$(localedir)\"
 CFLAGS = @CFLAGS@
 CPPFLAGS = @CPPFLAGS@ -I$(srcdir)/src/include -Isrc/include $(DEFS)
-LIBS = @LIBS@ @INTLDEPS@ @INTLOBJS@
+LIBS = @LIBS@
 
 alltarg = @PACKAGE@
 

@@ -1,9 +1,6 @@
 This package is free software, and is being distributed under the terms of the
 Artistic License.
 
-Parts of this program may be copyright (C) Free Software Foundation, Inc. and
-are distributed under the terms of the GNU Lesser General Public License.
-
 ----------------------------------------------------------
 
 The Artistic License
@@ -119,11 +116,5 @@ The Artistic License
    MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 
    The End
-
-----------------------------------------------------------
-
-For a copy of the GNU Lesser General Public License, please see
-http://www.gnu.org/ or write to the Free Software Foundation, Inc.,
-59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 ----------------------------------------------------------

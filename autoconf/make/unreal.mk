@@ -9,7 +9,7 @@
   install uninstall \
   rpm deb
 
-all: $(alltarg) $(POSUB)
+all: $(alltarg) $(CATALOGS)
 
 make:
 	echo > $(srcdir)/autoconf/make/filelist.mk~
@@ -34,12 +34,12 @@ clean:
 depclean:
 	rm -f $(alldep)
 
-update-po: $(srcdir)/src/nls/po/$(PACKAGE).pot
+update-po: $(srcdir)/src/nls/$(PACKAGE).pot
 	catalogs='$(CATALOGS)'; \
 	for cat in $$catalogs; do \
 	  lang=$(srcdir)/`echo $$cat | sed 's/$(CATOBJEXT)$$//'`; \
 	  mv $$lang.po $$lang.old.po; \
-	  if $(MSGMERGE) $$lang.old.po $(srcdir)/src/nls/po/$(PACKAGE).pot > $$lang.po; then \
+	  if $(MSGMERGE) $$lang.old.po $(srcdir)/src/nls/$(PACKAGE).pot > $$lang.po; then \
 	    rm -f $$lang.old.po; \
 	  else \
 	    echo "msgmerge for $$cat failed!"; \
@@ -64,8 +64,7 @@ cvsclean: distclean
 	rm -f doc/quickref.1
 	rm -f doc/quickref.txt
 	rm -f configure
-	rm -f src/nls/po/*.gmo src/nls/po/*.mo
-	rm -f src/nls/pofiles.made src/nls/cat-id-tbl.c
+	rm -f src/nls/*.gmo src/nls/*.mo
 	echo > $(srcdir)/autoconf/make/depend.mk~
 	echo > $(srcdir)/autoconf/make/filelist.mk~
 	echo > $(srcdir)/autoconf/make/modules.mk~
@@ -130,37 +129,41 @@ install: all doc
 	                  "$(RPM_BUILD_ROOT)/$(infodir)/$(package).info"
 	$(DO_GZIP) "$(RPM_BUILD_ROOT)/$(mandir)/man1/$(package).1"      || :
 	$(DO_GZIP) "$(RPM_BUILD_ROOT)/$(infodir)/$(package).info"       || :
-	catalogs='$(CATALOGS)'; \
-	for cat in $$catalogs; do \
-	  name=`echo $$cat | sed 's,^.*/,,g'`; \
-	  if test "`echo $$name | sed 's/.*\(\..*\)/\1/'`" = ".gmo"; then \
-	    destdir=$(gnulocaledir); \
-	  else \
-	    destdir=$(localedir); \
-	  fi; \
-	  lang=`echo $$name | sed 's/$(CATOBJEXT)$$//'`; \
-	  dir=$(RPM_BUILD_ROOT)/$$destdir/$$lang/LC_MESSAGES; \
-	  $(srcdir)/autoconf/scripts/mkinstalldirs $$dir; \
-	  $(INSTALL_DATA) $$cat $$dir/$(PACKAGE)$(INSTOBJEXT); \
-	done
+	if test -n "$(CATALOGS)"; then; \
+	  catalogs='$(CATALOGS)'; \
+	  for cat in $$catalogs; do \
+	    name=`echo $$cat | sed 's,^.*/,,g'`; \
+	    if test "`echo $$name | sed 's/.*\(\..*\)/\1/'`" = ".gmo"; then \
+	      destdir=$(gnulocaledir); \
+	    else \
+	      destdir=$(localedir); \
+	    fi; \
+	    lang=`echo $$name | sed 's/$(CATOBJEXT)$$//'`; \
+	    dir=$(RPM_BUILD_ROOT)/$$destdir/$$lang/LC_MESSAGES; \
+	    $(srcdir)/autoconf/scripts/mkinstalldirs $$dir; \
+	    $(INSTALL_DATA) $$cat $$dir/$(PACKAGE)$(INSTOBJEXT); \
+	  done; \
+	fi
 
 uninstall:
 	$(UNINSTALL) "$(RPM_BUILD_ROOT)/$(mandir)/man1/$(package).1"
 	$(UNINSTALL) "$(RPM_BUILD_ROOT)/$(infodir)/$(package).info"
 	$(UNINSTALL) "$(RPM_BUILD_ROOT)/$(mandir)/man1/$(package).1.gz"
 	$(UNINSTALL) "$(RPM_BUILD_ROOT)/$(infodir)/$(package).info.gz"
-	catalogs='$(CATALOGS)'; \
-	for cat in $$catalogs; do \
-	  name=`echo $$cat | sed 's,^.*/,,g'`; \
-	  if test "`echo $$name | sed 's/.*\(\..*\)/\1/'`" = ".gmo"; then \
-	    destdir=$(gnulocaledir); \
-	  else \
-	    destdir=$(localedir); \
-	  fi; \
-	  lang=`echo $$name | sed 's/$(CATOBJEXT)$$//'`; \
-	  dir=$(RPM_BUILD_ROOT)/$$destdir/$$lang/LC_MESSAGES; \
-	  $(UNINSTALL) $$dir/$(PACKAGE)$(INSTOBJEXT); \
-	done
+	if test -n "$(CATALOGS)"; then; \
+	  catalogs='$(CATALOGS)'; \
+	  for cat in $$catalogs; do \
+	    name=`echo $$cat | sed 's,^.*/,,g'`; \
+	    if test "`echo $$name | sed 's/.*\(\..*\)/\1/'`" = ".gmo"; then \
+	      destdir=$(gnulocaledir); \
+	    else \
+	      destdir=$(localedir); \
+	    fi; \
+	    lang=`echo $$name | sed 's/$(CATOBJEXT)$$//'`; \
+	    dir=$(RPM_BUILD_ROOT)/$$destdir/$$lang/LC_MESSAGES; \
+	    $(UNINSTALL) $$dir/$(PACKAGE)$(INSTOBJEXT); \
+	  done; \
+	fi
 
 rpm: dist
 	echo macrofiles: `rpm --showrc \

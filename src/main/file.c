@@ -4,12 +4,12 @@
  * Copyright 2004 Andrew Wood, distributed under the Artistic License.
  */
 
+#include <stdio.h>
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 #include "options.h"
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>

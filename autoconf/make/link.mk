@@ -2,14 +2,10 @@
 # Targets.
 #
 
-objgetopt = @needgetopt@
-intldeps = @INTLDEPS@
-intlobjs = @INTLOBJS@
+$(package): src/main.o src/library.o @NLSOBJ@
+	$(CC) $(LINKFLAGS) $(CFLAGS) -o $@ src/main.o src/library.o @NLSOBJ@ $(LIBS)
 
-$(package): src/main.o $(intldeps) $(intlobjs) $(objgetopt)
-	$(CC) $(LINKFLAGS) $(CFLAGS) -o $@ src/main.o $(objgetopt) $(LIBS)
-
-$(package)-static: src/main.o $(intldeps) $(intlobjs) $(objgetopt)
-	$(CC) $(LINKFLAGS) $(CFLAGS) -static -o $@ src/main.o $(objgetopt) $(LIBS)
+$(package)-static: src/main.o src/library.o @NLSOBJ@
+	$(CC) $(LINKFLAGS) $(CFLAGS) -static -o $@ src/main.o src/library.o @NLSOBJ@ $(LIBS)
 
 # EOF

@@ -8,7 +8,7 @@
 #include "config.h"
 #endif
 #include "options.h"
-#include "getopt.h"
+#include "library/getopt.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -47,6 +47,7 @@ void parse_options__destroy(opts_t object)
  */
 opts_t parse_options(int argc, char ** argv)
 {
+#ifdef HAVE_GETOPT_LONG
 	struct option long_options[] = {
 		{"help",	0, 0, 'h'},
 		{"license",	0, 0, 'l'},
@@ -68,8 +69,9 @@ opts_t parse_options(int argc, char ** argv)
 		{"name",	1, 0, 'N'},
 		{0, 0, 0, 0}
 	};
-	char * short_options = "hlVpterbfnqcL:Ws:i:w:N:";
 	int option_index = 0;
+#endif
+	char * short_options = "hlVpterbfnqcL:Ws:i:w:N:";
 	int c, numopts;
 	opts_t options;
 
@@ -104,8 +106,13 @@ opts_t parse_options(int argc, char ** argv)
 	options->interval = 1;
 
 	do {
-		c = getopt_long(argc, argv,
-		  short_options, long_options, &option_index);
+#ifdef HAVE_GETOPT_LONG
+		c = getopt_long(argc, argv, /* RATS: ignore */
+				short_options, long_options,
+				&option_index);
+#else
+		c = getopt(argc, argv, short_options);	/* RATS: ignore */
+#endif
 		if (c < 0) continue;
 
 		switch (c) {
@@ -177,9 +184,15 @@ opts_t parse_options(int argc, char ** argv)
 				options->name = optarg;
 				break;
 			default :
-				fprintf(stderr,
-				  _("Try `%s --help' for more information."),
-				  argv[0]);
+#ifdef HAVE_GETOPT_LONG
+			fprintf(stderr,	    /* RATS: ignore (OK) */
+				_("Try `%s --help' for more information."),
+				argv[0]);
+#else
+			fprintf(stderr,	    /* RATS: ignore (OK) */
+				_("Try `%s -h' for more information."),
+				argv[0]);
+#endif
 				fprintf(stderr, "\n");
 				options->destructor(options);
 				return 0;

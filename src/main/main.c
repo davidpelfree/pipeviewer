@@ -5,12 +5,12 @@
  * Copyright 2004 Andrew Wood, distributed under the Artistic License.
  */
 
+#include <termios.h>
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 #include "options.h"
 
-#include <termios.h>
 #include <unistd.h>
 #include <signal.h>
 #include <fcntl.h>
