@@ -14,6 +14,9 @@
 outlist=$1
 outlink=$2
 
+FIND=find
+which gfind >/dev/null 2>&1 && FIND=gfind
+
 echo '# Automatically generated file listings' > $outlist
 echo '#' >> $outlist
 echo "# Creation time: `date`" >> $outlist
@@ -26,7 +29,7 @@ echo >> $outlink
 
 echo -n "Scanning for source files: "
 
-allsrc=`find src -type f -name "*.c" -print`
+allsrc=`$FIND src -type f -name "*.c" -print`
 allobj=`echo $allsrc | tr ' ' '\n' | sed 's/\.c$/.o/'`
 alldep=`echo $allsrc | tr ' ' '\n' | sed 's/\.c$/.d/'`
 
@@ -34,7 +37,7 @@ echo `echo $allsrc | wc -w | tr -d ' '` found
 
 echo -n "Scanning for modules: "
 
-modules=`find src -mindepth 1 -type d -name "[^_]*" -print  \
+modules=`$FIND src -mindepth 1 -type d -name "[^_]*" -print  \
          | grep -v '^src/include' | grep -v 'CVS' \
          | while read DIR; do \
            CONTENT=\$(/bin/ls -d \$DIR/* \
@@ -56,9 +59,9 @@ echo -n -e ']\r['
 for i in $modules; do
   echo -n '.'
   allobj="$allobj $i.o"
-  deps=`find $i -type f -name "*.c" -maxdepth 1 -print \
+  deps=`$FIND $i -type f -name "*.c" -maxdepth 1 -print \
         | sed -e 's@\.c$@.o@' | tr '\n' ' '`
-  deps="$deps `find $i -type d -name "[^_]*" \
+  deps="$deps `$FIND $i -type d -name "[^_]*" \
                -maxdepth 1 -mindepth 1 -print \
                | grep -v 'CVS' \
                | while read DIR; do \
