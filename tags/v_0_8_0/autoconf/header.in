@@ -1,0 +1,55 @@
+/*!NOINDEX*/
+/* Define if you have standard C headers. */
+#undef STDC_HEADERS
+
+/* Define if you have "config.h" (yes, you have). */
+#undef HAVE_CONFIG_H
+
+/* Define if you have the getopt_long function. */
+#undef HAVE_GETOPT_LONG
+
+/* Define if you have "getopt.h". */
+#undef HAVE_GETOPT_H
+
+/* Define if you have getopt. */
+#undef HAVE_GETOPT
+
+/* NLS stuff. */
+#undef ENABLE_NLS
+#undef HAVE_LIBINTL_H
+#undef HAVE_LOCALE_H
+#undef HAVE_GETTEXT
+#ifdef ENABLE_NLS
+# include "library/gettext.h"
+#else
+# define _(String) (String)
+# define N_(String) (String)
+#endif
+
+/* The name of the program. */
+#define PROGRAM_NAME	"progname"
+
+/* The name of the package. */
+#define PACKAGE		""
+
+/* The current package version. */
+#define VERSION		"0.0.0"
+
+/* Various identification and legal drivel. */
+#define COPYRIGHT_YEAR   _("2004")
+#define COPYRIGHT_HOLDER _("Andrew Wood <andrew.wood@ivarch.com>")
+#define PROJECT_HOMEPAGE "http://www.ivarch.com/programs/" PROGRAM_NAME ".shtml"
+#define BUG_REPORTS_TO   _("Andrew Wood <andrew.wood@ivarch.com>")
+
+/* LFS support. */
+#undef ENABLE_LARGEFILE
+#ifdef ENABLE_LARGEFILE
+# define __USE_LARGEFILE64
+#else
+# define stat64 stat
+# define fstat64 fstat
+# define open64 open
+# define lseek64 lseek
+#endif
+
+/* EOF */
