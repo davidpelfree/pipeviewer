@@ -5,6 +5,7 @@ $Id$
     <fenio@o2.pl> <http://skawina.eu.org/>
   + moved doc/debian to ./debian at insistence of common sense
   + minor Solaris 8 compatibility fixes
+  + seems to compile and test OK on Mac OS X
 
 0.5.0 - 15 April 2003
   + added French translation thanks to Stéphane Lacasse
