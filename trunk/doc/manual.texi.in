@@ -13,7 +13,7 @@
 @ifinfo
 This file documents the ``@PACKAGE@'' package, version @VERSION@.
 
-Copyright 2003 Andrew Wood
+Copyright 2004 Andrew Wood
 
 Permission is granted to make and distribute verbatim copies of this manual
 provided the copyright notice and this permission notice are preserved on all
@@ -43,7 +43,7 @@ this permission notice may be stated in a translation approved by Andrew Wood.
 @author Andrew Wood
 @page
 @vskip 0pt plus 1filll
-Copyright @copyright{} 2003 Andrew Wood
+Copyright @copyright{} 2004 Andrew Wood
 
 Permission is granted to make and distribute verbatim copies of this manual
 provided the copyright notice and this permission notice are preserved on all
@@ -63,7 +63,7 @@ this permission notice may be stated in a translation approved by Andrew Wood.
 @node Top, Overview, , (dir)
 @top Pipe Viewer
 
-This edition of the @cite{PV manual}, last updated 3 August 2003,
+This edition of the @cite{PV manual}, last updated 14 January 2004,
 documents @code{@PACKAGE@} version @VERSION@.
 @end ifinfo
 

@@ -44,15 +44,24 @@ make install
 %pre
 
 %post
-[ -x /sbin/install-info ] \
-&& [ -e /usr/share/info/dir ] \
-&& /sbin/install-info /usr/share/info/@PACKAGE@.info.gz /usr/share/info/dir
+if [ -x /sbin/install-info ]; then
+	if [ -e /usr/share/info/dir ]; then
+		/sbin/install-info \
+		  /usr/share/info/@PACKAGE@.info.gz \
+		  /usr/share/info/dir
+	fi
+fi
+:
 
 %preun
-[ -x /sbin/install-info ] \
-&& [ -e /usr/share/info/dir ] \
-&& /sbin/install-info --delete /usr/share/info/@PACKAGE@.info.gz \
-                               /usr/share/info/dir
+if [ -x /sbin/install-info ]; then
+	if [ -e /usr/share/info/dir ]; then
+		/sbin/install-info --delete \
+		  /usr/share/info/@PACKAGE@.info.gz \
+                  /usr/share/info/dir
+	fi
+fi
+:
 
 %postun
 
@@ -67,6 +76,9 @@ make install
 %doc README doc/NEWS doc/TODO doc/COPYING
 
 %changelog
+* Wed Jan 14 2004 Andrew Wood <andrew.wood@ivarch.com>
+- A minor bug triggered when installing the RPM was fixed.
+
 * Mon Dec 22 2003 Andrew Wood <andrew.wood@ivarch.com>
 - Fixed a minor bug that occasionally reported "resource unavailable".
 
