@@ -27,53 +27,54 @@ struct optdesc_s {
 void display_help(void)
 {
 	struct optdesc_s optlist[] = {
-		{ "-p", "--progress", 0,
-		  _("show progress bar") },
-		{ "-t", "--timer", 0,
-		  _("show elapsed time") },
-		{ "-e", "--eta", 0,
-		  _("show estimated time of arrival (completion)") },
-		{ "-r", "--rate", 0,
-		  _("show data transfer rate counter") },
-		{ "-b", "--bytes", 0,
-		  _("show number of bytes transferred") },
-		{ "-f", "--force", 0,
-		  _("output even if standard error is not a terminal") },
-		{ "-n", "--numeric", 0,
-		  _("output percentages, not visual information") },
-		{ "-q", "--quiet", 0,
-		  _("do not output any transfer information at all") },
-		{ "-c", "--cursor", 0,
-		  _("use cursor positioning escape sequences") },
-		{ "-L", "--rate-limit", _("RATE"),
-		  _("limit transfer to RATE bytes per second") },
-		{ "-W", "--wait", 0,
-		  _("display nothing until first byte transferred") },
-		{ "-s", "--size", _("SIZE"),
-		  _("set estimated data size to SIZE bytes") },
-		{ "-i", "--interval", _("SEC"),
-		  _("update every SEC seconds") },
-		{ "-w", "--width", _("WIDTH"),
-		  _("assume terminal is WIDTH characters wide") },
-		{ "-N", "--name", _("NAME"),
-		  _("prefix visual information with NAME") },
-		{ "", 0, 0, 0 },
-		{ "-h", "--help", 0,
-		  _("show this help and exit") },
-		{ "-l", "--license", 0,
-		  _("show the license this program is distributed under") },
-		{ "-V", "--version", 0,
-		  _("show version information and exit") },
-		{ 0, 0, 0, 0 }
+		{"-p", "--progress", 0,
+		 _("show progress bar")},
+		{"-t", "--timer", 0,
+		 _("show elapsed time")},
+		{"-e", "--eta", 0,
+		 _("show estimated time of arrival (completion)")},
+		{"-r", "--rate", 0,
+		 _("show data transfer rate counter")},
+		{"-b", "--bytes", 0,
+		 _("show number of bytes transferred")},
+		{"-f", "--force", 0,
+		 _("output even if standard error is not a terminal")},
+		{"-n", "--numeric", 0,
+		 _("output percentages, not visual information")},
+		{"-q", "--quiet", 0,
+		 _("do not output any transfer information at all")},
+		{"-c", "--cursor", 0,
+		 _("use cursor positioning escape sequences")},
+		{"-L", "--rate-limit", _("RATE"),
+		 _("limit transfer to RATE bytes per second")},
+		{"-W", "--wait", 0,
+		 _("display nothing until first byte transferred")},
+		{"-s", "--size", _("SIZE"),
+		 _("set estimated data size to SIZE bytes")},
+		{"-i", "--interval", _("SEC"),
+		 _("update every SEC seconds")},
+		{"-w", "--width", _("WIDTH"),
+		 _("assume terminal is WIDTH characters wide")},
+		{"-N", "--name", _("NAME"),
+		 _("prefix visual information with NAME")},
+		{"", 0, 0, 0},
+		{"-h", "--help", 0,
+		 _("show this help and exit")},
+		{"-l", "--license", 0,
+		 _("show the license this program is distributed under")},
+		{"-V", "--version", 0,
+		 _("show version information and exit")},
+		{0, 0, 0, 0}
 	};
 	int i, col1max = 0, tw = 77;
 	char *optbuf;
 
-	printf(_("Usage: %s [OPTION] [FILE]..."), /* RATS: ignore */
+	printf(_("Usage: %s [OPTION] [FILE]..."),	/* RATS: ignore */
 	       PROGRAM_NAME);
 	printf("\n%s\n\n",
-_("Concatenate FILE(s), or standard input, to standard output,\n"
-  "with monitoring."));
+	       _
+	       ("Concatenate FILE(s), or standard input, to standard output,\n"
+		"with monitoring."));
 
 	for (i = 0; optlist[i].optshort; i++) {
 		int width = 0;
@@ -136,7 +137,8 @@ _("Concatenate FILE(s), or standard input, to standard output,\n"
 			} else {
 				end++;
 			}
-			printf("%.*s\n%*s ", (int)(end - start), start, col1max, "");
+			printf("%.*s\n%*s ", (int) (end - start), start,
+			       col1max, "");
 			if (end == start)
 				end++;
 			start = end;
@@ -146,7 +148,7 @@ _("Concatenate FILE(s), or standard input, to standard output,\n"
 	}
 
 	printf("\n");
-	printf(_("Please report any bugs to %s."), /* RATS: ignore */
+	printf(_("Please report any bugs to %s."),	/* RATS: ignore */
 	       BUG_REPORTS_TO);
 	printf("\n");
 }
