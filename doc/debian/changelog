@@ -1,0 +1,13 @@
+pv (0.4.5-1) unstable; urgency=low
+
+  * New upstream release
+  * Update to Debian Policy standards version 3.5.8
+
+ -- Cédric Delfosse <cedric@debian.org>  Tue, 31 Dec 2002 17:05:36 +0100
+
+pv (0.4.0-1) unstable; urgency=low
+
+  * Initial Release. (closes: Bug#171622)
+
+ -- Cédric Delfosse <cedric@debian.org>  Tue,  3 Dec 2002 21:50:20 +0100
+
