@@ -189,10 +189,14 @@ successfully.
 .B \-V, \-\-version         
 Print version information on standard output and exit successfully.
 
-.SH AUTHOR
+.SH AUTHORS
 Andrew Wood <andrew.wood@ivarch.com>
 .br
 .I http://www.ivarch.com/
+
+Eduardo Aguiar <eduardo.oliveira@sondabrasil.com.br>
+.br
+.I (provided Portuguese [Brazilian] translation)
 
 .SH BUGS
 If you find any bugs, please contact the author, either by email
