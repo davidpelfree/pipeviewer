@@ -1,8 +1,8 @@
 $Id$
 
-0.5.3 - NOT YET RELEASED
+0.5.3 - 4 May 2003
   + added Polish translation thanks to Bartosz Feñski
-    <fenio@o2.pl> <http://skawina.eu.org/>
+    <fenio@o2.pl> <http://skawina.eu.org/> and Krystian Zubel
   + moved doc/debian to ./debian at insistence of common sense
   + minor Solaris 8 compatibility fixes
   + seems to compile and test OK on Mac OS X
