@@ -1,4 +1,4 @@
-0.5.9 - NOT YET RELEASED
+0.5.9 - 23 July 2003
   + fix for test 007 when not in C locale
   + fix for build process to use CPPFLAGS
   + fix for build process to use correct i18n libraries
