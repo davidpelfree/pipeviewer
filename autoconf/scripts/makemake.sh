@@ -15,8 +15,8 @@ outlink=$2
 
 FIND=find
 GREP=grep
-which gfind >/dev/null 2>&1 && FIND=gfind
-which ggrep >/dev/null 2>&1 && GREP=ggrep
+which gfind 2>/dev/null | grep /gfind >/dev/null && FIND=gfind
+which ggrep 2>/dev/null | grep /ggrep >/dev/null && GREP=ggrep
 
 echo '# Automatically generated file listings' > $outlist
 echo '#' >> $outlist
@@ -38,8 +38,10 @@ echo `echo $allsrc | wc -w | tr -d ' '` found
 
 echo -n "Scanning for modules: "
 
-modules=`$FIND src -mindepth 1 -type d -name "[^_]*" -print  \
-         | $GREP -v '^src/include' | $GREP -v 'CVS' \
+modules=`$FIND src -type d -name "[^_]*" -print \
+         | $GREP -v '^src$' \
+         | $GREP -v '^src/include' \
+         | $GREP -v 'CVS' \
          | while read DIR; do \
            CONTENT=\$(/bin/ls -d \$DIR/* \
                      | $GREP -v -e '.po' -e '.gmo' -e '.mo' -e '.h' \
@@ -49,7 +51,7 @@ modules=`$FIND src -mindepth 1 -type d -name "[^_]*" -print  \
 	   done
          `
 
-echo `echo $modules | wc -w | tr -d ' '` found
+echo up to `echo $modules | wc -w | tr -d ' '` found
 
 echo "Writing module linking rules"
 
@@ -60,20 +62,22 @@ echo -n -e ']\r['
 for i in $modules; do
   echo -n '.'
   allobj="$allobj $i.o"
-  deps=`$FIND $i -type f -name "*.c" -maxdepth 1 -print \
-        | sed -e 's@\.c$@.o@' | tr '\n' ' '`
-  deps="$deps `$FIND $i -type d -name "[^_]*" \
-               -maxdepth 1 -mindepth 1 -print \
-               | $GREP -v 'CVS' \
-               | while read DIR; do \
-                 CONTENT=\$(/bin/ls -d \$DIR/* \
-                            | $GREP -v -e '.po' -e '.gmo' -e '.mo' -e '.h' \
-                            | sed -n '$p'); \
-                  [ -n "\$CONTENT" ] || continue; \
-                  echo \$DIR; \
-       	          done \
-               | sed -e 's@$@.o@' \
-               | tr '\n' ' '`"
+  deps=""
+  for j in $i/*.c; do
+    [ -f $j ] || continue
+    newobj=`echo $j | sed -e 's@\.c$@.o@'`
+    deps="$deps $newobj"
+  done
+  for j in $i/*; do
+    [ -d "$j" ] || continue
+    [ `basename $j` = "CVS" ] && continue
+    CONTENT=`/bin/ls -d $j/* \
+             | $GREP -v -e '.po' -e '.gmo' -e '.mo' -e '.h' \
+             | sed -n '$p'`
+    [ -n "$CONTENT" ] || continue
+    deps="$deps $j.o"
+  done
+  [ -n "$deps" ] || continue
   echo "$i.o: $deps" >> $outlink
   echo '	$(LD) $(LDFLAGS) -o $@' "$deps" >> $outlink
   echo >> $outlink
