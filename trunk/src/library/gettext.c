@@ -2,6 +2,16 @@
  * Very minimal (and stupid) implementation of gettext, with a fixed lookup
  * table.
  *
+ * This library ONLY handles gettext(), and that only for the basic form (it
+ * translates strings to other strings with no other modification, so %2$d
+ * style constructs are not dealt with). The setlocale(), bindtextdomain(),
+ * and textdomain() functions are ignored.
+ *
+ * To use this library, create a function that, given a language string,
+ * returns an struct msg_table_s[] of msgid and msgstr pairs, with the end
+ * of the table being marked by a NULL msgid. The po2table.sh script will do
+ * this.
+ *
  * Copyright 2004 Andrew Wood, distributed under the Artistic License.
  */
 
