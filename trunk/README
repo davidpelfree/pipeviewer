@@ -22,11 +22,14 @@ Compilation
 
 To compile the package, type "sh ./configure", which should generate a
 Makefile for your system.  You may then type "make" to build everything.
+Note that GNU `make' is required; this may be installed as `gmake' on some
+systems.
 
 See the file `doc/INSTALL' for more about the `configure' script.
 
-Developers note that you can do "./configure --enable-debug" to cause
-debugging support to be built in.  Also note that doing "make index" will
+Developers note that you can do "./configure --enable-debugging" to cause
+debugging support to be built in, and "--enable-profiling" builds in
+profiling support (see "man gprof").  Also note that doing "make index" will
 generate an HTML code index (using "ctags" and "cproto"); this index lists
 all files used, all functions defined, and all TODOs marked in the code.
 
