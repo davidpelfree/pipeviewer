@@ -1,3 +1,6 @@
+0.6.0 - NOT YET RELEASED
+  + doing ^Z then "bg" then "fg" now continues displaying
+
 0.5.9 - 23 July 2003
   + fix for test 007 when not in C locale
   + fix for build process to use CPPFLAGS
