@@ -1,0 +1,11 @@
+$Id$
+
+Things still to do:
+
+  * handle SIGWINCH
+  * make doing "pv" then ^Z then "bg" then "fg" not need another "fg"
+  * translations (please email me if you speak another language!)
+
+Any assistance would be appreciated.
+
+$Id$
