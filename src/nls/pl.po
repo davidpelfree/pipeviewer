@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2004-05-02 18:15+0100\n"
+"POT-Creation-Date: 2004-05-02 20:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,8 +13,13 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/main/cursor.c:125 src/main/cursor.c:135 src/main/cursor.c:209
+#: src/main/cursor.c:129 src/main/cursor.c:145 src/main/cursor.c:219
 msgid "failed to open terminal"
+msgstr "nie uda³o siê otworzyæ terminala"
+
+#: src/main/cursor.c:137
+#, fuzzy
+msgid "failed to lock terminal"
 msgstr "nie uda³o siê otworzyæ terminala"
 
 #: src/main/display.c:157

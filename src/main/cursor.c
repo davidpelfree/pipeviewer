@@ -7,8 +7,7 @@
  * first `pv' process.
  *
  * However, some OSes (FreeBSD and MacOS X so far) don't allow locking of a
- * terminal, so we fall back to non-IPC behaviour if terminal locking
- * doesn't work.
+ * terminal, so we have to abort if terminal locking doesn't work.
  *
  * Copyright 2004 Andrew Wood, distributed under the Artistic License.
  */
@@ -132,6 +131,12 @@ static int cursor_ipcinit(opts_t options, char *ttyfile, int terminalfd)
 	}
 
 	cursor_lock(terminalfd);
+	if (cursor__noipc) {
+		fprintf(stderr, "%s: %s: %s\n",
+			options->program_name,
+			_("failed to lock terminal"), strerror(errno));
+		return 1;
+	}
 
 	cursor__shmid = shmget(key, sizeof(int), 0600 | IPC_CREAT);
 	if (cursor__shmid < 0) {
