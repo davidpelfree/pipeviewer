@@ -1,3 +1,6 @@
+0.9.0 - 15 November 2004
+  - minor NLS bugfix
+
 0.8.9 - 6 November 2004
   - decimal values now accepted for rate and size, eg "-L 1.23M"
   - code cleanup

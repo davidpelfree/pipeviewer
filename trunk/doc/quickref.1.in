@@ -240,6 +240,10 @@ Boris Folgmann
 .br
 .I http://www.folgmann.com/en/
 
+Mathias Gumz
+.br
+(reported NLS bug)
+
 
 .SH BUGS
 If you find any bugs, please contact the primary author, either by email or
