@@ -1,23 +1,22 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2002-12-03 13:54+0000\n"
+"POT-Creation-Date: 2002-12-07 11:55+0000\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Date: 1999-06-01 15:18:29+0100\n"
 "From: Andrew Wood <ivarch@ubik>\n"
-"Xgettext-Options: --default-domain=pkgbuild --directory=./.pkgdir "
-"--add-comments --keyword=_ --keyword=N_\n"
-"Files: src/getopt/getopt.c src/getopt/getopt1.c src/version.c "
-"src/main/init.c src/main/help.c src/main/xpmptr.c src/guts/load.c "
-"src/guts/stop.c src/guts/configure.c src/guts/make.c src/guts/install.c "
-"src/guts/prefs.c src/ui/generate.c src/ui/main.c src/ui/xpm.c "
-"src/ui/status.c src/ui/activate.c src/ui/handlers/main.c "
-"src/ui/handlers/package.c src/ui/handlers/prefs.c src/ui/handlers/dirsel.c "
-"src/ui/handlers/popup.c src/ui/handlers/help.c src/ui/textout.c "
-"src/ui/report.c src/ui/callback.c src/nls/intl/bindtextdom.c "
-"src/nls/intl/dcgettext.c src/nls/intl/dgettext.c src/nls/intl/finddomain.c "
-"src/nls/intl/gettext.c src/nls/intl/loadmsgcat.c src/nls/intl/localealias.c "
-"src/nls/intl/textdomain.c src/nls/intl-cat/cat-compat.c "
-"src/nls/intl-gett/intl-compat.c\n"
+"Xgettext-Options: --default-domain=pkgbuild --directory=./.pkgdir --add-"
+"comments --keyword=_ --keyword=N_\n"
+"Files: src/getopt/getopt.c src/getopt/getopt1.c src/version.c src/main/init."
+"c src/main/help.c src/main/xpmptr.c src/guts/load.c src/guts/stop.c src/guts/"
+"configure.c src/guts/make.c src/guts/install.c src/guts/prefs.c src/ui/"
+"generate.c src/ui/main.c src/ui/xpm.c src/ui/status.c src/ui/activate.c src/"
+"ui/handlers/main.c src/ui/handlers/package.c src/ui/handlers/prefs.c src/ui/"
+"handlers/dirsel.c src/ui/handlers/popup.c src/ui/handlers/help.c src/ui/"
+"textout.c src/ui/report.c src/ui/callback.c src/nls/intl/bindtextdom.c src/"
+"nls/intl/dcgettext.c src/nls/intl/dgettext.c src/nls/intl/finddomain.c src/"
+"nls/intl/gettext.c src/nls/intl/loadmsgcat.c src/nls/intl/localealias.c src/"
+"nls/intl/textdomain.c src/nls/intl-cat/cat-compat.c src/nls/intl-gett/intl-"
+"compat.c\n"
 
 #: src/getopt/getopt.c:679
 #, c-format
@@ -82,39 +81,39 @@ msgstr "%s: flaggan `-W %s' tar ingen parameter\n"
 msgid "failed to open terminal"
 msgstr ""
 
-#: src/main/display.c:209
+#: src/main/display.c:215
 msgid "GB"
 msgstr ""
 
-#: src/main/display.c:212
+#: src/main/display.c:218
 msgid "MB"
 msgstr ""
 
-#: src/main/display.c:215
+#: src/main/display.c:221
 msgid "kB"
 msgstr ""
 
-#: src/main/display.c:217
+#: src/main/display.c:223
 msgid "B"
 msgstr ""
 
-#: src/main/display.c:232
+#: src/main/display.c:238
 msgid "GB/s"
 msgstr ""
 
-#: src/main/display.c:235
+#: src/main/display.c:241
 msgid "MB/s"
 msgstr ""
 
-#: src/main/display.c:238
+#: src/main/display.c:244
 msgid "kB/s"
 msgstr ""
 
-#: src/main/display.c:240
+#: src/main/display.c:246
 msgid "B/s "
 msgstr ""
 
-#: src/main/display.c:251
+#: src/main/display.c:257
 msgid "ETA"
 msgstr ""
 
