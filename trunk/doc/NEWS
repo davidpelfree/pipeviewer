@@ -1,3 +1,6 @@
+0.8.1 - NOT YET RELEASED
+  + bugfix in cursor positioning (-c)
+
 0.8.0 - 12 February 2004
   + replaced GNU getopt with my library code
   + replaced GNU gettext with my very minimal replacement

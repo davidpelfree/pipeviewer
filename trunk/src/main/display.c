@@ -138,7 +138,7 @@ void cursor_fini(opts_t options)
 	if (cursor__y > 10000)
 		cursor__y = 10000;
 
-	sprintf(tmp, "\033[%dH\n", cursor__y);	/* RATS: ignore */
+	sprintf(tmp, "\033[%d;1H\n", cursor__y);	/* RATS: ignore */
 	write(STDERR_FILENO, tmp, strlen(tmp));	/* RATS: ignore */
 
 	lock.l_type = F_UNLCK;
@@ -342,7 +342,7 @@ void main_display(opts_t opts, long double esec, long long sl,
 		lock.l_start = 0;
 		lock.l_len = 1;
 		fcntl(STDERR_FILENO, F_SETLKW, &lock);
-		sprintf(tmp, "\033[%dH", cursor__y);
+		sprintf(tmp, "\033[%d;1H", cursor__y);
 		write(STDERR_FILENO, tmp,
 		      strlen(tmp));		/* RATS: ignore */
 		write(STDERR_FILENO, display,
