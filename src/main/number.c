@@ -22,7 +22,8 @@ long long getnum_ll(char *str)
 {
 	long long n = 0;
 
-	while (str[0] != 0 && (!my_isdigit(str[0]))) str++;
+	while (str[0] != 0 && (!my_isdigit(str[0])))
+		str++;
 
 	for (; my_isdigit(str[0]); str++) {
 		n = n * 10;
@@ -41,14 +42,16 @@ double getnum_d(char *str)
 	double n = 0.0;
 	double step = 1;
 
-	while (str[0] != 0 && (!my_isdigit(str[0]))) str++;
+	while (str[0] != 0 && (!my_isdigit(str[0])))
+		str++;
 
 	for (; my_isdigit(str[0]); str++) {
 		n = n * 10;
 		n += (str[0] - '0');
 	}
 
-	if ((str[0] != '.') && (str[0] != ',')) return n;
+	if ((str[0] != '.') && (str[0] != ','))
+		return n;
 
 	for (; my_isdigit(str[0]) && step < 1000000; str++) {
 		step = step * 10;
@@ -64,7 +67,7 @@ double getnum_d(char *str)
  */
 int getnum_i(char *str)
 {
-	return (int)getnum_ll(str);
+	return (int) getnum_ll(str);
 }
 
 /* EOF */

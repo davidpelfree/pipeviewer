@@ -77,7 +77,7 @@ opts_t parse_options(int argc, char ** argv)
 
 	options = calloc(1, sizeof(*options));
 	if (!options) {
-		fprintf(stderr,
+		fprintf(stderr, /* RATS: ignore */
 		  _("%s: option structure allocation failed (%s)"),
 		  argv[0],
 		  strerror(errno));
@@ -92,7 +92,7 @@ opts_t parse_options(int argc, char ** argv)
 	options->argc = 0;
 	options->argv = calloc(argc + 1, sizeof(char *));
 	if (!options->argv) {
-		fprintf(stderr,
+		fprintf(stderr, /* RATS: ignore */
 		  _("%s: option structure argv allocation failed (%s)"),
 		  argv[0],
 		  strerror(errno));

@@ -32,7 +32,7 @@ void sig_checkbg(void);
 long calc_percentage(long long so_far, long long total)
 {
 	if (total < 1)
- 		return 0;
+		return 0;
 
 	so_far *= 100;
 	so_far /= total;
@@ -85,8 +85,7 @@ void cursor_init(opts_t options)
 	if (fd < 0) {
 		fprintf(stderr, "%s: %s: %s\n",
 			options->program_name,
-			_("failed to open terminal"),
-			strerror(errno));
+			_("failed to open terminal"), strerror(errno));
 		options->cursor = 0;
 		return;
 	}
@@ -150,7 +149,8 @@ void cursor_fini(opts_t options)
  * the final update so the rate is given as an average over the whole
  * transfer; otherwise the rate is "sl"/"esec", i.e. the current rate.
  */
-void main_display(opts_t opts, long double esec, long long sl, long long tot)
+void main_display(opts_t opts, long double esec, long long sl,
+		  long long tot)
 {
 	static long percentage = 0;
 	static long double prev_esec = 0;
@@ -174,19 +174,21 @@ void main_display(opts_t opts, long double esec, long long sl, long long tot)
 			rate = prev_rate;
 			prev_trans += sl;
 		} else {
-			rate = ((long double)sl + prev_trans) / sincelast;
+			rate = ((long double) sl + prev_trans) / sincelast;
 			prev_esec = esec;
 			prev_trans = 0;
 		}
 	} else {
 		if (esec < 0.000001)
 			esec = 0.000001;
-		rate = ((long double)tot) / (long double)esec;
+		rate = ((long double) tot) / (long double) esec;
 	}
 	prev_rate = rate;
 
-	if (rate > 0) percentage += 2;
-	if (percentage > 199) percentage = 0;
+	if (rate > 0)
+		percentage += 2;
+	if (percentage > 199)
+		percentage = 0;
 	eta = 0;
 
 	/*
@@ -234,11 +236,11 @@ void main_display(opts_t opts, long double esec, long long sl, long long tot)
 
 	if (opts->bytes) {
 		transferred = tot;
-		if (transferred >= 1000*1024*1024) {
-			transferred = transferred / (1024*1024*1024);
+		if (transferred >= 1000 * 1024 * 1024) {
+			transferred = transferred / (1024 * 1024 * 1024);
 			suffix = _("GB");
-		} else if (transferred >= 1000*1024) {
-			transferred = transferred / (1024*1024);
+		} else if (transferred >= 1000 * 1024) {
+			transferred = transferred / (1024 * 1024);
 			suffix = _("MB");
 		} else if (transferred >= 1000) {
 			transferred = transferred / 1024;
@@ -251,17 +253,17 @@ void main_display(opts_t opts, long double esec, long long sl, long long tot)
 	}
 
 	if (opts->timer) {
-		sprintf(tmp, "%ld:%02ld:%02ld ", ((long)esec) / 3600,
-			(((long)esec) / 60) % 60, ((long)esec) % 60);
+		sprintf(tmp, "%ld:%02ld:%02ld ", ((long) esec) / 3600,
+			(((long) esec) / 60) % 60, ((long) esec) % 60);
 		strcat(display, tmp);
 	}
 
 	if (opts->rate) {
-		if (rate >= 1000*1024*1024) {
-			rate = rate / (1024*1024*1024);
+		if (rate >= 1000 * 1024 * 1024) {
+			rate = rate / (1024 * 1024 * 1024);
 			suffix = _("GB/s");
-		} else if (rate >= 1000*1024) {
-			rate = rate / (1024*1024);
+		} else if (rate >= 1000 * 1024) {
+			rate = rate / (1024 * 1024);
 			suffix = _("MB/s");
 		} else if (rate >= 1000) {
 			rate = rate / 1024;
@@ -287,8 +289,8 @@ void main_display(opts_t opts, long double esec, long long sl, long long tot)
 		if (opts->size > 0) {
 			sprintf(tmp2, "%2ld%%", percentage);
 			avail = opts->width - strlen(display)
-				- strlen(tmp) - strlen(tmp2) - 3;
-			for (i = 0; i < (avail*percentage)/100 - 1;
+			    - strlen(tmp) - strlen(tmp2) - 3;
+			for (i = 0; i < (avail * percentage) / 100 - 1;
 			     i++) {
 				if (i < avail)
 					strcat(display, "=");
@@ -305,9 +307,10 @@ void main_display(opts_t opts, long double esec, long long sl, long long tot)
 		} else {
 			int p = percentage;
 			avail = opts->width - strlen(display)
-				- strlen(tmp) - 5;
-			if (p > 100) p = 200 - p;
-			for (i = 0; i < (avail*p)/100; i++) {
+			    - strlen(tmp) - 5;
+			if (p > 100)
+				p = 200 - p;
+			for (i = 0; i < (avail * p) / 100; i++) {
 				if (i < avail)
 					strcat(display, " ");
 			}

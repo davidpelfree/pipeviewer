@@ -46,9 +46,10 @@ void main_transfer_bufsize(unsigned long sz)
  *
  * Returns the number of bytes written, or negative on error.
  */
-long main_transfer(opts_t options, int fd, int *eof_in, int *eof_out, unsigned long long allowed)
+long main_transfer(opts_t options, int fd, int *eof_in, int *eof_out,
+		   unsigned long long allowed)
 {
-	static unsigned char * buf = NULL;
+	static unsigned char *buf = NULL;
 	static unsigned long in_buffer = 0;
 	static unsigned long bytes_written = 0;
 	struct timeval tv;
@@ -61,7 +62,8 @@ long main_transfer(opts_t options, int fd, int *eof_in, int *eof_out, unsigned l
 	if (buf == NULL) {
 		buf = (unsigned char *) malloc(pvmtbufsize + 32);
 		if (buf == NULL) {
-			fprintf(stderr, "%s: %s: %s\n", options->program_name,
+			fprintf(stderr, "%s: %s: %s\n",
+				options->program_name,
 				_("buffer allocation failed"),
 				strerror(errno));
 			return -1;
@@ -78,12 +80,12 @@ long main_transfer(opts_t options, int fd, int *eof_in, int *eof_out, unsigned l
 		FD_SET(fd, &readfds);
 	}
 
-    	to_write = in_buffer - bytes_written;
-    	if (options->rate_limit > 0) {
-    		if (to_write > allowed) {
-    			to_write = allowed;
-    		}
-    	}
+	to_write = in_buffer - bytes_written;
+	if (options->rate_limit > 0) {
+		if (to_write > allowed) {
+			to_write = allowed;
+		}
+	}
 
 	if ((!(*eof_out)) && (to_write > 0)) {
 		FD_SET(STDOUT_FILENO, &writefds);
@@ -97,9 +99,9 @@ long main_transfer(opts_t options, int fd, int *eof_in, int *eof_out, unsigned l
 	if (n < 0) {
 		if (errno == EINTR)
 			return 0;
-		fprintf(stderr, "%s: %s: %s: %d: %s\n", options->program_name,
-			options->current_file, _("select call failed"), n,
-			strerror(errno));
+		fprintf(stderr, "%s: %s: %s: %d: %s\n",
+			options->program_name, options->current_file,
+			_("select call failed"), n, strerror(errno));
 		return -1;
 	}
 
@@ -152,8 +154,7 @@ long main_transfer(opts_t options, int fd, int *eof_in, int *eof_out, unsigned l
 			}
 			fprintf(stderr, "%s: %s: %s\n",
 				options->program_name,
-				_("write failed"),
-				strerror(errno));
+				_("write failed"), strerror(errno));
 			*eof_out = 1;
 			written = -1;
 		} else if (w == 0) {

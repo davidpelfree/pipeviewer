@@ -4,7 +4,7 @@
 
 .PHONY: all dep depend depclean make check test \
   clean distclean cvsclean \
-  index manhtml update-po \
+  index manhtml indent indentclean update-po \
   doc dist \
   install uninstall \
   rpm deb
@@ -33,6 +33,9 @@ clean:
 
 depclean:
 	rm -f $(alldep)
+
+indentclean:
+	cd $(srcdir) && for FILE in $(allsrc); do rm -fv ./$${FILE}~; done
 
 update-po: $(srcdir)/src/nls/$(PACKAGE).pot
 	catalogs='$(CATALOGS)'; \
@@ -81,6 +84,9 @@ manhtml:
 	      -e 's|<A [^>]*>\([^<]*\)</A>|\1|ig' \
 	      -e '/<H1/d' -e 's|\(</H[0-9]>\)|\1<P>|ig' \
 	| sed -e '1,/<HR/d' -e '/<H2>Index/,/<HR/d'
+
+indent:
+	cd $(srcdir) && indent -npro -kr -i8 -cd42 -c45 $(allsrc)
 
 dist: doc update-po
 	rm -rf $(package)-$(version)

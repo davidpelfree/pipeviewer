@@ -69,7 +69,8 @@ void display_help(void)
 	int i, col1max = 0, tw = 77;
 	char *optbuf;
 
-	printf(_("Usage: %s [OPTION] [FILE]..."), PROGRAM_NAME);
+	printf(_("Usage: %s [OPTION] [FILE]..."), /* RATS: ignore */
+	       PROGRAM_NAME);
 	printf("\n%s\n\n",
 _("Concatenate FILE(s), or standard input, to standard output,\n"
   "with monitoring."));
@@ -145,7 +146,8 @@ _("Concatenate FILE(s), or standard input, to standard output,\n"
 	}
 
 	printf("\n");
-	printf(_("Please report any bugs to %s."), BUG_REPORTS_TO);
+	printf(_("Please report any bugs to %s."), /* RATS: ignore */
+	       BUG_REPORTS_TO);
 	printf("\n");
 }
 

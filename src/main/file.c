@@ -52,7 +52,8 @@ void main_getsize(opts_t options)
 			if (S_ISBLK(sb.st_mode)) {
 				fd = open64(options->argv[i], O_RDONLY);
 				if (fd >= 0) {
-					options->size += lseek64(fd, 0, SEEK_END);
+					options->size +=
+					    lseek64(fd, 0, SEEK_END);
 					close(fd);
 				}
 			} else {
@@ -96,8 +97,7 @@ int main_nextfd(opts_t options, int filenum, int oldfd)
 		fprintf(stderr, "%s: %s: %s: %s\n",
 			options->program_name,
 			_("failed to read file"),
-			options->argv[filenum],
-			strerror(errno));
+			options->argv[filenum], strerror(errno));
 		return -1;
 	}
 
@@ -105,8 +105,7 @@ int main_nextfd(opts_t options, int filenum, int oldfd)
 		fprintf(stderr, "%s: %s: %s: %s\n",
 			options->program_name,
 			_("failed to stat file"),
-			options->argv[filenum],
-			strerror(errno));
+			options->argv[filenum], strerror(errno));
 		close(fd);
 		return -1;
 	}
@@ -114,8 +113,7 @@ int main_nextfd(opts_t options, int filenum, int oldfd)
 	if (fstat64(STDOUT_FILENO, &osb)) {
 		fprintf(stderr, "%s: %s: %s\n",
 			options->program_name,
-			_("failed to stat output file"),
-			strerror(errno));
+			_("failed to stat output file"), strerror(errno));
 		close(fd);
 		return -1;
 	}
@@ -127,8 +125,7 @@ int main_nextfd(opts_t options, int filenum, int oldfd)
 
 	fprintf(stderr, "%s: %s: %s\n",
 		options->program_name,
-		_("input file is output file"),
-		options->argv[filenum]);
+		_("input file is output file"), options->argv[filenum]);
 	close(fd);
 	return -1;
 }
