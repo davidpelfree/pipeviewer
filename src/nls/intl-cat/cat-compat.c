@@ -37,7 +37,7 @@ char *getenv ();
 # include <nl_types.h>
 #endif
 
-#include "libgettext.h"
+#include "intl/libgettext.h"
 
 /* @@ end of prolog @@ */
 
