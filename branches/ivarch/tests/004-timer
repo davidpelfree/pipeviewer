@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# Check that the elapsed time counter does count up.
+#
+# $Id$
+
+(sleep 3 | $PROG -f -t >/dev/null) 2>&1 | tr '\r' '\n' > $TMP1
+NUM=`sort < $TMP1 | uniq -u | wc -l | tr -d ' '`
+test $NUM -gt 1
+
+# EOF $Id$
