@@ -108,7 +108,8 @@ long main_transfer(opts_t options, int fd, int *eof_in, int *eof_out,
 	written = 0;
 
 	if (FD_ISSET(fd, &readfds)) {
-		r = read(fd, buf + in_buffer, pvmtbufsize - in_buffer);
+		r = read( /* RATS: ignore (checked OK) */ fd,
+			 buf + in_buffer, pvmtbufsize - in_buffer);
 		if (r < 0) {
 			/*
 			 * If a read error occurred but it was EINTR or
