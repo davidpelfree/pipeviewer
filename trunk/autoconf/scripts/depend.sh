@@ -11,7 +11,9 @@ shift
 stem=$1
 shift
 srcdir=$1
-abssrc=`echo $srcdir | sed ':1;s,^\./,,g;t1'`
+abssrc=`echo $srcdir | sed ':1
+s,^\./,,g
+t1'`
 shift
 
 abssrc=`echo "$abssrc" | sed 's,\\.,\\\\.,g'`
