@@ -82,7 +82,7 @@ void display_help(void)
 		width = 2 + strlen(optlist[i].optshort);
 #ifdef HAVE_GETOPT_LONG
 		if (optlist[i].optlong)
-			width += 1 + strlen(optlist[i].optlong);
+			width += 2 + strlen(optlist[i].optlong);
 #endif
 		if (optlist[i].param)
 			width += 1 + strlen(optlist[i].param);
@@ -111,7 +111,7 @@ void display_help(void)
 		sprintf(optbuf, "%s%s%s%s%s",	/* RATS: ignore (checked) */
 			optlist[i].optshort,
 #ifdef HAVE_GETOPT_LONG
-			optlist[i].optlong ? " " : "",
+			optlist[i].optlong ? ", " : "",
 			optlist[i].optlong ? optlist[i].optlong : "",
 #else
 			"", "",
