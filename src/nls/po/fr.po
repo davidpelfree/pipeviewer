@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2003-05-04 19:39+0100\n"
+"POT-Creation-Date: 2003-08-03 20:36+0100\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Date: 1999-06-01 15:18:29+0100\n"
 "From: Andrew Wood <ivarch@ubik>\n"
@@ -77,43 +77,43 @@ msgstr "%s: l'option «-W %s» est ambiguë\n"
 msgid "%s: option `-W %s' doesn't allow an argument\n"
 msgstr "%s: l'option «-W %s» n'accepte pas d'argument\n"
 
-#: src/main/display.c:87
+#: src/main/display.c:88
 msgid "failed to open terminal"
 msgstr "l'ouverture du terminal a échoué"
 
-#: src/main/display.c:213
+#: src/main/display.c:216
 msgid "GB"
 msgstr "GO"
 
-#: src/main/display.c:216
+#: src/main/display.c:219
 msgid "MB"
 msgstr "MO"
 
-#: src/main/display.c:219
+#: src/main/display.c:222
 msgid "kB"
 msgstr "kO"
 
-#: src/main/display.c:221
+#: src/main/display.c:224
 msgid "B"
 msgstr "O"
 
-#: src/main/display.c:236
+#: src/main/display.c:239
 msgid "GB/s"
 msgstr "GO/s"
 
-#: src/main/display.c:239
+#: src/main/display.c:242
 msgid "MB/s"
 msgstr "MO/s"
 
-#: src/main/display.c:242
+#: src/main/display.c:245
 msgid "kB/s"
 msgstr "kO/s"
 
-#: src/main/display.c:244
+#: src/main/display.c:247
 msgid "B/s "
 msgstr "O/s"
 
-#: src/main/display.c:255
+#: src/main/display.c:258
 msgid "ETA"
 msgstr "ETA"
 

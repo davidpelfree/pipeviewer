@@ -20,7 +20,7 @@ make:
 	     autoconf/make/filelist.mk~ \
 	     autoconf/make/modules.mk~
 	sh ./config.status
-	
+
 dep depend: $(alldep)
 	echo '#' > $(srcdir)/autoconf/make/depend.mk~
 	echo '# Dependencies.' >> $(srcdir)/autoconf/make/depend.mk~
