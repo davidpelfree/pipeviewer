@@ -19,8 +19,6 @@ struct msgtable_s {
 
 struct msgtable_s *minigettext__gettable(char *);
 
-struct msgtable_s *minigettext__table = NULL;
-
 
 char *minisetlocale(char *a, char * b)
 {
@@ -48,42 +46,46 @@ char *minigettext_noop(char *msgid)
 
 char *minigettext(char *msgid)
 {
+	static struct msgtable_s *table = NULL;
+	static int tried_lang = 0;
 	char *lang;
 	int i;
 
 	if (msgid == NULL)
 		return msgid;
 
-	if (minigettext__table == NULL) {
-		lang = getenv("LANGUAGE");
+	if (tried_lang == 0) {
+		lang = getenv("LANGUAGE");		/* RATS: ignore */
 		if (lang)
-			minigettext__table = minigettext__gettable(lang);
+			table = minigettext__gettable(lang);
+
+		if (table == NULL) {
+			lang = getenv("LANG");		/* RATS: ignore */
+			if (lang)
+				table = minigettext__gettable(lang);
+		}
+
+		if (table == NULL) {
+			lang = getenv("LC_ALL");	/* RATS: ignore */
+			if (lang)
+				table = minigettext__gettable(lang);
+		}
+
+		if (table == NULL) {
+			lang = getenv("LC_MESSAGES");	/* RATS: ignore */
+			if (lang)
+				table = minigettext__gettable(lang);
+		}
+
+		tried_lang = 1;
 	}
 
-	if (minigettext__table == NULL) {
-		lang = getenv("LANG");
-		if (lang)
-			minigettext__table = minigettext__gettable(lang);
-	}
-
-	if (minigettext__table == NULL) {
-		lang = getenv("LC_ALL");
-		if (lang)
-			minigettext__table = minigettext__gettable(lang);
-	}
-
-	if (minigettext__table == NULL) {
-		lang = getenv("LC_MESSAGES");
-		if (lang)
-			minigettext__table = minigettext__gettable(lang);
-	}
-
-	if (minigettext__table == NULL)
+	if (table == NULL)
 		return msgid;
 
-	for (i = 0; minigettext__table[i].msgid; i++) {
-		if (strcmp(minigettext__table[i].msgid, msgid) == 0)
-			return minigettext__table[i].msgstr;
+	for (i = 0; table[i].msgid; i++) {
+		if (strcmp(table[i].msgid, msgid) == 0)
+			return table[i].msgstr;
 	}
 
 	return msgid;
