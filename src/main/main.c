@@ -25,10 +25,12 @@ void main_transfer_bufsize(unsigned long);
 long main_transfer(opts_t, int, int *, int *, unsigned long long);
 void cursor_init(opts_t);
 void cursor_fini(opts_t);
-void main_display(opts_t, double, long long, long long);
+void main_display(opts_t, long double, long long, long long);
 void main_getsize(opts_t);
 int main_nextfd(opts_t, int, int);
 void sig_init(void);
+void sig_nopause(void);
+void sig_allowpause(void);
 extern struct timeval sig__toffset;
 
 
@@ -45,7 +47,7 @@ int main_loop(opts_t options)
 	int eof_in, eof_out, final_update;
 	struct timeval start_time, next_update, next_reset, cur_time;
 	struct timeval init_time;
-	double elapsed, tilreset;
+	long double elapsed, tilreset;
 	struct stat sb;
 	int fd, n;
 
@@ -92,6 +94,8 @@ int main_loop(opts_t options)
 
 		tilreset = next_reset.tv_sec - cur_time.tv_sec;
 		tilreset += (next_reset.tv_usec - cur_time.tv_usec)/1000000.0;
+		if (tilreset < 0)
+			tilreset = 0;
 
 		if (options->rate_limit > 0) {
 			target = (1.03 - tilreset) * options->rate_limit;
@@ -131,19 +135,29 @@ int main_loop(opts_t options)
 		        && cur_time.tv_usec >= next_reset.tv_usec))
 		{
 			next_reset.tv_sec++;
+			if (next_reset.tv_sec < cur_time.tv_sec)
+				next_reset.tv_sec = cur_time.tv_sec;
 			donealready = 0;
 		}
 
 		if (options->no_op) continue;
 
+		/*
+		 * If -W given, we don't output anything until we have read
+		 * a byte, at which point we then count time as if we
+		 * started when the first byte was received
+		 */
 		if (options->wait) {
-			if (written < 1)
-				continue;
+			if (written < 1) continue;  /* nothing written yet */
+
 			options->wait = 0;
+
+			sig_nopause();
 			gettimeofday(&start_time, NULL);
-			/* FIXME: potential race condition here */
 			sig__toffset.tv_sec = 0;
 			sig__toffset.tv_usec = 0;
+			sig_allowpause();
+
 			next_update.tv_sec = start_time.tv_sec
 			  + (long) options->interval;
 			next_update.tv_usec = start_time.tv_usec
@@ -171,6 +185,13 @@ int main_loop(opts_t options)
 			next_update.tv_sec++;
 			next_update.tv_usec -= 1000000;
 		}
+		if (next_update.tv_sec < cur_time.tv_sec) {
+			next_update.tv_sec = cur_time.tv_sec;
+			next_update.tv_usec = cur_time.tv_usec;
+		} else if (next_update.tv_sec == cur_time.tv_sec
+		           && next_update.tv_usec < cur_time.tv_usec) {
+			next_update.tv_usec = cur_time.tv_usec;
+		}
 
 		init_time.tv_sec = start_time.tv_sec + sig__toffset.tv_sec;
 		init_time.tv_usec = start_time.tv_usec + sig__toffset.tv_usec;
@@ -182,7 +203,6 @@ int main_loop(opts_t options)
 			init_time.tv_sec --;
 			init_time.tv_usec += 1000000;
 		}
-
 
 		elapsed = cur_time.tv_sec - init_time.tv_sec;
 		elapsed += (cur_time.tv_usec - init_time.tv_usec) / 1000000.0;

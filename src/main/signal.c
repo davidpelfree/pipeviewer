@@ -153,4 +153,42 @@ void sig_init(void)
 	sigaction(SIGCONT, &sa, NULL);
 }
 
+
+/*
+ * Block SIGTSTP and SIGCONT.
+ */
+void sig_nopause(void)
+{
+	struct sigaction sa;
+
+	sa.sa_handler = SIG_IGN;
+	sigemptyset(&(sa.sa_mask));
+	sa.sa_flags = 0;
+	sigaction(SIGTSTP, &sa, NULL);
+
+	sa.sa_handler = SIG_IGN;
+	sigemptyset(&(sa.sa_mask));
+	sa.sa_flags = 0;
+	sigaction(SIGCONT, &sa, NULL);
+}
+
+
+/*
+ * Start catching SIGTSTP and SIGCONT again.
+ */
+void sig_allowpause(void)
+{
+	struct sigaction sa;
+
+	sa.sa_handler = sig__tstp;
+	sigemptyset(&(sa.sa_mask));
+	sa.sa_flags = 0;
+	sigaction(SIGTSTP, &sa, NULL);
+
+	sa.sa_handler = sig__cont;
+	sigemptyset(&(sa.sa_mask));
+	sa.sa_flags = 0;
+	sigaction(SIGCONT, &sa, NULL);
+}
+
 /* EOF $Id$ */
