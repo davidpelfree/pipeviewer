@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2004-04-24 23:25+0100\n"
+"POT-Creation-Date: 2004-04-27 23:00+0100\n"
 "Content-Type: text/plain; charset=iso-8859-15\n"
 "Date: 1999-06-01 15:18:29+0100\n"
 "From: Andrew Wood <ivarch@ubik>\n"
@@ -18,43 +18,43 @@ msgstr ""
 "nls/intl/textdomain.c src/nls/intl-cat/cat-compat.c src/nls/intl-gett/intl-"
 "compat.c\n"
 
-#: src/main/display.c:88
+#: src/main/cursor.c:53
 msgid "failed to open terminal"
 msgstr "Terminal konnte nicht geöffnet werden"
 
-#: src/main/display.c:246
+#: src/main/display.c:157
 msgid "GB"
 msgstr "GB"
 
-#: src/main/display.c:249
+#: src/main/display.c:160
 msgid "MB"
 msgstr "MB"
 
-#: src/main/display.c:252
+#: src/main/display.c:163
 msgid "kB"
 msgstr "kB"
 
-#: src/main/display.c:254
+#: src/main/display.c:165
 msgid "B"
 msgstr "B"
 
-#: src/main/display.c:269
+#: src/main/display.c:180
 msgid "GB/s"
 msgstr "GB/s"
 
-#: src/main/display.c:272
+#: src/main/display.c:183
 msgid "MB/s"
 msgstr "MB/s"
 
-#: src/main/display.c:275
+#: src/main/display.c:186
 msgid "kB/s"
 msgstr "kB/s"
 
-#: src/main/display.c:277
+#: src/main/display.c:188
 msgid "B/s "
 msgstr "B/s "
 
-#: src/main/display.c:288
+#: src/main/display.c:199
 msgid "ETA"
 msgstr "ETA"
 
@@ -505,55 +505,3 @@ msgstr "Starten Sie `%s --license', um weitere Informationen anzuzeigen."
 #, fuzzy, c-format
 msgid "For more information, please run `%s -l'."
 msgstr "Starten Sie `%s -l', um weitere Informationen anzuzeigen."
-
-#~ msgid ""
-#~ "Parts of this program may be copyright (C) Free Software\n"
-#~ "Foundation, Inc. and are distributed under the terms of the\n"
-#~ "GNU Lesser General Public License."
-#~ msgstr ""
-#~ "Teile dieses Programms stehen unter dem Copright (C) der\n"
-#~ "Free Software Foundation, Inc. und werden unter den Bedingungen\n"
-#~ "der GNU Lesser General Public License verbreitet."
-
-#~ msgid ""
-#~ "For a copy of the GNU Lesser General Public License, please see\n"
-#~ "http://www.gnu.org/ or write to the Free Software Foundation, Inc.,\n"
-#~ "59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
-#~ msgstr ""
-#~ "Sie erhalten die GNU Lesser General Public License im Internet unter\n"
-#~ "http://www.gnu.org/ oder per Briefpost von der\n"
-#~ "Free Software Foundation, Inc.,\n"
-#~ "59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
-
-#~ msgid "%s: option `%s' is ambiguous\n"
-#~ msgstr "%s: Option `%s' ist mehrdeutig\n"
-
-#~ msgid "%s: option `--%s' doesn't allow an argument\n"
-#~ msgstr "%s: Option `--%s' erwartet kein Argument\n"
-
-#~ msgid "%s: option `%c%s' doesn't allow an argument\n"
-#~ msgstr "%s: Option `%c%s' erwartet kein Argument\n"
-
-#~ msgid "%s: option `%s' requires an argument\n"
-#~ msgstr "%s: Option `%s' erwartet ein Argument\n"
-
-#~ msgid "%s: unrecognized option `--%s'\n"
-#~ msgstr "%s: unbekannte Option `--%s'\n"
-
-#~ msgid "%s: unrecognized option `%c%s'\n"
-#~ msgstr "%s: unbekannte Option `%c%s'\n"
-
-#~ msgid "%s: illegal option -- %c\n"
-#~ msgstr "%s: unzulässige Option -- %c\n"
-
-#~ msgid "%s: invalid option -- %c\n"
-#~ msgstr "%s: ungültige Option -- %c\n"
-
-#~ msgid "%s: option requires an argument -- %c\n"
-#~ msgstr "%s: Option erwartet ein Argument -- %c\n"
-
-#~ msgid "%s: option `-W %s' is ambiguous\n"
-#~ msgstr "%s: Option `-W %s' ist mehrdeutig\n"
-
-#~ msgid "%s: option `-W %s' doesn't allow an argument\n"
-#~ msgstr "%s: Option `-W %s' erwartet kein Argument\n"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2004-04-24 23:25+0100\n"
+"POT-Creation-Date: 2004-04-27 23:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,43 +13,43 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/main/display.c:88
+#: src/main/cursor.c:53
 msgid "failed to open terminal"
 msgstr "nie uda³o siê otworzyæ terminala"
 
-#: src/main/display.c:246
+#: src/main/display.c:157
 msgid "GB"
 msgstr "GB"
 
-#: src/main/display.c:249
+#: src/main/display.c:160
 msgid "MB"
 msgstr "MB"
 
-#: src/main/display.c:252
+#: src/main/display.c:163
 msgid "kB"
 msgstr "kB"
 
-#: src/main/display.c:254
+#: src/main/display.c:165
 msgid "B"
 msgstr "B"
 
-#: src/main/display.c:269
+#: src/main/display.c:180
 msgid "GB/s"
 msgstr "GB/s"
 
-#: src/main/display.c:272
+#: src/main/display.c:183
 msgid "MB/s"
 msgstr "MB/s"
 
-#: src/main/display.c:275
+#: src/main/display.c:186
 msgid "kB/s"
 msgstr "kB/s"
 
-#: src/main/display.c:277
+#: src/main/display.c:188
 msgid "B/s "
 msgstr "B/s"
 
-#: src/main/display.c:288
+#: src/main/display.c:199
 msgid "ETA"
 msgstr "ETA"
 
@@ -489,36 +489,3 @@ msgstr "By uzyskaæ wiêcej informacji wprowad¼ `%s --license'."
 #, fuzzy, c-format
 msgid "For more information, please run `%s -l'."
 msgstr "By uzyskaæ wiêcej informacji wprowad¼ `%s -l'."
-
-#~ msgid "%s: option `%s' is ambiguous\n"
-#~ msgstr "%s: opcja `%s' jest niejednoznaczna\n"
-
-#~ msgid "%s: option `--%s' doesn't allow an argument\n"
-#~ msgstr "%s: opcja `--%s' nie przyjmuje argumentów\n"
-
-#~ msgid "%s: option `%c%s' doesn't allow an argument\n"
-#~ msgstr "%s: option `%c%s' nie przyjmuje argumentów\n"
-
-#~ msgid "%s: option `%s' requires an argument\n"
-#~ msgstr "%s: opcja `%s' wymaga argumentu\n"
-
-#~ msgid "%s: unrecognized option `--%s'\n"
-#~ msgstr "%s: nieznana opcja `--%s'\n"
-
-#~ msgid "%s: unrecognized option `%c%s'\n"
-#~ msgstr "%s: nieznana opcja `%c%s'\n"
-
-#~ msgid "%s: illegal option -- %c\n"
-#~ msgstr "%s: niedozwolona opcja -- %c\n"
-
-#~ msgid "%s: invalid option -- %c\n"
-#~ msgstr "%s: nieprawid³owa opcja -- %c\n"
-
-#~ msgid "%s: option requires an argument -- %c\n"
-#~ msgstr "%s: opcja wymaga argumentu -- %c\n"
-
-#~ msgid "%s: option `-W %s' is ambiguous\n"
-#~ msgstr "%s: opcja `-W %s' jest niejednoznaczna\n"
-
-#~ msgid "%s: option `-W %s' doesn't allow an argument\n"
-#~ msgstr "%s: opcja `-W %s' nie przyjmuje argumentów\n"

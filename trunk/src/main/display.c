@@ -16,14 +16,14 @@
 #include <time.h>
 #include <sys/time.h>
 #include <sys/types.h>
-#include <termios.h>
 #include <unistd.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 
 
 int getnum_i(char *);
 void sig_checkbg(void);
+void cursor_init(opts_t);
+void cursor_update(opts_t, char *);
+void cursor_fini(opts_t);
 
 
 /*
@@ -62,94 +62,6 @@ long calc_eta(long long so_far, long long total, long elapsed)
 
 
 /*
- * Original Y co-ordinate.
- */
-static int cursor__y = 0;
-
-
-/*
- * Initialise the terminal for cursor positioning.
- */
-void cursor_init(opts_t options)
-{
-	struct termios tty;
-	struct termios old_tty;
-	struct flock lock;
-	char tmp[32];			 /* RATS: ignore (checked OK) */
-	int fd;
-
-	if (!options->cursor)
-		return;
-
-	fd = open("/dev/tty", O_RDWR);	    /* RATS: ignore (no race) */
-	if (fd < 0) {
-		fprintf(stderr, "%s: %s: %s\n",
-			options->program_name,
-			_("failed to open terminal"), strerror(errno));
-		options->cursor = 0;
-		return;
-	}
-
-	lock.l_type = F_WRLCK;
-	lock.l_whence = SEEK_SET;
-	lock.l_start = 0;
-	lock.l_len = 1;
-	fcntl(fd, F_SETLKW, &lock);
-
-	tcgetattr(fd, &tty);
-	tcgetattr(fd, &old_tty);
-	tty.c_lflag &= ~(ICANON | ECHO);
-	tcsetattr(fd, TCSANOW | TCSAFLUSH, &tty);
-	write(fd, "\n\n\n\n\033M\033M\033M\033[6n", 14);
-	memset(tmp, 0, sizeof(tmp));
-	read(fd, tmp, 6);		    /* RATS: ignore (OK) */
-	cursor__y = getnum_i(tmp + 2);
-	tcsetattr(fd, TCSANOW | TCSAFLUSH, &old_tty);
-
-	lock.l_type = F_UNLCK;
-	lock.l_whence = SEEK_SET;
-	lock.l_start = 0;
-	lock.l_len = 1;
-	fcntl(fd, F_SETLK, &lock);
-
-	close(fd);
-
-	if (cursor__y < 0)
-		options->cursor = 0;
-}
-
-
-/*
- * Reposition the cursor to its original position.
- */
-void cursor_fini(opts_t options)
-{
-	char tmp[128];			 /* RATS: ignore (checked OK) */
-	struct flock lock;
-
-	lock.l_type = F_WRLCK;
-	lock.l_whence = SEEK_SET;
-	lock.l_start = 0;
-	lock.l_len = 1;
-	fcntl(STDERR_FILENO, F_SETLKW, &lock);
-
-	if (cursor__y < 0)
-		cursor__y = 0;
-	if (cursor__y > 10000)
-		cursor__y = 10000;
-
-	sprintf(tmp, "\033[%d;1H\n", cursor__y);	/* RATS: ignore */
-	write(STDERR_FILENO, tmp, strlen(tmp));	/* RATS: ignore */
-
-	lock.l_type = F_UNLCK;
-	lock.l_whence = SEEK_SET;
-	lock.l_start = 0;
-	lock.l_len = 1;
-	fcntl(STDERR_FILENO, F_SETLK, &lock);
-}
-
-
-/*
  * Output status information on standard error. If "sl" is negative, this is
  * the final update so the rate is given as an average over the whole
  * transfer; otherwise the rate is "sl"/"esec", i.e. the current rate.
@@ -169,7 +81,6 @@ void main_display(opts_t opts, long double esec, long long sl,
 	char tmp2[64];			 /* RATS: ignore (checked OK) */
 	char *suffix;
 	int avail, i;
-	struct flock lock;
 
 	sig_checkbg();
 
@@ -337,27 +248,12 @@ void main_display(opts_t opts, long double esec, long long sl,
 	strcat(display, tmp);		    /* RATS: ignore (OK) */
 
 	if (opts->cursor) {
-		lock.l_type = F_WRLCK;
-		lock.l_whence = SEEK_SET;
-		lock.l_start = 0;
-		lock.l_len = 1;
-		fcntl(STDERR_FILENO, F_SETLKW, &lock);
-		sprintf(tmp, "\033[%d;1H", cursor__y);
-		write(STDERR_FILENO, tmp,
-		      strlen(tmp));		/* RATS: ignore */
-		write(STDERR_FILENO, display,
-		      strlen(display));		/* RATS: ignore */
-		lock.l_type = F_UNLCK;
-		lock.l_whence = SEEK_SET;
-		lock.l_start = 0;
-		lock.l_len = 1;
-		fcntl(STDERR_FILENO, F_SETLK, &lock);
+		cursor_update(opts, tmp);
 	} else {
 		write(STDERR_FILENO, display,
 		      strlen(display));		/* RATS: ignore */
 		write(STDERR_FILENO, "\r", 1);
 	}
-
 }
 
 /* EOF */
