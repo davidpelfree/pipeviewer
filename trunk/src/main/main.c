@@ -3,8 +3,6 @@
  * the appropriate actions.
  *
  * Copyright 2002 Andrew Wood, distributed under the Artistic License.
- *
- * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
@@ -311,4 +309,4 @@ int main(int argc, char ** argv)
 	return retcode;
 }
 
-/* EOF $Id$ */
+/* EOF */

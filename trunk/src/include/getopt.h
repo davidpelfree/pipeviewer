@@ -6,8 +6,6 @@
  * and although the changes are merely cosmetic, you should use a proper
  * copy in your code instead. Get it from any GNU mirror, or email me if you
  * can't find it anywhere and I'll send you a copy.
- *
- * $Id$
  */
 
 /* Declarations for getopt.
@@ -87,4 +85,4 @@ extern int _getopt_internal ();
 
 #endif /* _GETOPT_H */
 
-/* EOF $Id$ */
+/* EOF */

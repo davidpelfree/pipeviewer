@@ -2,8 +2,6 @@
  * Parse command-line options.
  *
  * Copyright 2002 Andrew Wood, distributed under the Artistic License.
- *
- * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
@@ -209,4 +207,4 @@ opts_t parse_options(int argc, char ** argv)
 	return options;
 }
 
-/* EOF $Id$ */
+/* EOF */

@@ -2,8 +2,6 @@
  * Output version information to stdout.
  *
  * Copyright 2002 Andrew Wood, distributed under the Artistic License.
- *
- * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
@@ -36,4 +34,4 @@ void display_version(void)
 	printf("\n");
 }
 
-/* EOF $Id$ */
+/* EOF */
