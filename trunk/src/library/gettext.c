@@ -20,7 +20,7 @@ struct msgtable_s {
 struct msgtable_s *minigettext__gettable(char *);
 
 
-char *minisetlocale(char *a, char * b)
+char *minisetlocale(char *a, char *b)
 {
 	return NULL;
 }
@@ -55,12 +55,12 @@ char *minigettext(char *msgid)
 		return msgid;
 
 	if (tried_lang == 0) {
-		lang = getenv("LANGUAGE");		/* RATS: ignore */
+		lang = getenv("LANGUAGE");  /* RATS: ignore */
 		if (lang)
 			table = minigettext__gettable(lang);
 
 		if (table == NULL) {
-			lang = getenv("LANG");		/* RATS: ignore */
+			lang = getenv("LANG");	/* RATS: ignore */
 			if (lang)
 				table = minigettext__gettable(lang);
 		}

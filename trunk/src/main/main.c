@@ -82,7 +82,7 @@ int main_loop(opts_t options)
 
 	next_update.tv_sec = start_time.tv_sec + (long) options->interval;
 	next_update.tv_usec = start_time.tv_usec
-	  + ((options->interval - ((long)options->interval)) * 1000000);
+	    + ((options->interval - ((long) options->interval)) * 1000000);
 	if (next_update.tv_usec >= 1000000) {
 		next_update.tv_sec++;
 		next_update.tv_usec -= 1000000;
@@ -103,14 +103,15 @@ int main_loop(opts_t options)
 		if (fd < 0)
 			return 1;
 		if (fstat64(fd, &sb) == 0) {
-			main_transfer_bufsize (sb.st_blksize * 32);
+			main_transfer_bufsize(sb.st_blksize * 32);
 		}
 	}
 
 	while ((!(eof_in && eof_out)) || (!final_update)) {
 
 		tilreset = next_reset.tv_sec - cur_time.tv_sec;
-		tilreset += (next_reset.tv_usec - cur_time.tv_usec)/1000000.0;
+		tilreset +=
+		    (next_reset.tv_usec - cur_time.tv_usec) / 1000000.0;
 		if (tilreset < 0)
 			tilreset = 0;
 
@@ -149,15 +150,15 @@ int main_loop(opts_t options)
 
 		if ((cur_time.tv_sec > next_reset.tv_sec)
 		    || (cur_time.tv_sec == next_reset.tv_sec
-		        && cur_time.tv_usec >= next_reset.tv_usec))
-		{
+			&& cur_time.tv_usec >= next_reset.tv_usec)) {
 			next_reset.tv_sec++;
 			if (next_reset.tv_sec < cur_time.tv_sec)
 				next_reset.tv_sec = cur_time.tv_sec;
 			donealready = 0;
 		}
 
-		if (options->no_op) continue;
+		if (options->no_op)
+			continue;
 
 		/*
 		 * If -W given, we don't output anything until we have read
@@ -165,7 +166,8 @@ int main_loop(opts_t options)
 		 * started when the first byte was received
 		 */
 		if (options->wait) {
-			if (written < 1) continue;  /* nothing written yet */
+			if (written < 1)
+				continue;   /* nothing written yet */
 
 			options->wait = 0;
 
@@ -176,9 +178,11 @@ int main_loop(opts_t options)
 			sig_allowpause();
 
 			next_update.tv_sec = start_time.tv_sec
-			  + (long) options->interval;
+			    + (long) options->interval;
 			next_update.tv_usec = start_time.tv_usec
-			  + ((options->interval - ((long)options->interval))
+			    +
+			    ((options->interval -
+			      ((long) options->interval))
 			     * 1000000);
 			if (next_update.tv_usec >= 1000000) {
 				next_update.tv_sec++;
@@ -188,16 +192,15 @@ int main_loop(opts_t options)
 
 		if ((cur_time.tv_sec < next_update.tv_sec)
 		    || (cur_time.tv_sec == next_update.tv_sec
-		        && cur_time.tv_usec < next_update.tv_usec))
-		{
+			&& cur_time.tv_usec < next_update.tv_usec)) {
 			continue;
 		}
 
 		next_update.tv_sec = next_update.tv_sec
-		  + (long) options->interval;
+		    + (long) options->interval;
 		next_update.tv_usec = next_update.tv_usec
-		  + ((options->interval - ((long)options->interval))
-		     * 1000000);
+		    + ((options->interval - ((long) options->interval))
+		       * 1000000);
 		if (next_update.tv_usec >= 1000000) {
 			next_update.tv_sec++;
 			next_update.tv_usec -= 1000000;
@@ -206,23 +209,25 @@ int main_loop(opts_t options)
 			next_update.tv_sec = cur_time.tv_sec;
 			next_update.tv_usec = cur_time.tv_usec;
 		} else if (next_update.tv_sec == cur_time.tv_sec
-		           && next_update.tv_usec < cur_time.tv_usec) {
+			   && next_update.tv_usec < cur_time.tv_usec) {
 			next_update.tv_usec = cur_time.tv_usec;
 		}
 
 		init_time.tv_sec = start_time.tv_sec + sig__toffset.tv_sec;
-		init_time.tv_usec = start_time.tv_usec + sig__toffset.tv_usec;
+		init_time.tv_usec =
+		    start_time.tv_usec + sig__toffset.tv_usec;
 		if (init_time.tv_usec >= 1000000) {
-			init_time.tv_sec ++;
+			init_time.tv_sec++;
 			init_time.tv_usec -= 1000000;
 		}
 		if (init_time.tv_usec < 0) {
-			init_time.tv_sec --;
+			init_time.tv_sec--;
 			init_time.tv_usec += 1000000;
 		}
 
 		elapsed = cur_time.tv_sec - init_time.tv_sec;
-		elapsed += (cur_time.tv_usec - init_time.tv_usec) / 1000000.0;
+		elapsed +=
+		    (cur_time.tv_usec - init_time.tv_usec) / 1000000.0;
 
 		if (final_update)
 			since_last = -1;
@@ -253,7 +258,7 @@ int main_loop(opts_t options)
  * Process command-line arguments and set option flags, then call functions
  * to initialise, and finally enter the main loop.
  */
-int main(int argc, char ** argv)
+int main(int argc, char **argv)
 {
 	struct termios t;
 	opts_t options;
@@ -266,7 +271,8 @@ int main(int argc, char ** argv)
 #endif
 
 	options = parse_options(argc, argv);
-	if (!options) return 1;
+	if (!options)
+		return 1;
 	if (options->do_nothing) {
 		options->destructor(options);
 		return 0;
@@ -276,18 +282,20 @@ int main(int argc, char ** argv)
 		main_getsize(options);
 	}
 
-	if (options->size < 1) options->eta = 0;
+	if (options->size < 1)
+		options->eta = 0;
 
 	if ((isatty(STDERR_FILENO) == 0)
 	    && (options->force == 0)
 	    && (options->numeric == 0)) {
-			options->no_op = 1;
+		options->no_op = 1;
 	}
 
 	if (options->width == 0)
 		get_width(options);
 
-	if (options->width < 1) options->width = 80;
+	if (options->width < 1)
+		options->width = 80;
 
 	/* Try and make standard output use non-blocking I/O */
 	fcntl(STDOUT_FILENO, F_SETFL,

@@ -18,10 +18,10 @@
 #include <sys/time.h>
 
 
-static int sig__old_stderr;            /* see sig__ttou() */
-static struct timeval sig__tstp_time;  /* see sig__tstp() / __cont() */
-struct timeval sig__toffset;    /* total time spent stopped */
-sig_atomic_t sig__newsize = 0;  /* whether we need to get term size again */
+static int sig__old_stderr;		 /* see sig__ttou() */
+static struct timeval sig__tstp_time;	 /* see sig__tstp() / __cont() */
+struct timeval sig__toffset;		 /* total time spent stopped */
+sig_atomic_t sig__newsize = 0;		 /* whether we need to get term size again */
 
 
 /*
@@ -82,11 +82,11 @@ void sig__cont(int s)
 	sig__toffset.tv_sec += (tv.tv_sec - sig__tstp_time.tv_sec);
 	sig__toffset.tv_usec += (tv.tv_usec - sig__tstp_time.tv_usec);
 	if (sig__toffset.tv_usec >= 1000000) {
-		sig__toffset.tv_sec ++;
+		sig__toffset.tv_sec++;
 		sig__toffset.tv_usec -= 1000000;
 	}
 	if (sig__toffset.tv_usec < 0) {
-		sig__toffset.tv_sec --;
+		sig__toffset.tv_sec--;
 		sig__toffset.tv_usec += 1000000;
 	}
 

@@ -16,10 +16,11 @@
  */
 void display_license(void)
 {
-	printf(_("%s %s - Copyright (C) %s %s"), PROGRAM_NAME, VERSION,
+	printf(_("%s %s - Copyright (C) %s %s"), /* RATS: ignore */
+	  PROGRAM_NAME, VERSION,
 	  COPYRIGHT_YEAR, COPYRIGHT_HOLDER);
 	printf("\n\n");
-	printf(_("This program is Open Source software, and is being "
+	printf("%s", _("This program is Open Source software, and is being "
 	  "distributed under the\nterms of the Artistic License."));
 	printf("\n\n");
 	printf("----------------------------------------------------------");
@@ -141,7 +142,7 @@ void display_license(void)
 	printf("\n\n");
 	printf("----------------------------------------------------------");
 	printf("\n\n");
-	printf(_(
+	printf(/* RATS: ignore */ _(
 "If that scrolled by too quickly, you may want to pipe it to a\n"
 "pager such as `more' or `less', eg `%s --license | more'."),
 	  PROGRAM_NAME);
