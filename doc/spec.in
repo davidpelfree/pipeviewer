@@ -76,6 +76,9 @@ fi
 %doc README doc/NEWS doc/TODO doc/COPYING
 
 %changelog
+* Thu Feb 12 2004 Andrew Wood <andrew.wood@ivarch.com>
+- Code cleanups and portability fixes.
+
 * Sun Feb  8 2004 Andrew Wood <andrew.wood@ivarch.com>
 - The display buffer is now dynamically allocated, fixing an overflow bug.
 

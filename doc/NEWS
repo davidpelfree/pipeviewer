@@ -1,4 +1,4 @@
-0.x.x - NOT YET RELEASED
+0.8.0 - 12 February 2004
   + replaced GNU getopt with my library code
   + replaced GNU gettext with my very minimal replacement
   + use DESTDIR instead of RPM_BUILD_ROOT for optional installation prefix

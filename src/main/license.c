@@ -139,12 +139,18 @@ void display_license(void)
 	printf
 	    ("----------------------------------------------------------");
 	printf("\n\n");
+#ifdef HAVE_GETOPT_LONG
 	printf( /* RATS: ignore */ _(
 					    "If that scrolled by too quickly, you may want to pipe it to a\n"
 					    "pager such as `more' or `less', eg `%s --license | more'."),
 	       PROGRAM_NAME);
+#else
+	printf( /* RATS: ignore */ _(
+					    "If that scrolled by too quickly, you may want to pipe it to a\n"
+					    "pager such as `more' or `less', eg `%s -l | more'."),
+	       PROGRAM_NAME);
+#endif
 	printf("\n");
-	/* TODO: -l instead of --license in short options mode */
 }
 
 /* EOF */

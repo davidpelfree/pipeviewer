@@ -32,10 +32,17 @@ void display_version(void)
 		"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
 		"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."));
 	printf("\n\n");
+#ifdef HAVE_GETOPT_LONG
 	printf(				    /* RATS: ignore */
 		      _
 		      ("For more information, please run `%s --license'."),
 		      PROGRAM_NAME);
+#else
+	printf(				    /* RATS: ignore */
+		      _
+		      ("For more information, please run `%s -l'."),
+		      PROGRAM_NAME);
+#endif
 	printf("\n");
 }
 
