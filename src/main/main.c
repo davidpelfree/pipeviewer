@@ -287,7 +287,6 @@ int main(int argc, char ** argv)
 	if (options->width == 0)
 		get_width(options);
 
-
 	if (options->width < 1) options->width = 80;
 
 	/* Try and make standard output use non-blocking I/O */

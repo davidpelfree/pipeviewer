@@ -8,7 +8,7 @@ Standards-Version: 3.6.0
 Package: pv
 Architecture: any
 Depends: ${shlibs:Depends}
-Description: Terminal-based tool for monitoring the progress of data through a pipeline
+Description: Shell pipeline element to meter data passing through
  pv (Pipe Viewer) can be inserted into any normal pipeline between two processes
  to give a visual indication of how quickly data is passing through, how long it
  has taken, how near to completion it is, and an estimate of how long it will be
