@@ -1,7 +1,7 @@
 /*
  * Signal handling functions.
  *
- * Copyright 2002 Andrew Wood, distributed under the Artistic License.
+ * Copyright 2004 Andrew Wood, distributed under the Artistic License.
  */
 
 #ifdef HAVE_CONFIG_H

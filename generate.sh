@@ -25,5 +25,6 @@ $MAKE make
 $MAKE dep
 cd ..
 rm -rf .gen
+rm -rf autoconf/autom4te.cache
 
 # EOF

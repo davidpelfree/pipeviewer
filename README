@@ -34,7 +34,7 @@ all files used, all functions defined, and all TODOs marked in the code.
 Author
 ******
 
-This package is copyright (C) 2003 Andrew Wood, and is being distributed
+This package is copyright (C) 2004 Andrew Wood, and is being distributed
 under the terms of the Artistic License and other licenses.  For more
 details, see the file `doc/COPYING'.
 
@@ -63,5 +63,8 @@ Credit is also due to:
 
   Bartosz Feñski <fenio@o2.pl> <http://skawina.eu.org/>
     - provided Polish translation along with Krystian Zubel
+
+  Joshua Jensen
+    - reported RPM installation bug
 
 -----------------------------------------------------------------------------

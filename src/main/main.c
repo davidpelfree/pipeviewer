@@ -2,7 +2,7 @@
  * Main program entry point - read the command line options, then perform
  * the appropriate actions.
  *
- * Copyright 2002 Andrew Wood, distributed under the Artistic License.
+ * Copyright 2004 Andrew Wood, distributed under the Artistic License.
  */
 
 #ifdef HAVE_CONFIG_H
