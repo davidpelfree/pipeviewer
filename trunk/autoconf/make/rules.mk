@@ -13,8 +13,8 @@
 	   $(CC) $< $(<:%.c=%) $(srcdir) $(CFLAGS) > $@
 
 doc/quickref.txt: doc/quickref.1
-	man doc/quickref.1 | col -b | cat -s > doc/quickref.txt         || :
-	chmod 644 doc/quickref.txt                                      || :
+	man $+ | sed 's/.//g' | cat -s > $@ || :
+	chmod 644 $@ || :
 
 doc/$(package).info: doc/manual.texi
 	makeinfo --no-split doc/manual.texi -o doc/$(package).info;        :
