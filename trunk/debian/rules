@@ -47,7 +47,7 @@ clean:
 	# Add here commands to clean up after the build process.
 	-$(MAKE) distclean
 
-	-rm -f src/nls/po/*.mo
+	-rm -f src/nls/*.mo
 	-rm -f doc/manual.texi doc/manual.html doc/pv.info doc/quickref.txt doc/lsm doc/quickref.1 doc/pv.spec
 
 	# autoconf/make contain *.mk~ files that are needed for the build
