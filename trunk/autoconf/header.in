@@ -17,6 +17,15 @@
 /* Define if <sys/ipc.h> is available. */
 #undef HAVE_SYS_IPC_H
 
+/* Define if the function uu_lock() is available. */
+#undef HAVE_UU_LOCK
+
+/* Define if <libutil.h> is available. */
+#undef HAVE_LIBUTIL_H
+
+/* Define if we have libutil. */
+#undef HAVE_LIBUTIL
+
 /* NLS stuff. */
 #undef ENABLE_NLS
 #undef HAVE_LIBINTL_H

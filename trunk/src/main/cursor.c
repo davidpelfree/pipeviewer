@@ -25,12 +25,21 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+#undef USE_UU_LOCK
+
 #ifdef HAVE_IPC
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
+#ifdef HAVE_LIBUTIL
+#ifdef HAVE_LIBUTIL_H
+#ifdef HAVE_UU_LOCK
+#define USE_UU_LOCK 1
+#include <libutil.h>
+#endif				/* HAVE_UU_LOCK */
+#endif				/* HAVE_LIBUTIL_H */
+#endif				/* HAVE_LIBUTIL */
 #endif				/* HAVE_IPC */
-
 
 int getnum_i(char *);
 
@@ -44,6 +53,9 @@ static int cursor__y_lastread = 0;	 /* last value of __y_top seen */
 static int cursor__y_offset = 0;	 /* our Y offset from this top position */
 static int cursor__needreinit = 0;	 /* set if we need to reinit cursor pos */
 static int cursor__noipc = 0;		 /* set if we can't use IPC */
+#ifdef USE_UU_LOCK
+static int cursor__uulock = 0;		 /* set if we're using uu_lock() */
+#endif
 #endif				/* HAVE_IPC */
 static int cursor__y_start = 0;		 /* our initial Y coordinate */
 
@@ -61,7 +73,18 @@ static void cursor_lock(int fd)
 	lock.l_len = 1;
 	while (fcntl(fd, F_SETLKW, &lock) < 0) {
 		if (errno != EINTR) {
+#ifdef USE_UU_LOCK
+			char *ttyfile;
+
+			ttyfile = ttyname(STDERR_FILENO);   /* RATS: ignore (unimportant) */
+			if ((ttyfile) && (uu_lock(ttyfile) == 0)) {
+				cursor__uulock = 1;
+			} else {
+				cursor__noipc = 1;
+			}
+#else
 			cursor__noipc = 1;
+#endif
 			return;
 		}
 	}
@@ -74,6 +97,17 @@ static void cursor_lock(int fd)
 static void cursor_unlock(int fd)
 {
 	struct flock lock;
+
+#ifdef USE_UU_LOCK
+	if (cursor__uulock) {
+		char *ttyfile;
+		ttyfile = ttyname(STDERR_FILENO);   /* RATS: ignore (unimportant) */
+		if (ttyfile) {
+			uu_unlock(ttyfile);
+		}
+		return;
+	}
+#endif
 
 	lock.l_type = F_UNLCK;
 	lock.l_whence = SEEK_SET;
