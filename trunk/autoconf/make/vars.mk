@@ -45,9 +45,9 @@ UNINSTALL = rm -f
 
 LDFLAGS = -r
 DEFS = @DEFS@ -DLOCALEDIR=\"$(localedir)\" -DGNULOCALEDIR=\"$(gnulocaledir)\" -DLOCALE_ALIAS_PATH=\"$(aliaspath)\" 
-CFLAGS = @CFLAGS@ -I$(srcdir)/src/include -Isrc/include @EXTRAFLAGS@ $(DEFS)
-LIBS = @LIBS@
-FINALFLAGS = @CFLAGS@
+CFLAGS = @CFLAGS@
+CPPFLAGS = @CPPFLAGS@ -I$(srcdir)/src/include -Isrc/include $(DEFS)
+LIBS = @LIBS@ @INTLLIBS@
 
 alltarg = @PACKAGE@
 

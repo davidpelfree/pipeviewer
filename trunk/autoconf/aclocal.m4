@@ -75,7 +75,7 @@ AC_DEFUN(ud_WITH_NLS,
                INTLDEPS="src/nls/intl.o"
 	       INTLLIBS=$INTLDEPS
 	       LIBS=`echo $LIBS | sed -e 's/-lintl//'`
-               EXTRAFLAGS="$EXTRAFLAGS -I$srcdir/src/nls"
+               CPPFLAGS="$CPPFLAGS -I$srcdir/src/nls"
 	       nls_cv_header_intl=intl/libintl.h
 	       nls_cv_header_libgt=intl/libgettext.h
 	     fi])
@@ -101,7 +101,7 @@ AC_DEFUN(ud_WITH_NLS,
         INTLDEPS="src/nls/intl.o"
         INTLLIBS=$INTLDEPS
 	LIBS=`echo $LIBS | sed -e 's/-lintl//'`
-        EXTRAFLAGS="$EXTRAFLAGS -I$srcdir/src/nls"
+        CPPFLAGS="$CPPFLAGS -I$srcdir/src/nls"
         nls_cv_header_intl=intl/libintl.h
         nls_cv_header_libgt=intl/libgettext.h
       fi
