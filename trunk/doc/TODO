@@ -1,8 +1,6 @@
 Things still to do:
 
   * analyse with RATS
-  * replace GNU getopt with my library code
-  * look into replacements for NLS code
   * build fixes on Slackware 8.0
 
 Any assistance would be appreciated.

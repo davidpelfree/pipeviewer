@@ -9,6 +9,16 @@
 #endif
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+
+struct optdesc_s {
+	char *optshort;
+	char *optlong;
+	char *param;
+	char *description;
+};
 
 
 /*
@@ -16,31 +26,125 @@
  */
 void display_help(void)
 {
+	struct optdesc_s optlist[] = {
+		{ "-p", "--progress", 0,
+		  _("show progress bar") },
+		{ "-t", "--timer", 0,
+		  _("show elapsed time") },
+		{ "-e", "--eta", 0,
+		  _("show estimated time of arrival (completion)") },
+		{ "-r", "--rate", 0,
+		  _("show data transfer rate counter") },
+		{ "-b", "--bytes", 0,
+		  _("show number of bytes transferred") },
+		{ "-f", "--force", 0,
+		  _("output even if standard error is not a terminal") },
+		{ "-n", "--numeric", 0,
+		  _("output percentages, not visual information") },
+		{ "-q", "--quiet", 0,
+		  _("do not output any transfer information at all") },
+		{ "-c", "--cursor", 0,
+		  _("use cursor positioning escape sequences") },
+		{ "-L", "--rate-limit", _("RATE"),
+		  _("limit transfer to RATE bytes per second") },
+		{ "-W", "--wait", 0,
+		  _("display nothing until first byte transferred") },
+		{ "-s", "--size", _("SIZE"),
+		  _("set estimated data size to SIZE bytes") },
+		{ "-i", "--interval", _("SEC"),
+		  _("update every SEC seconds") },
+		{ "-w", "--width", _("WIDTH"),
+		  _("assume terminal is WIDTH characters wide") },
+		{ "-N", "--name", _("NAME"),
+		  _("prefix visual information with NAME") },
+		{ "", 0, 0, 0 },
+		{ "-h", "--help", 0,
+		  _("show this help and exit") },
+		{ "-l", "--license", 0,
+		  _("show the license this program is distributed under") },
+		{ "-V", "--version", 0,
+		  _("show version information and exit") },
+		{ 0, 0, 0, 0 }
+	};
+	int i, col1max = 0, tw = 77;
+	char *optbuf;
+
 	printf(_("Usage: %s [OPTION] [FILE]..."), PROGRAM_NAME);
 	printf("\n%s\n\n",
 _("Concatenate FILE(s), or standard input, to standard output,\n"
   "with monitoring."));
-	printf("  %s\n  %s\n  %s\n  %s\n  %s\n  %s\n  %s\n  %s\n  %s\n"
-	       "  %s\n  %s\n  %s\n  %s\n  %s\n  %s\n\n",
-_("-p, --progress        show progress bar"),
-_("-t, --timer           show elapsed time"),
-_("-e, --eta             show estimated time of arrival (completion)"),
-_("-r, --rate            show data transfer rate counter"),
-_("-b, --bytes           show number of bytes transferred"),
-_("-f, --force           output even if standard error is not a terminal"),
-_("-n, --numeric         output percentages, not visual information"),
-_("-q, --quiet           do not output any transfer information at all"),
-_("-c, --cursor          use cursor positioning escape sequences"),
-_("-L, --rate-limit RATE limit transfer to RATE bytes per second"),
-_("-W, --wait            display nothing until first byte transferred"),
-_("-s, --size SIZE       set estimated data size to SIZE bytes"),
-_("-i, --interval SEC    update every SEC seconds"),
-_("-w, --width WIDTH     assume terminal is WIDTH characters wide"),
-_("-N, --name NAME       prefix visual information with NAME"));
-	printf("  %s\n  %s\n  %s\n\n",
-_("-h, --help            show this help and exit"),
-_("-l, --license         show the license this program is distributed under"),
-_("-V, --version         show version information and exit"));
+
+	for (i = 0; optlist[i].optshort; i++) {
+		int width = 0;
+
+		width = 2 + strlen(optlist[i].optshort);
+#ifdef HAVE_GETOPT_LONG
+		if (optlist[i].optlong)
+			width += 1 + strlen(optlist[i].optlong);
+#endif
+		if (optlist[i].param)
+			width += 1 + strlen(optlist[i].param);
+
+		if (width > col1max)
+			col1max = width;
+	}
+
+	col1max++;
+
+	optbuf = malloc(col1max + 16);
+	if (optbuf == NULL) {
+		fprintf(stderr, "%s: %s\n", PROGRAM_NAME, strerror(errno));
+		exit(1);
+	}
+
+	for (i = 0; optlist[i].optshort; i++) {
+		char *start;
+		char *end;
+
+		if (optlist[i].optshort[0] == 0) {
+			printf("\n");
+			continue;
+		}
+
+		sprintf(optbuf, "%s%s%s%s%s",	/* RATS: ignore (checked) */
+			optlist[i].optshort,
+#ifdef HAVE_GETOPT_LONG
+			optlist[i].optlong ? " " : "",
+			optlist[i].optlong ? optlist[i].optlong : "",
+#else
+			"", "",
+#endif
+			optlist[i].param ? " " : "",
+			optlist[i].param ? optlist[i].param : "");
+
+		printf("  %-*s ", col1max - 2, optbuf);
+
+		if (optlist[i].description == NULL) {
+			printf("\n");
+			continue;
+		}
+
+		start = optlist[i].description;
+
+		while (strlen(start) > tw - col1max) {
+			end = start + tw - col1max;
+			while ((end > start) && (end[0] != ' '))
+				end--;
+			if (end == start) {
+				end = start + tw - col1max;
+			} else {
+				end++;
+			}
+			printf("%.*s\n%*s ", (int)(end - start), start, col1max, "");
+			if (end == start)
+				end++;
+			start = end;
+		}
+
+		printf("%s\n", start);
+	}
+
+	printf("\n");
 	printf(_("Please report any bugs to %s."), BUG_REPORTS_TO);
 	printf("\n");
 }

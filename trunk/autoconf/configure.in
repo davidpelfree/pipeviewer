@@ -47,8 +47,20 @@ AC_ARG_ENABLE(lfs, [  --disable-lfs           disable LFS support],
   fi,
   LFS_SUPPORT="yes"
 )
-
-ALL_LINGUAS="de fr pl pt"
+STATIC_NLS="no"
+AC_ARG_ENABLE(static-nls, [  --enable-static-nls     hardcode NLS with no support files],
+  if test "$enable_static_nls" = "yes"; then
+    STATIC_NLS="yes"
+  fi,
+  STATIC_NLS="no"
+)
+NLS_SUPPORT="no"
+AC_ARG_ENABLE(nls, [  --disable-nls           do not use Native Language Support],
+  if test "$enable_nls" = "yes"; then
+    NLS_SUPPORT="yes"
+  fi,
+  NLS_SUPPORT="yes"
+)
 
 dnl Check for various programs.
 dnl
@@ -56,14 +68,61 @@ CFLAGS=${CFLAGS:-"-O2 -Wall -s"}
 AC_PROG_CC
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
-ud_GNU_GETTEXT
-CATALOGS=`echo "$CATALOGS" | sed 's|$(srcdir)/||g'`
 AC_CHECK_PROG(DO_GZIP, gzip, gzip -f9, touch)
 
-dnl Check for various library functions.
+dnl NLS stuff.
 dnl
-AC_CHECK_FUNCS(getopt_long, needgetopt="", needgetopt="src/getopt.o")
-AC_SUBST(needgetopt)
+ALL_LINGUAS="de fr pl pt"
+if test "$NLS_SUPPORT" = "yes"; then
+  AC_DEFINE(ENABLE_NLS)
+  if test "$STATIC_NLS" = "yes"; then
+    CATALOGS=""
+    NLSOBJ="src/nls/table.o"
+  else
+    AC_CHECK_LIB(intl, main)
+    AC_CHECK_LIB(i, main)
+    AC_PATH_PROG(MSGFMT, msgfmt, msgfmt)
+    AC_PATH_PROG(GMSGFMT, gmsgfmt, $MSGFMT)
+    AC_PATH_PROG(XGETTEXT, xgettext, xgettext)
+  fi
+  CATOBJEXT=.mo
+  INSTOBJEXT=.mo
+  for lang in $ALL_LINGUAS; do
+    GMOFILES="$GMOFILES $lang.gmo"
+    POFILES="$POFILES \$(srcdir)/src/nls/$lang.po"
+    CATALOGS="$CATALOGS src/nls/$lang$CATOBJEXT";
+  done
+  if test "$STATIC_NLS" = "yes"; then
+    CATALOGS=""
+  else
+    AC_CHECK_FUNC(gettext,
+     [AC_DEFINE(HAVE_GETTEXT)
+      NLSOBJ=""
+     ], [CATALOGS=""; NLSOBJ="src/nls/table.o"
+     ]
+    )
+  fi
+fi
+AC_CHECK_HEADERS(libintl.h)
+AC_CHECK_HEADERS(locale.h)
+AC_SUBST(MSGFMT)
+AC_SUBST(GMSGFMT)
+AC_SUBST(XGETTEXT)
+AC_SUBST(CATOBJEXT)
+AC_SUBST(INSTOBJEXT)
+AC_SUBST(GMOFILES)
+AC_SUBST(POFILES)
+AC_SUBST(CATALOGS)
+AC_SUBST(NLSOBJ)
+
+dnl Getopt checks.
+dnl
+AC_CHECK_FUNCS(getopt_long)
+AC_CHECK_FUNCS(getopt)
+AC_CHECK_HEADERS(getopt.h)
+
+dnl LFS checks.
+dnl
 if test "$LFS_SUPPORT" = "yes"; then
   AC_CHECK_FUNCS(open64, AC_DEFINE(ENABLE_LARGEFILE))
 fi

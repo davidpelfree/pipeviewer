@@ -30,10 +30,6 @@ doc/manual.html: doc/manual.texi
 # NLS stuff
 #
 
-%.pox: $(srcdir)/src/nls/po/$(PACKAGE).pot %.po
-	$(TUPDATE) $(srcdir)/nls/po/$(PACKAGE).pot $< > $@
-	@chmod 644 $@
-
 %.mo: %.po
 	$(MSGFMT) -o $@ $<
 	@touch $@
@@ -45,15 +41,7 @@ doc/manual.html: doc/manual.texi
 	@touch $@
 	@chmod 644 $@
 
-%.cat: %.po
-	sed -f $(srcdir)/autoconf/scripts/$(msgformat)-msg.sed \
-	     < $< > $(<:%.cat:%.msg) \
-	&& rm -f $@ \
-	&& $(GENCAT) $@ $(<:%.cat:%.msg)
-	@touch $@
-	@chmod 644 $@
-
-$(srcdir)/src/nls/po/$(PACKAGE).pot: $(allsrc)
+$(srcdir)/src/nls/$(PACKAGE).pot: $(allsrc)
 	$(XGETTEXT) --default-domain=$(PACKAGE) --directory=$(srcdir) \
 	            --add-comments --keyword=_ --keyword=N_ \
 	            $(allsrc)
@@ -65,10 +53,6 @@ $(srcdir)/src/nls/po/$(PACKAGE).pot: $(allsrc)
 	  chmod 644 $@; \
 	fi
 
-src/nls/cat-id-tbl.c: $(srcdir)/src/nls/po/$(PACKAGE).pot
-	echo | sed -f $(srcdir)/autoconf/scripts/po2tbl.sed $< \
-	| sed -e "s/@PACKAGE NAME@/$(PACKAGE)/" > $@
-	chmod 644 $@
+src/nls/table.c: $(POFILES)
+	sh $(srcdir)/autoconf/scripts/po2table.sh $(POFILES) > src/nls/table.c
 
-src/nls/pofiles.made: src/nls/cat-id-tbl.c $(CATALOGS)
-	@touch $@

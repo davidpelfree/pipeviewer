@@ -22,10 +22,6 @@ void display_license(void)
 	printf(_("This program is Open Source software, and is being "
 	  "distributed under the\nterms of the Artistic License."));
 	printf("\n\n");
-	printf(_("Parts of this program may be copyright (C) Free Software\n"
-	  "Foundation, Inc. and are distributed under the terms of the\n"
-	  "GNU Lesser General Public License."));
-	printf("\n\n");
 	printf("----------------------------------------------------------");
 	printf("\n\n");
 	printf("%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s", _(
@@ -146,17 +142,11 @@ void display_license(void)
 	printf("----------------------------------------------------------");
 	printf("\n\n");
 	printf(_(
-"For a copy of the GNU Lesser General Public License, please see\n"
-"http://www.gnu.org/ or write to the Free Software Foundation, Inc.,\n"
-"59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."));
-	printf("\n\n");
-	printf("----------------------------------------------------------");
-	printf("\n\n");
-	printf(_(
 "If that scrolled by too quickly, you may want to pipe it to a\n"
 "pager such as `more' or `less', eg `%s --license | more'."),
 	  PROGRAM_NAME);
 	printf("\n");
+	/* TODO: -l instead of --license in short options mode */
 }
 
 /* EOF */

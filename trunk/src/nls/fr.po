@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2004-02-08 02:25+0000\n"
+"POT-Creation-Date: 2004-02-11 19:25+0000\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Date: 1999-06-01 15:18:29+0100\n"
 "From: Andrew Wood <ivarch@ubik>\n"
@@ -17,65 +17,6 @@ msgstr ""
 "nls/intl/gettext.c src/nls/intl/loadmsgcat.c src/nls/intl/localealias.c src/"
 "nls/intl/textdomain.c src/nls/intl-cat/cat-compat.c src/nls/intl-gett/intl-"
 "compat.c\n"
-
-#: src/getopt/getopt.c:679
-#, c-format
-msgid "%s: option `%s' is ambiguous\n"
-msgstr "%s: l'option «%s» est ambiguë\n"
-
-#: src/getopt/getopt.c:703
-#, c-format
-msgid "%s: option `--%s' doesn't allow an argument\n"
-msgstr "%s: l'option «--%s» n'accepte pas d'argument\n"
-
-#: src/getopt/getopt.c:708
-#, c-format
-msgid "%s: option `%c%s' doesn't allow an argument\n"
-msgstr "%s: l'option «%c%s» n'accepte pas d'argument\n"
-
-#: src/getopt/getopt.c:725 src/getopt/getopt.c:898
-#, c-format
-msgid "%s: option `%s' requires an argument\n"
-msgstr "%s: l'option «%s» requiert un argument\n"
-
-#. --option
-#: src/getopt/getopt.c:754
-#, c-format
-msgid "%s: unrecognized option `--%s'\n"
-msgstr "%s: option non reconnue «--%s»\n"
-
-#. +option or -option
-#: src/getopt/getopt.c:758
-#, c-format
-msgid "%s: unrecognized option `%c%s'\n"
-msgstr "%s: option non reconnue «--%s»\n"
-
-#. 1003.2 specifies the format of this message.
-#: src/getopt/getopt.c:784
-#, c-format
-msgid "%s: illegal option -- %c\n"
-msgstr "%s: option illégale -- «%c»\n"
-
-#: src/getopt/getopt.c:787
-#, c-format
-msgid "%s: invalid option -- %c\n"
-msgstr "%s: option invalide «%c»\n"
-
-#. 1003.2 specifies the format of this message.
-#: src/getopt/getopt.c:817 src/getopt/getopt.c:947
-#, c-format
-msgid "%s: option requires an argument -- %c\n"
-msgstr "%s: l'option «%s» requiert un argument\n"
-
-#: src/getopt/getopt.c:864
-#, c-format
-msgid "%s: option `-W %s' is ambiguous\n"
-msgstr "%s: l'option «-W %s» est ambiguë\n"
-
-#: src/getopt/getopt.c:882
-#, c-format
-msgid "%s: option `-W %s' doesn't allow an argument\n"
-msgstr "%s: l'option «-W %s» n'accepte pas d'argument\n"
 
 #: src/main/display.c:88
 msgid "failed to open terminal"
@@ -111,7 +52,7 @@ msgstr "kO/s"
 
 #: src/main/display.c:270
 msgid "B/s "
-msgstr "O/s"
+msgstr "O/s "
 
 #: src/main/display.c:281
 msgid "ETA"
@@ -137,12 +78,122 @@ msgstr "échec à statuer sur le fichier de sortie"
 msgid "input file is output file"
 msgstr "fichiers d'entré et de sortie sont les mêmes"
 
-#: src/main/help.c:19
+#: src/main/help.c:31
+#, fuzzy
+msgid "show progress bar"
+msgstr "affiche la barre de progression"
+
+#: src/main/help.c:33
+#, fuzzy
+msgid "show elapsed time"
+msgstr "affiche le temps écoulé"
+
+#: src/main/help.c:35
+#, fuzzy
+msgid "show estimated time of arrival (completion)"
+msgstr "affiche l'heure approximative de l'achèvement de la tâche"
+
+#: src/main/help.c:37
+#, fuzzy
+msgid "show data transfer rate counter"
+msgstr "affiche le taux de tranfert des données"
+
+#: src/main/help.c:39
+#, fuzzy
+msgid "show number of bytes transferred"
+msgstr "affiche le nombre d'octets transférés"
+
+#: src/main/help.c:41
+#, fuzzy
+msgid "output even if standard error is not a terminal"
+msgstr "imprime vers la sortie d'erreur même si ce n'est pas un terminal"
+
+#: src/main/help.c:43
+#, fuzzy
+msgid "output percentages, not visual information"
+msgstr "imprime en pourcentage, pas les informations visuelles"
+
+#: src/main/help.c:45
+#, fuzzy
+msgid "do not output any transfer information at all"
+msgstr "n'afficher aucune information de transfert"
+
+#: src/main/help.c:47
+#, fuzzy
+msgid "use cursor positioning escape sequences"
+msgstr "utiliser les séquences d'échappements de positionnement de curseur"
+
+#: src/main/help.c:48
+msgid "RATE"
+msgstr "TAUX"
+
+#: src/main/help.c:49
+#, fuzzy
+msgid "limit transfer to RATE bytes per second"
+msgstr "limite le taux de transfer à TAUX octets par seconde"
+
+#: src/main/help.c:51
+#, fuzzy
+msgid "display nothing until first byte transferred"
+msgstr "ne rien afficher avant qu'au moins un octet soit tranféré"
+
+#: src/main/help.c:52
+msgid "SIZE"
+msgstr "TAILLE"
+
+#: src/main/help.c:53
+#, fuzzy
+msgid "set estimated data size to SIZE bytes"
+msgstr "ajuste la taille estimée des données à TAILLE octets"
+
+#: src/main/help.c:54
+msgid "SEC"
+msgstr ""
+
+#: src/main/help.c:55
+#, fuzzy
+msgid "update every SEC seconds"
+msgstr "mise-à-jour toute les SEC secondes"
+
+#: src/main/help.c:56
+msgid "WIDTH"
+msgstr "LARGEUR"
+
+#: src/main/help.c:57
+#, fuzzy
+msgid "assume terminal is WIDTH characters wide"
+msgstr "présumer la largeur du terminal à LARGEUR caractères"
+
+#: src/main/help.c:58
+msgid "NAME"
+msgstr "NOM"
+
+#: src/main/help.c:59
+#, fuzzy
+msgid "prefix visual information with NAME"
+msgstr "préfixer les informations visuelles avec NOM"
+
+#: src/main/help.c:62
+#, fuzzy
+msgid "show this help and exit"
+msgstr "afficher cette aide puis quitter"
+
+#: src/main/help.c:64
+#, fuzzy
+msgid "show the license this program is distributed under"
+msgstr "affiche la license sous laquelle ce programme est distribué"
+
+#: src/main/help.c:66
+#, fuzzy
+msgid "show version information and exit"
+msgstr "afficher la version puis quitter"
+
+#: src/main/help.c:72
 #, c-format
 msgid "Usage: %s [OPTION] [FILE]..."
 msgstr "Utilisation : %s [OPTIONS] [FICHIER]..."
 
-#: src/main/help.c:21
+#: src/main/help.c:74
 msgid ""
 "Concatenate FILE(s), or standard input, to standard output,\n"
 "with monitoring."
@@ -150,94 +201,7 @@ msgstr ""
 "Concatène FICHIER(s), ou l'entrée standard, sur la sortie standard\n"
 "avec monitorage."
 
-#: src/main/help.c:25
-msgid "-p, --progress        show progress bar"
-msgstr "-p, --progress        affiche la barre de progression"
-
-#: src/main/help.c:26
-msgid "-t, --timer           show elapsed time"
-msgstr "-t, --timer           affiche le temps écoulé"
-
-#: src/main/help.c:27
-msgid "-e, --eta             show estimated time of arrival (completion)"
-msgstr ""
-"-e, --eta             affiche l'heure approximative de l'achèvement de la\n"
-"                        tâche"
-
-#: src/main/help.c:28
-msgid "-r, --rate            show data transfer rate counter"
-msgstr "-r, --rate            affiche le taux de tranfert des données"
-
-#: src/main/help.c:29
-msgid "-b, --bytes           show number of bytes transferred"
-msgstr "-b, --bytes           affiche le nombre d'octets transférés"
-
-#: src/main/help.c:30
-msgid "-f, --force           output even if standard error is not a terminal"
-msgstr ""
-"-f, --force           imprime vers la sortie d'erreur même si ce n'est pas\n"
-"                        un terminal"
-
-#: src/main/help.c:31
-msgid "-n, --numeric         output percentages, not visual information"
-msgstr ""
-"-n, --numeric         imprime en pourcentage, pas les informations visuelles"
-
-#: src/main/help.c:32
-msgid "-q, --quiet           do not output any transfer information at all"
-msgstr "-q, --quiet           n'afficher aucune information de transfert"
-
-#: src/main/help.c:33
-msgid "-c, --cursor          use cursor positioning escape sequences"
-msgstr ""
-"-c, --cursor          utiliser les séquences d'échappements de\n"
-"                        positionnement de curseur"
-
-#: src/main/help.c:34
-msgid "-L, --rate-limit RATE limit transfer to RATE bytes per second"
-msgstr ""
-"-L, --rate-limit TAUX limite le taux de transfer à TAUX octets par seconde"
-
-#: src/main/help.c:35
-msgid "-W, --wait            display nothing until first byte transferred"
-msgstr ""
-"-W, --wait            ne rien afficher avant qu'au moins un octet soit\n"
-"                        tranféré"
-
-#: src/main/help.c:36
-msgid "-s, --size SIZE       set estimated data size to SIZE bytes"
-msgstr ""
-"-s, --size TAILLE     ajuste la taille estimée des données à TAILLE octets"
-
-#: src/main/help.c:37
-msgid "-i, --interval SEC    update every SEC seconds"
-msgstr "-i, --interval SEC    mise-à-jour toute les SEC secondes"
-
-#: src/main/help.c:38
-msgid "-w, --width WIDTH     assume terminal is WIDTH characters wide"
-msgstr ""
-"-w, --width LARGEUR   présumer la largeur du terminal à LARGEUR caractères"
-
-#: src/main/help.c:39
-msgid "-N, --name NAME       prefix visual information with NAME"
-msgstr "-N, --name NOM        préfixer les informations visuelles avec NOM"
-
-#: src/main/help.c:41
-msgid "-h, --help            show this help and exit"
-msgstr "-h, --help            afficher cette aide puis quitter"
-
-#: src/main/help.c:42
-msgid ""
-"-l, --license         show the license this program is distributed under"
-msgstr ""
-"-l, --license         affiche la license sous laquelle ce programme est\n"
-"                        distribué"
-
-#: src/main/help.c:43
-msgid "-V, --version         show version information and exit"
-msgstr "-V, --version         afficher la version puis quitter"
-
-#: src/main/help.c:44
+#: src/main/help.c:148
 #, c-format
 msgid "Please report any bugs to %s."
 msgstr "SVP rapporter touts bogues à %s."
@@ -476,20 +440,27 @@ msgstr ""
 "rediriger l'impression vers une visionneuse comme `more' ou `less',\n"
 "i.e. `%s --license | more'."
 
-#: src/main/options.c:79
+#: src/main/options.c:81
 #, c-format
 msgid "%s: option structure allocation failed (%s)"
 msgstr "%s: l'allocation pour la structure d'une option a echoué (%s)"
 
-#: src/main/options.c:94
+#: src/main/options.c:96
 #, c-format
 msgid "%s: option structure argv allocation failed (%s)"
 msgstr "%s: l'allocation pour la structure de l'option argv a echoué (%s)"
 
-#: src/main/options.c:181
+#. RATS: ignore (OK)
+#: src/main/options.c:189
 #, c-format
 msgid "Try `%s --help' for more information."
 msgstr "Essayez `%s --help' pour plus d'information."
+
+#. RATS: ignore (OK)
+#: src/main/options.c:193
+#, fuzzy, c-format
+msgid "Try `%s -h' for more information."
+msgstr "Essayez `%s -h' pour plus d'information."
 
 #: src/main/transfer.c:65
 msgid "buffer allocation failed"
@@ -540,3 +511,36 @@ msgstr ""
 #, c-format
 msgid "For more information, please run `%s --license'."
 msgstr "Pour plus d'information, exécutez `%s --license'."
+
+#~ msgid "%s: option `%s' is ambiguous\n"
+#~ msgstr "%s: l'option «%s» est ambiguë\n"
+
+#~ msgid "%s: option `--%s' doesn't allow an argument\n"
+#~ msgstr "%s: l'option «--%s» n'accepte pas d'argument\n"
+
+#~ msgid "%s: option `%c%s' doesn't allow an argument\n"
+#~ msgstr "%s: l'option «%c%s» n'accepte pas d'argument\n"
+
+#~ msgid "%s: option `%s' requires an argument\n"
+#~ msgstr "%s: l'option «%s» requiert un argument\n"
+
+#~ msgid "%s: unrecognized option `--%s'\n"
+#~ msgstr "%s: option non reconnue «--%s»\n"
+
+#~ msgid "%s: unrecognized option `%c%s'\n"
+#~ msgstr "%s: option non reconnue «--%s»\n"
+
+#~ msgid "%s: illegal option -- %c\n"
+#~ msgstr "%s: option illégale -- «%c»\n"
+
+#~ msgid "%s: invalid option -- %c\n"
+#~ msgstr "%s: option invalide «%c»\n"
+
+#~ msgid "%s: option requires an argument -- %c\n"
+#~ msgstr "%s: l'option «%s» requiert un argument\n"
+
+#~ msgid "%s: option `-W %s' is ambiguous\n"
+#~ msgstr "%s: l'option «-W %s» est ambiguë\n"
+
+#~ msgid "%s: option `-W %s' doesn't allow an argument\n"
+#~ msgstr "%s: l'option «-W %s» n'accepte pas d'argument\n"

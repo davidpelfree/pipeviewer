@@ -1,44 +1,29 @@
 /*!NOINDEX*/
-/*
- * Autoconf's config.h template.
- */
-
-/* Define if you have the getopt_long function. */
-#undef HAVE_GETOPT_LONG
-
 /* Define if you have standard C headers. */
 #undef STDC_HEADERS
 
 /* Define if you have "config.h" (yes, you have). */
 #undef HAVE_CONFIG_H
 
+/* Define if you have the getopt_long function. */
+#undef HAVE_GETOPT_LONG
+
+/* Define if you have "getopt.h". */
+#undef HAVE_GETOPT_H
+
+/* Define if you have getopt. */
+#undef HAVE_GETOPT
+
 /* NLS stuff. */
 #undef ENABLE_NLS
-#undef HAVE_CATGETS
-#undef HAVE_GETTEXT
-#undef HAVE_LC_MESSAGES
-#undef HAVE_STPCPY
-#undef HAVE_STRING_H
+#undef HAVE_LIBINTL_H
 #undef HAVE_LOCALE_H
-#undef STDC_HEADERS
-#undef HAVE_MALLOC_H
-#undef HAVE_NL_TYPES_H
-#undef HAVE_SETLOCALE
-#undef HAVE_SETLOCALE_NULL
-#undef LOCALEDIR
-#undef HAVE_SETENV
-#undef HAVE_PUTENV
-#undef HAVE_UNISTD_H
-
+#undef HAVE_GETTEXT
 #ifdef ENABLE_NLS
-# include <libintl.h>
-# ifdef HAVE_LOCALE_H
-#  include <locale.h>
-# endif
-# define _(String)	gettext (String)
-# define N_(String)	gettext_noop (String)
+# include "library/gettext.h"
 #else
 # define _(String) (String)
+# define N_(String) (String)
 #endif
 
 /* The name of the program. */
