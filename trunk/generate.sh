@@ -12,9 +12,9 @@ autoconf configure.in > ../configure
 cd ..
 chmod 755 configure
 
-echo -n > autoconf/make/depend.mk~
-echo -n > autoconf/make/filelist.mk~
-echo -n > autoconf/make/modules.mk~
+echo > autoconf/make/depend.mk~
+echo > autoconf/make/filelist.mk~
+echo > autoconf/make/modules.mk~
 
 rm -rf .gen
 mkdir .gen
