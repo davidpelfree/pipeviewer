@@ -38,8 +38,9 @@ echo `echo $allsrc | wc -w | tr -d ' '` found
 
 echo -n "Scanning for modules: "
 
-modules=`$FIND src -type d -name "[^_]*" -print \
+modules=`$FIND src -type d -print \
          | $GREP -v '^src$' \
+         | $GREP -v '/_' \
          | $GREP -v '^src/include' \
          | $GREP -v 'CVS' \
          | while read DIR; do \
