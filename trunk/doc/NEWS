@@ -1,5 +1,6 @@
 0.8.2 - 24 April 2004
   + allow k,m,g,t suffixes on numbers
+  + added "srpm" and "release" Makefile targets
 
 0.8.1 - 19 April 2004
   + bugfix in cursor positioning (-c)

@@ -5,9 +5,9 @@
 .PHONY: all dep depend depclean make check test \
   clean distclean cvsclean \
   index manhtml indent indentclean update-po \
-  doc dist \
+  doc dist release \
   install uninstall \
-  rpm deb
+  rpm srpm deb
 
 all: $(alltarg) $(CATALOGS)
 
@@ -186,6 +186,21 @@ rpm: dist
 	mv rpm/RPMS/*/$(package)-*.rpm .
 	rm -rf rpm rpmmacros rpmrc
 
+srpm: dist
+	echo macrofiles: `rpm --showrc \
+	  | grep ^macrofiles \
+	  | cut -d : -f 2- \
+	  | sed 's,^[^/]*/,/,'`:`pwd`/rpmmacros > rpmrc
+	echo %_topdir `pwd`/rpm > rpmmacros
+	rm -rf rpm
+	mkdir rpm
+	mkdir rpm/SPECS rpm/BUILD rpm/SOURCES rpm/RPMS rpm/SRPMS
+	grep -hsv ^macrofiles /usr/lib/rpm/rpmrc /etc/rpmrc $$HOME/.rpmrc \
+	  >> rpmrc
+	rpmbuild $(RPMFLAGS) --rcfile=rpmrc -ts $(package)-$(version).tar.gz
+	mv rpm/SRPMS/*$(package)-*.rpm .
+	rm -rf rpm rpmmacros rpmrc
+
 deb: dist
 	rm -rf BUILD-DEB
 	mkdir BUILD-DEB
@@ -193,3 +208,6 @@ deb: dist
 	cd BUILD-DEB && cd $(package)-$(version) && ./debian/rules binary
 	mv BUILD-DEB/*.deb .
 	rm -rf BUILD-DEB
+
+release: dist rpm srpm
+	zcat $(package)-$(version).tar.gz | bzip2 > $(package)-$(version).tar.bz2
