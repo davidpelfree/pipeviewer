@@ -72,7 +72,7 @@ opts_t parse_options(int argc, char ** argv)
 	};
 	char * short_options = "hlVpterbfnqcL:Ws:i:w:N:";
 	int option_index = 0;
-	int c, n, numopts;
+	int c, numopts;
 	opts_t options;
 
 	options = calloc(1, sizeof(*options));
