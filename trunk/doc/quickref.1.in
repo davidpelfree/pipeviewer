@@ -145,7 +145,7 @@ Assume the total amount of data to be transferred is
 .B SIZE
 bytes when calculating percentages and ETAs.  The same suffixes of "k", "m"
 etc can be used as with
-.BR -s .
+.BR -L .
 .TP
 .B \-i SEC, \-\-interval SEC
 Wait
