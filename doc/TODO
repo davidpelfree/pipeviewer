@@ -3,6 +3,7 @@ $Id$
 Things still to do:
 
   * make doing "pv" then ^Z then "bg" then "fg" not need another "fg"
+  * add a "make static" rule to build a statically linked version
   * translations (please email me if you speak another language!)
 
 Any assistance would be appreciated.
