@@ -456,6 +456,10 @@ msgid ""
 "http://www.gnu.org/ or write to the Free Software Foundation, Inc.,\n"
 "59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
 msgstr ""
+"Sie erhalten die GNU Lesser General Public License im Internet unter\n"
+"http://www.gnu.org/ oder per Briefpost von der\n"
+"Free Software Foundation, Inc.,\n"
+"59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
 
 #: src/main/license.c:158
 #, c-format
@@ -463,16 +467,18 @@ msgid ""
 "If that scrolled by too quickly, you may want to pipe it to a\n"
 "pager such as `more' or `less', eg `%s --license | more'."
 msgstr ""
+"Sollte diese Nachricht zu lang sein, lesen Sie sie mit einem Pager\n"
+"wie `more' oder 'less', etwa `%s --license | more'."
 
 #: src/main/options.c:81
 #, c-format
 msgid "%s: option structure allocation failed (%s)"
-msgstr ""
+msgstr "%s: `option' konnte nicht allokiert werden (%s)"
 
 #: src/main/options.c:96
 #, c-format
 msgid "%s: option structure argv allocation failed (%s)"
-msgstr ""
+msgstr "%s: `option' (argv) konnte nicht allokiert werden (%s)"
 
 #: src/main/options.c:183
 #, c-format

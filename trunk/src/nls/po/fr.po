@@ -127,11 +127,11 @@ msgstr "la lecture du fichier a échoué"
 
 #: src/main/file.c:101
 msgid "failed to stat file"
-msgstr ""
+msgstr "échec à statuer sur le fichier"
 
 #: src/main/file.c:111
 msgid "failed to stat output file"
-msgstr ""
+msgstr "échec à statuer sur le fichier de sortie"
 
 #: src/main/file.c:124
 msgid "input file is output file"
@@ -147,8 +147,8 @@ msgid ""
 "Concatenate FILE(s), or standard input, to standard output,\n"
 "with monitoring."
 msgstr ""
-"Concatène FICHIER(s), ou l'entrée standard, sur la sortie standard,\n"
-"with monitoring."
+"Concatène FICHIER(s), ou l'entrée standard, sur la sortie standard\n"
+"avec monitorage."
 
 #: src/main/help.c:27
 msgid "-p, --progress        show progress bar"
