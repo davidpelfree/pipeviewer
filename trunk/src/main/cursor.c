@@ -53,7 +53,12 @@ static void cursor_lock(int fd)
 	lock.l_whence = SEEK_SET;
 	lock.l_start = 0;
 	lock.l_len = 1;
-	fcntl(fd, F_SETLKW, &lock);
+	while (fcntl(fd, F_SETLKW, &lock) < 0) {
+		if (errno != EINTR) {
+			fprintf(stderr, "%s\n", strerror(errno));
+			return;
+		}
+	}
 }
 
 
@@ -260,13 +265,30 @@ void cursor_update(opts_t options, char *str)
 	/*
 	 * If the screen has scrolled, or is about to scroll, due to
 	 * multiple `pv' instances taking us near the bottom of the screen,
-	 * move our initial Y co-ordinate up.
+	 * scroll the screen (only if we're the first `pv'), and then move
+	 * our initial Y co-ordinate up.
 	 */
 	if ((cursor__y_start + cursor__pvmax) > options->height) {
-		cursor__y_start -= ((cursor__y_start + cursor__pvmax)
-				    - options->height);
+		int offs;
+
+		offs =
+		    ((cursor__y_start + cursor__pvmax) - options->height);
+
+		cursor__y_start -= offs;
 		if (cursor__y_start < 1)
 			cursor__y_start = 1;
+
+		if (cursor__y_offset == 0) {
+			cursor_lock(STDERR_FILENO);
+
+			sprintf(pos, "\033[%d;1H", options->height);
+			write(STDERR_FILENO, pos, strlen(pos));
+			for (; offs > 0; offs--) {
+				write(STDERR_FILENO, "\n", 1);
+			}
+
+			cursor_unlock(STDERR_FILENO);
+		}
 	}
 
 	y = cursor__y_start + cursor__y_offset;
@@ -317,7 +339,7 @@ void cursor_fini(opts_t options)
 	/*
 	 * If we are the last instance detaching from the shared memory,
 	 * delete it so it's not left lying around.
-	 */	
+	 */
 	if (cursor__pvcount < 2)
 		shmctl(cursor__shmid, IPC_RMID, 0);
 
