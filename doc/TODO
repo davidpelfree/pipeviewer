@@ -1,7 +1,6 @@
 Things still to do:
 
   * make sure that flock(tty) works on other OSes
-  * recalculate top y position after bg then fg
   * get more translations
 
 Any assistance would be appreciated.

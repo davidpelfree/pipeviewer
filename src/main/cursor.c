@@ -37,7 +37,9 @@ static int cursor__shmid = -1;		 /* ID of our shared memory segment */
 static int cursor__pvcount = 1;		 /* number of `pv' processes in total */
 static int cursor__pvmax = 0;		 /* highest number of `pv's seen */
 static int *cursor__y_top = 0;		 /* pointer to Y coord of topmost `pv' */
+static int cursor__y_lastread = 0;	 /* last value of __y_top seen */
 static int cursor__y_offset = 0;	 /* our Y offset from this top position */
+static int cursor__needreinit = 0;	 /* set if we need to reinit cursor pos */
 #endif				/* HAVE_IPC */
 static int cursor__y_start = 0;		 /* our initial Y coordinate */
 
@@ -160,6 +162,7 @@ static int cursor_ipcinit(opts_t options, char *ttyfile, int terminalfd)
 		tcsetattr(terminalfd, TCSANOW | TCSAFLUSH, &old_tty);
 
 		*cursor__y_top = cursor__y_start;
+		cursor__y_lastread = cursor__y_start;
 	}
 
 	cursor__y_offset = cursor__pvcount - 1;
@@ -172,6 +175,7 @@ static int cursor_ipcinit(opts_t options, char *ttyfile, int terminalfd)
 	 */
 	if (cursor__pvcount > 1) {
 		cursor__y_start = *cursor__y_top;
+		cursor__y_lastread = cursor__y_start;
 	}
 
 	cursor_unlock(terminalfd);
@@ -246,6 +250,51 @@ void cursor_init(opts_t options)
 }
 
 
+#ifdef HAVE_IPC
+/*
+ * Set the "we need to reinitialise cursor positioning" flag.
+ */
+void cursor_needreinit(void)
+{
+	cursor__needreinit = 1;
+}
+#endif
+
+
+#ifdef HAVE_IPC
+/*
+ * Reinitialise the cursor positioning code (called if we are backgrounded
+ * then foregrounded again).
+ */
+void cursor_reinit(void)
+{
+	struct termios tty;
+	struct termios old_tty;
+	char cpr[32];		 /* RATS: ignore (checked) */
+
+	cursor_lock(STDERR_FILENO);
+
+	cursor__needreinit = 0;
+
+	tcgetattr(STDERR_FILENO, &tty);
+	tcgetattr(STDERR_FILENO, &old_tty);
+	tty.c_lflag &= ~(ICANON | ECHO);
+	tcsetattr(STDERR_FILENO, TCSANOW | TCSAFLUSH, &tty);
+	write(STDERR_FILENO, "\033[6n", 4);
+	memset(cpr, 0, sizeof(cpr));
+	read(STDERR_FILENO, cpr, 6);   /* RATS: ignore (OK) */
+	cursor__y_start = getnum_i(cpr + 2);
+	tcsetattr(STDERR_FILENO, TCSANOW | TCSAFLUSH, &old_tty);
+
+	if (cursor__y_offset < 1)
+		*cursor__y_top = cursor__y_start;
+	cursor__y_lastread = cursor__y_start;
+
+	cursor_unlock(STDERR_FILENO);
+}
+#endif
+
+
 /*
  * Output a single-line update, moving the cursor to the correct position to
  * do so.
@@ -256,7 +305,15 @@ void cursor_update(opts_t options, char *str)
 	int y;
 
 #ifdef HAVE_IPC
+	if (cursor__needreinit)
+		cursor_reinit();
+
 	cursor_ipccount();
+	if (cursor__y_lastread != *cursor__y_top) {
+		cursor__y_start = *cursor__y_top;
+		cursor__y_lastread = cursor__y_start;
+	}
+
 #endif				/* HAVE_IPC */
 
 	y = cursor__y_start;
