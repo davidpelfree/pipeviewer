@@ -1,3 +1,9 @@
+pv (0.8.0-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Sun, 15 Feb 2004 16:55:43 +0100
+
 pv (0.6.3-2) unstable; urgency=low
 
   * Fix non ASCII character in man page (closes: Bug#219825)

@@ -227,6 +227,12 @@ Joshua Jensen
 .br
 (reported RPM installation bug)
 
+Boris Folgmann
+.br
+(reported cursor handling bug)
+.br
+.I http://www.folgmann.com/en/
+
 
 .SH BUGS
 If you find any bugs, please contact the primary author, either by email or
