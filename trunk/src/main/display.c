@@ -156,9 +156,10 @@ void main_display(opts_t opts, long double esec, long long sl, long long tot)
 	static long double prev_esec = 0;
 	static long double prev_rate = 0;
 	static long double prev_trans = 0;
+	static char *display = NULL;
+	static long dispbufsz = 0;
 	long double sincelast, rate, transferred;
 	long eta;
-	char display[1024];
 	char tmp[1024];
 	char tmp2[8];
 	char *suffix;
@@ -187,6 +188,28 @@ void main_display(opts_t opts, long double esec, long long sl, long long tot)
 	if (rate > 0) percentage += 2;
 	if (percentage > 199) percentage = 0;
 	eta = 0;
+
+	/*
+	 * Reallocate display buffer if width changes.
+	 */
+	if (display != NULL && dispbufsz < (opts->width * 2)) {
+		free(display);
+		display = NULL;
+		dispbufsz = 0;
+	}
+
+	/*
+	 * Allocate display buffer if there isn't one.
+	 */
+	if (display == NULL) {
+		dispbufsz = opts->width + 80;
+		if (opts->name)
+			dispbufsz += strlen(opts->name);
+		display = malloc(dispbufsz + 16);
+		if (display == NULL)
+			return;
+		display[0] = 0;
+	}
 
 	if (opts->size > 0)
 		percentage = calc_percentage(tot, opts->size);

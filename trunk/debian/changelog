@@ -1,3 +1,27 @@
+pv (0.6.3-2) unstable; urgency=low
+
+  * Fix non ASCII character in man page (closes: Bug#219825)
+
+ -- Cédric Delfosse <cedric@debian.org>  Sun,  4 Jan 2004 00:38:39 +0100
+
+pv (0.6.3-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Sat,  3 Jan 2004 23:45:32 +0100
+
+pv (0.6.2-2) unstable; urgency=low
+
+  * Changed too long description in debian/control (closes: Bug#204323)
+
+ -- Cédric Delfosse <cedric@debian.org>  Fri,  8 Aug 2003 18:41:02 +0200
+
+pv (0.6.2-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Wed,  6 Aug 2003 09:19:56 +0200
+
 pv (0.5.9-1) unstable; urgency=low
 
   * New upstream release
