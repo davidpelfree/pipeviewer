@@ -1,7 +1,6 @@
 #
 # Variables for Make.
 #
-# $Id$
 
 srcdir = @srcdir@
 
@@ -52,4 +51,4 @@ LIBS = @LIBS@ @INTLDEPS@ @INTLOBJS@
 
 alltarg = @PACKAGE@
 
-# EOF $Id$
+# EOF

@@ -10,5 +10,5 @@
 #   link.mk             # real top-level targets
 #   depend.mk~          # dependencies
 #
-# $Id$
+#
 

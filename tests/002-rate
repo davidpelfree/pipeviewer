@@ -1,8 +1,6 @@
 #!/bin/sh
 #
 # A simple test of rate limiting.
-#
-# $Id$
 
 START=`date +%S`
 dd if=/dev/zero bs=102 count=1 2>/dev/null | $PROG -L 100 2>/dev/null
@@ -10,4 +8,4 @@ END=`date +%S`
 
 test $START -ne $END
 
-# EOF $Id$
+# EOF

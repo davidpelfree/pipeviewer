@@ -14,7 +14,6 @@
 #
 # Requires ctags and cproto.
 #
-# $Id$
 
 OFFS=$1
 
@@ -169,4 +168,4 @@ done
 
 echo '</BODY></HTML>'
 
-# EOF $Id$
+# EOF

@@ -1,12 +1,10 @@
 #!/bin/sh
 #
 # Check that the estimated time counter counts.
-#
-# $Id$
 
 dd if=/dev/zero bs=100 count=1 2>/dev/null \
 | $PROG -f -e -s 100 -i 0.1 -L 25 >/dev/null 2>$TMP1
 NUM=`tr '\r' '\n' < $TMP1 | sort | uniq -u | wc -l | tr -d ' '`
 test $NUM -gt 1
 
-# EOF $Id$
+# EOF

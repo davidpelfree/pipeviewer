@@ -2,7 +2,6 @@
 #
 # Generate dependencies for a C source file.
 #
-# $Id$
 
 CC=$1
 shift
@@ -28,4 +27,4 @@ $CC -M -MG $* $file \
 
 echo
 
-# EOF $Id$
+# EOF
