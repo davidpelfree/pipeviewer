@@ -45,7 +45,10 @@ modules=`$FIND src -type d -print \
          | $GREP -v 'CVS' \
          | while read DIR; do \
            CONTENT=\$(/bin/ls -d \$DIR/* \
-                     | $GREP -v -e '.po' -e '.gmo' -e '.mo' -e '.h' \
+                     | $GREP -v '.po$' \
+                     | $GREP -v '.gmo$' \
+                     | $GREP -v '.mo$' \
+                     | $GREP -v '.h$' \
                      | sed -n '$p'); \
            [ -n "\$CONTENT" ] || continue; \
            echo \$DIR; \
@@ -73,7 +76,10 @@ for i in $modules; do
     [ -d "$j" ] || continue
     [ `basename $j` = "CVS" ] && continue
     CONTENT=`/bin/ls -d $j/* \
-             | $GREP -v -e '.po' -e '.gmo' -e '.mo' -e '.h' \
+             | $GREP -v '.po$' \
+             | $GREP -v '.gmo$' \
+             | $GREP -v '.mo$' \
+             | $GREP -v '.h$' \
              | sed -n '$p'`
     [ -n "$CONTENT" ] || continue
     deps="$deps $j.o"

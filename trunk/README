@@ -23,7 +23,7 @@ Compilation
 To compile the package, type "sh ./configure", which should generate a
 Makefile for your system.  You may then type "make" to build everything.
 Note that GNU `make' is required; this may be installed as `gmake' on some
-systems.
+systems, so if typing "make" gives an error, try "gmake" instead.
 
 See the file `doc/INSTALL' for more about the `configure' script.
 
