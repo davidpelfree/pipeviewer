@@ -5,7 +5,7 @@
 # $Id$
 
 dd if=/dev/zero bs=100 count=1 2>/dev/null \
-| $PROG -f -b >/dev/null 2>$TMP1
+| LANG=C $PROG -f -b >/dev/null 2>$TMP1
 NUM=`tr '\r' '\n' < $TMP1 | tr -d ' '`
 test "$NUM" = "100B"
 
