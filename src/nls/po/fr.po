@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2003-08-05 10:25+0100\n"
+"POT-Creation-Date: 2003-12-22 17:51+0000\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Date: 1999-06-01 15:18:29+0100\n"
 "From: Andrew Wood <ivarch@ubik>\n"
@@ -499,11 +499,11 @@ msgstr "l'allocation de mémoire tampon a échoué"
 msgid "select call failed"
 msgstr "appel de sélection a échoué"
 
-#: src/main/transfer.c:114
+#: src/main/transfer.c:125
 msgid "read failed"
 msgstr "la lecture a échoué"
 
-#: src/main/transfer.c:133
+#: src/main/transfer.c:155
 msgid "write failed"
 msgstr "l'écriture a échoué"
 
