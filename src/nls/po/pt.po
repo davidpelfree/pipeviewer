@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2004-01-14 19:11+0000\n"
+"POT-Creation-Date: 2004-02-08 02:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,39 +77,39 @@ msgstr "%s: opção `-W %s' não utiliza argumentos\n"
 msgid "failed to open terminal"
 msgstr "erro abrindo o terminal"
 
-#: src/main/display.c:216
+#: src/main/display.c:239
 msgid "GB"
 msgstr "GB"
 
-#: src/main/display.c:219
+#: src/main/display.c:242
 msgid "MB"
 msgstr "MB"
 
-#: src/main/display.c:222
+#: src/main/display.c:245
 msgid "kB"
 msgstr "kB"
 
-#: src/main/display.c:224
+#: src/main/display.c:247
 msgid "B"
 msgstr "B"
 
-#: src/main/display.c:239
+#: src/main/display.c:262
 msgid "GB/s"
 msgstr "GB/s"
 
-#: src/main/display.c:242
+#: src/main/display.c:265
 msgid "MB/s"
 msgstr "MB/s"
 
-#: src/main/display.c:245
+#: src/main/display.c:268
 msgid "kB/s"
 msgstr "kB/s"
 
-#: src/main/display.c:247
+#: src/main/display.c:270
 msgid "B/s "
 msgstr "B/s "
 
-#: src/main/display.c:258
+#: src/main/display.c:281
 msgid "ETA"
 msgstr "ETA"
 
