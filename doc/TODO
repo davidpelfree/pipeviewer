@@ -1,5 +1,6 @@
 Things still to do:
 
+  * make sure that flock(tty) works on other OSes
   * get more translations
 
 Any assistance would be appreciated.
