@@ -1,6 +1,6 @@
 0.8.5 - 28 April 2004
-  - minor fix: made test 005 more reliable
   - cursor positioning (-c) reliability improved on systems with IPC
+  - minor fix: made test 005 more reliable
   - new option --height (-H)
 
 0.8.2 - 24 April 2004
