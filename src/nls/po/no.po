@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2003-02-18 20:00+0000\n"
+"POT-Creation-Date: 2003-02-27 22:26+0000\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Date: 1999-06-01 15:18:29+0100\n"
 "From: Andrew Wood <ivarch@ubik>\n"
@@ -241,7 +241,7 @@ msgstr ""
 msgid ""
 "Parts of this program may be copyright (C) Free Software\n"
 "Foundation, Inc. and are distributed under the terms of the\n"
-"GNU Library General Public License."
+"GNU Lesser General Public License."
 msgstr ""
 
 #: src/main/license.c:34
@@ -435,7 +435,7 @@ msgstr ""
 
 #: src/main/license.c:151
 msgid ""
-"For a copy of the GNU Library General Public License, please see\n"
+"For a copy of the GNU Lesser General Public License, please see\n"
 "http://www.gnu.org/ or write to the Free Software Foundation, Inc.,\n"
 "59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
 msgstr ""
@@ -447,89 +447,17 @@ msgid ""
 "pager such as `more' or `less', eg `%s --license | more'."
 msgstr ""
 
-#: src/main/options.c:79
-msgid "help"
-msgstr ""
-
-#: src/main/options.c:80
-msgid "license"
-msgstr ""
-
 #: src/main/options.c:81
-msgid "version"
-msgstr ""
-
-#: src/main/options.c:82
-msgid "progress"
-msgstr ""
-
-#: src/main/options.c:83
-msgid "timer"
-msgstr ""
-
-#: src/main/options.c:84
-msgid "eta"
-msgstr ""
-
-#: src/main/options.c:85
-msgid "rate"
-msgstr ""
-
-#: src/main/options.c:86
-msgid "bytes"
-msgstr ""
-
-#: src/main/options.c:87
-msgid "force"
-msgstr ""
-
-#: src/main/options.c:88
-msgid "numeric"
-msgstr ""
-
-#: src/main/options.c:89
-msgid "quiet"
-msgstr ""
-
-#: src/main/options.c:90
-msgid "cursor"
-msgstr ""
-
-#: src/main/options.c:91
-msgid "rate-limit"
-msgstr ""
-
-#: src/main/options.c:92
-msgid "wait"
-msgstr ""
-
-#: src/main/options.c:93
-msgid "size"
-msgstr ""
-
-#: src/main/options.c:94
-msgid "interval"
-msgstr ""
-
-#: src/main/options.c:95
-msgid "width"
-msgstr ""
-
-#: src/main/options.c:96
-msgid "name"
-msgstr ""
-
-#: src/main/options.c:101
 #, c-format
 msgid "%s: option structure allocation failed (%s)"
 msgstr ""
 
-#: src/main/options.c:116
+#: src/main/options.c:96
 #, c-format
 msgid "%s: option structure argv allocation failed (%s)"
 msgstr ""
 
-#: src/main/options.c:203
+#: src/main/options.c:183
 #, c-format
 msgid "Try `%s --help' for more information."
 msgstr ""

@@ -1,5 +1,12 @@
 $Id$
 
+0.5.0
+  + added French translation thanks to Stéphane
+    <tecknojunky@tecknojunky.com>
+  + added German translation thanks to Marcos Kreinacke
+    <m.kreinacke@nettec-systeme.net>
+  + switched LGPL reference from "Library" to "Lesser"
+
 0.4.9 - 18 February 2003
   + support for >2GB files added where available (Debian bug #180986)
   + added doc/debian dir (from Cédric Delfosse)

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2003-02-18 20:00+0000\n"
+"POT-Creation-Date: 2003-02-27 22:26+0000\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Date: 1999-06-01 15:18:29+0100\n"
 "From: Andrew Wood <ivarch@ubik>\n"
@@ -26,46 +26,46 @@ msgstr "%s: l'option «%s» est ambiguë\n"
 #: src/getopt/getopt.c:703
 #, c-format
 msgid "%s: option `--%s' doesn't allow an argument\n"
-msgstr "%s: l'option «--%s» ne tolère pas d'argument\n"
+msgstr "%s: l'option «--%s» n'accepte pas d'argument\n"
 
 #: src/getopt/getopt.c:708
 #, c-format
 msgid "%s: option `%c%s' doesn't allow an argument\n"
-msgstr "%s: l'option «%c%s» ne tolère pas d'argument\n"
+msgstr "%s: l'option «%c%s» n'accepte pas d'argument\n"
 
 #: src/getopt/getopt.c:725 src/getopt/getopt.c:898
 #, c-format
 msgid "%s: option `%s' requires an argument\n"
-msgstr "%s: l'option «%s» exige un argument\n"
+msgstr "%s: l'option «%s» requiert un argument\n"
 
 #. --option
 #: src/getopt/getopt.c:754
 #, c-format
 msgid "%s: unrecognized option `--%s'\n"
-msgstr "%s: l'option «--%s» n'est pas reconnue\n"
+msgstr "%s: option non reconnue «--%s»\n"
 
 #. +option or -option
 #: src/getopt/getopt.c:758
 #, c-format
 msgid "%s: unrecognized option `%c%s'\n"
-msgstr "%s: l'option «%c%s» n'est pas reconnue\n"
+msgstr "%s: option non reconnue «--%s»\n"
 
 #. 1003.2 specifies the format of this message.
 #: src/getopt/getopt.c:784
 #, c-format
 msgid "%s: illegal option -- %c\n"
-msgstr "%s: l'option «%c» n'est pas permise\n"
+msgstr "%s: option illégale -- «%c»\n"
 
 #: src/getopt/getopt.c:787
 #, c-format
 msgid "%s: invalid option -- %c\n"
-msgstr "%s: l'option «%c» n'est pas valide\n"
+msgstr "%s: option invalide «%c»\n"
 
 #. 1003.2 specifies the format of this message.
 #: src/getopt/getopt.c:817 src/getopt/getopt.c:947
 #, c-format
 msgid "%s: option requires an argument -- %c\n"
-msgstr "%s: l'option «%c» exige un argument\n"
+msgstr "%s: l'option «%s» requiert un argument\n"
 
 #: src/getopt/getopt.c:864
 #, c-format
@@ -75,55 +75,55 @@ msgstr "%s: l'option «-W %s» est ambiguë\n"
 #: src/getopt/getopt.c:882
 #, c-format
 msgid "%s: option `-W %s' doesn't allow an argument\n"
-msgstr "%s: l'option «-W %s» ne tolère pas d'argument\n"
+msgstr "%s: l'option «-W %s» n'accepte pas d'argument\n"
 
 #: src/main/display.c:89
 msgid "failed to open terminal"
-msgstr ""
+msgstr "l'ouverture du terminal a échoué"
 
 #: src/main/display.c:215
 msgid "GB"
-msgstr ""
+msgstr "GO"
 
 #: src/main/display.c:218
 msgid "MB"
-msgstr ""
+msgstr "MO"
 
 #: src/main/display.c:221
 msgid "kB"
-msgstr ""
+msgstr "kO"
 
 #: src/main/display.c:223
 msgid "B"
-msgstr ""
+msgstr "O"
 
 #: src/main/display.c:238
 msgid "GB/s"
-msgstr ""
+msgstr "GO/s"
 
 #: src/main/display.c:241
 msgid "MB/s"
-msgstr ""
+msgstr "MO/s"
 
 #: src/main/display.c:244
 msgid "kB/s"
-msgstr ""
+msgstr "kO/s"
 
 #: src/main/display.c:246
 msgid "B/s "
-msgstr ""
+msgstr "O/s"
 
 #: src/main/display.c:257
 msgid "ETA"
-msgstr ""
+msgstr "ETA"
 
 #: src/main/file.c:75
 msgid "failed to close file"
-msgstr ""
+msgstr "la fermeture du fichier a échoué"
 
 #: src/main/file.c:92
 msgid "failed to read file"
-msgstr ""
+msgstr "la lecture du fichier a échoué"
 
 #: src/main/file.c:101
 msgid "failed to stat file"
@@ -135,114 +135,137 @@ msgstr ""
 
 #: src/main/file.c:124
 msgid "input file is output file"
-msgstr ""
+msgstr "fichiers d'entré et de sortie sont les mêmes"
 
 #: src/main/help.c:21
 #, c-format
 msgid "Usage: %s [OPTION] [FILE]..."
-msgstr ""
+msgstr "Utilisation : %s [OPTIONS] [FICHIER]..."
 
 #: src/main/help.c:23
 msgid ""
 "Concatenate FILE(s), or standard input, to standard output,\n"
 "with monitoring."
 msgstr ""
+"Concatène FICHIER(s), ou l'entrée standard, sur la sortie standard,\n"
+"with monitoring."
 
 #: src/main/help.c:27
 msgid "-p, --progress        show progress bar"
-msgstr ""
+msgstr "-p, --progress        affiche la barre de progression"
 
 #: src/main/help.c:28
 msgid "-t, --timer           show elapsed time"
-msgstr ""
+msgstr "-t, --timer           affiche le temps écoulé"
 
 #: src/main/help.c:29
 msgid "-e, --eta             show estimated time of arrival (completion)"
 msgstr ""
+"-e, --eta             affiche l'heure approximative de l'achèvement de la\n"
+"                        tâche"
 
 #: src/main/help.c:30
 msgid "-r, --rate            show data transfer rate counter"
-msgstr ""
+msgstr "-r, --rate            affiche le taux de tranfert des données"
 
 #: src/main/help.c:31
 msgid "-b, --bytes           show number of bytes transferred"
-msgstr ""
+msgstr "-b, --bytes           affiche le nombre d'octets transférés"
 
 #: src/main/help.c:32
 msgid "-f, --force           output even if standard error is not a terminal"
 msgstr ""
+"-f, --force           imprime vers la sortie d'erreur même si ce n'est pas\n"
+"                        un terminal"
 
 #: src/main/help.c:33
 msgid "-n, --numeric         output percentages, not visual information"
 msgstr ""
+"-n, --numeric         imprime en pourcentage, pas les informations visuelles"
 
 #: src/main/help.c:34
 msgid "-q, --quiet           do not output any transfer information at all"
-msgstr ""
+msgstr "-q, --quiet           n'afficher aucune information de transfert"
 
 #: src/main/help.c:35
 msgid "-c, --cursor          use cursor positioning escape sequences"
 msgstr ""
+"-c, --cursor          utiliser les séquences d'échappements de\n"
+"                        positionnement de curseur"
 
 #: src/main/help.c:36
 msgid "-L, --rate-limit RATE limit transfer to RATE bytes per second"
 msgstr ""
+"-L, --rate-limit TAUX limite le taux de transfer à TAUX octets par seconde"
 
 #: src/main/help.c:37
 msgid "-W, --wait            display nothing until first byte transferred"
 msgstr ""
+"-W, --wait            ne rien afficher avant qu'au moins un octet soit\n"
+"                        tranféré"
 
 #: src/main/help.c:38
 msgid "-s, --size SIZE       set estimated data size to SIZE bytes"
 msgstr ""
+"-s, --size TAILLE     ajuste la taille estimée des données à TAILLE octets"
 
 #: src/main/help.c:39
 msgid "-i, --interval SEC    update every SEC seconds"
-msgstr ""
+msgstr "-i, --interval SEC    mise-à-jour toute les SEC secondes"
 
 #: src/main/help.c:40
 msgid "-w, --width WIDTH     assume terminal is WIDTH characters wide"
 msgstr ""
+"-w, --width LARGEUR   présumer la largeur du terminal à LARGEUR caractères"
 
 #: src/main/help.c:41
 msgid "-N, --name NAME       prefix visual information with NAME"
-msgstr ""
+msgstr "-N, --name NOM        préfixer les informations visuelles avec NOM"
 
 #: src/main/help.c:43
 msgid "-h, --help            show this help and exit"
-msgstr ""
+msgstr "-h, --help            afficher cette aide puis quitter"
 
 #: src/main/help.c:44
 msgid ""
 "-l, --license         show the license this program is distributed under"
 msgstr ""
+"-l, --license         affiche la license sous laquelle ce programme est\n"
+"                        distribué"
 
 #: src/main/help.c:45
 msgid "-V, --version         show version information and exit"
-msgstr ""
+msgstr "-V, --version         afficher la version puis quitter"
 
 #: src/main/help.c:46
 #, c-format
 msgid "Please report any bugs to %s."
-msgstr ""
+msgstr "SVP rapporter touts bogues à %s."
 
 #: src/main/license.c:21
 #, c-format
 msgid "%s %s - Copyright (C) %s %s"
-msgstr ""
+msgstr "%s %s - Copyright (C) %s %s"
 
 #: src/main/license.c:24
 msgid ""
 "This program is Open Source software, and is being distributed under the\n"
 "terms of the Artistic License."
 msgstr ""
+"Ce programme est un logiciel libre et est distribué sous les termes de\n"
+"la version anglophone de la Licence Artistique (Artistic License)"
 
 #: src/main/license.c:27
 msgid ""
 "Parts of this program may be copyright (C) Free Software\n"
 "Foundation, Inc. and are distributed under the terms of the\n"
-"GNU Library General Public License."
+"GNU Lesser General Public License."
 msgstr ""
+"Des parties de ce programme peuvent être sous droits d'auteurs (C) de\n"
+"la Fondation pour le Logiciel Libre (Free Software Foundation Inc.)\n"
+"et sont distribuées sous les termes de la version anglophone de la\n"
+"Licence Publique Moins Générale GNU (GNU Lesser General Public\n"
+"License ou GNU LGPL)."
 
 #: src/main/license.c:34
 msgid ""
@@ -435,10 +458,13 @@ msgstr ""
 
 #: src/main/license.c:151
 msgid ""
-"For a copy of the GNU Library General Public License, please see\n"
+"For a copy of the GNU Lesser General Public License, please see\n"
 "http://www.gnu.org/ or write to the Free Software Foundation, Inc.,\n"
 "59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
 msgstr ""
+"Pour une copie de la Licence Publique Moins Générale (GNU LGPL),\n"
+"voir http://www.gnu.org/home.fr.html ou écrire à la Free Software\n"
+"Foundation Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
 
 #: src/main/license.c:158
 #, c-format
@@ -446,125 +472,58 @@ msgid ""
 "If that scrolled by too quickly, you may want to pipe it to a\n"
 "pager such as `more' or `less', eg `%s --license | more'."
 msgstr ""
-
-#: src/main/options.c:79
-msgid "help"
-msgstr ""
-
-#: src/main/options.c:80
-msgid "license"
-msgstr ""
+"Si le texte à défilé trop rapidement, vous voudrez peut-être\n"
+"rediriger l'impression vers une visionneuse comme `more' ou `less',\n"
+"i.e. `%s --license | more'."
 
 #: src/main/options.c:81
-msgid "version"
-msgstr ""
-
-#: src/main/options.c:82
-msgid "progress"
-msgstr ""
-
-#: src/main/options.c:83
-msgid "timer"
-msgstr ""
-
-#: src/main/options.c:84
-msgid "eta"
-msgstr ""
-
-#: src/main/options.c:85
-msgid "rate"
-msgstr ""
-
-#: src/main/options.c:86
-msgid "bytes"
-msgstr ""
-
-#: src/main/options.c:87
-msgid "force"
-msgstr ""
-
-#: src/main/options.c:88
-msgid "numeric"
-msgstr ""
-
-#: src/main/options.c:89
-msgid "quiet"
-msgstr ""
-
-#: src/main/options.c:90
-msgid "cursor"
-msgstr ""
-
-#: src/main/options.c:91
-msgid "rate-limit"
-msgstr ""
-
-#: src/main/options.c:92
-msgid "wait"
-msgstr ""
-
-#: src/main/options.c:93
-msgid "size"
-msgstr ""
-
-#: src/main/options.c:94
-msgid "interval"
-msgstr ""
-
-#: src/main/options.c:95
-msgid "width"
-msgstr ""
-
-#: src/main/options.c:96
-msgid "name"
-msgstr ""
-
-#: src/main/options.c:101
 #, c-format
 msgid "%s: option structure allocation failed (%s)"
-msgstr ""
+msgstr "%s: l'allocation pour la structure d'une option a echoué (%s)"
 
-#: src/main/options.c:116
+#: src/main/options.c:96
 #, c-format
 msgid "%s: option structure argv allocation failed (%s)"
-msgstr ""
+msgstr "%s: l'allocation pour la structure de l'option argv a echoué (%s)"
 
-#: src/main/options.c:203
+#: src/main/options.c:183
 #, c-format
 msgid "Try `%s --help' for more information."
-msgstr ""
+msgstr "Essayez `%s --help' pour plus d'information."
 
 #: src/main/transfer.c:67
 msgid "buffer allocation failed"
-msgstr ""
+msgstr "l'allocation de mémoire tampon a échoué"
 
 #: src/main/transfer.c:103
 msgid "select call failed"
-msgstr ""
+msgstr "appel de sélection a échoué"
 
 #: src/main/transfer.c:116
 msgid "read failed"
-msgstr ""
+msgstr "la lecture a échoué"
 
 #: src/main/transfer.c:135
 msgid "write failed"
-msgstr ""
+msgstr "l'écriture a échoué"
 
 #: src/main/version.c:21
 #, c-format
 msgid "%s %s - Copyright(C) %s %s"
-msgstr ""
+msgstr "%s %s - Copyright(C) %s %s"
 
 #: src/main/version.c:24
 #, c-format
 msgid "Web site: %s"
-msgstr ""
+msgstr "Site Web: %s"
 
 #: src/main/version.c:26
 msgid ""
 "This program is free software, and is being distributed under the\n"
 "terms of the Artistic License."
 msgstr ""
+"Ce programme est un logiciel libre et est distribué sous les termes\n"
+"anglophone de la Licence Artistique (Artistic License)."
 
 #: src/main/version.c:30
 msgid ""
@@ -572,8 +531,12 @@ msgid ""
 "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
 "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
 msgstr ""
+"Ce programme est distribué dans l'espoir qu'il sera utile, mais\n"
+"SANS GARANTIE AUCUNE; ni même de garantie sous-entendu que le\n"
+"programme soit COMMERCIALISABLE ou APPLICABLE À UNE TÂCHE\n"
+"PARTICULIÈRE."
 
 #: src/main/version.c:34
 #, c-format
 msgid "For more information, please run `%s --license'."
-msgstr ""
+msgstr "Pour plus d'information, exécutez `%s --license'."

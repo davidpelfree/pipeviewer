@@ -75,26 +75,6 @@ opts_t parse_options(int argc, char ** argv)
 	int c, n, numopts;
 	opts_t options;
 
-	n = 0;
-	long_options[n++].name = _("help");
-	long_options[n++].name = _("license");
-	long_options[n++].name = _("version");
-	long_options[n++].name = _("progress");
-	long_options[n++].name = _("timer");
-	long_options[n++].name = _("eta");
-	long_options[n++].name = _("rate");
-	long_options[n++].name = _("bytes");
-	long_options[n++].name = _("force");
-	long_options[n++].name = _("numeric");
-	long_options[n++].name = _("quiet");
-	long_options[n++].name = _("cursor");
-	long_options[n++].name = _("rate-limit");
-	long_options[n++].name = _("wait");
-	long_options[n++].name = _("size");
-	long_options[n++].name = _("interval");
-	long_options[n++].name = _("width");
-	long_options[n++].name = _("name");
-
 	options = calloc(1, sizeof(*options));
 	if (!options) {
 		fprintf(stderr,
