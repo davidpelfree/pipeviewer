@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# Check that the transfer rate counter changes.
+
+(dd if=/dev/zero bs=100 count=1 2>/dev/null;
+ sleep 2;
+ dd if=/dev/zero bs=100 count=1 2>/dev/null;
+) | $PROG -f -r >/dev/null 2>$TMP1
+NUM=`tr '\r' '\n' < $TMP1 | sort | uniq -u | wc -l | tr -d ' '`
+test $NUM -gt 2
+
+# EOF
