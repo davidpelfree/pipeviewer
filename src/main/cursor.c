@@ -471,7 +471,7 @@ void cursor_fini(opts_t opts)
 
 #ifdef HAVE_IPC
 	cursor_ipccount();
-	shmdt(cursor__y_top);
+	shmdt((void *)cursor__y_top);
 
 	/*
 	 * If we are the last instance detaching from the shared memory,
