@@ -12,9 +12,6 @@
 /* Define if you have "config.h" (yes, you have). */
 #undef HAVE_CONFIG_H
 
-/* Define if debugging is to be compiled in. */
-#undef DEBUG
-
 /* NLS stuff. */
 #undef ENABLE_NLS
 #undef HAVE_CATGETS

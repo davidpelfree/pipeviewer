@@ -28,10 +28,16 @@ AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
 
 dnl Check for compile-time options.
 dnl
-AC_ARG_ENABLE(debug, [  --enable-debug          compile in debugging support],
-  if test "$enable_debug" = "yes"; then
-    CFLAGS="-pg -g -Wall"
-    AC_DEFINE(DEBUG)
+AC_ARG_ENABLE(debugging,
+  [  --enable-debugging      compile with debugging symbols],
+  if test "$enable_debugging" = "yes"; then
+  	CFLAGS="-g -Wall"
+  fi
+)
+AC_ARG_ENABLE(profiling,
+  [  --enable-profiling      compile with profiling support],
+  if test "$enable_profiling" = "yes"; then
+  	CFLAGS="-pg $CFLAGS"
   fi
 )
 LFS_SUPPORT="no"
