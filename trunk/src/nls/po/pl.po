@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-08-03 20:36+0100\n"
+"POT-Creation-Date: 2003-08-05 10:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -113,23 +113,23 @@ msgid "ETA"
 msgstr "ETA"
 
 # "Przewidywany czas ukoñczenia" for ETA is too long
-#: src/main/file.c:73
+#: src/main/file.c:81
 msgid "failed to close file"
 msgstr "nie uda³o siê zamkn±æ pliku"
 
-#: src/main/file.c:90
+#: src/main/file.c:98
 msgid "failed to read file"
 msgstr "nie uda³o siê odczytaæ pliku"
 
-#: src/main/file.c:99
+#: src/main/file.c:107
 msgid "failed to stat file"
 msgstr "nie uda³o siê wykonaæ operacji stat na pliku"
 
-#: src/main/file.c:109
+#: src/main/file.c:117
 msgid "failed to stat output file"
 msgstr "nie uda³o siê wykonaæ operacji stat na pliku wyj¶ciowym"
 
-#: src/main/file.c:122
+#: src/main/file.c:130
 msgid "input file is output file"
 msgstr "plik wej¶ciowy jest zarazem plikiem wyj¶ciowym"
 

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2003-08-03 20:36+0100\n"
+"POT-Creation-Date: 2003-08-05 10:25+0100\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Date: 1999-06-01 15:18:29+0100\n"
 "From: Andrew Wood <ivarch@ubik>\n"
@@ -117,23 +117,23 @@ msgstr "O/s"
 msgid "ETA"
 msgstr "ETA"
 
-#: src/main/file.c:73
+#: src/main/file.c:81
 msgid "failed to close file"
 msgstr "la fermeture du fichier a échoué"
 
-#: src/main/file.c:90
+#: src/main/file.c:98
 msgid "failed to read file"
 msgstr "la lecture du fichier a échoué"
 
-#: src/main/file.c:99
+#: src/main/file.c:107
 msgid "failed to stat file"
 msgstr "échec à statuer sur le fichier"
 
-#: src/main/file.c:109
+#: src/main/file.c:117
 msgid "failed to stat output file"
 msgstr "échec à statuer sur le fichier de sortie"
 
-#: src/main/file.c:122
+#: src/main/file.c:130
 msgid "input file is output file"
 msgstr "fichiers d'entré et de sortie sont les mêmes"
 
