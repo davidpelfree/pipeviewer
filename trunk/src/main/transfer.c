@@ -1,7 +1,7 @@
 /*
  * Functions for transferring between file descriptors.
  *
- * Copyright 2002 Andrew Wood, distributed under the Artistic License.
+ * Copyright 2003 Andrew Wood, distributed under the Artistic License.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -108,6 +108,17 @@ long main_transfer(opts_t options, int fd, int *eof_in, int *eof_out, unsigned l
 	if (FD_ISSET(fd, &readfds)) {
 		r = read(fd, buf + in_buffer, pvmtbufsize - in_buffer);
 		if (r < 0) {
+			/*
+			 * If a read error occurred but it was EINTR or
+			 * EAGAIN, just wait a bit and then return zero,
+			 * since this was a transient error.
+			 */
+			if ((errno == EINTR) || (errno == EAGAIN)) {
+				tv.tv_sec = 0;
+				tv.tv_usec = 10000;
+				select(0, NULL, NULL, NULL, &tv);
+				return 0;
+			}
 			fprintf(stderr, "%s: %s: %s: %s\n",
 				options->program_name,
 				options->current_file,
@@ -128,6 +139,17 @@ long main_transfer(opts_t options, int fd, int *eof_in, int *eof_out, unsigned l
 	    && (in_buffer > bytes_written)) {
 		w = write(STDOUT_FILENO, buf + bytes_written, to_write);
 		if (w < 0) {
+			/*
+			 * If a write error occurred but it was EINTR or
+			 * EAGAIN, just wait a bit and then return zero,
+			 * since this was a transient error.
+			 */
+			if ((errno == EINTR) || (errno == EAGAIN)) {
+				tv.tv_sec = 0;
+				tv.tv_usec = 10000;
+				select(0, NULL, NULL, NULL, &tv);
+				return 0;
+			}
 			fprintf(stderr, "%s: %s: %s\n",
 				options->program_name,
 				_("write failed"),
