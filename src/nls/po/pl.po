@@ -167,7 +167,8 @@ msgstr "-b, --bytes           poka¿ ilo¶æ przes³anych bajtów"
 
 #: src/main/help.c:32
 msgid "-f, --force           output even if standard error is not a terminal"
-msgstr "-f, --force           poka¿ wyj¶cie nawet gdy b³êdy nie s± typu terminal"
+msgstr ""
+"-f, --force           poka¿ wyj¶cie nawet gdy b³êdy nie s± typu terminal"
 
 #: src/main/help.c:33
 msgid "-n, --numeric         output percentages, not visual information"
@@ -184,7 +185,8 @@ msgstr "-c, --cursor          u¿ywaj sekwencji escape do pozycjonowania"
 
 #: src/main/help.c:36
 msgid "-L, --rate-limit RATE limit transfer to RATE bytes per second"
-msgstr "-L, --rate-limit RATE ogranicz przesy³ane dane do RATE bajtów na sekundê"
+msgstr ""
+"-L, --rate-limit RATE ogranicz przesy³ane dane do RATE bajtów na sekundê"
 
 #: src/main/help.c:37
 msgid "-W, --wait            display nothing until first byte transferred"
@@ -193,7 +195,8 @@ msgstr ""
 
 #: src/main/help.c:38
 msgid "-s, --size SIZE       set estimated data size to SIZE bytes"
-msgstr "-s, --size WARTO¦Æ    ustaw oczekiwany rozmiar danych na WARTO¦Æ bajtów"
+msgstr ""
+"-s, --size WARTO¦Æ    ustaw oczekiwany rozmiar danych na WARTO¦Æ bajtów"
 
 #: src/main/help.c:39
 msgid "-i, --interval SEC    update every SEC seconds"
@@ -216,8 +219,8 @@ msgstr "-h, --help            wy¶wietl te informacje z pomoc± i wyjd¼"
 msgid ""
 "-l, --license         show the license this program is distributed under"
 msgstr ""
-"-l, --license          wy¶wietl informacje o licencji pod któr± program"
-"                       jest rozprowadzany"
+"-l, --license          wy¶wietl informacje o licencji pod któr± "
+"program                       jest rozprowadzany"
 
 #: src/main/help.c:45
 msgid "-V, --version         show version information and exit"

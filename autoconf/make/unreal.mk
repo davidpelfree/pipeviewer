@@ -52,7 +52,7 @@ update-po: $(srcdir)/src/nls/po/$(PACKAGE).pot
 
 distclean: clean depclean
 	rm -f $(alltarg) src/include/config.h
-	rm -rf $(package)-$(version).tar* $(package)-$(version) debian
+	rm -rf $(package)-$(version).tar* $(package)-$(version)
 	rm -f *.html config.*
 	rm Makefile
 
@@ -99,7 +99,7 @@ dist: doc update-po
 	chmod 755 `find $(package)-$(version) -type d -print`
 	chmod 755 `find $(package)-$(version)/autoconf/scripts`
 	chmod 755 $(package)-$(version)/configure
-	chmod 755 $(package)-$(version)/doc/debian/rules
+	chmod 755 $(package)-$(version)/debian/rules
 	rm -rf DUMMY `find $(package)-$(version) -type d -name CVS`
 	tar cf $(package)-$(version).tar $(package)-$(version)
 	rm -rf $(package)-$(version)
@@ -174,10 +174,9 @@ rpm: dist
 	rm -rf rpm rpmmacros rpmrc
 
 deb: dist
-	rm -rf debian
-	mkdir debian
-	cd debian && tar xzf ../$(package)-$(version).tar.gz
-	cd debian && cd $(package)-$(version) && mv doc/debian .
-	cd debian && cd $(package)-$(version) && ./debian/rules binary
-	mv debian/*.deb .
-	rm -rf debian
+	rm -rf BUILD-DEB
+	mkdir BUILD-DEB
+	cd BUILD-DEB && tar xzf ../$(package)-$(version).tar.gz
+	cd BUILD-DEB && cd $(package)-$(version) && ./debian/rules binary
+	mv BUILD-DEB/*.deb .
+	rm -rf BUILD-DEB
