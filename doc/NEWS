@@ -1,7 +1,8 @@
 $Id$
 
-0.5.4 - NOT YET RELEASED
+0.5.5 - NOT YET RELEASED
   + fix for test 007 when not in C locale
+  + build fixes - don't forget to use CPPFLAGS and LIBS
 
 0.5.3 - 4 May 2003
   + added Polish translation thanks to Bartosz Feñski

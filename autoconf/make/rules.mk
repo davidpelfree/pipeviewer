@@ -6,11 +6,11 @@
 .SUFFIXES: .c .d .o
 
 .c.o:
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 .c.d:
 	sh $(srcdir)/autoconf/scripts/depend.sh \
-	   $(CC) $< $(<:%.c=%) $(srcdir) $(CFLAGS) > $@
+	   $(CC) $< $(<:%.c=%) $(srcdir) $(CFLAGS) $(CPPFLAGS) > $@
 
 doc/quickref.txt: doc/quickref.1
 	man $+ | sed 's/.//g' | cat -s > $@ || :
