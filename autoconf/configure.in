@@ -48,7 +48,7 @@ ALL_LINGUAS="cy de fr no pl pt sv"
 
 dnl Check for various programs.
 dnl
-CFLAGS=${CFLAGS-"-O2 -Wall -s"}
+CFLAGS=${CFLAGS:-"-O2 -Wall -s"}
 AC_PROG_CC
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
