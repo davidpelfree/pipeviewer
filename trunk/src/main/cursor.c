@@ -33,10 +33,8 @@
 #include <sys/shm.h>
 #ifdef HAVE_LIBUTIL
 #ifdef HAVE_LIBUTIL_H
-#ifdef HAVE_UU_LOCK
 #define USE_UU_LOCK 1
 #include <libutil.h>
-#endif				/* HAVE_UU_LOCK */
 #endif				/* HAVE_LIBUTIL_H */
 #endif				/* HAVE_LIBUTIL */
 #endif				/* HAVE_IPC */
