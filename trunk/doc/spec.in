@@ -76,6 +76,9 @@ fi
 %doc README doc/NEWS doc/TODO doc/COPYING
 
 %changelog
+* Sat Apr 24 2004 Andrew Wood <andrew.wood@ivarch.com>
+- Rate and size parameters can now take suffixes such as "k", "m" etc.
+
 * Mon Apr 19 2004 Andrew Wood <andrew.wood@ivarch.com>
 - A bug in the cursor positioning was fixed.
 
