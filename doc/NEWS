@@ -1,5 +1,7 @@
-0.8.3 - 27 April 2004
+0.8.5 - 28 April 2004
   - minor fix: made test 005 more reliable
+  - cursor positioning (-c) reliability improved on systems with IPC
+  - new option --height (-H)
 
 0.8.2 - 24 April 2004
   - allow k,m,g,t suffixes on numbers

@@ -63,7 +63,7 @@ this permission notice may be stated in a translation approved by Andrew Wood.
 @node Top, Overview, , (dir)
 @top Pipe Viewer
 
-This edition of the @cite{PV manual}, last updated 27 April 2004,
+This edition of the @cite{PV manual}, last updated 28 April 2004,
 documents @code{@PACKAGE@} version @VERSION@.
 @end ifinfo
 
@@ -255,10 +255,20 @@ second.  Note that this can be a decimal such as 0.1.
 @cindex Output width
 @cindex Width
 @cindex Terminal width
+@cindex Terminal columns
 @item -w @var{WIDTH}
 @itemx --width @var{WIDTH}
 Assume the terminal is @var{WIDTH} characters wide, instead of trying to
 work it out (or assuming 80 if it cannot be guessed).
+
+@cindex Output height
+@cindex Height
+@cindex Terminal height
+@cindex Terminal rows
+@item -H @var{HEIGHT}
+@itemx --height @var{HEIGHT}
+Assume the terminal is @var{HEIGHT} rows high, instead of trying to
+work it out (or assuming 25 if it cannot be guessed).
 
 @cindex Name
 @cindex Prefix
@@ -280,8 +290,6 @@ if standard error is not a terminal.  This option forces it to do so.
 Use cursor positioning escape sequences instead of just using carriage
 returns.  This is useful in conjunction with @code{-N} (name) if you are
 using multiple @code{@PACKAGE@} invocations in a single, long, pipeline. 
-However, it is likely to result in a garbled display if used near the bottom
-of the screen and should be considered slightly experimental.
 
 @end table
 

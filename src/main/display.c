@@ -208,10 +208,9 @@ void main_display(opts_t opts, long double esec, long long sl,
 			if (percentage > 100000)
 				percentage = 100000;
 			sprintf(tmp2, "%2ld%%", percentage);
-			avail = opts->width
-			    - strlen(display)	/* RATS: ignore */
-			    - strlen(tmp)	/* RATS: ignore */
-			    - strlen(tmp2) - 3;	/* RATS: ignore */
+			avail = opts->width - strlen(display)	/* RATS: ignore */
+			    -strlen(tmp)    /* RATS: ignore */
+			    -strlen(tmp2) - 3;	/* RATS: ignore */
 			for (i = 0; i < (avail * percentage) / 100 - 1;
 			     i++) {
 				if (i < avail)
@@ -228,9 +227,8 @@ void main_display(opts_t opts, long double esec, long long sl,
 			strcat(display, tmp2);	/* RATS: ignore (OK) */
 		} else {
 			int p = percentage;
-			avail = opts->width
-			    - strlen(display)	/* RATS: ignore */
-			    - strlen(tmp) - 5;	/* RATS: ignore */
+			avail = opts->width - strlen(display)	/* RATS: ignore */
+			    -strlen(tmp) - 5;	/* RATS: ignore */
 			if (p > 100)
 				p = 200 - p;
 			for (i = 0; i < (avail * p) / 100; i++) {
@@ -248,10 +246,9 @@ void main_display(opts_t opts, long double esec, long long sl,
 	strcat(display, tmp);		    /* RATS: ignore (OK) */
 
 	if (opts->cursor) {
-		cursor_update(opts, tmp);
+		cursor_update(opts, display);
 	} else {
-		write(STDERR_FILENO, display,
-		      strlen(display));		/* RATS: ignore */
+		write(STDERR_FILENO, display, strlen(display));	/* RATS: ignore */
 		write(STDERR_FILENO, "\r", 1);
 	}
 }

@@ -69,12 +69,13 @@ opts_t parse_options(int argc, char **argv)
 		{"size", 1, 0, 's'},
 		{"interval", 1, 0, 'i'},
 		{"width", 1, 0, 'w'},
+		{"height", 1, 0, 'H'},
 		{"name", 1, 0, 'N'},
 		{0, 0, 0, 0}
 	};
 	int option_index = 0;
 #endif
-	char *short_options = "hlVpterbfnqcL:Ws:i:w:N:";
+	char *short_options = "hlVpterbfnqcL:Ws:i:w:H:N:";
 	int c, numopts;
 	opts_t options;
 
@@ -182,6 +183,9 @@ opts_t parse_options(int argc, char **argv)
 			break;
 		case 'w':
 			options->width = getnum_i(optarg);
+			break;
+		case 'H':
+			options->height = getnum_i(optarg);
 			break;
 		case 'N':
 			options->name = optarg;

@@ -159,6 +159,12 @@ Assume the terminal is
 characters wide, instead of trying to work it out (or assuming 80 if it
 cannot be guessed).
 .TP
+.B \-H HEIGHT, \-\-height HEIGHT
+Assume the terminal is
+.B HEIGHT
+rows high, instead of trying to work it out (or assuming 25 if it
+cannot be guessed).
+.TP
 .B \-N NAME, \-\-name NAME
 Prefix the output information with
 .BR NAME .
@@ -179,9 +185,7 @@ returns.  This is useful in conjunction with
 .B \-N
 (name) if you are using multiple
 .B @PACKAGE@
-invocations in a single, long, pipeline.  However, it is likely to result in
-a garbled display if used near the bottom of the screen and should be
-considered slightly experimental.
+invocations in a single, long, pipeline.
 
 
 .SH GENERAL OPTIONS

@@ -76,8 +76,8 @@ fi
 %doc README doc/NEWS doc/TODO doc/COPYING
 
 %changelog
-* Tue Apr 27 2004 Andrew Wood <andrew.wood@ivarch.com>
-- One of the tests was made more reliable.
+* Wed Apr 28 2004 Andrew Wood <andrew.wood@ivarch.com>
+- Major reliability improvements to the cursor positioning.
 
 * Sat Apr 24 2004 Andrew Wood <andrew.wood@ivarch.com>
 - Rate and size parameters can now take suffixes such as "k", "m" etc.

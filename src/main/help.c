@@ -55,6 +55,8 @@ void display_help(void)
 		 _("update every SEC seconds")},
 		{"-w", "--width", _("WIDTH"),
 		 _("assume terminal is WIDTH characters wide")},
+		{"-H", "--height", _("HEIGHT"),
+		 _("assume terminal is HEIGHT rows high")},
 		{"-N", "--name", _("NAME"),
 		 _("prefix visual information with NAME")},
 		{"", 0, 0, 0},
