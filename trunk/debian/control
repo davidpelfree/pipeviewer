@@ -3,7 +3,7 @@ Section: utils
 Priority: optional
 Maintainer: Cédric Delfosse <cedric@debian.org>
 Build-Depends: debhelper (>> 3.0.0), texi2html, texinfo
-Standards-Version: 3.6.0
+Standards-Version: 3.6.1
 
 Package: pv
 Architecture: any
