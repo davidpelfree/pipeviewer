@@ -27,7 +27,7 @@ struct msgtable_s *minigettext__gettable(char *lang)
 EOF
 
 for POFILE; do
-	LANG=`echo "$POFILE" | sed 's/^.*\/\([^\/]\+\)\.po$/\1/'`
+	LANG=`basename "$POFILE" | sed 's/.po$//'`
 	echo "	if (strncmp(lang, \"$LANG\", 2) == 0) {"
 	echo "		static struct msgtable_s data[] = {";
 
