@@ -23,6 +23,7 @@
 
 
 int getnum_i(char *);
+void sig_checkbg(void);
 
 
 /*
@@ -163,6 +164,8 @@ void main_display(opts_t opts, long double esec, long long sl, long long tot)
 	char *suffix;
 	int avail, i;
 	struct flock lock;
+
+	sig_checkbg();
 
 	if (sl >= 0) {
 		sincelast = esec - prev_esec;

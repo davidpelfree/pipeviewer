@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-05-04 19:39+0100\n"
+"POT-Creation-Date: 2003-08-03 14:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,43 +73,43 @@ msgstr ""
 msgid "%s: option `-W %s' doesn't allow an argument\n"
 msgstr ""
 
-#: src/main/display.c:87
+#: src/main/display.c:88
 msgid "failed to open terminal"
 msgstr ""
 
-#: src/main/display.c:213
+#: src/main/display.c:216
 msgid "GB"
 msgstr ""
 
-#: src/main/display.c:216
+#: src/main/display.c:219
 msgid "MB"
 msgstr ""
 
-#: src/main/display.c:219
+#: src/main/display.c:222
 msgid "kB"
 msgstr ""
 
-#: src/main/display.c:221
+#: src/main/display.c:224
 msgid "B"
 msgstr ""
 
-#: src/main/display.c:236
+#: src/main/display.c:239
 msgid "GB/s"
 msgstr ""
 
-#: src/main/display.c:239
+#: src/main/display.c:242
 msgid "MB/s"
 msgstr ""
 
-#: src/main/display.c:242
+#: src/main/display.c:245
 msgid "kB/s"
 msgstr ""
 
-#: src/main/display.c:244
+#: src/main/display.c:247
 msgid "B/s "
 msgstr ""
 
-#: src/main/display.c:255
+#: src/main/display.c:258
 msgid "ETA"
 msgstr ""
 

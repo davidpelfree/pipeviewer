@@ -10,6 +10,7 @@
 
 #include <signal.h>
 #include <termios.h>
+#include <time.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -208,6 +209,35 @@ void sig_allowpause(void)
 	sigemptyset(&(sa.sa_mask));
 	sa.sa_flags = 0;
 	sigaction(SIGCONT, &sa, NULL);
+}
+
+
+/*
+ * If we'd redirected stderr to /dev/null, check every second or so to see
+ * whether we can write to the terminal again - this is so that if we get
+ * backgrounded, then foregrounded again, we start writing to the terminal
+ * again.
+ */
+void sig_checkbg(void)
+{
+	static time_t next_check = 0;
+	struct termios t;
+
+	if (time(NULL) < next_check)
+		return;
+
+	next_check = time(NULL) + 1;
+
+	if (sig__old_stderr == -1)
+		return;
+
+	dup2(sig__old_stderr, STDERR_FILENO);
+	close(sig__old_stderr);
+	sig__old_stderr = -1;
+
+	tcgetattr(STDERR_FILENO, &t);
+	t.c_lflag |= TOSTOP;
+	tcsetattr(STDERR_FILENO, TCSANOW, &t);
 }
 
 /* EOF */
