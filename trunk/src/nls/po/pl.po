@@ -2,7 +2,6 @@
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -17,215 +16,222 @@ msgstr ""
 #: src/getopt/getopt.c:679
 #, c-format
 msgid "%s: option `%s' is ambiguous\n"
-msgstr ""
+msgstr "%s: opcja `%s' jest niejednoznaczna\n"
 
 #: src/getopt/getopt.c:703
 #, c-format
 msgid "%s: option `--%s' doesn't allow an argument\n"
-msgstr ""
+msgstr "%s: opcja `--%s' nie przyjmuje argumentów\n"
 
 #: src/getopt/getopt.c:708
 #, c-format
 msgid "%s: option `%c%s' doesn't allow an argument\n"
-msgstr ""
+msgstr "%s: option `%c%s' nie przyjmuje argumentów\n"
 
 #: src/getopt/getopt.c:725 src/getopt/getopt.c:898
 #, c-format
 msgid "%s: option `%s' requires an argument\n"
-msgstr ""
+msgstr "%s: opcja `%s' wymaga argumentu\n"
 
 #. --option
 #: src/getopt/getopt.c:754
 #, c-format
 msgid "%s: unrecognized option `--%s'\n"
-msgstr ""
+msgstr "%s: nieznana opcja `--%s'\n"
 
 #. +option or -option
 #: src/getopt/getopt.c:758
 #, c-format
 msgid "%s: unrecognized option `%c%s'\n"
-msgstr ""
+msgstr "%s: nieznana opcja `%c%s'\n"
 
 #. 1003.2 specifies the format of this message.
 #: src/getopt/getopt.c:784
 #, c-format
 msgid "%s: illegal option -- %c\n"
-msgstr ""
+msgstr "%s: niedozwolona opcja -- %c\n"
 
 #: src/getopt/getopt.c:787
 #, c-format
 msgid "%s: invalid option -- %c\n"
-msgstr ""
+msgstr "%s: nieprawid³owa opcja -- %c\n"
 
 #. 1003.2 specifies the format of this message.
 #: src/getopt/getopt.c:817 src/getopt/getopt.c:947
 #, c-format
 msgid "%s: option requires an argument -- %c\n"
-msgstr ""
+msgstr "%s: opcja wymaga argumentu -- %c\n"
 
 #: src/getopt/getopt.c:864
 #, c-format
 msgid "%s: option `-W %s' is ambiguous\n"
-msgstr ""
+msgstr "%s: opcja `-W %s' jest niejednoznaczna\n"
 
 #: src/getopt/getopt.c:882
 #, c-format
 msgid "%s: option `-W %s' doesn't allow an argument\n"
-msgstr ""
+msgstr "%s: opcja `-W %s' nie przyjmuje argumentów\n"
 
 #: src/main/display.c:89
 msgid "failed to open terminal"
-msgstr ""
+msgstr "nie uda³o siê otworzyæ terminala"
 
 #: src/main/display.c:215
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 #: src/main/display.c:218
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 #: src/main/display.c:221
 msgid "kB"
-msgstr ""
+msgstr "kB"
 
 #: src/main/display.c:223
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: src/main/display.c:238
 msgid "GB/s"
-msgstr ""
+msgstr "GB/s"
 
 #: src/main/display.c:241
 msgid "MB/s"
-msgstr ""
+msgstr "MB/s"
 
 #: src/main/display.c:244
 msgid "kB/s"
-msgstr ""
+msgstr "kB/s"
 
 #: src/main/display.c:246
 msgid "B/s "
-msgstr ""
+msgstr "B/s"
 
 #: src/main/display.c:257
 msgid "ETA"
-msgstr ""
+msgstr "Przewidywany czas ukoñczenia"
 
 #: src/main/file.c:75
 msgid "failed to close file"
-msgstr ""
+msgstr "nie uda³o siê zamkn±æ pliku"
 
 #: src/main/file.c:92
 msgid "failed to read file"
-msgstr ""
+msgstr "nie uda³o siê odczytaæ pliku"
 
 #: src/main/file.c:101
 msgid "failed to stat file"
-msgstr ""
+msgstr "nie uda³o siê wykonaæ operacji stat na pliku"
 
 #: src/main/file.c:111
 msgid "failed to stat output file"
-msgstr ""
+msgstr "nie uda³o siê wykonaæ operacji stat na pliku wyj¶ciowym"
 
 #: src/main/file.c:124
 msgid "input file is output file"
-msgstr ""
+msgstr "plik wej¶ciowy jest zarazem plikiem wyj¶ciowym"
 
 #: src/main/help.c:21
 #, c-format
 msgid "Usage: %s [OPTION] [FILE]..."
-msgstr ""
+msgstr "Sposób u¿ycia: %s [OPCJA] [PLIK]..."
 
 #: src/main/help.c:23
 msgid ""
 "Concatenate FILE(s), or standard input, to standard output,\n"
 "with monitoring."
 msgstr ""
+"£±czenie PLIK(ów) lub wej¶cia standardowego, do wyj¶cia standardowego\n"
+"z monitoringiem."
 
 #: src/main/help.c:27
 msgid "-p, --progress        show progress bar"
-msgstr ""
+msgstr "-p, --progress        poka¿ pasek postêpu"
 
 #: src/main/help.c:28
 msgid "-t, --timer           show elapsed time"
-msgstr ""
+msgstr "-t, --timer           poka¿ up³ywaj±cy czas"
 
 #: src/main/help.c:29
 msgid "-e, --eta             show estimated time of arrival (completion)"
-msgstr ""
+msgstr "-e, --eta             poka¿ szacowany czas ukoñczenia"
 
 #: src/main/help.c:30
 msgid "-r, --rate            show data transfer rate counter"
-msgstr ""
+msgstr "-r, --tate            poka¿ licznik prêdko¶ci przesy³ania"
 
 #: src/main/help.c:31
 msgid "-b, --bytes           show number of bytes transferred"
-msgstr ""
+msgstr "-b, --bytes           poka¿ ilo¶æ przes³anych bajtów"
 
 #: src/main/help.c:32
 msgid "-f, --force           output even if standard error is not a terminal"
-msgstr ""
+msgstr "-f, --force           poka¿ wyj¶cie nawet gdy b³êdy nie s± typu terminal"
 
 #: src/main/help.c:33
 msgid "-n, --numeric         output percentages, not visual information"
 msgstr ""
+"-n, --numeric         w¶wietl wyj¶cie procentowo, bez graficznej prezentacji"
 
 #: src/main/help.c:34
 msgid "-q, --quiet           do not output any transfer information at all"
-msgstr ""
+msgstr "-q, --quiet           nie wy¶wietlaj ¿adnych informacji o przesy³aniu"
 
 #: src/main/help.c:35
 msgid "-c, --cursor          use cursor positioning escape sequences"
-msgstr ""
+msgstr "-c, --cursor          u¿ywaj sekwencji escape do pozycjonowania"
 
 #: src/main/help.c:36
 msgid "-L, --rate-limit RATE limit transfer to RATE bytes per second"
-msgstr ""
+msgstr "-L, --rate-limit RATE ogranicz przesy³ane dane do RATE bajtów na sekundê"
 
 #: src/main/help.c:37
 msgid "-W, --wait            display nothing until first byte transferred"
 msgstr ""
+"-W, --wait            nie wy¶wietlaj nic a¿ do pierwszego przes³anego bajtu"
 
 #: src/main/help.c:38
 msgid "-s, --size SIZE       set estimated data size to SIZE bytes"
-msgstr ""
+msgstr "-s, --size WARTO¦Æ    ustaw oczekiwany rozmiar danych na WARTO¦Æ bajtów"
 
 #: src/main/help.c:39
 msgid "-i, --interval SEC    update every SEC seconds"
-msgstr ""
+msgstr "-i, --interval WARTO¦Æ aktualizuj co ka¿de WARTO¦Æ sekund"
 
 #: src/main/help.c:40
 msgid "-w, --width WIDTH     assume terminal is WIDTH characters wide"
 msgstr ""
+"-w, --width WARTO¦Æ   przyjmij, ¿e terminal ma szeroko¶æ WARTO¦Æ znaków"
 
 #: src/main/help.c:41
 msgid "-N, --name NAME       prefix visual information with NAME"
-msgstr ""
+msgstr "-N, --name NAZWA      poprzed¼ informacje prefiksem NAZWA"
 
 #: src/main/help.c:43
 msgid "-h, --help            show this help and exit"
-msgstr ""
+msgstr "-h, --help            wy¶wietl te informacje z pomoc± i wyjd¼"
 
 #: src/main/help.c:44
 msgid ""
 "-l, --license         show the license this program is distributed under"
 msgstr ""
+"-l, --license          wy¶wietl informacje o licencji pod któr± program"
+"                       jest rozprowadzany"
 
 #: src/main/help.c:45
 msgid "-V, --version         show version information and exit"
-msgstr ""
+msgstr "-V, --version         wy¶wietl informacje o wersji i wyjd¼"
 
 #: src/main/help.c:46
 #, c-format
 msgid "Please report any bugs to %s."
-msgstr ""
+msgstr "Proszê przesy³aæ zg³oszenia b³êdów do %s."
 
 #: src/main/license.c:21
 #, c-format
 msgid "%s %s - Copyright (C) %s %s"
-msgstr ""
+msgstr "%s %s - Prawa autorskie (C) %s %s"
 
 #: src/main/license.c:24
 msgid ""
@@ -446,43 +452,43 @@ msgstr ""
 #: src/main/options.c:81
 #, c-format
 msgid "%s: option structure allocation failed (%s)"
-msgstr ""
+msgstr "%s: nie uda³o siê zaalokowaæ struktur opcji (%s)"
 
 #: src/main/options.c:96
 #, c-format
 msgid "%s: option structure argv allocation failed (%s)"
-msgstr ""
+msgstr "%s: nie uda³o siê zaalokowaæ struktur opcji argv (%s)"
 
 #: src/main/options.c:183
 #, c-format
 msgid "Try `%s --help' for more information."
-msgstr ""
+msgstr "Spróbuj `%s --help' by uzyskaæ wiêcej informacji"
 
 #: src/main/transfer.c:67
 msgid "buffer allocation failed"
-msgstr ""
+msgstr "nie uda³o siê zaalokowaæ bufora"
 
 #: src/main/transfer.c:103
 msgid "select call failed"
-msgstr ""
+msgstr "nie uda³o siê wywo³aæ funkcji select"
 
 #: src/main/transfer.c:116
 msgid "read failed"
-msgstr ""
+msgstr "b³±d odczytu"
 
 #: src/main/transfer.c:135
 msgid "write failed"
-msgstr ""
+msgstr "b³±d zapisu"
 
 #: src/main/version.c:21
 #, c-format
 msgid "%s %s - Copyright(C) %s %s"
-msgstr ""
+msgstr "%s %s - Prawa autorskie (C) %s %s"
 
 #: src/main/version.c:24
 #, c-format
 msgid "Web site: %s"
-msgstr ""
+msgstr "Strona WWW: %s"
 
 #: src/main/version.c:26
 msgid ""
@@ -500,4 +506,4 @@ msgstr ""
 #: src/main/version.c:34
 #, c-format
 msgid "For more information, please run `%s --license'."
-msgstr ""
+msgstr "By uzyskaæ wiêcej informacji wprowad¼ `%s --license'."
