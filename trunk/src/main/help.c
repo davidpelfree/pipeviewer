@@ -128,7 +128,7 @@ void display_help(void)
 
 		start = optlist[i].description;
 
-		while (strlen(start) /* RATS: ignore */ > tw - col1max) {
+		while (strlen(start) /* RATS: ignore */ >tw - col1max) {
 			end = start + tw - col1max;
 			while ((end > start) && (end[0] != ' '))
 				end--;

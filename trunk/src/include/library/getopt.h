@@ -21,7 +21,7 @@ int minigetopt(int, char **, char *);
 extern char *minioptarg;
 extern int minioptind, miniopterr, minioptopt;
 
-#define getopt minigetopt
+#define getopt minigetopt	/* Flawfinder: ignore */
 #define optarg minioptarg
 #define optind minioptind
 #define opterr miniopterr
