@@ -131,10 +131,10 @@ install: all doc
 	                  "$(DESTDIR)/$(bindir)/$(package)"
 	$(INSTALL) -m 644 doc/quickref.1 \
 	                  "$(DESTDIR)/$(mandir)/man1/$(package).1"
-	$(INSTALL) -m 644 doc/$(package).info \
-	                  "$(DESTDIR)/$(infodir)/$(package).info"
-	$(DO_GZIP) "$(DESTDIR)/$(mandir)/man1/$(package).1"      || :
-	$(DO_GZIP) "$(DESTDIR)/$(infodir)/$(package).info"       || :
+	-$(INSTALL) -m 644 doc/$(package).info \
+	                   "$(DESTDIR)/$(infodir)/$(package).info"
+	-$(DO_GZIP) "$(DESTDIR)/$(mandir)/man1/$(package).1"
+	-$(DO_GZIP) "$(DESTDIR)/$(infodir)/$(package).info"
 	if test -n "$(CATALOGS)"; then \
 	  catalogs='$(CATALOGS)'; \
 	  for cat in $$catalogs; do \
