@@ -3,7 +3,13 @@
 #
 # $Id$
 
-.PHONY: all dep depend depclean make check test clean distclean cvsclean index manhtml update-po dist doc install uninstall
+.PHONY: all dep depend depclean make check test \
+  clean distclean cvsclean \
+  index manhtml update-po \
+  doc dist \
+  install uninstall \
+  rpm deb
+
 all: $(alltarg) $(POSUB)
 
 make:
@@ -46,7 +52,7 @@ update-po: $(srcdir)/src/nls/po/$(PACKAGE).pot
 
 distclean: clean depclean
 	rm -f $(alltarg) src/include/config.h
-	rm -rf $(package)-$(version).tar* $(package)-$(version)
+	rm -rf $(package)-$(version).tar* $(package)-$(version) debian
 	rm -f *.html config.*
 	rm Makefile
 
@@ -93,6 +99,7 @@ dist: doc update-po
 	chmod 755 `find $(package)-$(version) -type d -print`
 	chmod 755 `find $(package)-$(version)/autoconf/scripts`
 	chmod 755 $(package)-$(version)/configure
+	chmod 755 $(package)-$(version)/doc/debian/rules
 	rm -rf DUMMY `find $(package)-$(version) -type d -name CVS`
 	tar cf $(package)-$(version).tar $(package)-$(version)
 	rm -rf $(package)-$(version)
@@ -150,3 +157,27 @@ uninstall:
 	  dir=$(RPM_BUILD_ROOT)/$$destdir/$$lang/LC_MESSAGES; \
 	  $(UNINSTALL) $$dir/$(PACKAGE)$(INSTOBJEXT); \
 	done
+
+rpm: dist
+	echo macrofiles: `rpm --showrc \
+	  | grep ^macrofiles \
+	  | cut -d : -f 2- \
+	  | sed 's,^[^/]*/,/,'`:`pwd`/rpmmacros > rpmrc
+	echo %_topdir `pwd`/rpm > rpmmacros
+	rm -rf rpm
+	mkdir rpm
+	mkdir rpm/SPECS rpm/BUILD rpm/SOURCES rpm/RPMS
+	grep -hsv ^macrofiles /usr/lib/rpm/rpmrc /etc/rpmrc $$HOME/.rpmrc \
+	  >> rpmrc
+	rpmbuild --rcfile=rpmrc -tb $(package)-$(version).tar.gz
+	mv rpm/RPMS/*/$(package)*rpm .
+	rm -rf rpm rpmmacros rpmrc
+
+deb: dist
+	rm -rf debian
+	mkdir debian
+	cd debian && tar xzf ../$(package)-$(version).tar.gz
+	cd debian && cd $(package)-$(version) && mv doc/debian .
+	cd debian && cd $(package)-$(version) && ./debian/rules binary
+	mv debian/*.deb .
+	rm -rf debian

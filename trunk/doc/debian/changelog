@@ -1,3 +1,10 @@
+pv (0.4.8-1) unstable; urgency=low
+
+  * Imported Debian changes into main source tree
+  * Updated to version 0.4.8
+
+ -- Andrew Wood <andrew.wood@ivarch.com>  Sat,  1 Feb 2003 21:22:55 +0000
+
 pv (0.4.5-1) unstable; urgency=low
 
   * New upstream release
