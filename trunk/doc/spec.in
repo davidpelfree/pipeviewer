@@ -76,6 +76,9 @@ fi
 %doc README doc/NEWS doc/TODO doc/COPYING
 
 %changelog
+* Sat Nov  6 2004 Andrew Wood <andrew.wood@ivarch.com>
+- Code cleanups and minor usability fixes.
+
 * Tue Jun 29 2004 Andrew Wood <andrew.wood@ivarch.com>
 - A port of the terminal locking code to FreeBSD.
 

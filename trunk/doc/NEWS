@@ -1,4 +1,4 @@
-x - NOT YET RELEASED
+0.8.9 - 6 November 2004
   - decimal values now accepted for rate and size, eg "-L 1.23M"
   - code cleanup
   - developers: "make help" now lists Makefile targets

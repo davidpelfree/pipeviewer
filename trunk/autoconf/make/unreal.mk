@@ -114,7 +114,10 @@ manhtml:
 	      -e 's|<A [^>]*>&nbsp;</A>||ig' \
 	      -e 's|<A [^>]*>\([^<]*\)</A>|\1|ig' \
 	      -e '/<H1/d' -e 's|\(</H[0-9]>\)|\1<P>|ig' \
-	| sed -e '1,/<HR/d' -e '/<H2>Index/,/<HR/d'
+	      -e 's/<DL COMPACT>/<DL>/ig' \
+	      -e 's/&lt;[0-9A-Za-z_.-]\+@[0-9A-Za-z_.-]\+&gt;//g' \
+	      -e 's|<I>\(http://.*\)</I>|<A HREF="\1">\1</A>|ig' \
+	| sed -e '1,/<HR/d' -e '/<H2>Index/,/<HR/d' \
 
 indent:
 	cd $(srcdir) && indent -npro -kr -i8 -cd42 -c45 $(allsrc)
