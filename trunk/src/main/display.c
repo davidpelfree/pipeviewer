@@ -81,7 +81,7 @@ void cursor_init(opts_t options)
 	if (!options->cursor)
 		return;
 
-	fd = open("/dev/tty", O_RDWR);
+	fd = open("/dev/tty", O_RDWR);	    /* RATS: ignore (no race) */
 	if (fd < 0) {
 		fprintf(stderr, "%s: %s: %s\n",
 			options->program_name,

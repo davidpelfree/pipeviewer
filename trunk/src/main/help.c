@@ -79,13 +79,13 @@ void display_help(void)
 	for (i = 0; optlist[i].optshort; i++) {
 		int width = 0;
 
-		width = 2 + strlen(optlist[i].optshort);
+		width = 2 + strlen(optlist[i].optshort);	/* RATS: ignore */
 #ifdef HAVE_GETOPT_LONG
 		if (optlist[i].optlong)
-			width += 2 + strlen(optlist[i].optlong);
+			width += 2 + strlen(optlist[i].optlong);	/* RATS: ignore */
 #endif
 		if (optlist[i].param)
-			width += 1 + strlen(optlist[i].param);
+			width += 1 + strlen(optlist[i].param);	/* RATS: ignore */
 
 		if (width > col1max)
 			col1max = width;
@@ -128,7 +128,7 @@ void display_help(void)
 
 		start = optlist[i].description;
 
-		while (strlen(start) > tw - col1max) {
+		while (strlen(start) /* RATS: ignore */ > tw - col1max) {
 			end = start + tw - col1max;
 			while ((end > start) && (end[0] != ' '))
 				end--;
