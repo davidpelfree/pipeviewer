@@ -8,7 +8,7 @@
  * and textdomain() functions are ignored.
  *
  * To use this library, create a function that, given a language string,
- * returns an struct msg_table_s[] of msgid and msgstr pairs, with the end
+ * returns a struct msg_table_s[] of msgid and msgstr pairs, with the end
  * of the table being marked by a NULL msgid. The po2table.sh script will do
  * this.
  *

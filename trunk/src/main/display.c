@@ -65,6 +65,8 @@ long calc_eta(long long so_far, long long total, long elapsed)
  * Output status information on standard error. If "sl" is negative, this is
  * the final update so the rate is given as an average over the whole
  * transfer; otherwise the rate is "sl"/"esec", i.e. the current rate.
+ *
+ * If "opts" is NULL, then free all allocated memory and return.
  */
 void main_display(opts_t opts, long double esec, long long sl,
 		  long long tot)
@@ -77,10 +79,18 @@ void main_display(opts_t opts, long double esec, long long sl,
 	static long dispbufsz = 0;
 	long double sincelast, rate, transferred;
 	long eta;
-	char tmp[1024];			 /* RATS: ignore (checked OK) */
-	char tmp2[64];			 /* RATS: ignore (checked OK) */
-	char *suffix;
+	char prefix[128];		 /* RATS: ignore (checked OK) */
+	char suffix[128];		 /* RATS: ignore (checked OK) */
+	char pct[64];			 /* RATS: ignore (checked OK) */
+	char *units;
 	int avail, i;
+
+	if (opts == NULL) {
+		if (display)
+			free(display);
+		display = NULL;
+		return;
+	}
 
 	sig_checkbg();
 
@@ -152,51 +162,81 @@ void main_display(opts_t opts, long double esec, long long sl,
 
 	if (opts->bytes) {
 		transferred = tot;
+
 		if (transferred >= 1000 * 1024 * 1024) {
 			transferred = transferred / (1024 * 1024 * 1024);
-			suffix = _("GB");
+			units = _("GB");
 		} else if (transferred >= 1000 * 1024) {
 			transferred = transferred / (1024 * 1024);
-			suffix = _("MB");
+			units = _("MB");
 		} else if (transferred >= 1000) {
 			transferred = transferred / 1024;
-			suffix = _("kB");
+			units = _("kB");
 		} else {
-			suffix = _("B");
+			units = _("B");
 		}
-		sprintf(tmp, "%4.3Lg%.16s ", transferred, suffix);
-		strcat(display, tmp);	    /* RATS: ignore (OK) */
+
+		/*
+		 * Bounds check, so we don't overrun the prefix buffer.
+		 */
+		if (transferred > 100000)
+			transferred = 100000;
+
+		sprintf(prefix, "%4.3Lg%.16s ", transferred, units);
+		strcat(display, prefix);    /* RATS: ignore (OK) */
 	}
 
 	if (opts->timer) {
-		sprintf(tmp, "%ld:%02ld:%02ld ", ((long) esec) / 3600,
+		/*
+		 * Bounds check, so we don't overrun the prefix buffer. This
+		 * does mean that the timer will stop at a 100,000 hours,
+		 * but since that's 11 years, it shouldn't be a problem.
+		 */
+		if (esec > (long double)360000000.0L)
+			esec = (long double)360000000.0L;
+
+		sprintf(prefix, "%ld:%02ld:%02ld ", ((long) esec) / 3600,
 			(((long) esec) / 60) % 60, ((long) esec) % 60);
-		strcat(display, tmp);	    /* RATS: ignore (OK) */
+		strcat(display, prefix);    /* RATS: ignore (OK) */
 	}
 
 	if (opts->rate) {
 		if (rate >= 1000 * 1024 * 1024) {
 			rate = rate / (1024 * 1024 * 1024);
-			suffix = _("GB/s");
+			units = _("GB/s");
 		} else if (rate >= 1000 * 1024) {
 			rate = rate / (1024 * 1024);
-			suffix = _("MB/s");
+			units = _("MB/s");
 		} else if (rate >= 1000) {
 			rate = rate / 1024;
-			suffix = _("kB/s");
+			units = _("kB/s");
 		} else {
-			suffix = _("B/s ");
+			units = _("B/s ");
 		}
-		sprintf(tmp, "[%4.3Lg%.16s] ", rate, suffix);
-		strcat(display, tmp);	    /* RATS: ignore (OK) */
+
+		/*
+		 * Bounds check, so we don't overrun the prefix buffer.
+		 */
+		if (rate > 100000)
+			rate = 100000;
+
+		sprintf(prefix, "[%4.3Lg%.16s] ", rate, units);
+		strcat(display, prefix);    /* RATS: ignore (OK) */
 	}
 
-	tmp[0] = 0;
+	suffix[0] = 0;
 	if (opts->eta && opts->size > 0) {
-		if (eta < 0) {
+		if (eta < 0)
 			eta = 0;
-		}
-		sprintf(tmp, " %.16s %ld:%02ld:%02ld", _("ETA"),
+
+		/*
+		 * Bounds check, so we don't overrun the suffix buffer. This
+		 * means the ETA will always be less than 100,000 hours.
+		 */
+		if (eta > (long)360000000L)
+			eta = (long)360000000L;
+
+		sprintf(suffix, " %.16s %ld:%02ld:%02ld", _("ETA"),
 			eta / 3600, (eta / 60) % 60, eta % 60);
 	}
 
@@ -207,10 +247,10 @@ void main_display(opts_t opts, long double esec, long long sl,
 				percentage = 0;
 			if (percentage > 100000)
 				percentage = 100000;
-			sprintf(tmp2, "%2ld%%", percentage);
+			sprintf(pct, "%2ld%%", percentage);
 			avail = opts->width - strlen(display)	/* RATS: ignore */
-			    -strlen(tmp)    /* RATS: ignore */
-			    -strlen(tmp2) - 3;	/* RATS: ignore */
+			    -strlen(suffix) /* RATS: ignore */
+			    -strlen(pct) - 3;	/* RATS: ignore */
 			for (i = 0; i < (avail * percentage) / 100 - 1;
 			     i++) {
 				if (i < avail)
@@ -224,11 +264,11 @@ void main_display(opts_t opts, long double esec, long long sl,
 				strcat(display, " ");
 			}
 			strcat(display, "] ");
-			strcat(display, tmp2);	/* RATS: ignore (OK) */
+			strcat(display, pct);	/* RATS: ignore (OK) */
 		} else {
 			int p = percentage;
 			avail = opts->width - strlen(display)	/* RATS: ignore */
-			    -strlen(tmp) - 5;	/* RATS: ignore */
+			    -strlen(suffix) - 5;	/* RATS: ignore */
 			if (p > 100)
 				p = 200 - p;
 			for (i = 0; i < (avail * p) / 100; i++) {
@@ -243,7 +283,7 @@ void main_display(opts_t opts, long double esec, long long sl,
 		}
 	}
 
-	strcat(display, tmp);		    /* RATS: ignore (OK) */
+	strcat(display, suffix);	    /* RATS: ignore (OK) */
 
 	if (opts->cursor) {
 		cursor_update(opts, display);

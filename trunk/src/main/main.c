@@ -37,15 +37,15 @@ extern sig_atomic_t sig__newsize;
 /*
  * Fill in options->width with the current terminal size, if possible.
  */
-void get_screensize(opts_t options)
+static void get_screensize(opts_t opts)
 {
 #ifdef TIOCGWINSZ
 	struct winsize wsz;
 
 	if (isatty(STDERR_FILENO)) {
 		if (ioctl(STDERR_FILENO, TIOCGWINSZ, &wsz) == 0) {
-			options->width = wsz.ws_col;
-			options->height = wsz.ws_row;
+			opts->width = wsz.ws_col;
+			opts->height = wsz.ws_row;
 		}
 	}
 #endif
@@ -58,7 +58,7 @@ void get_screensize(opts_t options)
  *
  * Returns nonzero on error.
  */
-int main_loop(opts_t options)
+static int main_loop(opts_t opts)
 {
 	long written;
 	long long total_written, since_last, cansend, donealready, target;
@@ -71,7 +71,7 @@ int main_loop(opts_t options)
 
 	fd = -1;
 
-	cursor_init(options);
+	cursor_init(opts);
 
 	eof_in = 0;
 	eof_out = 0;
@@ -81,9 +81,9 @@ int main_loop(opts_t options)
 	gettimeofday(&start_time, NULL);
 	gettimeofday(&cur_time, NULL);
 
-	next_update.tv_sec = start_time.tv_sec + (long) options->interval;
+	next_update.tv_sec = start_time.tv_sec + (long) opts->interval;
 	next_update.tv_usec = start_time.tv_usec
-	    + ((options->interval - ((long) options->interval)) * 1000000);
+	    + ((opts->interval - ((long) opts->interval)) * 1000000);
 	if (next_update.tv_usec >= 1000000) {
 		next_update.tv_sec++;
 		next_update.tv_usec -= 1000000;
@@ -97,10 +97,10 @@ int main_loop(opts_t options)
 	final_update = 0;
 
 	n = 0;
-	if (n >= options->argc) {
+	if (n >= opts->argc) {
 		fd = STDIN_FILENO;
 	} else {
-		fd = main_nextfd(options, n, -1);
+		fd = main_nextfd(opts, n, -1);
 		if (fd < 0)
 			return 1;
 		if (fstat64(fd, &sb) == 0) {
@@ -116,26 +116,25 @@ int main_loop(opts_t options)
 		if (tilreset < 0)
 			tilreset = 0;
 
-		if (options->rate_limit > 0) {
-			target = (1.03 - tilreset) * options->rate_limit;
+		if (opts->rate_limit > 0) {
+			target = (1.03 - tilreset) * opts->rate_limit;
 			cansend = target - donealready;
 			if (target < donealready)
 				cansend = 0;
 		}
 
-		written = main_transfer(options, fd, &eof_in, &eof_out,
-					cansend);
+		written = main_transfer(opts, fd, &eof_in, &eof_out, cansend);
 		if (written < 0)
 			return 1;
 
 		since_last += written;
 		total_written += written;
-		if (options->rate_limit > 0)
+		if (opts->rate_limit > 0)
 			donealready += written;
 
-		if (eof_in && eof_out && n < (options->argc - 1)) {
+		if (eof_in && eof_out && n < (opts->argc - 1)) {
 			n++;
-			fd = main_nextfd(options, n, fd);
+			fd = main_nextfd(opts, n, fd);
 			if (fd < 0)
 				return 1;
 			eof_in = 0;
@@ -158,20 +157,30 @@ int main_loop(opts_t options)
 			donealready = 0;
 		}
 
-		if (options->no_op)
+		if (opts->no_op)
 			continue;
 
 		/*
-		 * If -W given, we don't output anything until we have read
-		 * a byte, at which point we then count time as if we
+		 * If -W was given, we don't output anything until we have
+		 * read a byte, at which point we then count time as if we
 		 * started when the first byte was received
 		 */
-		if (options->wait) {
+		if (opts->wait) {
 			if (written < 1)
 				continue;   /* nothing written yet */
 
-			options->wait = 0;
+			opts->wait = 0;
 
+			/*
+			 * Reset the timer offset counter now that data
+			 * transfer has begun, otherwise if we had been
+			 * stopped and started (with ^Z / SIGTSTOP)
+			 * previously (while waiting for data), the timers
+			 * will be wrongly offset.
+			 *
+			 * While we reset the offset counter we must disable
+			 * SIGTSTOP so things don't mess up.
+			 */
 			sig_nopause();
 			gettimeofday(&start_time, NULL);
 			sig__toffset.tv_sec = 0;
@@ -179,11 +188,11 @@ int main_loop(opts_t options)
 			sig_allowpause();
 
 			next_update.tv_sec = start_time.tv_sec
-			    + (long) options->interval;
+			    + (long) opts->interval;
 			next_update.tv_usec = start_time.tv_usec
 			    +
-			    ((options->interval -
-			      ((long) options->interval))
+			    ((opts->interval -
+			      ((long) opts->interval))
 			     * 1000000);
 			if (next_update.tv_usec >= 1000000) {
 				next_update.tv_sec++;
@@ -198,9 +207,9 @@ int main_loop(opts_t options)
 		}
 
 		next_update.tv_sec = next_update.tv_sec
-		    + (long) options->interval;
+		    + (long) opts->interval;
 		next_update.tv_usec = next_update.tv_usec
-		    + ((options->interval - ((long) options->interval))
+		    + ((opts->interval - ((long) opts->interval))
 		       * 1000000);
 		if (next_update.tv_usec >= 1000000) {
 			next_update.tv_sec++;
@@ -235,21 +244,27 @@ int main_loop(opts_t options)
 
 		if (sig__newsize) {
 			sig__newsize = 0;
-			get_screensize(options);
+			get_screensize(opts);
 		}
 
-		main_display(options, elapsed, since_last, total_written);
+		main_display(opts, elapsed, since_last, total_written);
 
 		since_last = 0;
 	}
 
-	if (options->cursor) {
-		cursor_fini(options);
+	if (opts->cursor) {
+		cursor_fini(opts);
 	} else {
-		if (!options->numeric)
-			if (!options->no_op)
-				write(STDERR_FILENO, "\n", 1);
+		if ((!opts->numeric) && (!opts->no_op))
+			write(STDERR_FILENO, "\n", 1);
 	}
+
+	/*
+	 * Free up the buffers used by the display and data transfer
+	 * routines.
+	 */
+	main_display(0, 0, 0, 0);
+	main_transfer(0, -1, 0, 0, 0);
 
 	return 0;
 }
@@ -262,7 +277,7 @@ int main_loop(opts_t options)
 int main(int argc, char **argv)
 {
 	struct termios t;
-	opts_t options;
+	opts_t opts;
 	int retcode = 0;
 
 #ifdef ENABLE_NLS
@@ -271,74 +286,79 @@ int main(int argc, char **argv)
 	textdomain(PACKAGE);
 #endif
 
-	options = parse_options(argc, argv);
-	if (!options)
+	opts = opts_parse(argc, argv);
+	if (!opts)
 		return 1;
-	if (options->do_nothing) {
-		options->destructor(options);
+	if (opts->do_nothing) {
+		opts_free(opts);
 		return 0;
 	}
 
-	if (options->size == 0) {
-		main_getsize(options);
+	if (opts->size == 0) {
+		main_getsize(opts);
 	}
 
-	if (options->size < 1)
-		options->eta = 0;
+	if (opts->size < 1)
+		opts->eta = 0;
 
 	if ((isatty(STDERR_FILENO) == 0)
-	    && (options->force == 0)
-	    && (options->numeric == 0)) {
-		options->no_op = 1;
+	    && (opts->force == 0)
+	    && (opts->numeric == 0)) {
+		opts->no_op = 1;
 	}
 
-	if (options->width == 0) {
+	if (opts->width == 0) {
 		int tmpheight;
-		tmpheight = options->height;
-		get_screensize(options);
+		tmpheight = opts->height;
+		get_screensize(opts);
 		if (tmpheight > 0)
-			options->height = tmpheight;
+			opts->height = tmpheight;
 	}
 
-	if (options->height == 0) {
+	if (opts->height == 0) {
 		int tmpwidth;
-		tmpwidth = options->width;
-		get_screensize(options);
+		tmpwidth = opts->width;
+		get_screensize(opts);
 		if (tmpwidth > 0)
-			options->width = tmpwidth;
+			opts->width = tmpwidth;
 	}
 
 	/*
 	 * Width and height bounds checking (and defaults).
 	 */
-	if (options->width < 1)
-		options->width = 80;
+	if (opts->width < 1)
+		opts->width = 80;
 
-	if (options->height < 1)
-		options->height = 25;
+	if (opts->height < 1)
+		opts->height = 25;
 
-	if (options->width > 999999)
-		options->width = 999999;
+	if (opts->width > 999999)
+		opts->width = 999999;
 
-	if (options->height > 999999)
-		options->height = 999999;
+	if (opts->height > 999999)
+		opts->height = 999999;
 
-	/* Try and make standard output use non-blocking I/O */
+	/*
+	 * Try and make standard output use non-blocking I/O.
+	 */
 	fcntl(STDOUT_FILENO, F_SETFL,
 	      O_NONBLOCK | fcntl(STDOUT_FILENO, F_GETFL));
 
-	/* Set TOSTOP so we get SIGTTOU when writing in background */
+	/*
+	 * Set terminal option TOSTOP so we get signal SIGTTOU if we try to
+	 * write to the terminal while backgrounded.
+	 */
 	tcgetattr(STDERR_FILENO, &t);
 	t.c_lflag |= TOSTOP;
 	tcsetattr(STDERR_FILENO, TCSANOW, &t);
 
-	options->current_file = "(stdin)";
+	opts->current_file = "(stdin)";
 
 	sig_init();
 
-	retcode = main_loop(options);
+	retcode = main_loop(opts);
 
-	options->destructor(options);
+	opts_free(opts);
 	return retcode;
 }
 

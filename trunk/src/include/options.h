@@ -36,10 +36,10 @@ struct opts_s {           /* structure describing run-time options */
 	int argc;                      /* number of non-option arguments */
 	char **argv;                   /* array of non-option arguments */
 	char *current_file;            /* current file being read */
-	void (*destructor)(opts_t);    /* call as "opts->destructor(opts)" */
 };
 
-extern opts_t parse_options(int, char **);
+extern opts_t opts_parse(int, char **);
+extern void opts_free(opts_t);
 
 
 #ifdef __cplusplus

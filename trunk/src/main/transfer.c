@@ -41,12 +41,15 @@ void main_transfer_bufsize(unsigned long sz)
 
 /*
  * Transfer some data from "fd" to standard output, timing out after 9/100
- * of a second. If options->rate_limit is >0, only up to "allowed" bytes can
+ * of a second. If opts->rate_limit is >0, only up to "allowed" bytes can
  * be written.
  *
  * Returns the number of bytes written, or negative on error.
+ *
+ * If "opts" is NULL, then the transfer buffer is freed, and zero is
+ * returned.
  */
-long main_transfer(opts_t options, int fd, int *eof_in, int *eof_out,
+long main_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 		   unsigned long long allowed)
 {
 	static unsigned char *buf = NULL;
@@ -59,11 +62,20 @@ long main_transfer(opts_t options, int fd, int *eof_in, int *eof_out,
 	ssize_t r, w;
 	int n;
 
+	if (opts == NULL) {
+		if (buf)
+			free(buf);
+		buf = NULL;
+		in_buffer = 0;
+		bytes_written = 0;
+		return 0;
+	}
+
 	if (buf == NULL) {
 		buf = (unsigned char *) malloc(pvmtbufsize + 32);
 		if (buf == NULL) {
 			fprintf(stderr, "%s: %s: %s\n",
-				options->program_name,
+				opts->program_name,
 				_("buffer allocation failed"),
 				strerror(errno));
 			return -1;
@@ -81,7 +93,7 @@ long main_transfer(opts_t options, int fd, int *eof_in, int *eof_out,
 	}
 
 	to_write = in_buffer - bytes_written;
-	if (options->rate_limit > 0) {
+	if (opts->rate_limit > 0) {
 		if (to_write > allowed) {
 			to_write = allowed;
 		}
@@ -100,7 +112,7 @@ long main_transfer(opts_t options, int fd, int *eof_in, int *eof_out,
 		if (errno == EINTR)
 			return 0;
 		fprintf(stderr, "%s: %s: %s: %d: %s\n",
-			options->program_name, options->current_file,
+			opts->program_name, opts->current_file,
 			_("select call failed"), n, strerror(errno));
 		return -1;
 	}
@@ -123,8 +135,8 @@ long main_transfer(opts_t options, int fd, int *eof_in, int *eof_out,
 				return 0;
 			}
 			fprintf(stderr, "%s: %s: %s: %s\n",
-				options->program_name,
-				options->current_file,
+				opts->program_name,
+				opts->current_file,
 				_("read failed"), strerror(errno));
 			*eof_in = 1;
 			if (bytes_written >= in_buffer)
@@ -154,7 +166,7 @@ long main_transfer(opts_t options, int fd, int *eof_in, int *eof_out,
 				return 0;
 			}
 			fprintf(stderr, "%s: %s: %s\n",
-				options->program_name,
+				opts->program_name,
 				_("write failed"), strerror(errno));
 			*eof_out = 1;
 			written = -1;
