@@ -1,0 +1,513 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2004-02-08 02:25+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/getopt/getopt.c:679
+#, c-format
+msgid "%s: option `%s' is ambiguous\n"
+msgstr "%s: opcja `%s' jest niejednoznaczna\n"
+
+#: src/getopt/getopt.c:703
+#, c-format
+msgid "%s: option `--%s' doesn't allow an argument\n"
+msgstr "%s: opcja `--%s' nie przyjmuje argumentów\n"
+
+#: src/getopt/getopt.c:708
+#, c-format
+msgid "%s: option `%c%s' doesn't allow an argument\n"
+msgstr "%s: option `%c%s' nie przyjmuje argumentów\n"
+
+#: src/getopt/getopt.c:725 src/getopt/getopt.c:898
+#, c-format
+msgid "%s: option `%s' requires an argument\n"
+msgstr "%s: opcja `%s' wymaga argumentu\n"
+
+#. --option
+#: src/getopt/getopt.c:754
+#, c-format
+msgid "%s: unrecognized option `--%s'\n"
+msgstr "%s: nieznana opcja `--%s'\n"
+
+#. +option or -option
+#: src/getopt/getopt.c:758
+#, c-format
+msgid "%s: unrecognized option `%c%s'\n"
+msgstr "%s: nieznana opcja `%c%s'\n"
+
+#. 1003.2 specifies the format of this message.
+#: src/getopt/getopt.c:784
+#, c-format
+msgid "%s: illegal option -- %c\n"
+msgstr "%s: niedozwolona opcja -- %c\n"
+
+#: src/getopt/getopt.c:787
+#, c-format
+msgid "%s: invalid option -- %c\n"
+msgstr "%s: nieprawid³owa opcja -- %c\n"
+
+#. 1003.2 specifies the format of this message.
+#: src/getopt/getopt.c:817 src/getopt/getopt.c:947
+#, c-format
+msgid "%s: option requires an argument -- %c\n"
+msgstr "%s: opcja wymaga argumentu -- %c\n"
+
+#: src/getopt/getopt.c:864
+#, c-format
+msgid "%s: option `-W %s' is ambiguous\n"
+msgstr "%s: opcja `-W %s' jest niejednoznaczna\n"
+
+#: src/getopt/getopt.c:882
+#, c-format
+msgid "%s: option `-W %s' doesn't allow an argument\n"
+msgstr "%s: opcja `-W %s' nie przyjmuje argumentów\n"
+
+#: src/main/display.c:88
+msgid "failed to open terminal"
+msgstr "nie uda³o siê otworzyæ terminala"
+
+#: src/main/display.c:239
+msgid "GB"
+msgstr "GB"
+
+#: src/main/display.c:242
+msgid "MB"
+msgstr "MB"
+
+#: src/main/display.c:245
+msgid "kB"
+msgstr "kB"
+
+#: src/main/display.c:247
+msgid "B"
+msgstr "B"
+
+#: src/main/display.c:262
+msgid "GB/s"
+msgstr "GB/s"
+
+#: src/main/display.c:265
+msgid "MB/s"
+msgstr "MB/s"
+
+#: src/main/display.c:268
+msgid "kB/s"
+msgstr "kB/s"
+
+#: src/main/display.c:270
+msgid "B/s "
+msgstr "B/s"
+
+#: src/main/display.c:281
+msgid "ETA"
+msgstr "ETA"
+
+# "Przewidywany czas ukoñczenia" for ETA is too long
+#: src/main/file.c:81
+msgid "failed to close file"
+msgstr "nie uda³o siê zamkn±æ pliku"
+
+#: src/main/file.c:98
+msgid "failed to read file"
+msgstr "nie uda³o siê odczytaæ pliku"
+
+#: src/main/file.c:107
+msgid "failed to stat file"
+msgstr "nie uda³o siê wykonaæ operacji stat na pliku"
+
+#: src/main/file.c:117
+msgid "failed to stat output file"
+msgstr "nie uda³o siê wykonaæ operacji stat na pliku wyj¶ciowym"
+
+#: src/main/file.c:130
+msgid "input file is output file"
+msgstr "plik wej¶ciowy jest zarazem plikiem wyj¶ciowym"
+
+#: src/main/help.c:19
+#, c-format
+msgid "Usage: %s [OPTION] [FILE]..."
+msgstr "Sposób u¿ycia: %s [OPCJA] [PLIK]..."
+
+#: src/main/help.c:21
+msgid ""
+"Concatenate FILE(s), or standard input, to standard output,\n"
+"with monitoring."
+msgstr ""
+"£±czenie PLIK(ów) lub wej¶cia standardowego, do wyj¶cia standardowego\n"
+"z monitoringiem."
+
+#: src/main/help.c:25
+msgid "-p, --progress        show progress bar"
+msgstr "-p, --progress        poka¿ pasek postêpu"
+
+#: src/main/help.c:26
+msgid "-t, --timer           show elapsed time"
+msgstr "-t, --timer           poka¿ up³ywaj±cy czas"
+
+#: src/main/help.c:27
+msgid "-e, --eta             show estimated time of arrival (completion)"
+msgstr "-e, --eta             poka¿ szacowany czas ukoñczenia"
+
+#: src/main/help.c:28
+msgid "-r, --rate            show data transfer rate counter"
+msgstr "-r, --tate            poka¿ licznik prêdko¶ci przesy³ania"
+
+#: src/main/help.c:29
+msgid "-b, --bytes           show number of bytes transferred"
+msgstr "-b, --bytes           poka¿ ilo¶æ przes³anych bajtów"
+
+#: src/main/help.c:30
+msgid "-f, --force           output even if standard error is not a terminal"
+msgstr ""
+"-f, --force           poka¿ wyj¶cie nawet gdy b³êdy nie s± typu terminal"
+
+#: src/main/help.c:31
+msgid "-n, --numeric         output percentages, not visual information"
+msgstr ""
+"-n, --numeric         w¶wietl wyj¶cie procentowo, bez graficznej prezentacji"
+
+#: src/main/help.c:32
+msgid "-q, --quiet           do not output any transfer information at all"
+msgstr "-q, --quiet           nie wy¶wietlaj ¿adnych informacji o przesy³aniu"
+
+#: src/main/help.c:33
+msgid "-c, --cursor          use cursor positioning escape sequences"
+msgstr "-c, --cursor          u¿ywaj sekwencji escape do pozycjonowania"
+
+#: src/main/help.c:34
+msgid "-L, --rate-limit RATE limit transfer to RATE bytes per second"
+msgstr ""
+"-L, --rate-limit RATE ogranicz przesy³ane dane do RATE bajtów na sekundê"
+
+#: src/main/help.c:35
+msgid "-W, --wait            display nothing until first byte transferred"
+msgstr ""
+"-W, --wait            nie wy¶wietlaj nic a¿ do pierwszego przes³anego bajtu"
+
+#: src/main/help.c:36
+msgid "-s, --size SIZE       set estimated data size to SIZE bytes"
+msgstr ""
+"-s, --size WARTO¦Æ    ustaw oczekiwany rozmiar danych na WARTO¦Æ bajtów"
+
+#: src/main/help.c:37
+msgid "-i, --interval SEC    update every SEC seconds"
+msgstr "-i, --interval WARTO¦Æ aktualizuj co ka¿de WARTO¦Æ sekund"
+
+#: src/main/help.c:38
+msgid "-w, --width WIDTH     assume terminal is WIDTH characters wide"
+msgstr ""
+"-w, --width WARTO¦Æ   przyjmij, ¿e terminal ma szeroko¶æ WARTO¦Æ znaków"
+
+#: src/main/help.c:39
+msgid "-N, --name NAME       prefix visual information with NAME"
+msgstr "-N, --name NAZWA      poprzed¼ informacje prefiksem NAZWA"
+
+#: src/main/help.c:41
+msgid "-h, --help            show this help and exit"
+msgstr "-h, --help            wy¶wietl te informacje z pomoc± i wyjd¼"
+
+#: src/main/help.c:42
+msgid ""
+"-l, --license         show the license this program is distributed under"
+msgstr ""
+"-l, --license         wy¶wietl informacje o licencji pod któr± program\n"
+"                        jest rozprowadzany"
+
+#: src/main/help.c:43
+msgid "-V, --version         show version information and exit"
+msgstr "-V, --version         wy¶wietl informacje o wersji i wyjd¼"
+
+#: src/main/help.c:44
+#, c-format
+msgid "Please report any bugs to %s."
+msgstr "Proszê przesy³aæ zg³oszenia b³êdów do %s."
+
+#: src/main/license.c:19
+#, c-format
+msgid "%s %s - Copyright (C) %s %s"
+msgstr "%s %s - Prawa autorskie (C) %s %s"
+
+#: src/main/license.c:22
+msgid ""
+"This program is Open Source software, and is being distributed under the\n"
+"terms of the Artistic License."
+msgstr ""
+
+#: src/main/license.c:25
+msgid ""
+"Parts of this program may be copyright (C) Free Software\n"
+"Foundation, Inc. and are distributed under the terms of the\n"
+"GNU Lesser General Public License."
+msgstr ""
+
+#: src/main/license.c:32
+msgid ""
+"The Artistic License\n"
+"\n"
+"   Preamble\n"
+"\n"
+"   The intent of this document is to state the conditions under which a\n"
+"   Package may be copied, such that the Copyright Holder maintains some\n"
+"   semblance of artistic control over the development of the package,\n"
+"   while giving the users of the package the right to use and distribute\n"
+"   the Package in a more-or-less customary fashion, plus the right to\n"
+"   make reasonable modifications.\n"
+"\n"
+msgstr ""
+
+#: src/main/license.c:43
+msgid ""
+"   Definitions:\n"
+"\n"
+"     * \"Package\" refers to the collection of files distributed by the\n"
+"       Copyright Holder, and derivatives of that collection of files\n"
+"       created through textual modification.\n"
+"\n"
+msgstr ""
+
+#: src/main/license.c:49
+msgid ""
+"     * \"Standard Version\" refers to such a Package if it has not been\n"
+"       modified, or has been modified in accordance with the wishes of\n"
+"       the Copyright Holder.\n"
+"\n"
+msgstr ""
+
+#: src/main/license.c:53
+msgid ""
+"     * \"Copyright Holder\" is whoever is named in the copyright or\n"
+"       copyrights for the package.\n"
+"\n"
+msgstr ""
+
+#: src/main/license.c:56
+msgid ""
+"     * \"You\" is you, if you're thinking about copying or distributing\n"
+"       this Package.\n"
+"\n"
+msgstr ""
+
+#: src/main/license.c:59
+msgid ""
+"     * \"Reasonable copying fee\" is whatever you can justify on the basis\n"
+"       of media cost, duplication charges, time of people involved, and\n"
+"       so on. (You will not be required to justify it to the Copyright\n"
+"       Holder, but only to the computing community at large as a market\n"
+"       that must bear the fee.)\n"
+"\n"
+msgstr ""
+
+#: src/main/license.c:65
+msgid ""
+"     * \"Freely Available\" means that no fee is charged for the item\n"
+"       itself, though there may be fees involved in handling the item. It\n"
+"       also means that recipients of the item may redistribute it under\n"
+"       the same conditions they received it.\n"
+"\n"
+msgstr ""
+
+#: src/main/license.c:70
+msgid ""
+"   1. You may make and give away verbatim copies of the source form of\n"
+"   the Standard Version of this Package without restriction, provided\n"
+"   that you duplicate all of the original copyright notices and\n"
+"   associated disclaimers.\n"
+"\n"
+msgstr ""
+
+#: src/main/license.c:75
+msgid ""
+"   2. You may apply bug fixes, portability fixes and other modifications\n"
+"   derived from the Public Domain or from the Copyright Holder. A Package\n"
+"   modified in such a way shall still be considered the Standard Version.\n"
+"\n"
+msgstr ""
+
+#: src/main/license.c:79
+msgid ""
+"   3. You may otherwise modify your copy of this Package in any way,\n"
+"   provided that you insert a prominent notice in each changed file\n"
+"   stating how and when you changed that file, and provided that you do\n"
+"   at least ONE of the following:\n"
+"\n"
+msgstr ""
+
+#: src/main/license.c:84
+msgid ""
+"     a) place your modifications in the Public Domain or otherwise make\n"
+"     them Freely Available, such as by posting said modifications to\n"
+"     Usenet or an equivalent medium, or placing the modifications on a\n"
+"     major archive site such as ftp.uu.net, or by allowing the Copyright\n"
+"     Holder to include your modifications in the Standard Version of the\n"
+"     Package.\n"
+"\n"
+msgstr ""
+
+#: src/main/license.c:91
+msgid ""
+"     b) use the modified Package only within your corporation or\n"
+"     organization.\n"
+"\n"
+"     c) rename any non-standard executables so the names do not conflict\n"
+"     with standard executables, which must also be provided, and provide\n"
+"     a separate manual page for each non-standard executable that\n"
+"     clearly documents how it differs from the Standard Version.\n"
+"\n"
+"     d) make other distribution arrangements with the Copyright Holder.\n"
+"\n"
+msgstr ""
+
+#: src/main/license.c:101
+msgid ""
+"   4. You may distribute the programs of this Package in object code or\n"
+"   executable form, provided that you do at least ONE of the following:\n"
+"\n"
+"     a) distribute a Standard Version of the executables and library\n"
+"     files, together with instructions (in the manual page or\n"
+"     equivalent) on where to get the Standard Version.\n"
+"\n"
+"     b) accompany the distribution with the machine-readable source of\n"
+"     the Package with your modifications.\n"
+"\n"
+msgstr ""
+
+#: src/main/license.c:111
+msgid ""
+"     c) accompany any non-standard executables with their corresponding\n"
+"     Standard Version executables, giving the non-standard executables\n"
+"     non-standard names, and clearly documenting the differences in\n"
+"     manual pages (or equivalent), together with instructions on where\n"
+"     to get the Standard Version.\n"
+"\n"
+"     d) make other distribution arrangements with the Copyright Holder.\n"
+"\n"
+msgstr ""
+
+#: src/main/license.c:119
+msgid ""
+"   5. You may charge a reasonable copying fee for any distribution of\n"
+"   this Package. You may charge any fee you choose for support of this\n"
+"   Package. You may not charge a fee for this Package itself. However,\n"
+"   you may distribute this Package in aggregate with other (possibly\n"
+"   commercial) programs as part of a larger (possibly commercial)\n"
+"   software distribution provided that you do not advertise this Package\n"
+"   as a product of your own.\n"
+"\n"
+msgstr ""
+
+#: src/main/license.c:127
+msgid ""
+"   6. The scripts and library files supplied as input to or produced as\n"
+"   output from the programs of this Package do not automatically fall\n"
+"   under the copyright of this Package, but belong to whomever generated\n"
+"   them, and may be sold commercially, and may be aggregated with this\n"
+"   Package.\n"
+"\n"
+msgstr ""
+
+#: src/main/license.c:133
+msgid ""
+"   7. C or perl subroutines supplied by you and linked into this Package\n"
+"   shall not be considered part of this Package.\n"
+"\n"
+msgstr ""
+
+#: src/main/license.c:136
+msgid ""
+"   8. The name of the Copyright Holder may not be used to endorse or\n"
+"   promote products derived from this software without specific prior\n"
+"   written permission.\n"
+"\n"
+msgstr ""
+
+#: src/main/license.c:140
+msgid ""
+"   9. THIS PACKAGE IS PROVIDED \"AS IS\" AND WITHOUT ANY EXPRESS OR IMPLIED\n"
+"   WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF\n"
+"   MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.\n"
+"\n"
+"   The End"
+msgstr ""
+
+#: src/main/license.c:149
+msgid ""
+"For a copy of the GNU Lesser General Public License, please see\n"
+"http://www.gnu.org/ or write to the Free Software Foundation, Inc.,\n"
+"59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
+msgstr ""
+
+#: src/main/license.c:156
+#, c-format
+msgid ""
+"If that scrolled by too quickly, you may want to pipe it to a\n"
+"pager such as `more' or `less', eg `%s --license | more'."
+msgstr ""
+
+#: src/main/options.c:79
+#, c-format
+msgid "%s: option structure allocation failed (%s)"
+msgstr "%s: nie uda³o siê zaalokowaæ struktur opcji (%s)"
+
+#: src/main/options.c:94
+#, c-format
+msgid "%s: option structure argv allocation failed (%s)"
+msgstr "%s: nie uda³o siê zaalokowaæ struktur opcji argv (%s)"
+
+#: src/main/options.c:181
+#, c-format
+msgid "Try `%s --help' for more information."
+msgstr "Spróbuj `%s --help' by uzyskaæ wiêcej informacji"
+
+#: src/main/transfer.c:65
+msgid "buffer allocation failed"
+msgstr "nie uda³o siê zaalokowaæ bufora"
+
+#: src/main/transfer.c:101
+msgid "select call failed"
+msgstr "nie uda³o siê wywo³aæ funkcji select"
+
+#: src/main/transfer.c:125
+msgid "read failed"
+msgstr "b³±d odczytu"
+
+#: src/main/transfer.c:155
+msgid "write failed"
+msgstr "b³±d zapisu"
+
+#: src/main/version.c:19
+#, c-format
+msgid "%s %s - Copyright(C) %s %s"
+msgstr "%s %s - Prawa autorskie (C) %s %s"
+
+#: src/main/version.c:22
+#, c-format
+msgid "Web site: %s"
+msgstr "Strona WWW: %s"
+
+#: src/main/version.c:24
+msgid ""
+"This program is free software, and is being distributed under the\n"
+"terms of the Artistic License."
+msgstr ""
+
+#: src/main/version.c:28
+msgid ""
+"This program is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+msgstr ""
+
+#: src/main/version.c:32
+#, c-format
+msgid "For more information, please run `%s --license'."
+msgstr "By uzyskaæ wiêcej informacji wprowad¼ `%s --license'."
