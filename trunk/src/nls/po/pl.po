@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-08-05 10:25+0100\n"
+"POT-Creation-Date: 2003-12-22 17:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -476,11 +476,11 @@ msgstr "nie uda³o siê zaalokowaæ bufora"
 msgid "select call failed"
 msgstr "nie uda³o siê wywo³aæ funkcji select"
 
-#: src/main/transfer.c:114
+#: src/main/transfer.c:125
 msgid "read failed"
 msgstr "b³±d odczytu"
 
-#: src/main/transfer.c:133
+#: src/main/transfer.c:155
 msgid "write failed"
 msgstr "b³±d zapisu"
 
