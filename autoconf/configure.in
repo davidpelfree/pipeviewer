@@ -44,7 +44,7 @@ AC_ARG_ENABLE(lfs, [  --disable-lfs           disable LFS support],
   LFS_SUPPORT="yes"
 )
 
-ALL_LINGUAS="cy de fr no pl pt sv"
+ALL_LINGUAS="de fr pl pt"
 
 dnl Check for various programs.
 dnl
