@@ -1,5 +1,5 @@
 0.7.0 - 8 February 2004
-  + fixed two display buffer overruns (thanks Cédric Delfosse)
+  + display buffer management fixes (thanks Cédric Delfosse)
 
 0.6.4 - 14 January 2004
   + fixed minor bug in RPM installation
