@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-11-26 13:20+0000\n"
+"POT-Creation-Date: 2002-12-03 13:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,6 +71,66 @@ msgstr ""
 #: src/getopt/getopt.c:882
 #, c-format
 msgid "%s: option `-W %s' doesn't allow an argument\n"
+msgstr ""
+
+#: src/main/display.c:89
+msgid "failed to open terminal"
+msgstr ""
+
+#: src/main/display.c:209
+msgid "GB"
+msgstr ""
+
+#: src/main/display.c:212
+msgid "MB"
+msgstr ""
+
+#: src/main/display.c:215
+msgid "kB"
+msgstr ""
+
+#: src/main/display.c:217
+msgid "B"
+msgstr ""
+
+#: src/main/display.c:232
+msgid "GB/s"
+msgstr ""
+
+#: src/main/display.c:235
+msgid "MB/s"
+msgstr ""
+
+#: src/main/display.c:238
+msgid "kB/s"
+msgstr ""
+
+#: src/main/display.c:240
+msgid "B/s "
+msgstr ""
+
+#: src/main/display.c:251
+msgid "ETA"
+msgstr ""
+
+#: src/main/file.c:75
+msgid "failed to close file"
+msgstr ""
+
+#: src/main/file.c:92
+msgid "failed to read file"
+msgstr ""
+
+#: src/main/file.c:101
+msgid "failed to stat file"
+msgstr ""
+
+#: src/main/file.c:111
+msgid "failed to stat output file"
+msgstr ""
+
+#: src/main/file.c:124
+msgid "input file is output file"
 msgstr ""
 
 #: src/main/help.c:21
@@ -470,6 +530,22 @@ msgstr ""
 msgid "Try `%s --help' for more information."
 msgstr ""
 
+#: src/main/transfer.c:67
+msgid "buffer allocation failed"
+msgstr ""
+
+#: src/main/transfer.c:103
+msgid "select call failed"
+msgstr ""
+
+#: src/main/transfer.c:116
+msgid "read failed"
+msgstr ""
+
+#: src/main/transfer.c:135
+msgid "write failed"
+msgstr ""
+
 #: src/main/version.c:21
 #, c-format
 msgid "%s %s - Copyright(C) %s %s"
@@ -496,80 +572,4 @@ msgstr ""
 #: src/main/version.c:34
 #, c-format
 msgid "For more information, please run `%s --license'."
-msgstr ""
-
-#: src/main/file.c:75
-msgid "failed to close file"
-msgstr ""
-
-#: src/main/file.c:92
-msgid "failed to read file"
-msgstr ""
-
-#: src/main/file.c:101
-msgid "failed to stat file"
-msgstr ""
-
-#: src/main/file.c:111
-msgid "failed to stat output file"
-msgstr ""
-
-#: src/main/file.c:124
-msgid "input file is output file"
-msgstr ""
-
-#: src/main/transfer.c:67
-msgid "buffer allocation failed"
-msgstr ""
-
-#: src/main/transfer.c:103
-msgid "select call failed"
-msgstr ""
-
-#: src/main/transfer.c:116
-msgid "read failed"
-msgstr ""
-
-#: src/main/transfer.c:135
-msgid "write failed"
-msgstr ""
-
-#: src/main/display.c:89
-msgid "failed to open terminal"
-msgstr ""
-
-#: src/main/display.c:209
-msgid "GB"
-msgstr ""
-
-#: src/main/display.c:212
-msgid "MB"
-msgstr ""
-
-#: src/main/display.c:215
-msgid "kB"
-msgstr ""
-
-#: src/main/display.c:217
-msgid "B"
-msgstr ""
-
-#: src/main/display.c:232
-msgid "GB/s"
-msgstr ""
-
-#: src/main/display.c:235
-msgid "MB/s"
-msgstr ""
-
-#: src/main/display.c:238
-msgid "kB/s"
-msgstr ""
-
-#: src/main/display.c:240
-msgid "B/s "
-msgstr ""
-
-#: src/main/display.c:251
-msgid "ETA"
 msgstr ""
