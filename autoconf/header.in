@@ -54,7 +54,7 @@
 #define VERSION		"0.0.0"
 
 /* Various identification and legal drivel. */
-#define COPYRIGHT_YEAR   _("2002")
+#define COPYRIGHT_YEAR   _("2003")
 #define COPYRIGHT_HOLDER _("Andrew Wood <andrew.wood@ivarch.com>")
 #define PROJECT_HOMEPAGE "http://www.ivarch.com/programs/" PROGRAM_NAME ".shtml"
 #define BUG_REPORTS_TO   _("Andrew Wood <andrew.wood@ivarch.com>")
@@ -67,6 +67,7 @@
 # define stat64 stat
 # define fstat64 fstat
 # define open64 open
+# define lseek64 lseek
 #endif
 
 /* EOF $Id$ */

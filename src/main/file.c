@@ -28,7 +28,7 @@
 void main_getsize(opts_t options)
 {
 	struct stat64 sb;
-	int i;
+	int i, fd;
 
 	options->size = 0;
 
@@ -49,7 +49,15 @@ void main_getsize(opts_t options)
 		}
 
 		if (stat64(options->argv[i], &sb) == 0) {
-			options->size += sb.st_size;
+			if (S_ISBLK(sb.st_mode)) {
+				fd = open64(options->argv[i], O_RDONLY);
+				if (fd >= 0) {
+					options->size += lseek64(fd, 0, SEEK_END);
+					close(fd);
+				}
+			} else {
+				options->size += sb.st_size;
+			}
 		}
 	}
 }
