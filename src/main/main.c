@@ -14,6 +14,7 @@
 
 #include <termios.h>
 #include <unistd.h>
+#include <signal.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
@@ -32,6 +33,24 @@ void sig_init(void);
 void sig_nopause(void);
 void sig_allowpause(void);
 extern struct timeval sig__toffset;
+extern sig_atomic_t sig__newsize;
+
+
+/*
+ * Fill in options->width with the current terminal size, if possible.
+ */
+void get_width(opts_t options)
+{
+#ifdef TIOCGWINSZ
+	struct winsize wsz;
+
+	if (isatty(STDERR_FILENO)) {
+		if (ioctl(STDERR_FILENO, TIOCGWINSZ, &wsz) == 0) {
+			options->width = wsz.ws_col;
+		}
+	}
+#endif
+}
 
 
 /*
@@ -210,6 +229,11 @@ int main_loop(opts_t options)
 		if (final_update)
 			since_last = -1;
 
+		if (sig__newsize) {
+			sig__newsize = 0;
+			get_width(options);
+		}
+
 		main_display(options, elapsed, since_last, total_written);
 
 		since_last = 0;
@@ -233,9 +257,6 @@ int main_loop(opts_t options)
  */
 int main(int argc, char ** argv)
 {
-#ifdef TIOCGWINSZ
-	struct winsize wsz;
-#endif
 	struct termios t;
 	opts_t options;
 	int retcode = 0;
@@ -265,17 +286,9 @@ int main(int argc, char ** argv)
 			options->no_op = 1;
 	}
 
-#ifdef TIOCGWINSZ
-	if (isatty(STDERR_FILENO) && options->width == 0) {
-		/* Clear TOSTOP so we can get the width even if backgrounded */
-		tcgetattr(STDERR_FILENO, &t);
-		t.c_lflag &= ~TOSTOP;
-		tcsetattr(STDERR_FILENO, TCSANOW, &t);
-		if (ioctl(STDERR_FILENO, TIOCGWINSZ, &wsz) == 0) {
-			options->width = wsz.ws_col;
-		}
-	}
-#endif
+	if (options->width == 0)
+		get_width(options);
+
 
 	if (options->width < 1) options->width = 80;
 

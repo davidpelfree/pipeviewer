@@ -1,8 +1,9 @@
 $Id$
 
-0.4.3 - NOT YET RELEASED
+0.4.4 - NOT YET RELEASED
   + pause/resume support - don't count time while stopped
   + stop output when resumed in the background
+  + terminal size change support
   + bugfix: <=> indicator no longer sticks at right hand edge
 
 0.4.0 - 27 November 2002
