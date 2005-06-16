@@ -7,7 +7,7 @@
   index manhtml indent update-po \
   doc dist release \
   install uninstall \
-  rpm srpm deb
+  rpmbuild rpm srpm deb
 
 all: $(alltarg) $(CATALOGS)
 
@@ -205,22 +205,7 @@ uninstall:
 	  done; \
 	fi
 
-rpm: dist
-	echo macrofiles: `rpm --showrc \
-	  | grep ^macrofiles \
-	  | cut -d : -f 2- \
-	  | sed 's,^[^/]*/,/,'`:`pwd`/rpmmacros > rpmrc
-	echo %_topdir `pwd`/rpm > rpmmacros
-	rm -rf rpm
-	mkdir rpm
-	mkdir rpm/SPECS rpm/BUILD rpm/SOURCES rpm/RPMS
-	grep -hsv ^macrofiles /usr/lib/rpm/rpmrc /etc/rpmrc $$HOME/.rpmrc \
-	  >> rpmrc
-	rpmbuild $(RPMFLAGS) --rcfile=rpmrc -tb $(package)-$(version).tar.gz
-	mv rpm/RPMS/*/$(package)-*.rpm .
-	rm -rf rpm rpmmacros rpmrc
-
-srpm: dist
+rpmbuild:
 	echo macrofiles: `rpm --showrc \
 	  | grep ^macrofiles \
 	  | cut -d : -f 2- \
@@ -229,8 +214,20 @@ srpm: dist
 	rm -rf rpm
 	mkdir rpm
 	mkdir rpm/SPECS rpm/BUILD rpm/SOURCES rpm/RPMS rpm/SRPMS
-	grep -hsv ^macrofiles /usr/lib/rpm/rpmrc /etc/rpmrc $$HOME/.rpmrc \
-	  >> rpmrc
+	-cat /usr/lib/rpm/rpmrc /etc/rpmrc $$HOME/.rpmrc \
+	 | grep -hsv ^macrofiles \
+	 >> rpmrc
+
+rpm:
+	-test -e $(package)-$(version).tar.gz || $(MAKE) dist
+	-test -e rpmrc || $(MAKE) rpmbuild
+	rpmbuild $(RPMFLAGS) --rcfile=rpmrc -tb $(package)-$(version).tar.gz
+	mv rpm/RPMS/*/$(package)-*.rpm .
+	rm -rf rpm rpmmacros rpmrc
+
+srpm:
+	-test -e $(package)-$(version).tar.gz || $(MAKE) dist
+	-test -e rpmrc || $(MAKE) rpmbuild
 	rpmbuild $(RPMFLAGS) --rcfile=rpmrc -ts $(package)-$(version).tar.gz
 	mv rpm/SRPMS/*$(package)-*.rpm .
 	rm -rf rpm rpmmacros rpmrc

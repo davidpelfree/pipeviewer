@@ -2,7 +2,7 @@ Summary: Monitor the progress of data through a pipe.
 Name: @PACKAGE@
 Version: @VERSION@
 Release: 1
-Copyright: Artistic
+License: Artistic
 Group: Development/Tools
 Source: http://www.ivarch.com/programs/sources/@PACKAGE@-@VERSION@.tar.gz
 BuildRoot: /var/tmp/%{name}-%{version}-root
@@ -76,6 +76,9 @@ fi
 %doc README doc/NEWS doc/TODO doc/COPYING
 
 %changelog
+* Thu Jun 16 2005 Andrew Wood <andrew.wood@ivarch.com>
+- A minor problem with the spec file was fixed.
+
 * Mon Nov 15 2004 Andrew Wood <andrew.wood@ivarch.com>
 - A minor bug in the NLS code was fixed.
 
