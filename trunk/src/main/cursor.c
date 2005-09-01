@@ -91,7 +91,7 @@ static void cursor_lock__lockfile(int fd)
 	snprintf(lockfile, MAXPATHLEN, "%s/pv-%s-%i.lock",
 		 tmpdir, basename(ttydev), geteuid());
 #else
-	sprintf(lockfile, MAXPATHLEN, /* RATS: ignore */
+	sprintf(lockfile, MAXPATHLEN,	    /* RATS: ignore */
 		"%.*s/pv-%8s-%i.lock",
 		MAXPATHLEN - 64, tmpdir, basename(ttydev), geteuid());
 #endif
