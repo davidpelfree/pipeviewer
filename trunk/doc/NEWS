@@ -1,3 +1,6 @@
+0.9.2 - 1 September 2005
+  - Daniel Roethlisberger patch: use lockfiles if terminal locking fails
+
 0.9.1 - 16 June 2005
   - minor RPM spec file fix for Fedora Core 4
 
