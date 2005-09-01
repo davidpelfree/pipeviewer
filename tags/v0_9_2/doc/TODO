@@ -1,0 +1,9 @@
+Things still to do:
+
+  - fix cursor positioning (-c) to use semaphores instead of locking
+  - option -F to read list of files to use from a file
+  - another option to read list of files terminated by NULL not newline
+  - if the first pv exits, should the second become IPC leader?
+  - get more translations
+
+Any assistance would be appreciated.

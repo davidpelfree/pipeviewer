@@ -1,0 +1,123 @@
+Summary: Monitor the progress of data through a pipe.
+Name: @PACKAGE@
+Version: @VERSION@
+Release: 1
+License: Artistic
+Group: Development/Tools
+Source: http://www.ivarch.com/programs/sources/@PACKAGE@-@VERSION@.tar.gz
+BuildRoot: /var/tmp/%{name}-%{version}-root
+
+%description
+PV ("Pipe Viewer") is a tool for monitoring the progress of data through a
+pipeline.  It can be inserted into any normal pipeline between two processes
+to give a visual indication of how quickly data is passing through, how long
+it has taken, how near to completion it is, and an estimate of how long it
+will be until completion.
+
+%prep
+%setup
+
+%build
+CFLAGS="$RPM_OPT_FLAGS" sh ./configure \
+  --prefix=/usr \
+  --infodir=/usr/share/info \
+  --mandir=/usr/share/man \
+  --sysconfdir=/etc
+make
+
+%install
+[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf "$RPM_BUILD_ROOT"
+[ -e "$RPM_BUILD_ROOT" ] || mkdir -m 755 "$RPM_BUILD_ROOT"
+[ -e "$RPM_BUILD_ROOT/etc" ] || mkdir -m 755 "$RPM_BUILD_ROOT/etc"
+[ -e "$RPM_BUILD_ROOT/usr" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr"
+[ -e "$RPM_BUILD_ROOT/usr/bin" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr/bin"
+[ -e "$RPM_BUILD_ROOT/usr/share" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr/share"
+[ -e "$RPM_BUILD_ROOT/usr/share/man" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr/share/man"
+[ -e "$RPM_BUILD_ROOT/usr/share/man/man1" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr/share/man/man1"
+[ -e "$RPM_BUILD_ROOT/usr/share/info" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr/share/info"
+[ -e "$RPM_BUILD_ROOT/usr/share/locale" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr/share/locale"
+make install DESTDIR="$RPM_BUILD_ROOT"
+
+%clean
+[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf "$RPM_BUILD_ROOT"
+
+%pre
+
+%post
+if [ -x /sbin/install-info ]; then
+	if [ -e /usr/share/info/dir ]; then
+		/sbin/install-info \
+		  /usr/share/info/@PACKAGE@.info.gz \
+		  /usr/share/info/dir
+	fi
+fi
+:
+
+%preun
+if [ -x /sbin/install-info ]; then
+	if [ -e /usr/share/info/dir ]; then
+		/sbin/install-info --delete \
+		  /usr/share/info/@PACKAGE@.info.gz \
+                  /usr/share/info/dir
+	fi
+fi
+:
+
+%postun
+
+%files
+%defattr(-, root, root)
+/usr/bin/*
+%docdir /usr/share/man/man1
+%docdir /usr/share/info
+/usr/share/man/man1/*
+/usr/share/info/*
+/usr/share/locale/*/LC_MESSAGES/*
+%doc README doc/NEWS doc/TODO doc/COPYING
+
+%changelog
+* Thu Sep  1 2005 Andrew Wood <andrew.wood@ivarch.com>
+- Terminal locking now uses lockfiles if the terminal itself cannot be locked.
+
+* Thu Jun 16 2005 Andrew Wood <andrew.wood@ivarch.com>
+- A minor problem with the spec file was fixed.
+
+* Mon Nov 15 2004 Andrew Wood <andrew.wood@ivarch.com>
+- A minor bug in the NLS code was fixed.
+
+* Sat Nov  6 2004 Andrew Wood <andrew.wood@ivarch.com>
+- Code cleanups and minor usability fixes.
+
+* Tue Jun 29 2004 Andrew Wood <andrew.wood@ivarch.com>
+- A port of the terminal locking code to FreeBSD.
+
+* Sun May  2 2004 Andrew Wood <andrew.wood@ivarch.com>
+- Major reliability improvements to the cursor positioning.
+
+* Sat Apr 24 2004 Andrew Wood <andrew.wood@ivarch.com>
+- Rate and size parameters can now take suffixes such as "k", "m" etc.
+
+* Mon Apr 19 2004 Andrew Wood <andrew.wood@ivarch.com>
+- A bug in the cursor positioning was fixed.
+
+* Thu Feb 12 2004 Andrew Wood <andrew.wood@ivarch.com>
+- Code cleanups and portability fixes.
+
+* Sun Feb  8 2004 Andrew Wood <andrew.wood@ivarch.com>
+- The display buffer is now dynamically allocated, fixing an overflow bug.
+
+* Wed Jan 14 2004 Andrew Wood <andrew.wood@ivarch.com>
+- A minor bug triggered when installing the RPM was fixed.
+
+* Mon Dec 22 2003 Andrew Wood <andrew.wood@ivarch.com>
+- Fixed a minor bug that occasionally reported "resource unavailable".
+
+* Wed Aug  6 2003 Andrew Wood <andrew.wood@ivarch.com>
+- Block devices now have their size read correctly, so pv /dev/hda1 works
+- Minor code cleanups (mainly removal of CVS "Id" tags)
+
+* Sun Aug  3 2003 Andrew Wood <andrew.wood@ivarch.com>
+- Doing ^Z then "bg" then "fg" now continues displaying
+
+* Tue Jul 16 2002 Andrew Wood <andrew.wood@ivarch.com>
+- First draft of spec file created.

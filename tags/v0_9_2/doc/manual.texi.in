@@ -1,0 +1,324 @@
+\input texinfo   @c -*-texinfo-*-
+@c
+@c %**start of header
+@setfilename @PACKAGE@.info
+@settitle @UCPACKAGE@ package
+@c %**end of header
+
+@dircategory Miscellaneous
+@direntry
+* PV: (pv).             Monitor the progress of data through a pipe.
+@end direntry
+
+@ifinfo
+This file documents the ``@PACKAGE@'' package, version @VERSION@.
+
+Copyright 2005 Andrew Wood
+
+Permission is granted to make and distribute verbatim copies of this manual
+provided the copyright notice and this permission notice are preserved on all
+copies.
+
+@ignore
+Permission is granted to process this file through TeX and print the results,
+provided the printed document carries a copying permission notice identical to
+this one except for the removal of this paragraph (this paragraph not being
+relevant to the printed manual).
+
+@end ignore
+Permission is granted to copy and distribute modified versions of this manual
+under the conditions for verbatim copying, provided that the entire resulting
+derived work is distributed under the terms of a permission notice identical
+to this one.
+
+Permission is granted to copy and distribute translations of this manual into
+another language, under the above conditions for modified versions, except that
+this permission notice may be stated in a translation approved by Andrew Wood.
+
+@end ifinfo
+
+@titlepage
+@title @UCPACKAGE@ @VERSION@
+@subtitle Pipe Viewer
+@author Andrew Wood
+@page
+@vskip 0pt plus 1filll
+Copyright @copyright{} 2005 Andrew Wood
+
+Permission is granted to make and distribute verbatim copies of this manual
+provided the copyright notice and this permission notice are preserved on all
+copies.
+
+Permission is granted to copy and distribute modified versions of this manual
+under the conditions for verbatim copying, provided that the entire resulting
+derived work is distributed under the terms of a permission notice identical
+to this one.
+
+Permission is granted to copy and distribute translations of this manual into
+another language, under the above conditions for modified versions, except that
+this permission notice may be stated in a translation approved by Andrew Wood.
+@end titlepage
+
+@ifinfo
+@node Top, Overview, , (dir)
+@top Pipe Viewer
+
+This edition of the @cite{PV manual}, last updated 29 June 2004,
+documents @code{@PACKAGE@} version @VERSION@.
+@end ifinfo
+
+@menu
+* Overview::           Overview of @code{@PACKAGE@}.
+* Invocation::         Invoking @code{@PACKAGE@}.
+
+* Concept Index::      Index of concepts.
+@detailmenu
+
+ --- The Detailed Node Listing ---
+
+* Display switches::   Options to change which information is shown.
+* Output modifiers::   Options altering the way this information is given.
+* General options::    Everything that's left over.
+
+@end detailmenu
+@end menu
+
+@node Overview, Invocation, Top, Top
+@chapter Overview
+
+This is the documentation for @code{@PACKAGE@}, a terminal-based tool for
+monitoring the progress of data through a pipeline.  It can be inserted into
+any normal pipeline between two processes to give a visual indication of how
+quickly data is passing through, how long it has taken, how near to
+completion it is, and an estimate of how long it will be until completion.
+
+@node Invocation, Display switches, Overview, Top
+@chapter Invocation
+
+Summary: @code{@PACKAGE@ [@var{OPTION}] [@var{FILE}]...}
+
+To use @code{@PACKAGE@}, insert it in a pipeline between two processes, with
+the appropriate options.  Its standard input will be passed through to its
+standard output and progress will be shown on standard error.
+
+@code{@PACKAGE@} will copy each supplied @var{FILE} in turn to standard output
+(@code{-} means standard input), or if no @var{FILE}s are specified just
+standard input is copied.  This is the same behaviour as @code{cat}.
+
+A simple example to watch how quickly a file is transferred using @code{nc}:
+
+@cindex Example, using nc
+
+@example
+@PACKAGE@ file | nc -w 1 somewhere.com 3000
+@end example
+
+A similar example, transferring a file from another process and passing the
+expected size to @code{@PACKAGE@}:
+
+@example
+cat file | @PACKAGE@ -s 12345 | nc -w 1 somewhere.com 3000
+@end example
+
+A more complicated example using numeric output to feed into the
+@code{dialog} program for a full-screen progress display:
+
+@cindex Example, using dialog
+
+@example
+(tar cf - . \
+ | @PACKAGE@ -n -s `du -sb . | awk '@{print $1@}'` \
+ | gzip -9 > out.tgz) 2>&1 \
+| dialog --gauge 'Progress' 7 70
+@end example
+
+Frequent use of this third form is not recommended as it may cause the
+programmer to overheat.
+
+@code{@PACKAGE@} takes many options, which are divided into display
+switches, output modifiers, and general options.
+
+@menu
+* Display switches::   Options to change which information is shown.
+* Output modifiers::   Options altering the way this information is given.
+* General options::    Everything that's left over.
+@end menu
+
+@node Display switches, Output modifiers, Invocation, Invocation
+@section Display switches
+
+If no display switches are specified, @code{@PACKAGE@} behaves as if
+@code{-p}, @code{-t}, @code{-e}, @code{-r}, and @code{-b} had been given
+(i.e. everything is switched on).  Otherwise, only those display types that
+are explicitly switched on will be shown.
+
+@table @code
+
+@cindex Progress bar
+@item -p
+@itemx --progress
+Turn the progress bar on.  If standard input is not a file and no size
+was given (with the @code{-s} modifier), the progress bar cannot indicate
+how close to completion the transfer is, so it will just move left and right
+to indicate that data is moving.
+
+@cindex Timer
+@cindex Elapsed time
+@cindex Time, elapsed
+@item -t
+@itemx --timer
+Turn the timer on.  This will display the total elapsed time that
+@code{@PACKAGE@} has been running for.
+
+@cindex ETA
+@cindex Completion time
+@cindex Time, until completion
+@item -e
+@itemx --eta
+Turn the ETA timer on.  This will attempt to guess, based on previous
+transfer rates and the total data size, how long it will be before
+completion.  This option will have no effect if the total data size cannot
+be determined.
+
+@cindex Rate
+@cindex Transfer rate
+@item -r
+@itemx --rate
+Turn the rate counter on.  This will display the current rate of data
+transfer.
+
+@cindex Bytes transferred
+@item -b
+@itemx --bytes
+Turn the total byte counter on.  This will display the total amount of
+data transferred so far.
+
+@cindex Numeric output
+@cindex Percentage only output
+@cindex Dialog, output to
+@item -n
+@itemx --numeric
+Numeric output.  Instead of giving a visual indication of progress,
+@code{@PACKAGE@} will give an integer percentage, one per line, on standard
+error, suitable for piping (via convoluted redirection) into the
+@code{dialog} program.  Note that @code{-f} is not required if @code{-n} is
+being used.
+
+@cindex No output
+@cindex Quiet (no output)
+@cindex Silent (no output)
+@item -q
+@itemx --quiet
+No output.  Useful if the @code{-L} option is being used on its own to just
+limit the transfer rate of a pipe.
+
+@end table
+
+@node Output modifiers, General options, Display switches, Invocation
+@section Output modifiers
+
+@table @code
+
+@cindex Rate limiting
+@cindex Limiting transfer rate
+@item -L @var{RATE}
+@itemx --rate-limit @var{RATE}
+Limit the transfer to a maximum of @var{RATE} bytes per second.
+A suffix of "k", "m", "g", or "t" can be added to denote
+kilobytes (*1024), megabytes, and so on.
+
+@cindex Wait
+@cindex Wait until transfer starts
+@item -W
+@itemx --wait
+Wait until the first byte has been transferred before showing any progress
+information or calculating any ETAs.  Useful if the program you are piping to
+or from requires extra information before it starts, eg piping data into
+@code{gpg} or @code{mcrypt} which require a passphrase before data can be
+processed.
+
+@cindex Data size
+@cindex Size
+@item -s @var{SIZE}
+@itemx --size @var{SIZE}
+Assume the total amount of data to be transferred is @var{SIZE} bytes when
+calculating percentages and ETAs.  The same suffixes of "k", "m"
+etc can be used as with @code{-L}.
+
+@cindex Update interval
+@cindex Interval
+@item -i @var{SEC}
+@itemx --interval @var{SEC}
+Wait @var{SEC} seconds between updates.  The default is to update every
+second.  Note that this can be a decimal such as 0.1.
+
+@cindex Output width
+@cindex Width
+@cindex Terminal width
+@cindex Terminal columns
+@item -w @var{WIDTH}
+@itemx --width @var{WIDTH}
+Assume the terminal is @var{WIDTH} characters wide, instead of trying to
+work it out (or assuming 80 if it cannot be guessed).
+
+@cindex Output height
+@cindex Height
+@cindex Terminal height
+@cindex Terminal rows
+@item -H @var{HEIGHT}
+@itemx --height @var{HEIGHT}
+Assume the terminal is @var{HEIGHT} rows high, instead of trying to
+work it out (or assuming 25 if it cannot be guessed).
+
+@cindex Name
+@cindex Prefix
+@item -N @var{NAME}
+@itemx --name @var{NAME}
+Prefix the output information with @var{NAME}. Useful in conjunction with
+@code{-c} if you have a complicated pipeline and you want to be able to tell
+different parts of it apart.
+
+@cindex Force terminal output
+@item -f
+@itemx --force
+Force output.  Normally, @code{@PACKAGE@} will not output any visual display
+if standard error is not a terminal.  This option forces it to do so.
+
+@cindex Cursor positioning
+@item -c
+@itemx --cursor
+Use cursor positioning escape sequences instead of just using carriage
+returns.  This is useful in conjunction with @code{-N} (name) if you are
+using multiple @code{@PACKAGE@} invocations in a single, long, pipeline. 
+
+@end table
+
+@node General options,  , Output modifiers, Invocation
+@section General options
+
+@table @code
+
+@item -h
+@itemx --help
+Print a usage message on standard output and exit successfully.
+
+@item -l
+@itemx --license
+Print details of the program's license on standard output and exit
+successfully.
+
+@item -V
+@itemx --version
+Print version information on standard output and exit successfully.
+
+@end table
+
+@node Concept Index,  ,  , Top
+@unnumbered Concept Index
+
+@printindex cp
+
+@contents
+@bye
+
+@c EOF

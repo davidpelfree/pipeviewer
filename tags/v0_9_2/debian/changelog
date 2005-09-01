@@ -1,0 +1,217 @@
+pv (0.9.1-1) unstable; urgency=low
+
+  * New upstream release
+  * Added ${misc:Depends} to Depends
+  * Added doc-base to Suggests
+  * echo 4 > debian/compat, and update debian/rules and Build-Depends
+  * Remove not needed debian/dirs
+  * Update Standards-Version to 3.6.2
+
+ -- Cédric Delfosse <cedric@debian.org>  Sat,  9 Jul 2005 13:30:08 +0200
+
+pv (0.9.0-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Mon, 22 Nov 2004 21:59:27 +0100
+
+pv (0.8.6-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Fri,  9 Jul 2004 23:19:54 +0200
+
+pv (0.8.5-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Mon,  3 May 2004 21:15:38 +0200
+
+pv (0.8.2-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Tue, 27 Apr 2004 15:48:26 +0200
+
+pv (0.8.1-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Sat, 24 Apr 2004 00:39:57 +0200
+
+pv (0.8.0-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Sun, 15 Feb 2004 16:55:43 +0100
+
+pv (0.6.3-2) unstable; urgency=low
+
+  * Fix non ASCII character in man page (closes: Bug#219825)
+
+ -- Cédric Delfosse <cedric@debian.org>  Sun,  4 Jan 2004 00:38:39 +0100
+
+pv (0.6.3-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Sat,  3 Jan 2004 23:45:32 +0100
+
+pv (0.6.2-2) unstable; urgency=low
+
+  * Changed too long description in debian/control (closes: Bug#204323)
+
+ -- Cédric Delfosse <cedric@debian.org>  Fri,  8 Aug 2003 18:41:02 +0200
+
+pv (0.6.2-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Wed,  6 Aug 2003 09:19:56 +0200
+
+pv (0.5.9-1) unstable; urgency=low
+
+  * New upstream release
+  * Update Standards-Version to 3.6.0
+
+ -- Cédric Delfosse <cedric@debian.org>  Wed, 30 Jul 2003 22:17:51 +0200
+
+pv (0.5.3-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Mon,  5 May 2003 20:58:08 +0200
+
+pv (0.5.0-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Tue, 15 Apr 2003 22:26:08 +0200
+
+pv (0.4.9-1) unstable; urgency=low
+
+  * New upstream release
+  * Large file support (closes: Bug#180986)
+  * Added LDFLAGS in the ./configure line of debian/rules
+  * Remove more files from doc/ for the clean target in debian/rules
+  * Added texinfo to Build-Depends in debian/control
+  * Modified long description so that it is 80 characters wide
+
+ -- Cédric Delfosse <cedric@debian.org>  Wed, 19 Feb 2003 20:41:12 +0100
+
+pv (0.4.5-1) unstable; urgency=low
+
+  * New upstream release
+  * Update to Debian Policy standards version 3.5.8
+
+ -- Cédric Delfosse <cedric@debian.org>  Tue, 31 Dec 2002 17:05:36 +0100
+
+pv (0.4.0-1) unstable; urgency=low
+
+  * Initial Release. (closes: Bug#171622)
+
+ -- Cédric Delfosse <cedric@debian.org>  Tue,  3 Dec 2002 21:50:20 +0100
+
+pv (0.9.0-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Mon, 22 Nov 2004 21:59:27 +0100
+
+pv (0.8.6-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Fri,  9 Jul 2004 23:19:54 +0200
+
+pv (0.8.5-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Mon,  3 May 2004 21:15:38 +0200
+
+pv (0.8.2-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Tue, 27 Apr 2004 15:48:26 +0200
+
+pv (0.8.1-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Sat, 24 Apr 2004 00:39:57 +0200
+
+pv (0.8.0-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Sun, 15 Feb 2004 16:55:43 +0100
+
+pv (0.6.3-2) unstable; urgency=low
+
+  * Fix non ASCII character in man page (closes: Bug#219825)
+
+ -- Cédric Delfosse <cedric@debian.org>  Sun,  4 Jan 2004 00:38:39 +0100
+
+pv (0.6.3-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Sat,  3 Jan 2004 23:45:32 +0100
+
+pv (0.6.2-2) unstable; urgency=low
+
+  * Changed too long description in debian/control (closes: Bug#204323)
+
+ -- Cédric Delfosse <cedric@debian.org>  Fri,  8 Aug 2003 18:41:02 +0200
+
+pv (0.6.2-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Wed,  6 Aug 2003 09:19:56 +0200
+
+pv (0.5.9-1) unstable; urgency=low
+
+  * New upstream release
+  * Update Standards-Version to 3.6.0
+
+ -- Cédric Delfosse <cedric@debian.org>  Wed, 30 Jul 2003 22:17:51 +0200
+
+pv (0.5.3-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Mon,  5 May 2003 20:58:08 +0200
+
+pv (0.5.0-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cédric Delfosse <cedric@debian.org>  Tue, 15 Apr 2003 22:26:08 +0200
+
+pv (0.4.9-1) unstable; urgency=low
+
+  * New upstream release
+  * Large file support (closes: Bug#180986)
+  * Added LDFLAGS in the ./configure line of debian/rules
+  * Remove more files from doc/ for the clean target in debian/rules
+  * Added texinfo to Build-Depends in debian/control
+  * Modified long description so that it is 80 characters wide
+
+ -- Cédric Delfosse <cedric@debian.org>  Wed, 19 Feb 2003 20:41:12 +0100
+
+pv (0.4.5-1) unstable; urgency=low
+
+  * New upstream release
+  * Update to Debian Policy standards version 3.5.8
+
+ -- Cédric Delfosse <cedric@debian.org>  Tue, 31 Dec 2002 17:05:36 +0100
+
+pv (0.4.0-1) unstable; urgency=low
+
+  * Initial Release. (closes: Bug#171622)
+
+ -- Cédric Delfosse <cedric@debian.org>  Tue,  3 Dec 2002 21:50:20 +0100
+
