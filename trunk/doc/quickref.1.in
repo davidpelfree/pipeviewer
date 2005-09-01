@@ -244,6 +244,10 @@ Mathias Gumz
 .br
 (reported NLS bug)
 
+Daniel Roethlisberger
+.br
+(submitted patch to use lockfiles for -c if terminal locking fails)
+
 
 .SH BUGS
 If you find any bugs, please contact the primary author, either by email or

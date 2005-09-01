@@ -1,7 +1,7 @@
 /*
  * Global program option structure and the parsing function prototype.
  *
- * Copyright 2004 Andrew Wood, distributed under the Artistic License.
+ * Copyright 2005 Andrew Wood, distributed under the Artistic License.
  */
 
 #ifndef _OPTIONS_H
