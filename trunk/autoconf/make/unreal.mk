@@ -219,15 +219,15 @@ rpmbuild:
 	 >> rpmrc
 
 rpm:
-	-test -e $(package)-$(version).tar.gz || $(MAKE) dist
-	-test -e rpmrc || $(MAKE) rpmbuild
+	test -e $(package)-$(version).tar.gz || $(MAKE) dist
+	test -e rpmrc || $(MAKE) rpmbuild
 	rpmbuild $(RPMFLAGS) --rcfile=rpmrc -tb $(package)-$(version).tar.gz
 	mv rpm/RPMS/*/$(package)-*.rpm .
 	rm -rf rpm rpmmacros rpmrc
 
 srpm:
-	-test -e $(package)-$(version).tar.gz || $(MAKE) dist
-	-test -e rpmrc || $(MAKE) rpmbuild
+	test -e $(package)-$(version).tar.gz || $(MAKE) dist
+	test -e rpmrc || $(MAKE) rpmbuild
 	rpmbuild $(RPMFLAGS) --rcfile=rpmrc -ts $(package)-$(version).tar.gz
 	mv rpm/SRPMS/*$(package)-*.rpm .
 	rm -rf rpm rpmmacros rpmrc

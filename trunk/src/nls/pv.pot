@@ -8,21 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-16 11:25+0100\n"
+"POT-Creation-Date: 2005-09-01 14:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: src/main/cursor.c:166 src/main/cursor.c:182 src/main/cursor.c:256
-msgid "failed to open terminal"
-msgstr ""
-
-#: src/main/cursor.c:174
-msgid "failed to lock terminal"
-msgstr ""
 
 #: src/main/display.c:168
 msgid "GB"
@@ -60,140 +52,12 @@ msgstr ""
 msgid "ETA"
 msgstr ""
 
-#: src/main/file.c:87
-msgid "failed to close file"
+#: src/main/cursor.c:208 src/main/cursor.c:224 src/main/cursor.c:298
+msgid "failed to open terminal"
 msgstr ""
 
-#: src/main/file.c:106
-msgid "failed to read file"
-msgstr ""
-
-#: src/main/file.c:115
-msgid "failed to stat file"
-msgstr ""
-
-#: src/main/file.c:124
-msgid "failed to stat output file"
-msgstr ""
-
-#: src/main/file.c:140
-msgid "input file is output file"
-msgstr ""
-
-#: src/main/help.c:31
-msgid "show progress bar"
-msgstr ""
-
-#: src/main/help.c:33
-msgid "show elapsed time"
-msgstr ""
-
-#: src/main/help.c:35
-msgid "show estimated time of arrival (completion)"
-msgstr ""
-
-#: src/main/help.c:37
-msgid "show data transfer rate counter"
-msgstr ""
-
-#: src/main/help.c:39
-msgid "show number of bytes transferred"
-msgstr ""
-
-#: src/main/help.c:41
-msgid "output even if standard error is not a terminal"
-msgstr ""
-
-#: src/main/help.c:43
-msgid "output percentages, not visual information"
-msgstr ""
-
-#: src/main/help.c:45
-msgid "do not output any transfer information at all"
-msgstr ""
-
-#: src/main/help.c:47
-msgid "use cursor positioning escape sequences"
-msgstr ""
-
-#: src/main/help.c:48
-msgid "RATE"
-msgstr ""
-
-#: src/main/help.c:49
-msgid "limit transfer to RATE bytes per second"
-msgstr ""
-
-#: src/main/help.c:51
-msgid "display nothing until first byte transferred"
-msgstr ""
-
-#: src/main/help.c:52
-msgid "SIZE"
-msgstr ""
-
-#: src/main/help.c:53
-msgid "set estimated data size to SIZE bytes"
-msgstr ""
-
-#: src/main/help.c:54
-msgid "SEC"
-msgstr ""
-
-#: src/main/help.c:55
-msgid "update every SEC seconds"
-msgstr ""
-
-#: src/main/help.c:56
-msgid "WIDTH"
-msgstr ""
-
-#: src/main/help.c:57
-msgid "assume terminal is WIDTH characters wide"
-msgstr ""
-
-#: src/main/help.c:58
-msgid "HEIGHT"
-msgstr ""
-
-#: src/main/help.c:59
-msgid "assume terminal is HEIGHT rows high"
-msgstr ""
-
-#: src/main/help.c:60
-msgid "NAME"
-msgstr ""
-
-#: src/main/help.c:61
-msgid "prefix visual information with NAME"
-msgstr ""
-
-#: src/main/help.c:64
-msgid "show this help and exit"
-msgstr ""
-
-#: src/main/help.c:66
-msgid "show the license this program is distributed under"
-msgstr ""
-
-#: src/main/help.c:68
-msgid "show version information and exit"
-msgstr ""
-
-#: src/main/help.c:74
-#, c-format
-msgid "Usage: %s [OPTION] [FILE]..."
-msgstr ""
-
-#: src/main/help.c:78
-msgid ""
-"Concatenate FILE(s), or standard input, to standard output,\n"
-"with monitoring."
-msgstr ""
-
-#: src/main/help.c:153
-#, c-format
-msgid "Please report any bugs to %s."
+#: src/main/cursor.c:216
+msgid "failed to lock terminal"
 msgstr ""
 
 #: src/main/license.c:19
@@ -410,6 +274,142 @@ msgstr ""
 msgid ""
 "If that scrolled by too quickly, you may want to pipe it to a\n"
 "pager such as `more' or `less', eg `%s -l | more'."
+msgstr ""
+
+#: src/main/file.c:87
+msgid "failed to close file"
+msgstr ""
+
+#: src/main/file.c:106
+msgid "failed to read file"
+msgstr ""
+
+#: src/main/file.c:115
+msgid "failed to stat file"
+msgstr ""
+
+#: src/main/file.c:124
+msgid "failed to stat output file"
+msgstr ""
+
+#: src/main/file.c:140
+msgid "input file is output file"
+msgstr ""
+
+#: src/main/help.c:31
+msgid "show progress bar"
+msgstr ""
+
+#: src/main/help.c:33
+msgid "show elapsed time"
+msgstr ""
+
+#: src/main/help.c:35
+msgid "show estimated time of arrival (completion)"
+msgstr ""
+
+#: src/main/help.c:37
+msgid "show data transfer rate counter"
+msgstr ""
+
+#: src/main/help.c:39
+msgid "show number of bytes transferred"
+msgstr ""
+
+#: src/main/help.c:41
+msgid "output even if standard error is not a terminal"
+msgstr ""
+
+#: src/main/help.c:43
+msgid "output percentages, not visual information"
+msgstr ""
+
+#: src/main/help.c:45
+msgid "do not output any transfer information at all"
+msgstr ""
+
+#: src/main/help.c:47
+msgid "use cursor positioning escape sequences"
+msgstr ""
+
+#: src/main/help.c:48
+msgid "RATE"
+msgstr ""
+
+#: src/main/help.c:49
+msgid "limit transfer to RATE bytes per second"
+msgstr ""
+
+#: src/main/help.c:51
+msgid "display nothing until first byte transferred"
+msgstr ""
+
+#: src/main/help.c:52
+msgid "SIZE"
+msgstr ""
+
+#: src/main/help.c:53
+msgid "set estimated data size to SIZE bytes"
+msgstr ""
+
+#: src/main/help.c:54
+msgid "SEC"
+msgstr ""
+
+#: src/main/help.c:55
+msgid "update every SEC seconds"
+msgstr ""
+
+#: src/main/help.c:56
+msgid "WIDTH"
+msgstr ""
+
+#: src/main/help.c:57
+msgid "assume terminal is WIDTH characters wide"
+msgstr ""
+
+#: src/main/help.c:58
+msgid "HEIGHT"
+msgstr ""
+
+#: src/main/help.c:59
+msgid "assume terminal is HEIGHT rows high"
+msgstr ""
+
+#: src/main/help.c:60
+msgid "NAME"
+msgstr ""
+
+#: src/main/help.c:61
+msgid "prefix visual information with NAME"
+msgstr ""
+
+#: src/main/help.c:64
+msgid "show this help and exit"
+msgstr ""
+
+#: src/main/help.c:66
+msgid "show the license this program is distributed under"
+msgstr ""
+
+#: src/main/help.c:68
+msgid "show version information and exit"
+msgstr ""
+
+#: src/main/help.c:74
+#, c-format
+msgid "Usage: %s [OPTION] [FILE]..."
+msgstr ""
+
+#: src/main/help.c:78
+msgid ""
+"Concatenate FILE(s), or standard input, to standard output,\n"
+"with monitoring."
+msgstr ""
+
+#: src/main/help.c:153
+#, c-format
+msgid "Please report any bugs to %s."
 msgstr ""
 
 #. RATS: ignore
