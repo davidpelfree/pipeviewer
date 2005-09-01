@@ -7,7 +7,8 @@
  * first `pv' process.
  *
  * However, some OSes (FreeBSD and MacOS X so far) don't allow locking of a
- * terminal, so we have to abort if terminal locking doesn't work.
+ * terminal, so we try to use a lockfile if terminal locking doesn't work,
+ * and finally abort if even that is unavailable.
  *
  * Copyright 2004 Andrew Wood, distributed under the Artistic License.
  */
@@ -25,18 +26,16 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#undef USE_UU_LOCK
-
 #ifdef HAVE_IPC
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
-#ifdef HAVE_LIBUTIL
-#ifdef HAVE_LIBUTIL_H
-#define USE_UU_LOCK 1
-#include <libutil.h>
-#endif				/* HAVE_LIBUTIL_H */
-#endif				/* HAVE_LIBUTIL */
+# ifdef HAVE_SYS_PARAM_H
+# include <sys/param.h>
+# endif
+# ifdef HAVE_LIBGEN_H
+# include <libgen.h>
+# endif
 #endif				/* HAVE_IPC */
 
 int getnum_i(char *);
@@ -51,15 +50,72 @@ static int cursor__y_lastread = 0;	 /* last value of __y_top seen */
 static int cursor__y_offset = 0;	 /* our Y offset from this top position */
 static int cursor__needreinit = 0;	 /* set if we need to reinit cursor pos */
 static int cursor__noipc = 0;		 /* set if we can't use IPC */
-#ifdef USE_UU_LOCK
-static int cursor__uulock = 0;		 /* set if we're using uu_lock() */
-#endif
 #endif				/* HAVE_IPC */
+static int cursor__uselockfile = 0;	 /* set if we used a lockfile */
+static int cursor__lock_fd = -1;	 /* fd of lockfile, -1 if none open */
 static int cursor__y_start = 0;		 /* our initial Y coordinate */
 
 
 /*
- * Lock the terminal on the given file descriptor.
+ * Lock the terminal on the given file descriptor by creating and locking a
+ * per-euid, per-tty, lockfile in ${TMPDIR:-${TMP:-/tmp}}.
+ */
+static void cursor_lock__lockfile(int fd)
+{
+#ifdef O_EXLOCK
+	char *ttydev;
+	char *tmpdir;
+#ifndef MAXPATHLEN
+#define MAXPATHLEN 4096
+#endif
+	char lockfile[MAXPATHLEN + 1];	 /* RATS: ignore */
+
+	cursor__uselockfile = 1;
+
+	ttydev = ttyname(fd);		    /* RATS: ignore */
+	if (!ttydev) {
+#ifdef HAVE_IPC
+		cursor__noipc = 1;
+#endif
+		return;
+	}
+
+	tmpdir = (char *) getenv("TMPDIR"); /* RATS: ignore */
+	if (!tmpdir)
+		tmpdir = (char *) getenv("TMP");	/* RATS: ignore */
+	if (!tmpdir)
+		tmpdir = "/tmp";
+
+#ifdef HAVE_SNPRINTF
+	snprintf(lockfile, MAXPATHLEN, "%s/pv-%s-%i.lock",
+		 tmpdir, basename(ttydev), geteuid());
+#else
+	sprintf(lockfile, MAXPATHLEN, /* RATS: ignore */
+		"%.*s/pv-%8s-%i.lock",
+		MAXPATHLEN - 64, tmpdir, basename(ttydev), geteuid());
+#endif
+
+	cursor__lock_fd =
+	    open(lockfile, O_RDWR | O_EXLOCK | O_CREAT | O_NOFOLLOW, 0600);
+#ifdef HAVE_IPC
+	if (cursor__lock_fd < 0)
+		cursor__noipc = 1;
+#endif
+
+#else				/* !O_EXLOCK */
+
+	cursor__uselockfile = 1;
+#ifdef HAVE_IPC
+	cursor__noipc = 1;
+#endif
+
+#endif				/* O_EXLOCK */
+}
+
+
+/*
+ * Lock the terminal on the given file descriptor, falling back to using a
+ * lockfile if the terminal itself cannot be locked.
  */
 static void cursor_lock(int fd)
 {
@@ -71,18 +127,7 @@ static void cursor_lock(int fd)
 	lock.l_len = 1;
 	while (fcntl(fd, F_SETLKW, &lock) < 0) {
 		if (errno != EINTR) {
-#ifdef USE_UU_LOCK
-			char *ttyfile;
-
-			ttyfile = ttyname(STDERR_FILENO);	/* RATS: ignore (unimportant) */
-			if ((ttyfile) && (uu_lock(ttyfile) == 0)) {
-				cursor__uulock = 1;
-			} else {
-				cursor__noipc = 1;
-			}
-#else
-			cursor__noipc = 1;
-#endif
+			cursor_lock__lockfile(fd);
 			return;
 		}
 	}
@@ -90,28 +135,24 @@ static void cursor_lock(int fd)
 
 
 /*
- * Unlock the terminal on the given file descriptor.
+ * Unlock the terminal on the given file descriptor.  If cursor_lock used
+ * lockfile locking, unlock the lockfile.
  */
 static void cursor_unlock(int fd)
 {
 	struct flock lock;
 
-#ifdef USE_UU_LOCK
-	if (cursor__uulock) {
-		char *ttyfile;
-		ttyfile = ttyname(STDERR_FILENO);	/* RATS: ignore (unimportant) */
-		if (ttyfile) {
-			uu_unlock(ttyfile);
-		}
-		return;
+	if (cursor__uselockfile) {
+		if (cursor__lock_fd >= 0)
+			close(cursor__lock_fd);
+		cursor__lock_fd = -1;
+	} else {
+		lock.l_type = F_UNLCK;
+		lock.l_whence = SEEK_SET;
+		lock.l_start = 0;
+		lock.l_len = 1;
+		fcntl(fd, F_SETLK, &lock);
 	}
-#endif
-
-	lock.l_type = F_UNLCK;
-	lock.l_whence = SEEK_SET;
-	lock.l_start = 0;
-	lock.l_len = 1;
-	fcntl(fd, F_SETLK, &lock);
 }
 
 

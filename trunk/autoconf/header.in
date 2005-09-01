@@ -5,23 +5,19 @@
 /* Define if you have "config.h" (yes, you have). */
 #undef HAVE_CONFIG_H
 
-/* Define if you have the getopt_long function. */
-#undef HAVE_GETOPT_LONG
-
-/* Define if you have "getopt.h". */
+/* Various other header files. */
 #undef HAVE_GETOPT_H
-
-/* Define if you have getopt. */
-#undef HAVE_GETOPT
-
-/* Define if <sys/ipc.h> is available. */
+#undef HAVE_LIMITS_H
 #undef HAVE_SYS_IPC_H
+#undef HAVE_SYS_PARAM_H
+#undef HAVE_LIBGEN_H
 
-/* Define if <libutil.h> is available. */
-#undef HAVE_LIBUTIL_H
-
-/* Define if we have libutil. */
-#undef HAVE_LIBUTIL
+/* Functions. */
+#undef HAVE_GETOPT
+#undef HAVE_GETOPT_LONG
+#undef HAVE_MEMCPY
+#undef HAVE_BASENAME
+#undef HAVE_SNPRINTF
 
 /* NLS stuff. */
 #undef ENABLE_NLS
@@ -45,7 +41,7 @@
 #define VERSION		"0.0.0"
 
 /* Various identification and legal drivel. */
-#define COPYRIGHT_YEAR   _("2004")
+#define COPYRIGHT_YEAR   _("2005")
 #define COPYRIGHT_HOLDER _("Andrew Wood <andrew.wood@ivarch.com>")
 #define PROJECT_HOMEPAGE "http://www.ivarch.com/programs/" PROGRAM_NAME ".shtml"
 #define BUG_REPORTS_TO   _("Andrew Wood <andrew.wood@ivarch.com>")
