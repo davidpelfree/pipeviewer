@@ -117,8 +117,7 @@ AC_SUBST(NLSOBJ)
 
 dnl Getopt checks.
 dnl
-AC_CHECK_FUNCS(getopt_long)
-AC_CHECK_FUNCS(getopt)
+AC_CHECK_FUNCS(getopt_long getopt)
 AC_CHECK_HEADERS(getopt.h)
 
 dnl LFS checks.
@@ -131,11 +130,8 @@ dnl Check for various header files and set various other macros.
 dnl
 AC_DEFINE(HAVE_CONFIG_H)
 AC_HEADER_STDC
-AC_CHECK_FUNCS(memcpy)
-AC_CHECK_HEADERS(limits.h)
-AC_CHECK_HEADERS(sys/ipc.h)
-AC_CHECK_HEADERS(libutil.h)
-AC_CHECK_LIB(util, uu_lock, [], [], [])
+AC_CHECK_FUNCS(memcpy basename snprintf)
+AC_CHECK_HEADERS(limits.h sys/ipc.h sys/param.h libgen.h)
 
 test -z "$INSTALL_DATA" && INSTALL_DATA='${INSTALL} -m 644'
 AC_SUBST(INSTALL_DATA)
