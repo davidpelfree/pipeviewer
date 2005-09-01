@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-16 11:25+0100\n"
+"POT-Creation-Date: 2005-09-01 14:36+0100\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Date: 1999-06-01 15:18:29+0100\n"
 "From: Andrew Wood <ivarch@ubik>\n"
@@ -18,15 +18,6 @@ msgstr ""
 "nls/intl/gettext.c src/nls/intl/loadmsgcat.c src/nls/intl/localealias.c src/"
 "nls/intl/textdomain.c src/nls/intl-cat/cat-compat.c src/nls/intl-gett/intl-"
 "compat.c\n"
-
-#: src/main/cursor.c:166 src/main/cursor.c:182 src/main/cursor.c:256
-msgid "failed to open terminal"
-msgstr "l'ouverture du terminal a échoué"
-
-#: src/main/cursor.c:174
-#, fuzzy
-msgid "failed to lock terminal"
-msgstr "l'ouverture du terminal a échoué"
 
 #: src/main/display.c:168
 msgid "GB"
@@ -64,162 +55,14 @@ msgstr "O/s "
 msgid "ETA"
 msgstr "ETA"
 
-#: src/main/file.c:87
-msgid "failed to close file"
-msgstr "la fermeture du fichier a échoué"
+#: src/main/cursor.c:208 src/main/cursor.c:224 src/main/cursor.c:298
+msgid "failed to open terminal"
+msgstr "l'ouverture du terminal a échoué"
 
-#: src/main/file.c:106
-msgid "failed to read file"
-msgstr "la lecture du fichier a échoué"
-
-#: src/main/file.c:115
-msgid "failed to stat file"
-msgstr "échec à statuer sur le fichier"
-
-#: src/main/file.c:124
-msgid "failed to stat output file"
-msgstr "échec à statuer sur le fichier de sortie"
-
-#: src/main/file.c:140
-msgid "input file is output file"
-msgstr "fichiers d'entré et de sortie sont les mêmes"
-
-#: src/main/help.c:31
+#: src/main/cursor.c:216
 #, fuzzy
-msgid "show progress bar"
-msgstr "affiche la barre de progression"
-
-#: src/main/help.c:33
-#, fuzzy
-msgid "show elapsed time"
-msgstr "affiche le temps écoulé"
-
-#: src/main/help.c:35
-#, fuzzy
-msgid "show estimated time of arrival (completion)"
-msgstr "affiche l'heure approximative de l'achèvement de la tâche"
-
-#: src/main/help.c:37
-#, fuzzy
-msgid "show data transfer rate counter"
-msgstr "affiche le taux de tranfert des données"
-
-#: src/main/help.c:39
-#, fuzzy
-msgid "show number of bytes transferred"
-msgstr "affiche le nombre d'octets transférés"
-
-#: src/main/help.c:41
-#, fuzzy
-msgid "output even if standard error is not a terminal"
-msgstr "imprime vers la sortie d'erreur même si ce n'est pas un terminal"
-
-#: src/main/help.c:43
-#, fuzzy
-msgid "output percentages, not visual information"
-msgstr "imprime en pourcentage, pas les informations visuelles"
-
-#: src/main/help.c:45
-#, fuzzy
-msgid "do not output any transfer information at all"
-msgstr "n'afficher aucune information de transfert"
-
-#: src/main/help.c:47
-#, fuzzy
-msgid "use cursor positioning escape sequences"
-msgstr "utiliser les séquences d'échappements de positionnement de curseur"
-
-#: src/main/help.c:48
-msgid "RATE"
-msgstr "TAUX"
-
-#: src/main/help.c:49
-#, fuzzy
-msgid "limit transfer to RATE bytes per second"
-msgstr "limite le taux de transfer à TAUX octets par seconde"
-
-#: src/main/help.c:51
-#, fuzzy
-msgid "display nothing until first byte transferred"
-msgstr "ne rien afficher avant qu'au moins un octet soit tranféré"
-
-#: src/main/help.c:52
-msgid "SIZE"
-msgstr "TAILLE"
-
-#: src/main/help.c:53
-#, fuzzy
-msgid "set estimated data size to SIZE bytes"
-msgstr "ajuste la taille estimée des données à TAILLE octets"
-
-#: src/main/help.c:54
-msgid "SEC"
-msgstr ""
-
-#: src/main/help.c:55
-#, fuzzy
-msgid "update every SEC seconds"
-msgstr "mise-à-jour toute les SEC secondes"
-
-#: src/main/help.c:56
-msgid "WIDTH"
-msgstr "LARGEUR"
-
-#: src/main/help.c:57
-#, fuzzy
-msgid "assume terminal is WIDTH characters wide"
-msgstr "présumer la largeur du terminal à LARGEUR caractères"
-
-#: src/main/help.c:58
-msgid "HEIGHT"
-msgstr ""
-
-#: src/main/help.c:59
-#, fuzzy
-msgid "assume terminal is HEIGHT rows high"
-msgstr "présumer la largeur du terminal à LARGEUR caractères"
-
-#: src/main/help.c:60
-msgid "NAME"
-msgstr "NOM"
-
-#: src/main/help.c:61
-#, fuzzy
-msgid "prefix visual information with NAME"
-msgstr "préfixer les informations visuelles avec NOM"
-
-#: src/main/help.c:64
-#, fuzzy
-msgid "show this help and exit"
-msgstr "afficher cette aide puis quitter"
-
-#: src/main/help.c:66
-#, fuzzy
-msgid "show the license this program is distributed under"
-msgstr "affiche la license sous laquelle ce programme est distribué"
-
-#: src/main/help.c:68
-#, fuzzy
-msgid "show version information and exit"
-msgstr "afficher la version puis quitter"
-
-#: src/main/help.c:74
-#, c-format
-msgid "Usage: %s [OPTION] [FILE]..."
-msgstr "Utilisation : %s [OPTIONS] [FICHIER]..."
-
-#: src/main/help.c:78
-msgid ""
-"Concatenate FILE(s), or standard input, to standard output,\n"
-"with monitoring."
-msgstr ""
-"Concatène FICHIER(s), ou l'entrée standard, sur la sortie standard\n"
-"avec monitorage."
-
-#: src/main/help.c:153
-#, c-format
-msgid "Please report any bugs to %s."
-msgstr "SVP rapporter touts bogues à %s."
+msgid "failed to lock terminal"
+msgstr "l'ouverture du terminal a échoué"
 
 #: src/main/license.c:19
 #, c-format
@@ -444,6 +287,163 @@ msgstr ""
 "Si le texte à défilé trop rapidement, vous voudrez peut-être\n"
 "rediriger l'impression vers une visionneuse comme `more' ou `less',\n"
 "i.e. `%s -l | more'."
+
+#: src/main/file.c:87
+msgid "failed to close file"
+msgstr "la fermeture du fichier a échoué"
+
+#: src/main/file.c:106
+msgid "failed to read file"
+msgstr "la lecture du fichier a échoué"
+
+#: src/main/file.c:115
+msgid "failed to stat file"
+msgstr "échec à statuer sur le fichier"
+
+#: src/main/file.c:124
+msgid "failed to stat output file"
+msgstr "échec à statuer sur le fichier de sortie"
+
+#: src/main/file.c:140
+msgid "input file is output file"
+msgstr "fichiers d'entré et de sortie sont les mêmes"
+
+#: src/main/help.c:31
+#, fuzzy
+msgid "show progress bar"
+msgstr "affiche la barre de progression"
+
+#: src/main/help.c:33
+#, fuzzy
+msgid "show elapsed time"
+msgstr "affiche le temps écoulé"
+
+#: src/main/help.c:35
+#, fuzzy
+msgid "show estimated time of arrival (completion)"
+msgstr "affiche l'heure approximative de l'achèvement de la tâche"
+
+#: src/main/help.c:37
+#, fuzzy
+msgid "show data transfer rate counter"
+msgstr "affiche le taux de tranfert des données"
+
+#: src/main/help.c:39
+#, fuzzy
+msgid "show number of bytes transferred"
+msgstr "affiche le nombre d'octets transférés"
+
+#: src/main/help.c:41
+#, fuzzy
+msgid "output even if standard error is not a terminal"
+msgstr "imprime vers la sortie d'erreur même si ce n'est pas un terminal"
+
+#: src/main/help.c:43
+#, fuzzy
+msgid "output percentages, not visual information"
+msgstr "imprime en pourcentage, pas les informations visuelles"
+
+#: src/main/help.c:45
+#, fuzzy
+msgid "do not output any transfer information at all"
+msgstr "n'afficher aucune information de transfert"
+
+#: src/main/help.c:47
+#, fuzzy
+msgid "use cursor positioning escape sequences"
+msgstr "utiliser les séquences d'échappements de positionnement de curseur"
+
+#: src/main/help.c:48
+msgid "RATE"
+msgstr "TAUX"
+
+#: src/main/help.c:49
+#, fuzzy
+msgid "limit transfer to RATE bytes per second"
+msgstr "limite le taux de transfer à TAUX octets par seconde"
+
+#: src/main/help.c:51
+#, fuzzy
+msgid "display nothing until first byte transferred"
+msgstr "ne rien afficher avant qu'au moins un octet soit tranféré"
+
+#: src/main/help.c:52
+msgid "SIZE"
+msgstr "TAILLE"
+
+#: src/main/help.c:53
+#, fuzzy
+msgid "set estimated data size to SIZE bytes"
+msgstr "ajuste la taille estimée des données à TAILLE octets"
+
+#: src/main/help.c:54
+msgid "SEC"
+msgstr ""
+
+#: src/main/help.c:55
+#, fuzzy
+msgid "update every SEC seconds"
+msgstr "mise-à-jour toute les SEC secondes"
+
+#: src/main/help.c:56
+msgid "WIDTH"
+msgstr "LARGEUR"
+
+#: src/main/help.c:57
+#, fuzzy
+msgid "assume terminal is WIDTH characters wide"
+msgstr "présumer la largeur du terminal à LARGEUR caractères"
+
+#: src/main/help.c:58
+msgid "HEIGHT"
+msgstr ""
+
+#: src/main/help.c:59
+#, fuzzy
+msgid "assume terminal is HEIGHT rows high"
+msgstr "présumer la largeur du terminal à LARGEUR caractères"
+
+#: src/main/help.c:60
+msgid "NAME"
+msgstr "NOM"
+
+#: src/main/help.c:61
+#, fuzzy
+msgid "prefix visual information with NAME"
+msgstr "préfixer les informations visuelles avec NOM"
+
+#: src/main/help.c:64
+#, fuzzy
+msgid "show this help and exit"
+msgstr "afficher cette aide puis quitter"
+
+#: src/main/help.c:66
+#, fuzzy
+msgid "show the license this program is distributed under"
+msgstr "affiche la license sous laquelle ce programme est distribué"
+
+#: src/main/help.c:68
+#, fuzzy
+msgid "show version information and exit"
+msgstr "afficher la version puis quitter"
+
+#: src/main/help.c:74
+#, c-format
+msgid "Usage: %s [OPTION] [FILE]..."
+msgstr "Utilisation : %s [OPTIONS] [FICHIER]..."
+
+#: src/main/help.c:78
+msgid ""
+"Concatenate FILE(s), or standard input, to standard output,\n"
+"with monitoring."
+msgstr ""
+"Concatène FICHIER(s), ou l'entrée standard, sur la sortie standard\n"
+"avec monitorage."
+
+#: src/main/help.c:153
+#, c-format
+msgid "Please report any bugs to %s."
+msgstr "SVP rapporter touts bogues à %s."
 
 #. RATS: ignore
 #: src/main/options.c:85
