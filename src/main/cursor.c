@@ -19,6 +19,7 @@
 #include "options.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <errno.h>
 #include <termios.h>
