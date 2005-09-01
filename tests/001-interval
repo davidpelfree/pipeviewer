@@ -4,6 +4,6 @@
 
 sleep 1 | $PROG -f -i 0.1 >/dev/null 2>$TMP1
 NUM=`tr '\r' '\n' < $TMP1 | wc -l | tr -d ' '`
-test $NUM -gt 8
+test $NUM -gt 6
 
 # EOF
