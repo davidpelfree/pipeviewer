@@ -13,7 +13,7 @@
 @ifinfo
 This file documents the ``@PACKAGE@'' package, version @VERSION@.
 
-Copyright 2004 Andrew Wood
+Copyright 2005 Andrew Wood
 
 Permission is granted to make and distribute verbatim copies of this manual
 provided the copyright notice and this permission notice are preserved on all
@@ -43,7 +43,7 @@ this permission notice may be stated in a translation approved by Andrew Wood.
 @author Andrew Wood
 @page
 @vskip 0pt plus 1filll
-Copyright @copyright{} 2004 Andrew Wood
+Copyright @copyright{} 2005 Andrew Wood
 
 Permission is granted to make and distribute verbatim copies of this manual
 provided the copyright notice and this permission notice are preserved on all

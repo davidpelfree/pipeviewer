@@ -2,7 +2,7 @@
  * Main program entry point - read the command line options, then perform
  * the appropriate actions.
  *
- * Copyright 2004 Andrew Wood, distributed under the Artistic License.
+ * Copyright 2005 Andrew Wood, distributed under the Artistic License.
  */
 
 #include <termios.h>

@@ -1,7 +1,7 @@
 /*
  * Functions for converting strings to numbers.
  *
- * Copyright 2004 Andrew Wood, distributed under the Artistic License.
+ * Copyright 2005 Andrew Wood, distributed under the Artistic License.
  */
 
 #ifdef HAVE_CONFIG_H

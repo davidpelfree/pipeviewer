@@ -76,4 +76,7 @@ Credit is also due to:
   Mathias Gumz
     - reported NLS bug
 
+  Daniel Roethlisberger
+    - submitted patch to use lockfiles for -c if terminal locking fails
+
 -----------------------------------------------------------------------------
