@@ -194,7 +194,7 @@ static void cursor_ipccount(void)
  */
 static int cursor_ipcinit(opts_t opts, char *ttyfile, int terminalfd)
 {
-	int key;
+	key_t key;
 
 	/*
 	 * Base the key for the shared memory segment on our current tty, so
@@ -202,7 +202,7 @@ static int cursor_ipcinit(opts_t opts, char *ttyfile, int terminalfd)
 	 * running on another terminal.
 	 */
 	key = ftok(ttyfile, 'p');
-	if (key < 0) {
+	if (key == -1) {
 		fprintf(stderr, "%s: %s: %s\n",
 			opts->program_name,
 			_("failed to open terminal"), strerror(errno));

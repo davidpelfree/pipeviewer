@@ -30,7 +30,7 @@ struct msgtable_s {
 #if ENABLE_NLS
 struct msgtable_s *minigettext__gettable(char *);
 #else				/* ENABLE_NLS */
-struct msgtable_s *minigettext__gettable(char *)
+struct msgtable_s *minigettext__gettable(char *a)
 {
 	return NULL;
 }
