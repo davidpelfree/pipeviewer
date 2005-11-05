@@ -248,6 +248,10 @@ Daniel Roethlisberger
 .br
 (submitted patch to use lockfiles for -c if terminal locking fails)
 
+Adam Buchbinder
+.br
+(lots of help with a Cygwin port of -c)
+
 
 .SH BUGS
 If you find any bugs, please contact the primary author, either by email or
