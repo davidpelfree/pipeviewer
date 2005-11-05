@@ -79,4 +79,7 @@ Credit is also due to:
   Daniel Roethlisberger
     - submitted patch to use lockfiles for -c if terminal locking fails
 
+  Adam Buchbinder
+    - lots of help with a Cygwin port of -c
+
 -----------------------------------------------------------------------------
