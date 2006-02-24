@@ -127,6 +127,8 @@ double getnum_d(char *str)
 	if ((str[0] != '.') && (str[0] != ','))
 		return n;
 
+	str++;
+
 	for (; my_isdigit(str[0]) && step < 1000000; str++) {
 		step = step * 10;
 		n += (str[0] - '0') / step;
