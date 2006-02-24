@@ -238,6 +238,17 @@ void main_display(opts_t opts, long double esec, long long sl,
 
 		sprintf(suffix, " %.16s %ld:%02ld:%02ld", _("ETA"),
 			eta / 3600, (eta / 60) % 60, eta % 60);
+
+		/*
+		 * If this is the final update, show a blank space where the
+		 * ETA used to be.
+		 */
+		if (sl < 0) {
+			for (i = 0; i < sizeof(suffix) && suffix[i] != 0;
+			     i++) {
+				suffix[i] = ' ';
+			}
+		}
 	}
 
 	if (opts->progress) {
