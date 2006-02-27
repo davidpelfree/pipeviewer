@@ -76,6 +76,9 @@ fi
 %doc README doc/NEWS doc/TODO doc/COPYING
 
 %changelog
+* Mon Feb 27 2006 Andrew Wood <andrew.wood@ivarch.com>
+- Minor bugfixes, and on the final update, blank out the now-zero ETA.
+
 * Thu Sep  1 2005 Andrew Wood <andrew.wood@ivarch.com>
 - Terminal locking now uses lockfiles if the terminal itself cannot be locked.
 

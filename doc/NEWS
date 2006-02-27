@@ -1,4 +1,4 @@
-0.9.x - NOT YET RELEASED
+0.9.6 - 27 February 2006
   - bugfix: key_t incompatibility with Cygwin
   - bugfix: interval (-i) parameter parses numbers after decimal point
   - build fix: use static NLS if msgfmt is unavailable
