@@ -50,6 +50,7 @@
 #undef ENABLE_LARGEFILE
 #ifdef ENABLE_LARGEFILE
 # define __USE_LARGEFILE64
+# define _LARGEFILE64_SOURCE 1
 #else
 # define stat64 stat
 # define fstat64 fstat
