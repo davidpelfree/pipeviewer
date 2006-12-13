@@ -25,15 +25,15 @@
 #include <fcntl.h>
 
 
-static unsigned long pvmtbufsize = BUFFER_SIZE;
+static unsigned long long pvmtbufsize = BUFFER_SIZE;
 
 
 /*
  * Set the buffer size for transfers.
  */
-void main_transfer_bufsize(unsigned long sz)
+void main_transfer_bufsize(unsigned long long sz, int force)
 {
-	if (sz > BUFFER_SIZE_MAX)
+	if ((sz > BUFFER_SIZE_MAX) && (!force))
 		sz = BUFFER_SIZE_MAX;
 	pvmtbufsize = sz;
 }

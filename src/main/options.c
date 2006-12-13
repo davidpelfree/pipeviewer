@@ -64,18 +64,19 @@ opts_t opts_parse(int argc, char **argv)
 		{"numeric", 0, 0, 'n'},
 		{"quiet", 0, 0, 'q'},
 		{"cursor", 0, 0, 'c'},
-		{"rate-limit", 1, 0, 'L'},
 		{"wait", 0, 0, 'W'},
 		{"size", 1, 0, 's'},
 		{"interval", 1, 0, 'i'},
 		{"width", 1, 0, 'w'},
 		{"height", 1, 0, 'H'},
 		{"name", 1, 0, 'N'},
+		{"rate-limit", 1, 0, 'L'},
+		{"buffer-size", 1, 0, 'B'},
 		{0, 0, 0, 0}
 	};
 	int option_index = 0;
 #endif
-	char *short_options = "hlVpterbfnqcL:Ws:i:w:H:N:";
+	char *short_options = "hlVpterbfnqcWs:i:w:H:N:L:B:";
 	int c, numopts;
 	opts_t opts;
 
@@ -167,9 +168,6 @@ opts_t opts_parse(int argc, char **argv)
 		case 'c':
 			opts->cursor = 1;
 			break;
-		case 'L':
-			opts->rate_limit = getnum_ll(optarg);
-			break;
 		case 'W':
 			opts->wait = 1;
 			break;
@@ -187,6 +185,12 @@ opts_t opts_parse(int argc, char **argv)
 			break;
 		case 'N':
 			opts->name = optarg;
+			break;
+		case 'L':
+			opts->rate_limit = getnum_ll(optarg);
+			break;
+		case 'B':
+			opts->buffer_size = getnum_ll(optarg);
 			break;
 		default:
 #ifdef HAVE_GETOPT_LONG
