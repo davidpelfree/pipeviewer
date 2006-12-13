@@ -28,6 +28,7 @@ struct opts_s {           /* structure describing run-time options */
 	unsigned char wait;            /* wait for transfer before display */
 	unsigned char no_op;           /* do nothing other than pipe data */
 	unsigned long long rate_limit; /* rate limit, in bytes per second */
+	unsigned long long buffer_size;/* buffer size, in bytes (0=default) */
 	unsigned long long size;       /* total size of data */
 	double interval;               /* interval between updates */
 	unsigned int width;            /* screen width */

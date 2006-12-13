@@ -82,4 +82,7 @@ Credit is also due to:
   Adam Buchbinder
     - lots of help with a Cygwin port of -c
 
+  Mark Tomich <http://metuchen.dyndns.org>
+    - suggested -B option
+
 -----------------------------------------------------------------------------

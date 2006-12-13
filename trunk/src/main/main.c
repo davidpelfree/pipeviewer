@@ -20,7 +20,7 @@
 #include <sys/time.h>
 
 
-void main_transfer_bufsize(unsigned long);
+void main_transfer_bufsize(unsigned long long, int);
 long main_transfer(opts_t, int, int *, int *, unsigned long long);
 void cursor_init(opts_t);
 void cursor_fini(opts_t);
@@ -104,8 +104,12 @@ static int main_loop(opts_t opts)
 		if (fd < 0)
 			return 1;
 		if (fstat64(fd, &sb) == 0) {
-			main_transfer_bufsize(sb.st_blksize * 32);
+			main_transfer_bufsize(sb.st_blksize * 32, 0);
 		}
+	}
+
+	if (opts->buffer_size > 0) {
+			main_transfer_bufsize(opts->buffer_size, 1);
 	}
 
 	while ((!(eof_in && eof_out)) || (!final_update)) {

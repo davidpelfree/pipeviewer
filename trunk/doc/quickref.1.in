@@ -1,4 +1,4 @@
-.TH @UCPACKAGE@ 1 "February 2006" Linux "User Manuals"
+.TH @UCPACKAGE@ 1 "December 2006" Linux "User Manuals"
 .SH NAME
 @PACKAGE@ \- monitor the progress of data through a pipe
 .SH SYNOPSIS
@@ -125,12 +125,6 @@ option is being used on its own to just limit the transfer rate of a pipe.
 
 .SH OUTPUT MODIFIERS
 .TP
-.B \-L RATE, \-\-rate-limit RATE
-Limit the transfer to a maximum of
-.B RATE
-bytes per second.  A suffix of "k", "m", "g", or "t" can be added to denote
-kilobytes (*1024), megabytes, and so on.
-.TP
 .B \-W, \-\-wait
 Wait until the first byte has been transferred before showing any progress
 information or calculating any ETAs.  Useful if the program you are piping to
@@ -186,6 +180,23 @@ returns.  This is useful in conjunction with
 (name) if you are using multiple
 .B @PACKAGE@
 invocations in a single, long, pipeline.
+
+
+.SH DATA TRANSFER MODIFIERS
+.TP
+.B \-L RATE, \-\-rate-limit RATE
+Limit the transfer to a maximum of
+.B RATE
+bytes per second.  A suffix of "k", "m", "g", or "t" can be added to denote
+kilobytes (*1024), megabytes, and so on.
+.TP
+.B \-B BYTES, \-\-buffer-size BYTES
+Use a transfer buffer size of
+.B BYTES
+bytes.  A suffix of "k", "m", "g", or "t" can be added to denote
+kilobytes (*1024), megabytes, and so on.  The default buffer size is the
+block size of the input file's filesystem multiplied by 32 (512kb max), or
+400kb if the block size cannot be determined.
 
 
 .SH GENERAL OPTIONS
@@ -251,6 +262,12 @@ Daniel Roethlisberger
 Adam Buchbinder
 .br
 (lots of help with a Cygwin port of -c)
+
+Mark Tomich
+.br
+(suggested -B option)
+.br
+.I http://metuchen.dyndns.org
 
 
 .SH BUGS
