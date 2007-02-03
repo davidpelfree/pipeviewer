@@ -85,4 +85,7 @@ Credit is also due to:
   Mark Tomich <http://metuchen.dyndns.org>
     - suggested -B option
 
+  Gert Menke
+    - reported bug when piping to dd with a large input buffer size
+
 -----------------------------------------------------------------------------
