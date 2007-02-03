@@ -12,6 +12,8 @@
 #define BUFFER_SIZE	409600
 #define BUFFER_SIZE_MAX	524288
 
+#define MAXIMISE_BUFFER_FILL	1
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -23,6 +25,7 @@
 #include <sys/file.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <signal.h>
 
 
 static unsigned long long pvmtbufsize = BUFFER_SIZE;
@@ -58,6 +61,7 @@ long main_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 	struct timeval tv;
 	fd_set readfds;
 	fd_set writefds;
+	int max_fd;
 	long to_write, written;
 	ssize_t r, w;
 	int n;
@@ -88,8 +92,12 @@ long main_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 	FD_ZERO(&readfds);
 	FD_ZERO(&writefds);
 
+	max_fd = 0;
+
 	if ((!(*eof_in)) && (in_buffer < pvmtbufsize)) {
 		FD_SET(fd, &readfds);
+		if (fd > max_fd)
+		        max_fd = fd;
 	}
 
 	to_write = in_buffer - bytes_written;
@@ -101,12 +109,14 @@ long main_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 
 	if ((!(*eof_out)) && (to_write > 0)) {
 		FD_SET(STDOUT_FILENO, &writefds);
+		if (STDOUT_FILENO > max_fd)
+		        max_fd = STDOUT_FILENO;
 	}
 
 	if ((*eof_in) && (*eof_out))
 		return 0;
 
-	n = select(FD_SETSIZE, &readfds, &writefds, NULL, &tv);
+	n = select(max_fd + 1, &readfds, &writefds, NULL, &tv);
 
 	if (n < 0) {
 		if (errno == EINTR)
@@ -151,8 +161,16 @@ long main_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 	}
 
 	if (FD_ISSET(STDOUT_FILENO, &writefds)
-	    && (in_buffer > bytes_written)) {
+	    && (in_buffer > bytes_written)
+	    && (to_write > 0)) {
+
+		signal(SIGALRM, SIG_IGN);
+	    	alarm(1);
+
 		w = write(STDOUT_FILENO, buf + bytes_written, to_write);
+
+		alarm(0);
+
 		if (w < 0) {
 			/*
 			 * If a write error occurred but it was EINTR or
@@ -164,6 +182,15 @@ long main_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 				tv.tv_usec = 10000;
 				select(0, NULL, NULL, NULL, &tv);
 				return 0;
+			}
+			/*
+			 * SIGPIPE means we've finished. Don't output an
+			 * error because it's not really our error to report. 
+			 */
+			if (errno == EPIPE) {
+			        *eof_in = 1;
+                                *eof_out = 1;
+                                return 0;
 			}
 			fprintf(stderr, "%s: %s: %s\n",
 				opts->program_name,
@@ -183,6 +210,23 @@ long main_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 			}
 		}
 	}
+
+#ifdef MAXIMISE_BUFFER_FILL
+        /*
+         * Rotate the written bytes out of the buffer so that it can be
+         * filled up completely by the next read.
+         */
+	if (bytes_written > 0) {
+	        if (bytes_written < in_buffer) {
+	                memmove(buf, buf + bytes_written, in_buffer - bytes_written);
+	                in_buffer -= bytes_written;
+	                bytes_written = 0;
+	        } else {
+	                bytes_written = 0;
+	                in_buffer = 0;
+	        }
+	}
+#endif	/* MAXIMISE_BUFFER_FILL */
 
 	return written;
 }
