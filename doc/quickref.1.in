@@ -1,4 +1,4 @@
-.TH @UCPACKAGE@ 1 "December 2006" Linux "User Manuals"
+.TH @UCPACKAGE@ 1 "February 2007" Linux "User Manuals"
 .SH NAME
 @PACKAGE@ \- monitor the progress of data through a pipe
 .SH SYNOPSIS
@@ -268,6 +268,10 @@ Mark Tomich
 (suggested -B option)
 .br
 .I http://metuchen.dyndns.org
+
+Gert Menke
+.br
+(reported bug when piping to dd with a large input buffer size)
 
 
 .SH BUGS
