@@ -11,6 +11,8 @@
 #endif
 #include "options.h"
 
+/* #undef MAKE_STDOUT_NONBLOCKING */
+
 #include <unistd.h>
 #include <signal.h>
 #include <fcntl.h>
@@ -341,11 +343,16 @@ int main(int argc, char **argv)
 	if (opts->height > 999999)
 		opts->height = 999999;
 
+#ifdef MAKE_STDOUT_NONBLOCKING
 	/*
 	 * Try and make standard output use non-blocking I/O.
+	 *
+	 * Note that this can cause problems with (broken) applications
+	 * such as dd.
 	 */
 	fcntl(STDOUT_FILENO, F_SETFL,
 	      O_NONBLOCK | fcntl(STDOUT_FILENO, F_GETFL));
+#endif	/* MAKE_STDOUT_NONBLOCKING */
 
 	/*
 	 * Set terminal option TOSTOP so we get signal SIGTTOU if we try to

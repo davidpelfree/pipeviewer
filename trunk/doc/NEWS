@@ -1,6 +1,7 @@
 0.x.x - NOT YET RELEASED
   - build fix: HP/UX largefile compile fix from Timo Savinen
   - new option --buffer-size (-B) suggested by Mark Tomich
+  - bug notes: pv /dev/zero | dd bs=1M count=1k bug (reported by Gert Menke)
 
 0.9.6 - 27 February 2006
   - bugfix: key_t incompatibility with Cygwin
