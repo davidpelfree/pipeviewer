@@ -164,7 +164,7 @@ long main_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 	    && (in_buffer > bytes_written)
 	    && (to_write > 0)) {
 
-		signal(SIGALRM, SIG_IGN);
+		signal(SIGALRM, SIG_IGN);	/* RATS: ignore */
 	    	alarm(1);
 
 		w = write(STDOUT_FILENO, buf + bytes_written, to_write);
