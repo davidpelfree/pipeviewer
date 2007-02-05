@@ -34,7 +34,6 @@ make
 [ -e "$RPM_BUILD_ROOT/usr/share" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr/share"
 [ -e "$RPM_BUILD_ROOT/usr/share/man" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr/share/man"
 [ -e "$RPM_BUILD_ROOT/usr/share/man/man1" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr/share/man/man1"
-[ -e "$RPM_BUILD_ROOT/usr/share/info" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr/share/info"
 [ -e "$RPM_BUILD_ROOT/usr/share/locale" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr/share/locale"
 make install DESTDIR="$RPM_BUILD_ROOT"
 
@@ -47,24 +46,8 @@ make test
 %pre
 
 %post
-if [ -x /sbin/install-info ]; then
-	if [ -e /usr/share/info/dir ]; then
-		/sbin/install-info \
-		  /usr/share/info/@PACKAGE@.info.gz \
-		  /usr/share/info/dir
-	fi
-fi
-:
 
 %preun
-if [ -x /sbin/install-info ]; then
-	if [ -e /usr/share/info/dir ]; then
-		/sbin/install-info --delete \
-		  /usr/share/info/@PACKAGE@.info.gz \
-                  /usr/share/info/dir
-	fi
-fi
-:
 
 %postun
 
@@ -72,9 +55,7 @@ fi
 %defattr(-, root, root)
 /usr/bin/*
 %docdir /usr/share/man/man1
-%docdir /usr/share/info
 /usr/share/man/man1/*
-/usr/share/info/*
 /usr/share/locale/*/LC_MESSAGES/*
 %doc README doc/NEWS doc/TODO doc/COPYING
 
