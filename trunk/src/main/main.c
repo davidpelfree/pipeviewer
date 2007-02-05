@@ -111,7 +111,7 @@ static int main_loop(opts_t opts)
 	}
 
 	if (opts->buffer_size > 0) {
-			main_transfer_bufsize(opts->buffer_size, 1);
+		main_transfer_bufsize(opts->buffer_size, 1);
 	}
 
 	while ((!(eof_in && eof_out)) || (!final_update)) {
@@ -352,7 +352,7 @@ int main(int argc, char **argv)
 	 */
 	fcntl(STDOUT_FILENO, F_SETFL,
 	      O_NONBLOCK | fcntl(STDOUT_FILENO, F_GETFL));
-#endif	/* MAKE_STDOUT_NONBLOCKING */
+#endif				/* MAKE_STDOUT_NONBLOCKING */
 
 	/*
 	 * Set terminal option TOSTOP so we get signal SIGTTOU if we try to

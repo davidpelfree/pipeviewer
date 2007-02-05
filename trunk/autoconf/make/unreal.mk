@@ -92,8 +92,6 @@ distclean: clean depclean
 cvsclean: distclean
 	rm -f doc/$(package).info
 	rm -f doc/lsm
-	rm -f doc/manual.html
-	rm -f doc/manual.texi
 	rm -f doc/$(package).spec
 	rm -f doc/quickref.1
 	rm -f doc/quickref.txt
@@ -103,7 +101,7 @@ cvsclean: distclean
 	echo > $(srcdir)/autoconf/make/filelist.mk~
 	echo > $(srcdir)/autoconf/make/modules.mk~
 
-doc: doc/$(package).info doc/manual.html doc/quickref.txt
+doc: doc/quickref.txt
 
 index:
 	(cd $(srcdir); sh autoconf/scripts/index.sh $(srcdir)) > index.html
@@ -129,8 +127,6 @@ dist: doc update-po
 	cd $(package)-$(version); $(MAKE) distclean
 	cp -dpf doc/lsm             $(package)-$(version)/doc/
 	cp -dpf doc/$(package).spec $(package)-$(version)/doc/
-	cp -dpf doc/$(package).info $(package)-$(version)/doc/
-	cp -dpf doc/manual.html     $(package)-$(version)/doc/
 	cp -dpf doc/quickref.txt    $(package)-$(version)/doc/
 	chmod 644 `find $(package)-$(version) -type f -print`
 	chmod 755 `find $(package)-$(version) -type d -print`

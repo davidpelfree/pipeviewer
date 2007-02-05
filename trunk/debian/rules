@@ -45,7 +45,7 @@ clean:
 	-$(MAKE) distclean
 
 	-rm -f src/nls/*.mo
-	-rm -f doc/manual.texi doc/manual.html doc/pv.info doc/quickref.txt doc/lsm doc/quickref.1 doc/pv.spec
+	-rm -f doc/quickref.txt doc/lsm doc/quickref.1 doc/pv.spec
 
 	# autoconf/make contain *.mk~ files that are needed for the build
 	dh_clean -Xmk~
@@ -68,7 +68,6 @@ binary-indep: build install
 binary-arch: build install
 	dh_testdir
 	dh_testroot
-	dh_installdocs doc/manual.html
 	dh_installinfo
 	dh_installchangelogs 
 	dh_link
@@ -133,7 +132,7 @@ clean:
 	-$(MAKE) distclean
 
 	-rm -f src/nls/*.mo
-	-rm -f doc/manual.texi doc/manual.html doc/pv.info doc/quickref.txt doc/lsm doc/quickref.1 doc/pv.spec
+	-rm -f doc/quickref.txt doc/lsm doc/quickref.1 doc/pv.spec
 
 	# autoconf/make contain *.mk~ files that are needed for the build
 	dh_clean -Xmk~
@@ -156,7 +155,6 @@ binary-indep: build install
 binary-arch: build install
 	dh_testdir
 	dh_testroot
-	dh_installdocs doc/manual.html
 	dh_installinfo
 	dh_installchangelogs 
 	dh_link

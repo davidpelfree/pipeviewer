@@ -15,17 +15,6 @@ doc/quickref.txt: doc/quickref.1
 	man $+ | sed 's/.//g' | cat -s > $@ || :
 	chmod 644 $@ || :
 
-doc/$(package).info: doc/manual.texi
-	-makeinfo --no-split doc/manual.texi -o doc/$(package).info
-	-chmod 644 doc/$(package).info
-
-doc/manual.html: doc/manual.texi
-	-texi2html -monolithic doc/manual.texi
-	-test -e manual.html || mv $(package).html manual.html
-	-perl $(srcdir)/autoconf/scripts/htmlmunge.pl < manual.html > $@
-	rm -f manual.html
-	-chmod 644 doc/manual.html
-
 #
 # NLS stuff
 #
