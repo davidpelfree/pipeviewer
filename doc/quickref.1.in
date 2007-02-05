@@ -283,18 +283,6 @@ by using the contact form on the web site.
 .BR cat (1),
 .BR dialog (1)
 
-The documentation for
-.B @PACKAGE@
-is also maintained as a Texinfo manual.  If the
-.B info
-and
-.B @PACKAGE@
-programs are properly installed at your site, the command
-.IP
-.B info @PACKAGE@
-.PP
-should give you access to the Texinfo manual.
-
 
 .SH LICENSE
 This is free software, distributed under the ARTISTIC license.

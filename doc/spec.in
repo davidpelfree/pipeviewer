@@ -1,11 +1,11 @@
 Summary: Monitor the progress of data through a pipe.
 Name: @PACKAGE@
 Version: @VERSION@
-Release: 1
+Release: 1%{?dist}
 License: Artistic
 Group: Development/Tools
 Source: http://www.ivarch.com/programs/sources/@PACKAGE@-@VERSION@.tar.gz
-BuildRoot: /var/tmp/%{name}-%{version}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 PV ("Pipe Viewer") is a tool for monitoring the progress of data through a
@@ -37,6 +37,9 @@ make
 [ -e "$RPM_BUILD_ROOT/usr/share/info" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr/share/info"
 [ -e "$RPM_BUILD_ROOT/usr/share/locale" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr/share/locale"
 make install DESTDIR="$RPM_BUILD_ROOT"
+
+%check
+make test
 
 %clean
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf "$RPM_BUILD_ROOT"
@@ -76,6 +79,10 @@ fi
 %doc README doc/NEWS doc/TODO doc/COPYING
 
 %changelog
+* Mon Feb  5 2007 Andrew Wood <andrew.wood@ivarch.com> 0.9.9-1
+- New option "-B" to set the buffer size, and a workaround for problems
+- piping to dd(1).
+
 * Mon Feb 27 2006 Andrew Wood <andrew.wood@ivarch.com>
 - Minor bugfixes, and on the final update, blank out the now-zero ETA.
 

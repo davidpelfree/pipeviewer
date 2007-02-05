@@ -11,10 +11,9 @@ completion it is, and an estimate of how long it will be until completion.
 Documentation
 *************
 
-An Info file, manual page, and an HTML manual are all included in this
-distribution.  If you have a web browser such as `lynx' handy, you may view
-the file `doc/index.html' to get started.  If you prefer plain text, then
-look at `doc/quickref.txt' to see the manual page.
+A manual page is included in this distribution.  If you have a web browser
+such as `lynx' handy, you may view the file `doc/index.html' to get started. 
+If you prefer plain text, then look at `doc/quickref.txt'.
 
 
 Compilation

@@ -97,7 +97,7 @@ long main_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 	if ((!(*eof_in)) && (in_buffer < pvmtbufsize)) {
 		FD_SET(fd, &readfds);
 		if (fd > max_fd)
-		        max_fd = fd;
+			max_fd = fd;
 	}
 
 	to_write = in_buffer - bytes_written;
@@ -110,7 +110,7 @@ long main_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 	if ((!(*eof_out)) && (to_write > 0)) {
 		FD_SET(STDOUT_FILENO, &writefds);
 		if (STDOUT_FILENO > max_fd)
-		        max_fd = STDOUT_FILENO;
+			max_fd = STDOUT_FILENO;
 	}
 
 	if ((*eof_in) && (*eof_out))
@@ -164,8 +164,8 @@ long main_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 	    && (in_buffer > bytes_written)
 	    && (to_write > 0)) {
 
-		signal(SIGALRM, SIG_IGN);	/* RATS: ignore */
-	    	alarm(1);
+		signal(SIGALRM, SIG_IGN);   /* RATS: ignore */
+		alarm(1);
 
 		w = write(STDOUT_FILENO, buf + bytes_written, to_write);
 
@@ -188,9 +188,9 @@ long main_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 			 * error because it's not really our error to report. 
 			 */
 			if (errno == EPIPE) {
-			        *eof_in = 1;
-                                *eof_out = 1;
-                                return 0;
+				*eof_in = 1;
+				*eof_out = 1;
+				return 0;
 			}
 			fprintf(stderr, "%s: %s: %s\n",
 				opts->program_name,
@@ -210,23 +210,23 @@ long main_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 			}
 		}
 	}
-
 #ifdef MAXIMISE_BUFFER_FILL
-        /*
-         * Rotate the written bytes out of the buffer so that it can be
-         * filled up completely by the next read.
-         */
+	/*
+	 * Rotate the written bytes out of the buffer so that it can be
+	 * filled up completely by the next read.
+	 */
 	if (bytes_written > 0) {
-	        if (bytes_written < in_buffer) {
-	                memmove(buf, buf + bytes_written, in_buffer - bytes_written);
-	                in_buffer -= bytes_written;
-	                bytes_written = 0;
-	        } else {
-	                bytes_written = 0;
-	                in_buffer = 0;
-	        }
+		if (bytes_written < in_buffer) {
+			memmove(buf, buf + bytes_written,
+				in_buffer - bytes_written);
+			in_buffer -= bytes_written;
+			bytes_written = 0;
+		} else {
+			bytes_written = 0;
+			in_buffer = 0;
+		}
 	}
-#endif	/* MAXIMISE_BUFFER_FILL */
+#endif				/* MAXIMISE_BUFFER_FILL */
 
 	return written;
 }

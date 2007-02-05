@@ -158,7 +158,6 @@ done
 dnl Output files (and create build directory structure too).
 dnl
 AC_OUTPUT(Makefile:$mk_segments doc/lsm:doc/lsm.in
-          doc/manual.texi:doc/manual.texi.in
           doc/quickref.1:doc/quickref.1.in
           doc/$PACKAGE.spec:doc/spec.in
           src/.dummy:doc/NEWS,
