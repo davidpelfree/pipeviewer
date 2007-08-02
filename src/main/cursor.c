@@ -17,6 +17,7 @@
 #include "config.h"
 #endif
 #include "options.h"
+#include "pv.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,29 +40,27 @@
 # endif
 #endif				/* HAVE_IPC */
 
-int getnum_i(char *);
-
 
 #ifdef HAVE_IPC
-static int cursor__shmid = -1;		 /* ID of our shared memory segment */
-static int cursor__pvcount = 1;		 /* number of `pv' processes in total */
-static int cursor__pvmax = 0;		 /* highest number of `pv's seen */
-static int *cursor__y_top = 0;		 /* pointer to Y coord of topmost `pv' */
-static int cursor__y_lastread = 0;	 /* last value of __y_top seen */
-static int cursor__y_offset = 0;	 /* our Y offset from this top position */
-static int cursor__needreinit = 0;	 /* set if we need to reinit cursor pos */
-static int cursor__noipc = 0;		 /* set if we can't use IPC */
+static int pv_crs__shmid = -1;		 /* ID of our shared memory segment */
+static int pv_crs__pvcount = 1;		 /* number of `pv' processes in total */
+static int pv_crs__pvmax = 0;		 /* highest number of `pv's seen */
+static int *pv_crs__y_top = 0;		 /* pointer to Y coord of topmost `pv' */
+static int pv_crs__y_lastread = 0;	 /* last value of __y_top seen */
+static int pv_crs__y_offset = 0;	 /* our Y offset from this top position */
+static int pv_crs__needreinit = 0;	 /* set if we need to reinit cursor pos */
+static int pv_crs__noipc = 0;		 /* set if we can't use IPC */
 #endif				/* HAVE_IPC */
-static int cursor__uselockfile = 0;	 /* set if we used a lockfile */
-static int cursor__lock_fd = -1;	 /* fd of lockfile, -1 if none open */
-static int cursor__y_start = 0;		 /* our initial Y coordinate */
+static int pv_crs__uselockfile = 0;	 /* set if we used a lockfile */
+static int pv_crs__lock_fd = -1;	 /* fd of lockfile, -1 if none open */
+static int pv_crs__y_start = 0;		 /* our initial Y coordinate */
 
 
 /*
  * Lock the terminal on the given file descriptor by creating and locking a
  * per-euid, per-tty, lockfile in ${TMPDIR:-${TMP:-/tmp}}.
  */
-static void cursor_lock__lockfile(int fd)
+static void pv_crs__lock_lockfile(int fd)
 {
 #ifdef O_EXLOCK
 	char *ttydev;
@@ -71,12 +70,12 @@ static void cursor_lock__lockfile(int fd)
 #endif
 	char lockfile[MAXPATHLEN + 1];	 /* RATS: ignore */
 
-	cursor__uselockfile = 1;
+	pv_crs__uselockfile = 1;
 
 	ttydev = ttyname(fd);		    /* RATS: ignore */
 	if (!ttydev) {
 #ifdef HAVE_IPC
-		cursor__noipc = 1;
+		pv_crs__noipc = 1;
 #endif
 		return;
 	}
@@ -96,18 +95,18 @@ static void cursor_lock__lockfile(int fd)
 		MAXPATHLEN - 64, tmpdir, basename(ttydev), geteuid());
 #endif
 
-	cursor__lock_fd =
+	pv_crs__lock_fd =
 	    open(lockfile, O_RDWR | O_EXLOCK | O_CREAT | O_NOFOLLOW, 0600);
 #ifdef HAVE_IPC
-	if (cursor__lock_fd < 0)
-		cursor__noipc = 1;
+	if (pv_crs__lock_fd < 0)
+		pv_crs__noipc = 1;
 #endif
 
 #else				/* !O_EXLOCK */
 
-	cursor__uselockfile = 1;
+	pv_crs__uselockfile = 1;
 #ifdef HAVE_IPC
-	cursor__noipc = 1;
+	pv_crs__noipc = 1;
 #endif
 
 #endif				/* O_EXLOCK */
@@ -118,7 +117,7 @@ static void cursor_lock__lockfile(int fd)
  * Lock the terminal on the given file descriptor, falling back to using a
  * lockfile if the terminal itself cannot be locked.
  */
-static void cursor_lock(int fd)
+static void pv_crs__lock(int fd)
 {
 	struct flock lock;
 
@@ -128,7 +127,7 @@ static void cursor_lock(int fd)
 	lock.l_len = 1;
 	while (fcntl(fd, F_SETLKW, &lock) < 0) {
 		if (errno != EINTR) {
-			cursor_lock__lockfile(fd);
+			pv_crs__lock_lockfile(fd);
 			return;
 		}
 	}
@@ -136,17 +135,17 @@ static void cursor_lock(int fd)
 
 
 /*
- * Unlock the terminal on the given file descriptor.  If cursor_lock used
+ * Unlock the terminal on the given file descriptor.  If pv_crs__lock used
  * lockfile locking, unlock the lockfile.
  */
-static void cursor_unlock(int fd)
+static void pv_crs__unlock(int fd)
 {
 	struct flock lock;
 
-	if (cursor__uselockfile) {
-		if (cursor__lock_fd >= 0)
-			close(cursor__lock_fd);
-		cursor__lock_fd = -1;
+	if (pv_crs__uselockfile) {
+		if (pv_crs__lock_fd >= 0)
+			close(pv_crs__lock_fd);
+		pv_crs__lock_fd = -1;
 	} else {
 		lock.l_type = F_UNLCK;
 		lock.l_whence = SEEK_SET;
@@ -161,22 +160,47 @@ static void cursor_unlock(int fd)
 /*
  * Get the current number of processes attached to our shared memory
  * segment, i.e. find out how many `pv' processes in total are running in
- * cursor mode (including us), and store it in cursor__pvcount. If this is
- * larger than cursor__pvmax, update cursor__pvmax.
+ * cursor mode (including us), and store it in pv_crs__pvcount. If this is
+ * larger than pv_crs__pvmax, update pv_crs__pvmax.
  */
-static void cursor_ipccount(void)
+static void pv_crs__ipccount(void)
 {
 	struct shmid_ds buf;
 
 	buf.shm_nattch = 0;
 
-	shmctl(cursor__shmid, IPC_STAT, &buf);
-	cursor__pvcount = buf.shm_nattch;
+	shmctl(pv_crs__shmid, IPC_STAT, &buf);
+	pv_crs__pvcount = buf.shm_nattch;
 
-	if (cursor__pvcount > cursor__pvmax)
-		cursor__pvmax = cursor__pvcount;
+	if (pv_crs__pvcount > pv_crs__pvmax)
+		pv_crs__pvmax = pv_crs__pvcount;
 }
 #endif				/* HAVE_IPC */
+
+
+/*
+ * Get the current cursor Y co-ordinate by sending the ECMA-48 CPR code to
+ * the terminal connected to the given file descriptor.
+ */
+static int pv_crs__get_ypos(int terminalfd)
+{
+	struct termios tty;
+	struct termios old_tty;
+	char cpr[32];		 /* RATS: ignore (checked) */
+	int ypos;
+
+	tcgetattr(terminalfd, &tty);
+	tcgetattr(terminalfd, &old_tty);
+	tty.c_lflag &= ~(ICANON | ECHO);
+	tcsetattr(terminalfd, TCSANOW | TCSAFLUSH, &tty);
+	write(terminalfd, "\033[6n", 4);
+	memset(cpr, 0, sizeof(cpr));
+	read(terminalfd, cpr, 6);   /* RATS: ignore (OK) */
+	ypos = pv_getnum_i(cpr + 2);
+	tcsetattr(terminalfd, TCSANOW | TCSAFLUSH, &old_tty);
+
+	return ypos;
+}
 
 
 #ifdef HAVE_IPC
@@ -190,9 +214,9 @@ static void cursor_ipccount(void)
  * There is a race condition here: another process could attach before we've
  * had a chance to check, such that no process ends up getting an "attach
  * count" of one, and so no initialisation occurs. So, we lock the terminal
- * with cursor_lock() while we are attaching and checking.
+ * with pv_crs__lock() while we are attaching and checking.
  */
-static int cursor_ipcinit(opts_t opts, char *ttyfile, int terminalfd)
+static int pv_crs__ipcinit(opts_t opts, char *ttyfile, int terminalfd)
 {
 	key_t key;
 
@@ -209,65 +233,52 @@ static int cursor_ipcinit(opts_t opts, char *ttyfile, int terminalfd)
 		return 1;
 	}
 
-	cursor_lock(terminalfd);
-	if (cursor__noipc) {
+	pv_crs__lock(terminalfd);
+	if (pv_crs__noipc) {
 		fprintf(stderr, "%s: %s: %s\n",
 			opts->program_name,
 			_("failed to lock terminal"), strerror(errno));
 		return 1;
 	}
 
-	cursor__shmid = shmget(key, sizeof(int), 0600 | IPC_CREAT);
-	if (cursor__shmid < 0) {
+	pv_crs__shmid = shmget(key, sizeof(int), 0600 | IPC_CREAT);
+	if (pv_crs__shmid < 0) {
 		fprintf(stderr, "%s: %s: %s\n",
 			opts->program_name,
 			_("failed to open terminal"), strerror(errno));
-		cursor_unlock(terminalfd);
+		pv_crs__unlock(terminalfd);
 		return 1;
 	}
 
-	cursor__y_top = shmat(cursor__shmid, 0, 0);
+	pv_crs__y_top = shmat(pv_crs__shmid, 0, 0);
 
-	cursor_ipccount();
+	pv_crs__ipccount();
 
 	/*
 	 * If nobody else is attached to the shared memory segment, we're
 	 * the first, so we need to initialise the shared memory with our
 	 * current Y cursor co-ordinate.
 	 */
-	if (cursor__pvcount < 2) {
-		struct termios tty;
-		struct termios old_tty;
-		char cpr[32];		 /* RATS: ignore (checked) */
-
-		tcgetattr(terminalfd, &tty);
-		tcgetattr(terminalfd, &old_tty);
-		tty.c_lflag &= ~(ICANON | ECHO);
-		tcsetattr(terminalfd, TCSANOW | TCSAFLUSH, &tty);
-		write(terminalfd, "\033[6n", 4);
-		memset(cpr, 0, sizeof(cpr));
-		read(terminalfd, cpr, 6);   /* RATS: ignore (OK) */
-		cursor__y_start = getnum_i(cpr + 2);
-		tcsetattr(terminalfd, TCSANOW | TCSAFLUSH, &old_tty);
-
-		*cursor__y_top = cursor__y_start;
-		cursor__y_lastread = cursor__y_start;
+	if (pv_crs__pvcount < 2) {
+		pv_crs__y_start = pv_crs__get_ypos(terminalfd);
+		*pv_crs__y_top = pv_crs__y_start;
+		pv_crs__y_lastread = pv_crs__y_start;
 	}
 
-	cursor__y_offset = cursor__pvcount - 1;
-	if (cursor__y_offset < 0)
-		cursor__y_offset = 0;
+	pv_crs__y_offset = pv_crs__pvcount - 1;
+	if (pv_crs__y_offset < 0)
+		pv_crs__y_offset = 0;
 
 	/*
 	 * If anyone else had attached to the shared memory segment, we need
 	 * to read the top Y co-ordinate from it.
 	 */
-	if (cursor__pvcount > 1) {
-		cursor__y_start = *cursor__y_top;
-		cursor__y_lastread = cursor__y_start;
+	if (pv_crs__pvcount > 1) {
+		pv_crs__y_start = *pv_crs__y_top;
+		pv_crs__y_lastread = pv_crs__y_start;
 	}
 
-	cursor_unlock(terminalfd);
+	pv_crs__unlock(terminalfd);
 
 	return 0;
 }
@@ -277,7 +288,7 @@ static int cursor_ipcinit(opts_t opts, char *ttyfile, int terminalfd)
 /*
  * Initialise the terminal for cursor positioning.
  */
-void cursor_init(opts_t opts)
+void pv_crs_init(opts_t opts)
 {
 	char *ttyfile;
 	int fd;
@@ -300,7 +311,7 @@ void cursor_init(opts_t opts)
 		return;
 	}
 #ifdef HAVE_IPC
-	if (cursor_ipcinit(opts, ttyfile, fd)) {
+	if (pv_crs__ipcinit(opts, ttyfile, fd)) {
 		opts->cursor = 0;
 		close(fd);
 		return;
@@ -308,35 +319,21 @@ void cursor_init(opts_t opts)
 
 	/*
 	 * If we are not using IPC, then we need to get the current Y
-	 * co-ordinate. If we are using IPC, then the cursor_ipcinit()
+	 * co-ordinate. If we are using IPC, then the pv_crs__ipcinit()
 	 * function takes care of this in a more multi-process-friendly way.
 	 */
-	if (cursor__noipc) {
+	if (pv_crs__noipc) {
 #else				/* ! HAVE_IPC */
 	if (1) {
 #endif				/* HAVE_IPC */
 		/*
 		 * Get current cursor position + 1.
 		 */
-		struct termios tty;
-		struct termios old_tty;
-		char cpr[32];		 /* RATS: ignore (checked) */
+		pv_crs__lock(fd);
+		pv_crs__y_start = pv_crs__get_ypos(fd);
+		pv_crs__unlock(fd);
 
-		cursor_lock(fd);
-
-		tcgetattr(fd, &tty);
-		tcgetattr(fd, &old_tty);
-		tty.c_lflag &= ~(ICANON | ECHO);
-		tcsetattr(fd, TCSANOW | TCSAFLUSH, &tty);
-		write(fd, "\n\033[6n", 5);
-		memset(cpr, 0, sizeof(cpr));
-		read(fd, cpr, 6);	    /* RATS: ignore (OK) */
-		cursor__y_start = getnum_i(cpr + 2);
-		tcsetattr(fd, TCSANOW | TCSAFLUSH, &old_tty);
-
-		cursor_unlock(fd);
-
-		if (cursor__y_start < 1)
+		if (pv_crs__y_start < 1)
 			opts->cursor = 0;
 	}
 
@@ -348,11 +345,11 @@ void cursor_init(opts_t opts)
 /*
  * Set the "we need to reinitialise cursor positioning" flag.
  */
-void cursor_needreinit(void)
+void pv_crs_needreinit(void)
 {
-	cursor__needreinit += 2;
-	if (cursor__needreinit > 3)
-		cursor__needreinit = 3;
+	pv_crs__needreinit += 2;
+	if (pv_crs__needreinit > 3)
+		pv_crs__needreinit = 3;
 }
 #endif
 
@@ -362,38 +359,26 @@ void cursor_needreinit(void)
  * Reinitialise the cursor positioning code (called if we are backgrounded
  * then foregrounded again).
  */
-void cursor_reinit(void)
+void pv_crs_reinit(void)
 {
-	struct termios tty;
-	struct termios old_tty;
-	char cpr[32];			 /* RATS: ignore (checked) */
+	pv_crs__lock(STDERR_FILENO);
 
-	cursor_lock(STDERR_FILENO);
+	pv_crs__needreinit--;
+	if (pv_crs__y_offset < 1)
+		pv_crs__needreinit = 0;
 
-	cursor__needreinit--;
-	if (cursor__y_offset < 1)
-		cursor__needreinit = 0;
-
-	if (cursor__needreinit > 0) {
-		cursor_unlock(STDERR_FILENO);
+	if (pv_crs__needreinit > 0) {
+		pv_crs__unlock(STDERR_FILENO);
 		return;
 	}
 
-	tcgetattr(STDERR_FILENO, &tty);
-	tcgetattr(STDERR_FILENO, &old_tty);
-	tty.c_lflag &= ~(ICANON | ECHO);
-	tcsetattr(STDERR_FILENO, TCSANOW | TCSAFLUSH, &tty);
-	write(STDERR_FILENO, "\033[6n", 4);
-	memset(cpr, 0, sizeof(cpr));
-	read(STDERR_FILENO, cpr, 6);	    /* RATS: ignore (OK) */
-	cursor__y_start = getnum_i(cpr + 2);
-	tcsetattr(STDERR_FILENO, TCSANOW | TCSAFLUSH, &old_tty);
+	pv_crs__y_start = pv_crs__get_ypos(STDERR_FILENO);
 
-	if (cursor__y_offset < 1)
-		*cursor__y_top = cursor__y_start;
-	cursor__y_lastread = cursor__y_start;
+	if (pv_crs__y_offset < 1)
+		*pv_crs__y_top = pv_crs__y_start;
+	pv_crs__y_lastread = pv_crs__y_start;
 
-	cursor_unlock(STDERR_FILENO);
+	pv_crs__unlock(STDERR_FILENO);
 }
 #endif
 
@@ -402,28 +387,28 @@ void cursor_reinit(void)
  * Output a single-line update, moving the cursor to the correct position to
  * do so.
  */
-void cursor_update(opts_t opts, char *str)
+void pv_crs_update(opts_t opts, char *str)
 {
 	char pos[32];			 /* RATS: ignore (checked OK) */
 	int y;
 
 #ifdef HAVE_IPC
-	if (!cursor__noipc) {
-		if (cursor__needreinit)
-			cursor_reinit();
+	if (!pv_crs__noipc) {
+		if (pv_crs__needreinit)
+			pv_crs_reinit();
 
-		cursor_ipccount();
-		if (cursor__y_lastread != *cursor__y_top) {
-			cursor__y_start = *cursor__y_top;
-			cursor__y_lastread = cursor__y_start;
+		pv_crs__ipccount();
+		if (pv_crs__y_lastread != *pv_crs__y_top) {
+			pv_crs__y_start = *pv_crs__y_top;
+			pv_crs__y_lastread = pv_crs__y_start;
 		}
 
-		if (cursor__needreinit > 0)
+		if (pv_crs__needreinit > 0)
 			return;
 	}
 #endif				/* HAVE_IPC */
 
-	y = cursor__y_start;
+	y = pv_crs__y_start;
 
 #ifdef HAVE_IPC
 	/*
@@ -432,22 +417,22 @@ void cursor_update(opts_t opts, char *str)
 	 * scroll the screen (only if we're the first `pv'), and then move
 	 * our initial Y co-ordinate up.
 	 */
-	if (((cursor__y_start + cursor__pvmax) > opts->height)
-	    && (!cursor__noipc)
+	if (((pv_crs__y_start + pv_crs__pvmax) > opts->height)
+	    && (!pv_crs__noipc)
 	    ) {
 		int offs;
 
-		offs = ((cursor__y_start + cursor__pvmax) - opts->height);
+		offs = ((pv_crs__y_start + pv_crs__pvmax) - opts->height);
 
-		cursor__y_start -= offs;
-		if (cursor__y_start < 1)
-			cursor__y_start = 1;
+		pv_crs__y_start -= offs;
+		if (pv_crs__y_start < 1)
+			pv_crs__y_start = 1;
 
 		/*
 		 * Scroll the screen if we're the first `pv'.
 		 */
-		if (cursor__y_offset == 0) {
-			cursor_lock(STDERR_FILENO);
+		if (pv_crs__y_offset == 0) {
+			pv_crs__lock(STDERR_FILENO);
 
 			sprintf(pos, "\033[%d;1H", opts->height);
 			write(STDERR_FILENO, pos, strlen(pos));
@@ -455,12 +440,12 @@ void cursor_update(opts_t opts, char *str)
 				write(STDERR_FILENO, "\n", 1);
 			}
 
-			cursor_unlock(STDERR_FILENO);
+			pv_crs__unlock(STDERR_FILENO);
 		}
 	}
 
-	if (!cursor__noipc)
-		y = cursor__y_start + cursor__y_offset;
+	if (!pv_crs__noipc)
+		y = pv_crs__y_start + pv_crs__y_offset;
 #endif				/* HAVE_IPC */
 
 	/*
@@ -471,28 +456,28 @@ void cursor_update(opts_t opts, char *str)
 		y = 1;
 	sprintf(pos, "\033[%d;1H", y);
 
-	cursor_lock(STDERR_FILENO);
+	pv_crs__lock(STDERR_FILENO);
 
 	write(STDERR_FILENO, pos, strlen(pos));	/* RATS: ignore */
 	write(STDERR_FILENO, str, strlen(str));	/* RATS: ignore */
 
-	cursor_unlock(STDERR_FILENO);
+	pv_crs__unlock(STDERR_FILENO);
 }
 
 
 /*
  * Reposition the cursor to a final position.
  */
-void cursor_fini(opts_t opts)
+void pv_crs_fini(opts_t opts)
 {
 	char pos[32];			 /* RATS: ignore (checked OK) */
 	int y;
 
-	y = cursor__y_start;
+	y = pv_crs__y_start;
 
 #ifdef HAVE_IPC
-	if ((cursor__pvmax > 0) && (!cursor__noipc))
-		y += cursor__pvmax - 1;
+	if ((pv_crs__pvmax > 0) && (!pv_crs__noipc))
+		y += pv_crs__pvmax - 1;
 #endif				/* HAVE_IPC */
 
 	if (y > opts->height)
@@ -506,24 +491,24 @@ void cursor_fini(opts_t opts)
 
 	sprintf(pos, "\033[%d;1H\n", y);    /* RATS: ignore */
 
-	cursor_lock(STDERR_FILENO);
+	pv_crs__lock(STDERR_FILENO);
 
 	write(STDERR_FILENO, pos, strlen(pos));	/* RATS: ignore */
 
 #ifdef HAVE_IPC
-	cursor_ipccount();
-	shmdt((void *) cursor__y_top);
+	pv_crs__ipccount();
+	shmdt((void *) pv_crs__y_top);
 
 	/*
 	 * If we are the last instance detaching from the shared memory,
 	 * delete it so it's not left lying around.
 	 */
-	if (cursor__pvcount < 2)
-		shmctl(cursor__shmid, IPC_RMID, 0);
+	if (pv_crs__pvcount < 2)
+		shmctl(pv_crs__shmid, IPC_RMID, 0);
 
 #endif				/* HAVE_IPC */
 
-	cursor_unlock(STDERR_FILENO);
+	pv_crs__unlock(STDERR_FILENO);
 }
 
 /* EOF */

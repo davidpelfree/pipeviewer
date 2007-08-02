@@ -11,10 +11,6 @@
 	sh $(srcdir)/autoconf/scripts/depend.sh \
 	   $(CC) $< $(<:%.c=%) $(srcdir) $(CFLAGS) $(CPPFLAGS) > $@
 
-doc/quickref.txt: doc/quickref.1
-	man $+ | sed 's/.//g' | cat -s > $@ || :
-	chmod 644 $@ || :
-
 #
 # NLS stuff
 #

@@ -15,7 +15,6 @@ help:
 	@echo 'This Makefile has the following utility targets:'
 	@echo
 	@echo '  all             build all binary targets'
-	@echo '  doc             regenerate text version of man page'
 	@echo '  install         install compiled package and manual'
 	@echo '  uninstall       uninstall the package'
 	@echo '  check / test    run standardised tests on the compiled binary'
@@ -90,18 +89,17 @@ distclean: clean depclean
 	rm Makefile
 
 cvsclean: distclean
-	rm -f doc/$(package).info
 	rm -f doc/lsm
 	rm -f doc/$(package).spec
 	rm -f doc/quickref.1
-	rm -f doc/quickref.txt
 	rm -f configure
 	rm -f src/nls/*.gmo src/nls/*.mo
 	echo > $(srcdir)/autoconf/make/depend.mk~
 	echo > $(srcdir)/autoconf/make/filelist.mk~
 	echo > $(srcdir)/autoconf/make/modules.mk~
 
-doc: doc/quickref.txt
+doc:
+	:
 
 index:
 	(cd $(srcdir); sh autoconf/scripts/index.sh $(srcdir)) > index.html
@@ -127,7 +125,6 @@ dist: doc update-po
 	cd $(package)-$(version); $(MAKE) distclean
 	cp -dpf doc/lsm             $(package)-$(version)/doc/
 	cp -dpf doc/$(package).spec $(package)-$(version)/doc/
-	cp -dpf doc/quickref.txt    $(package)-$(version)/doc/
 	chmod 644 `find $(package)-$(version) -type f -print`
 	chmod 755 `find $(package)-$(version) -type d -print`
 	chmod 755 `find $(package)-$(version)/autoconf/scripts`
@@ -161,10 +158,7 @@ install: all doc
 	                  "$(DESTDIR)/$(bindir)/$(package)"
 	$(INSTALL) -m 644 doc/quickref.1 \
 	                  "$(DESTDIR)/$(mandir)/man1/$(package).1"
-	-$(INSTALL) -m 644 doc/$(package).info \
-	                   "$(DESTDIR)/$(infodir)/$(package).info"
 	-$(DO_GZIP) "$(DESTDIR)/$(mandir)/man1/$(package).1"
-	-$(DO_GZIP) "$(DESTDIR)/$(infodir)/$(package).info"
 	if test -n "$(CATALOGS)"; then \
 	  catalogs='$(CATALOGS)'; \
 	  for cat in $$catalogs; do \
@@ -183,9 +177,7 @@ install: all doc
 
 uninstall:
 	$(UNINSTALL) "$(DESTDIR)/$(mandir)/man1/$(package).1"
-	$(UNINSTALL) "$(DESTDIR)/$(infodir)/$(package).info"
 	$(UNINSTALL) "$(DESTDIR)/$(mandir)/man1/$(package).1.gz"
-	$(UNINSTALL) "$(DESTDIR)/$(infodir)/$(package).info.gz"
 	if test -n "$(CATALOGS)"; then \
 	  catalogs='$(CATALOGS)'; \
 	  for cat in $$catalogs; do \

@@ -7,7 +7,8 @@
 # Modules live inside subdirectories called [^_]* - i.e. a directory "foo" will
 # have a rule created which links all code inside it to "foo.o".
 #
-# The directory "src/include" is never scanned; neither are CVS directories.
+# The directory "src/include" is never scanned; neither are CVS or SVN
+# directories.
 #
 
 outlist=$1
@@ -43,6 +44,7 @@ modules=`$FIND src -type d -print \
          | $GREP -v '/_' \
          | $GREP -v '^src/include' \
          | $GREP -v 'CVS' \
+         | $GREP -v '.svn' \
          | while read DIR; do \
            CONTENT=\$(/bin/ls -d \$DIR/* \
                      | $GREP -v '.po$' \
@@ -75,6 +77,7 @@ for i in $modules; do
   for j in $i/*; do
     [ -d "$j" ] || continue
     [ `basename $j` = "CVS" ] && continue
+    [ `basename $j` = ".svn" ] && continue
     CONTENT=`/bin/ls -d $j/* \
              | $GREP -v '.po$' \
              | $GREP -v '.gmo$' \

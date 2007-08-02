@@ -6,6 +6,7 @@ License: Artistic
 Group: Development/Tools
 Source: http://www.ivarch.com/programs/sources/@PACKAGE@-@VERSION@.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires: gettext
 
 %description
 PV ("Pipe Viewer") is a tool for monitoring the progress of data through a
@@ -15,27 +16,20 @@ it has taken, how near to completion it is, and an estimate of how long it
 will be until completion.
 
 %prep
-%setup
+%setup -q
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" sh ./configure \
-  --prefix=/usr \
-  --infodir=/usr/share/info \
-  --mandir=/usr/share/man \
-  --sysconfdir=/etc
-make
+%configure
+make %{?_smp_mflags}
 
 %install
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf "$RPM_BUILD_ROOT"
-[ -e "$RPM_BUILD_ROOT" ] || mkdir -m 755 "$RPM_BUILD_ROOT"
-[ -e "$RPM_BUILD_ROOT/etc" ] || mkdir -m 755 "$RPM_BUILD_ROOT/etc"
-[ -e "$RPM_BUILD_ROOT/usr" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr"
-[ -e "$RPM_BUILD_ROOT/usr/bin" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr/bin"
-[ -e "$RPM_BUILD_ROOT/usr/share" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr/share"
-[ -e "$RPM_BUILD_ROOT/usr/share/man" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr/share/man"
-[ -e "$RPM_BUILD_ROOT/usr/share/man/man1" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr/share/man/man1"
-[ -e "$RPM_BUILD_ROOT/usr/share/locale" ] || mkdir -m 755 "$RPM_BUILD_ROOT/usr/share/locale"
-make install DESTDIR="$RPM_BUILD_ROOT"
+mkdir -p "$RPM_BUILD_ROOT"%{_bindir}
+mkdir -p "$RPM_BUILD_ROOT"%{_mandir}/man1
+mkdir -p "$RPM_BUILD_ROOT"/usr/share/locale
+
+make DESTDIR="$RPM_BUILD_ROOT" install
+%find_lang %{name}
 
 %check
 make test
@@ -43,20 +37,11 @@ make test
 %clean
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf "$RPM_BUILD_ROOT"
 
-%pre
-
-%post
-
-%preun
-
-%postun
-
-%files
+%files -f %{name}.lang
 %defattr(-, root, root)
-/usr/bin/*
-%docdir /usr/share/man/man1
-/usr/share/man/man1/*
-/usr/share/locale/*/LC_MESSAGES/*
+%{_bindir}/%{name}
+%{_mandir}/man1/%{name}.1.gz
+
 %doc README doc/NEWS doc/TODO doc/COPYING
 
 %changelog

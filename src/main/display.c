@@ -8,6 +8,7 @@
 #include "config.h"
 #endif
 #include "options.h"
+#include "pv.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,19 +18,32 @@
 #include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <termios.h>
+#include <sys/ioctl.h>
 
 
-int getnum_i(char *);
-void sig_checkbg(void);
-void cursor_init(opts_t);
-void cursor_update(opts_t, char *);
-void cursor_fini(opts_t);
+/*
+ * Fill in opts->width with the current terminal size, if possible.
+ */
+void pv_screensize(opts_t opts)
+{
+#ifdef TIOCGWINSZ
+	struct winsize wsz;
+
+	if (isatty(STDERR_FILENO)) {
+		if (ioctl(STDERR_FILENO, TIOCGWINSZ, &wsz) == 0) {
+			opts->width = wsz.ws_col;
+			opts->height = wsz.ws_row;
+		}
+	}
+#endif
+}
 
 
 /*
  * Calculate the percentage transferred so far and return it.
  */
-long calc_percentage(long long so_far, long long total)
+static long pv__calc_percentage(long long so_far, long long total)
 {
 	if (total < 1)
 		return 0;
@@ -46,7 +60,7 @@ long calc_percentage(long long so_far, long long total)
  * transfer, and how long it's taken so far in seconds, return the estimated
  * number of seconds until completion.
  */
-long calc_eta(long long so_far, long long total, long elapsed)
+static long pv__calc_eta(long long so_far, long long total, long elapsed)
 {
 	long long bytes_left;
 
@@ -62,13 +76,20 @@ long calc_eta(long long so_far, long long total, long elapsed)
 
 
 /*
- * Output status information on standard error. If "sl" is negative, this is
- * the final update so the rate is given as an average over the whole
- * transfer; otherwise the rate is "sl"/"esec", i.e. the current rate.
+ * Output status information on standard error, where "esec" is the seconds
+ * elapsed since the transfer started, "sl" is the number of bytes transferred
+ * since the last update, and "tot" is the total number of bytes transferred
+ * so far.
+ *
+ * If "sl" is negative, this is the final update so the rate is given as an
+ * an average over the whole transfer; otherwise the current rate is shown.
  *
  * If "opts" is NULL, then free all allocated memory and return.
+ *
+ * Note that this function is not thread-safe since it uses internal static
+ * variables.
  */
-void main_display(opts_t opts, long double esec, long long sl,
+void pv_display(opts_t opts, long double esec, long long sl,
 		  long long tot)
 {
 	static long percentage = 0;
@@ -92,7 +113,7 @@ void main_display(opts_t opts, long double esec, long long sl,
 		return;
 	}
 
-	sig_checkbg();
+	pv_sig_checkbg();
 
 	if (sl >= 0) {
 		sincelast = esec - prev_esec;
@@ -140,7 +161,7 @@ void main_display(opts_t opts, long double esec, long long sl,
 	}
 
 	if (opts->size > 0)
-		percentage = calc_percentage(tot, opts->size);
+		percentage = pv__calc_percentage(tot, opts->size);
 
 	if (opts->numeric) {
 		if (percentage > 100) {
@@ -153,7 +174,7 @@ void main_display(opts_t opts, long double esec, long long sl,
 	}
 
 	if (opts->size > 0)
-		eta = calc_eta(tot, opts->size, esec);
+		eta = pv__calc_eta(tot, opts->size, esec);
 
 	display[0] = 0;
 
@@ -216,6 +237,7 @@ void main_display(opts_t opts, long double esec, long long sl,
 
 		/*
 		 * Bounds check, so we don't overrun the prefix buffer.
+		 * Hopefully 97TB/sec is fast enough.
 		 */
 		if (rate > 100000)
 			rate = 100000;
@@ -297,7 +319,7 @@ void main_display(opts_t opts, long double esec, long long sl,
 	strcat(display, suffix);	    /* RATS: ignore (OK) */
 
 	if (opts->cursor) {
-		cursor_update(opts, display);
+		pv_crs_update(opts, display);
 	} else {
 		write(STDERR_FILENO, display, strlen(display));	/* RATS: ignore */
 		write(STDERR_FILENO, "\r", 1);

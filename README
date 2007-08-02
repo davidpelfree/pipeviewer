@@ -11,9 +11,8 @@ completion it is, and an estimate of how long it will be until completion.
 Documentation
 *************
 
-A manual page is included in this distribution.  If you have a web browser
-such as `lynx' handy, you may view the file `doc/index.html' to get started. 
-If you prefer plain text, then look at `doc/quickref.txt'.
+A manual page is included in this distribution.  See `man ./doc/quickref.1',
+or `man pv' after installation.
 
 
 Compilation
@@ -36,7 +35,7 @@ all files used, all functions defined, and all TODOs marked in the code.
 Author
 ******
 
-This package is copyright (C) 2005 Andrew Wood, and is being distributed
+This package is copyright (C) 2007 Andrew Wood, and is being distributed
 under the terms of the Artistic License.  For more details, see the file
 `doc/COPYING'.
 
@@ -53,6 +52,9 @@ Credit is also due to:
 
   Cédric Delfosse <cedric@debian.org>
     - Debian package maintainer
+
+  Jakub Hrozek <jhrozek@redhat.com>
+    - Fedora package maintainer
 
   Eduardo Aguiar <eduardo.oliveira@sondabrasil.com.br>
     - provided Portuguese (Brazilian) translation
