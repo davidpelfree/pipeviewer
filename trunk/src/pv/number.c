@@ -1,7 +1,7 @@
 /*
  * Functions for converting strings to numbers.
  *
- * Copyright 2005 Andrew Wood, distributed under the Artistic License.
+ * Copyright 2007 Andrew Wood, distributed under the Artistic License.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -14,7 +14,7 @@
  * including <ctype.h> causes weird versioned glibc dependencies on certain
  * Red Hat systems, complicating package management.
  */
-static int my_isdigit(char c)
+static int pv__isdigit(char c)
 {
 	return ((c >= '0') && (c <= '9'));
 }
@@ -30,10 +30,10 @@ long long pv_getnum_ll(char *str)
 	int decdivisor = 1;
 	int shift = 0;
 
-	while (str[0] != 0 && (!my_isdigit(str[0])))
+	while (str[0] != 0 && (!pv__isdigit(str[0])))
 		str++;
 
-	for (; my_isdigit(str[0]); str++) {
+	for (; pv__isdigit(str[0]); str++) {
 		n = n * 10;
 		n += (str[0] - '0');
 	}
@@ -43,7 +43,7 @@ long long pv_getnum_ll(char *str)
 	 */
 	if ((str[0] == '.') || (str[0] == ',')) {
 		str++;
-		for (; my_isdigit(str[0]); str++) {
+		for (; pv__isdigit(str[0]); str++) {
 			if (decdivisor < 10000) {
 				decimal = decimal * 10;
 				decimal += (str[0] - '0');
@@ -116,10 +116,10 @@ double pv_getnum_d(char *str)
 	double n = 0.0;
 	double step = 1;
 
-	while (str[0] != 0 && (!my_isdigit(str[0])))
+	while (str[0] != 0 && (!pv__isdigit(str[0])))
 		str++;
 
-	for (; my_isdigit(str[0]); str++) {
+	for (; pv__isdigit(str[0]); str++) {
 		n = n * 10;
 		n += (str[0] - '0');
 	}
@@ -129,7 +129,7 @@ double pv_getnum_d(char *str)
 
 	str++;
 
-	for (; my_isdigit(str[0]) && step < 1000000; str++) {
+	for (; pv__isdigit(str[0]) && step < 1000000; str++) {
 		step = step * 10;
 		n += (str[0] - '0') / step;
 	}

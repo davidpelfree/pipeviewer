@@ -1,7 +1,7 @@
 /*
  * Signal handling functions.
  *
- * Copyright 2005 Andrew Wood, distributed under the Artistic License.
+ * Copyright 2007 Andrew Wood, distributed under the Artistic License.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -19,11 +19,11 @@
 #include <sys/time.h>
 
 
-static int pv_sig__old_stderr;		 /* see pv_sig__ttou() */
-static struct timeval pv_sig__tstp_time; /* see pv_sig__tstp() / __cont() */
+static int pv__sig_old_stderr;		 /* see pv__sig_ttou() */
+static struct timeval pv__sig_tstp_time; /* see pv__sig_tstp() / __cont() */
 
-struct timeval pv_sig__toffset;		 /* total time spent stopped */
-sig_atomic_t pv_sig__newsize = 0;	 /* whether we need to get term size again */
+struct timeval pv_sig_toffset;		 /* total time spent stopped */
+sig_atomic_t pv_sig_newsize = 0;	 /* whether we need to get term size again */
 
 
 /*
@@ -33,7 +33,7 @@ sig_atomic_t pv_sig__newsize = 0;	 /* whether we need to get term size again */
  * subsequent SIGCONT we can try writing to the terminal again, in case we
  * get backgrounded and later get foregrounded again.
  */
-static void pv_sig__ttou(int s)
+static void pv__sig_ttou(int s)
 {
 	int fd;
 
@@ -41,8 +41,8 @@ static void pv_sig__ttou(int s)
 	if (fd < 0)
 		return;
 
-	if (pv_sig__old_stderr == -1)
-		pv_sig__old_stderr = dup(STDERR_FILENO);
+	if (pv__sig_old_stderr == -1)
+		pv__sig_old_stderr = dup(STDERR_FILENO);
 
 	dup2(fd, STDERR_FILENO);
 	close(fd);
@@ -51,11 +51,11 @@ static void pv_sig__ttou(int s)
 
 /*
  * Handle SIGTSTP (stop typed at tty) by storing the time the signal
- * happened for later use by pv_sig__cont(), and then stopping the process.
+ * happened for later use by pv__sig_cont(), and then stopping the process.
  */
-static void pv_sig__tstp(int s)
+static void pv__sig_tstp(int s)
 {
-	gettimeofday(&pv_sig__tstp_time, NULL);
+	gettimeofday(&pv__sig_tstp_time, NULL);
 	raise(SIGSTOP);
 }
 
@@ -65,14 +65,14 @@ static void pv_sig__tstp(int s)
  * last SIGTSTP to the elapsed time offset, and by trying to write to the
  * terminal again (by replacing the /dev/null stderr with the old stderr).
  */
-static void pv_sig__cont(int s)
+static void pv__sig_cont(int s)
 {
 	struct timeval tv;
 	struct termios t;
 
-	pv_sig__newsize = 1;
+	pv_sig_newsize = 1;
 
-	if (pv_sig__tstp_time.tv_sec == 0) {
+	if (pv__sig_tstp_time.tv_sec == 0) {
 		tcgetattr(STDERR_FILENO, &t);
 		t.c_lflag |= TOSTOP;
 		tcsetattr(STDERR_FILENO, TCSANOW, &t);
@@ -84,25 +84,24 @@ static void pv_sig__cont(int s)
 
 	gettimeofday(&tv, NULL);
 
-	pv_sig__toffset.tv_sec += (tv.tv_sec - pv_sig__tstp_time.tv_sec);
-	pv_sig__toffset.tv_usec +=
-	    (tv.tv_usec - pv_sig__tstp_time.tv_usec);
-	if (pv_sig__toffset.tv_usec >= 1000000) {
-		pv_sig__toffset.tv_sec++;
-		pv_sig__toffset.tv_usec -= 1000000;
+	pv_sig_toffset.tv_sec += (tv.tv_sec - pv__sig_tstp_time.tv_sec);
+	pv_sig_toffset.tv_usec += (tv.tv_usec - pv__sig_tstp_time.tv_usec);
+	if (pv_sig_toffset.tv_usec >= 1000000) {
+		pv_sig_toffset.tv_sec++;
+		pv_sig_toffset.tv_usec -= 1000000;
 	}
-	if (pv_sig__toffset.tv_usec < 0) {
-		pv_sig__toffset.tv_sec--;
-		pv_sig__toffset.tv_usec += 1000000;
+	if (pv_sig_toffset.tv_usec < 0) {
+		pv_sig_toffset.tv_sec--;
+		pv_sig_toffset.tv_usec += 1000000;
 	}
 
-	pv_sig__tstp_time.tv_sec = 0;
-	pv_sig__tstp_time.tv_usec = 0;
+	pv__sig_tstp_time.tv_sec = 0;
+	pv__sig_tstp_time.tv_usec = 0;
 
-	if (pv_sig__old_stderr != -1) {
-		dup2(pv_sig__old_stderr, STDERR_FILENO);
-		close(pv_sig__old_stderr);
-		pv_sig__old_stderr = -1;
+	if (pv__sig_old_stderr != -1) {
+		dup2(pv__sig_old_stderr, STDERR_FILENO);
+		close(pv__sig_old_stderr);
+		pv__sig_old_stderr = -1;
 	}
 
 	tcgetattr(STDERR_FILENO, &t);
@@ -118,9 +117,9 @@ static void pv_sig__cont(int s)
 /*
  * Handle SIGWINCH (window size changed) by setting a flag.
  */
-static void pv_sig__winch(int s)
+static void pv__sig_winch(int s)
 {
-	pv_sig__newsize = 1;
+	pv_sig_newsize = 1;
 }
 
 
@@ -131,11 +130,11 @@ void pv_sig_init(void)
 {
 	struct sigaction sa;
 
-	pv_sig__old_stderr = -1;
-	pv_sig__tstp_time.tv_sec = 0;
-	pv_sig__tstp_time.tv_usec = 0;
-	pv_sig__toffset.tv_sec = 0;
-	pv_sig__toffset.tv_usec = 0;
+	pv__sig_old_stderr = -1;
+	pv__sig_tstp_time.tv_sec = 0;
+	pv__sig_tstp_time.tv_usec = 0;
+	pv_sig_toffset.tv_sec = 0;
+	pv_sig_toffset.tv_usec = 0;
 
 	/*
 	 * Ignore SIGPIPE, so we don't die if stdout is a pipe and the other
@@ -150,16 +149,16 @@ void pv_sig_init(void)
 	 * Handle SIGTTOU by continuing with output switched off, so that we
 	 * can be stopped and backgrounded without messing up the terminal.
 	 */
-	sa.sa_handler = pv_sig__ttou;
+	sa.sa_handler = pv__sig_ttou;
 	sigemptyset(&(sa.sa_mask));
 	sa.sa_flags = 0;
 	sigaction(SIGTTOU, &sa, NULL);
 
 	/*
 	 * Handle SIGTSTP by storing the time the signal happened for later
-	 * use by pv_sig__cont(), and then stopping the process.
+	 * use by pv__sig_cont(), and then stopping the process.
 	 */
-	sa.sa_handler = pv_sig__tstp;
+	sa.sa_handler = pv__sig_tstp;
 	sigemptyset(&(sa.sa_mask));
 	sa.sa_flags = 0;
 	sigaction(SIGTSTP, &sa, NULL);
@@ -169,7 +168,7 @@ void pv_sig_init(void)
 	 * to the elapsed time offset, and by trying to write to the
 	 * terminal again.
 	 */
-	sa.sa_handler = pv_sig__cont;
+	sa.sa_handler = pv__sig_cont;
 	sigemptyset(&(sa.sa_mask));
 	sa.sa_flags = 0;
 	sigaction(SIGCONT, &sa, NULL);
@@ -178,7 +177,7 @@ void pv_sig_init(void)
 	 * Handle SIGWINCH by setting a flag to let the main loop know it
 	 * has to reread the terminal size.
 	 */
-	sa.sa_handler = pv_sig__winch;
+	sa.sa_handler = pv__sig_winch;
 	sigemptyset(&(sa.sa_mask));
 	sa.sa_flags = 0;
 	sigaction(SIGWINCH, &sa, NULL);
@@ -211,12 +210,12 @@ void pv_sig_allowpause(void)
 {
 	struct sigaction sa;
 
-	sa.sa_handler = pv_sig__tstp;
+	sa.sa_handler = pv__sig_tstp;
 	sigemptyset(&(sa.sa_mask));
 	sa.sa_flags = 0;
 	sigaction(SIGTSTP, &sa, NULL);
 
-	sa.sa_handler = pv_sig__cont;
+	sa.sa_handler = pv__sig_cont;
 	sigemptyset(&(sa.sa_mask));
 	sa.sa_flags = 0;
 	sigaction(SIGCONT, &sa, NULL);
@@ -239,12 +238,12 @@ void pv_sig_checkbg(void)
 
 	next_check = time(NULL) + 1;
 
-	if (pv_sig__old_stderr == -1)
+	if (pv__sig_old_stderr == -1)
 		return;
 
-	dup2(pv_sig__old_stderr, STDERR_FILENO);
-	close(pv_sig__old_stderr);
-	pv_sig__old_stderr = -1;
+	dup2(pv__sig_old_stderr, STDERR_FILENO);
+	close(pv__sig_old_stderr);
+	pv__sig_old_stderr = -1;
 
 	tcgetattr(STDERR_FILENO, &t);
 	t.c_lflag |= TOSTOP;

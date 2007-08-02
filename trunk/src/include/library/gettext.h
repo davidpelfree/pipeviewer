@@ -9,7 +9,7 @@
  *   # define N_(String) (String)
  *   #endif
  *
- * Copyright 2005 Andrew Wood, distributed under the Artistic License.
+ * Copyright 2007 Andrew Wood, distributed under the Artistic License.
  */
 
 #ifndef _LIBRARY_GETTEXT_H
