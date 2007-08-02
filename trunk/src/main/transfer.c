@@ -28,31 +28,34 @@
 #include <signal.h>
 
 
-static unsigned long long pvmtbufsize = BUFFER_SIZE;
+static unsigned long long pv__bufsize = BUFFER_SIZE;
 
 
 /*
  * Set the buffer size for transfers.
  */
-void main_transfer_bufsize(unsigned long long sz, int force)
+void pv_set_buffer_size(unsigned long long sz, int force)
 {
 	if ((sz > BUFFER_SIZE_MAX) && (!force))
 		sz = BUFFER_SIZE_MAX;
-	pvmtbufsize = sz;
+	pv__bufsize = sz;
 }
 
 
 /*
  * Transfer some data from "fd" to standard output, timing out after 9/100
  * of a second. If opts->rate_limit is >0, only up to "allowed" bytes can
- * be written.
+ * be written. The variables that "eof_in" and "eof_out" point to are used
+ * to flag end of input and end of output conditions respectively.
  *
  * Returns the number of bytes written, or negative on error.
  *
  * If "opts" is NULL, then the transfer buffer is freed, and zero is
  * returned.
+ *
+ * This function is not thread-safe as it uses static variables.
  */
-long main_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
+long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 		   unsigned long long allowed)
 {
 	static unsigned char *buf = NULL;
@@ -76,7 +79,7 @@ long main_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 	}
 
 	if (buf == NULL) {
-		buf = (unsigned char *) malloc(pvmtbufsize + 32);
+		buf = (unsigned char *) malloc(pv__bufsize + 32);
 		if (buf == NULL) {
 			fprintf(stderr, "%s: %s: %s\n",
 				opts->program_name,
@@ -94,7 +97,7 @@ long main_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 
 	max_fd = 0;
 
-	if ((!(*eof_in)) && (in_buffer < pvmtbufsize)) {
+	if ((!(*eof_in)) && (in_buffer < pv__bufsize)) {
 		FD_SET(fd, &readfds);
 		if (fd > max_fd)
 			max_fd = fd;
@@ -131,7 +134,7 @@ long main_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 
 	if (FD_ISSET(fd, &readfds)) {
 		r = read( /* RATS: ignore (checked OK) */ fd,
-			 buf + in_buffer, pvmtbufsize - in_buffer);
+			 buf + in_buffer, pv__bufsize - in_buffer);
 		if (r < 0) {
 			/*
 			 * If a read error occurred but it was EINTR or

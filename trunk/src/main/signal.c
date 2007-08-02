@@ -7,6 +7,7 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+#include "pv.h"
 
 #include <signal.h>
 #include <termios.h>
@@ -17,15 +18,12 @@
 #include <fcntl.h>
 #include <sys/time.h>
 
-#ifdef HAVE_IPC
-void cursor_needreinit(void);
-#endif
 
+static int pv_sig__old_stderr;		 /* see pv_sig__ttou() */
+static struct timeval pv_sig__tstp_time;	 /* see pv_sig__tstp() / __cont() */
 
-static int sig__old_stderr;		 /* see sig__ttou() */
-static struct timeval sig__tstp_time;	 /* see sig__tstp() / __cont() */
-struct timeval sig__toffset;		 /* total time spent stopped */
-sig_atomic_t sig__newsize = 0;		 /* whether we need to get term size again */
+struct timeval pv_sig__toffset;		 /* total time spent stopped */
+sig_atomic_t pv_sig__newsize = 0;		 /* whether we need to get term size again */
 
 
 /*
@@ -35,7 +33,7 @@ sig_atomic_t sig__newsize = 0;		 /* whether we need to get term size again */
  * subsequent SIGCONT we can try writing to the terminal again, in case we
  * get backgrounded and later get foregrounded again.
  */
-static void sig__ttou(int s)
+static void pv_sig__ttou(int s)
 {
 	int fd;
 
@@ -43,8 +41,8 @@ static void sig__ttou(int s)
 	if (fd < 0)
 		return;
 
-	if (sig__old_stderr == -1)
-		sig__old_stderr = dup(STDERR_FILENO);
+	if (pv_sig__old_stderr == -1)
+		pv_sig__old_stderr = dup(STDERR_FILENO);
 
 	dup2(fd, STDERR_FILENO);
 	close(fd);
@@ -53,11 +51,11 @@ static void sig__ttou(int s)
 
 /*
  * Handle SIGTSTP (stop typed at tty) by storing the time the signal
- * happened for later use by sig__cont(), and then stopping the process.
+ * happened for later use by pv_sig__cont(), and then stopping the process.
  */
-static void sig__tstp(int s)
+static void pv_sig__tstp(int s)
 {
-	gettimeofday(&sig__tstp_time, NULL);
+	gettimeofday(&pv_sig__tstp_time, NULL);
 	raise(SIGSTOP);
 }
 
@@ -67,43 +65,43 @@ static void sig__tstp(int s)
  * last SIGTSTP to the elapsed time offset, and by trying to write to the
  * terminal again (by replacing the /dev/null stderr with the old stderr).
  */
-static void sig__cont(int s)
+static void pv_sig__cont(int s)
 {
 	struct timeval tv;
 	struct termios t;
 
-	sig__newsize = 1;
+	pv_sig__newsize = 1;
 
-	if (sig__tstp_time.tv_sec == 0) {
+	if (pv_sig__tstp_time.tv_sec == 0) {
 		tcgetattr(STDERR_FILENO, &t);
 		t.c_lflag |= TOSTOP;
 		tcsetattr(STDERR_FILENO, TCSANOW, &t);
 #ifdef HAVE_IPC
-		cursor_needreinit();
+		pv_crs_needreinit();
 #endif
 		return;
 	}
 
 	gettimeofday(&tv, NULL);
 
-	sig__toffset.tv_sec += (tv.tv_sec - sig__tstp_time.tv_sec);
-	sig__toffset.tv_usec += (tv.tv_usec - sig__tstp_time.tv_usec);
-	if (sig__toffset.tv_usec >= 1000000) {
-		sig__toffset.tv_sec++;
-		sig__toffset.tv_usec -= 1000000;
+	pv_sig__toffset.tv_sec += (tv.tv_sec - pv_sig__tstp_time.tv_sec);
+	pv_sig__toffset.tv_usec += (tv.tv_usec - pv_sig__tstp_time.tv_usec);
+	if (pv_sig__toffset.tv_usec >= 1000000) {
+		pv_sig__toffset.tv_sec++;
+		pv_sig__toffset.tv_usec -= 1000000;
 	}
-	if (sig__toffset.tv_usec < 0) {
-		sig__toffset.tv_sec--;
-		sig__toffset.tv_usec += 1000000;
+	if (pv_sig__toffset.tv_usec < 0) {
+		pv_sig__toffset.tv_sec--;
+		pv_sig__toffset.tv_usec += 1000000;
 	}
 
-	sig__tstp_time.tv_sec = 0;
-	sig__tstp_time.tv_usec = 0;
+	pv_sig__tstp_time.tv_sec = 0;
+	pv_sig__tstp_time.tv_usec = 0;
 
-	if (sig__old_stderr != -1) {
-		dup2(sig__old_stderr, STDERR_FILENO);
-		close(sig__old_stderr);
-		sig__old_stderr = -1;
+	if (pv_sig__old_stderr != -1) {
+		dup2(pv_sig__old_stderr, STDERR_FILENO);
+		close(pv_sig__old_stderr);
+		pv_sig__old_stderr = -1;
 	}
 
 	tcgetattr(STDERR_FILENO, &t);
@@ -111,7 +109,7 @@ static void sig__cont(int s)
 	tcsetattr(STDERR_FILENO, TCSANOW, &t);
 
 #ifdef HAVE_IPC
-	cursor_needreinit();
+	pv_crs_needreinit();
 #endif
 }
 
@@ -119,24 +117,24 @@ static void sig__cont(int s)
 /*
  * Handle SIGWINCH (window size changed) by setting a flag.
  */
-static void sig__winch(int s)
+static void pv_sig__winch(int s)
 {
-	sig__newsize = 1;
+	pv_sig__newsize = 1;
 }
 
 
 /*
  * Initialise signal handling.
  */
-void sig_init(void)
+void pv_sig_init(void)
 {
 	struct sigaction sa;
 
-	sig__old_stderr = -1;
-	sig__tstp_time.tv_sec = 0;
-	sig__tstp_time.tv_usec = 0;
-	sig__toffset.tv_sec = 0;
-	sig__toffset.tv_usec = 0;
+	pv_sig__old_stderr = -1;
+	pv_sig__tstp_time.tv_sec = 0;
+	pv_sig__tstp_time.tv_usec = 0;
+	pv_sig__toffset.tv_sec = 0;
+	pv_sig__toffset.tv_usec = 0;
 
 	/*
 	 * Ignore SIGPIPE, so we don't die if stdout is a pipe and the other
@@ -151,16 +149,16 @@ void sig_init(void)
 	 * Handle SIGTTOU by continuing with output switched off, so that we
 	 * can be stopped and backgrounded without messing up the terminal.
 	 */
-	sa.sa_handler = sig__ttou;
+	sa.sa_handler = pv_sig__ttou;
 	sigemptyset(&(sa.sa_mask));
 	sa.sa_flags = 0;
 	sigaction(SIGTTOU, &sa, NULL);
 
 	/*
 	 * Handle SIGTSTP by storing the time the signal happened for later
-	 * use by sig__cont(), and then stopping the process.
+	 * use by pv_sig__cont(), and then stopping the process.
 	 */
-	sa.sa_handler = sig__tstp;
+	sa.sa_handler = pv_sig__tstp;
 	sigemptyset(&(sa.sa_mask));
 	sa.sa_flags = 0;
 	sigaction(SIGTSTP, &sa, NULL);
@@ -170,7 +168,7 @@ void sig_init(void)
 	 * to the elapsed time offset, and by trying to write to the
 	 * terminal again.
 	 */
-	sa.sa_handler = sig__cont;
+	sa.sa_handler = pv_sig__cont;
 	sigemptyset(&(sa.sa_mask));
 	sa.sa_flags = 0;
 	sigaction(SIGCONT, &sa, NULL);
@@ -179,7 +177,7 @@ void sig_init(void)
 	 * Handle SIGWINCH by setting a flag to let the main loop know it
 	 * has to reread the terminal size.
 	 */
-	sa.sa_handler = sig__winch;
+	sa.sa_handler = pv_sig__winch;
 	sigemptyset(&(sa.sa_mask));
 	sa.sa_flags = 0;
 	sigaction(SIGWINCH, &sa, NULL);
@@ -189,7 +187,7 @@ void sig_init(void)
 /*
  * Stop reacting to SIGTSTP and SIGCONT.
  */
-void sig_nopause(void)
+void pv_sig_nopause(void)
 {
 	struct sigaction sa;
 
@@ -208,16 +206,16 @@ void sig_nopause(void)
 /*
  * Start catching SIGTSTP and SIGCONT again.
  */
-void sig_allowpause(void)
+void pv_sig_allowpause(void)
 {
 	struct sigaction sa;
 
-	sa.sa_handler = sig__tstp;
+	sa.sa_handler = pv_sig__tstp;
 	sigemptyset(&(sa.sa_mask));
 	sa.sa_flags = 0;
 	sigaction(SIGTSTP, &sa, NULL);
 
-	sa.sa_handler = sig__cont;
+	sa.sa_handler = pv_sig__cont;
 	sigemptyset(&(sa.sa_mask));
 	sa.sa_flags = 0;
 	sigaction(SIGCONT, &sa, NULL);
@@ -230,7 +228,7 @@ void sig_allowpause(void)
  * get backgrounded, then foregrounded again, we start writing to the
  * terminal again.
  */
-void sig_checkbg(void)
+void pv_sig_checkbg(void)
 {
 	static time_t next_check = 0;
 	struct termios t;
@@ -240,19 +238,19 @@ void sig_checkbg(void)
 
 	next_check = time(NULL) + 1;
 
-	if (sig__old_stderr == -1)
+	if (pv_sig__old_stderr == -1)
 		return;
 
-	dup2(sig__old_stderr, STDERR_FILENO);
-	close(sig__old_stderr);
-	sig__old_stderr = -1;
+	dup2(pv_sig__old_stderr, STDERR_FILENO);
+	close(pv_sig__old_stderr);
+	pv_sig__old_stderr = -1;
 
 	tcgetattr(STDERR_FILENO, &t);
 	t.c_lflag |= TOSTOP;
 	tcsetattr(STDERR_FILENO, TCSANOW, &t);
 
 #ifdef HAVE_IPC
-	cursor_needreinit();
+	pv_crs_needreinit();
 #endif
 }
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-05 00:06+0000\n"
+"POT-Creation-Date: 2007-08-02 11:44+0100\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Date: 1999-06-01 15:18:29+0100\n"
 "From: Andrew Wood <ivarch@ubik>\n"
@@ -502,23 +502,23 @@ msgstr ""
 "rediriger l'impression vers une visionneuse comme `more' ou `less',\n"
 "i.e. `%s -l | more'."
 
-#: src/main/file.c:87
+#: src/main/file.c:103
 msgid "failed to close file"
 msgstr "la fermeture du fichier a échoué"
 
-#: src/main/file.c:106
+#: src/main/file.c:122
 msgid "failed to read file"
 msgstr "la lecture du fichier a échoué"
 
-#: src/main/file.c:115
+#: src/main/file.c:131
 msgid "failed to stat file"
 msgstr "échec à statuer sur le fichier"
 
-#: src/main/file.c:124
+#: src/main/file.c:140
 msgid "failed to stat output file"
 msgstr "échec à statuer sur le fichier de sortie"
 
-#: src/main/file.c:140
+#: src/main/file.c:158
 msgid "input file is output file"
 msgstr "fichiers d'entré et de sortie sont les mêmes"
 

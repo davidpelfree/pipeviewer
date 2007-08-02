@@ -23,7 +23,7 @@ static int my_isdigit(char c)
 /*
  * Return the numeric value of "str", as a long long.
  */
-long long getnum_ll(char *str)
+long long pv_getnum_ll(char *str)
 {
 	long long n = 0;
 	long long decimal = 0;
@@ -111,7 +111,7 @@ long long getnum_ll(char *str)
 /*
  * Return the numeric value of "str", as a double.
  */
-double getnum_d(char *str)
+double pv_getnum_d(char *str)
 {
 	double n = 0.0;
 	double step = 1;
@@ -141,9 +141,9 @@ double getnum_d(char *str)
 /*
  * Return the numeric value of "str", as an int.
  */
-int getnum_i(char *str)
+int pv_getnum_i(char *str)
 {
-	return (int) getnum_ll(str);
+	return (int) pv_getnum_ll(str);
 }
 
 /* EOF */

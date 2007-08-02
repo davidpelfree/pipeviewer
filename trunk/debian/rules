@@ -45,7 +45,7 @@ clean:
 	-$(MAKE) distclean
 
 	-rm -f src/nls/*.mo
-	-rm -f doc/quickref.txt doc/lsm doc/quickref.1 doc/pv.spec
+	-rm -f doc/lsm doc/quickref.1 doc/pv.spec
 
 	# autoconf/make contain *.mk~ files that are needed for the build
 	dh_clean -Xmk~
@@ -132,7 +132,7 @@ clean:
 	-$(MAKE) distclean
 
 	-rm -f src/nls/*.mo
-	-rm -f doc/quickref.txt doc/lsm doc/quickref.1 doc/pv.spec
+	-rm -f doc/lsm doc/quickref.1 doc/pv.spec
 
 	# autoconf/make contain *.mk~ files that are needed for the build
 	dh_clean -Xmk~

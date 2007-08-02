@@ -9,6 +9,7 @@
 #endif
 #include "options.h"
 #include "library/getopt.h"
+#include "pv.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,9 +21,6 @@
 void display_help(void);
 void display_license(void);
 void display_version(void);
-long long getnum_ll(char *);
-double getnum_d(char *);
-int getnum_i(char *);
 
 
 /*
@@ -172,25 +170,25 @@ opts_t opts_parse(int argc, char **argv)
 			opts->wait = 1;
 			break;
 		case 's':
-			opts->size = getnum_ll(optarg);
+			opts->size = pv_getnum_ll(optarg);
 			break;
 		case 'i':
-			opts->interval = getnum_d(optarg);
+			opts->interval = pv_getnum_d(optarg);
 			break;
 		case 'w':
-			opts->width = getnum_i(optarg);
+			opts->width = pv_getnum_i(optarg);
 			break;
 		case 'H':
-			opts->height = getnum_i(optarg);
+			opts->height = pv_getnum_i(optarg);
 			break;
 		case 'N':
 			opts->name = optarg;
 			break;
 		case 'L':
-			opts->rate_limit = getnum_ll(optarg);
+			opts->rate_limit = pv_getnum_ll(optarg);
 			break;
 		case 'B':
-			opts->buffer_size = getnum_ll(optarg);
+			opts->buffer_size = pv_getnum_ll(optarg);
 			break;
 		default:
 #ifdef HAVE_GETOPT_LONG
@@ -220,14 +218,6 @@ opts_t opts_parse(int argc, char **argv)
 		opts->rate = 1;
 		opts->bytes = 1;
 	}
-
-	/*
-	 * Interval must be at least 0.1 second, and at most 10 minutes.
-	 */
-	if (opts->interval < 0.1)
-		opts->interval = 0.1;
-	if (opts->interval > 600)
-		opts->interval = 600;
 
 	/*
 	 * Store remaining command-line arguments.
