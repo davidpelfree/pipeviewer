@@ -96,7 +96,8 @@ int pv_main_loop(opts_t opts)
 				cansend = 0;
 		}
 
-		written = pv_transfer(opts, fd, &eof_in, &eof_out, cansend);
+		written =
+		    pv_transfer(opts, fd, &eof_in, &eof_out, cansend);
 		if (written < 0)
 			return 1;
 
@@ -194,7 +195,8 @@ int pv_main_loop(opts_t opts)
 			next_update.tv_usec = cur_time.tv_usec;
 		}
 
-		init_time.tv_sec = start_time.tv_sec + pv_sig__toffset.tv_sec;
+		init_time.tv_sec =
+		    start_time.tv_sec + pv_sig__toffset.tv_sec;
 		init_time.tv_usec =
 		    start_time.tv_usec + pv_sig__toffset.tv_usec;
 		if (init_time.tv_usec >= 1000000) {

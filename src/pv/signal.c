@@ -20,10 +20,10 @@
 
 
 static int pv_sig__old_stderr;		 /* see pv_sig__ttou() */
-static struct timeval pv_sig__tstp_time;	 /* see pv_sig__tstp() / __cont() */
+static struct timeval pv_sig__tstp_time; /* see pv_sig__tstp() / __cont() */
 
 struct timeval pv_sig__toffset;		 /* total time spent stopped */
-sig_atomic_t pv_sig__newsize = 0;		 /* whether we need to get term size again */
+sig_atomic_t pv_sig__newsize = 0;	 /* whether we need to get term size again */
 
 
 /*
@@ -85,7 +85,8 @@ static void pv_sig__cont(int s)
 	gettimeofday(&tv, NULL);
 
 	pv_sig__toffset.tv_sec += (tv.tv_sec - pv_sig__tstp_time.tv_sec);
-	pv_sig__toffset.tv_usec += (tv.tv_usec - pv_sig__tstp_time.tv_usec);
+	pv_sig__toffset.tv_usec +=
+	    (tv.tv_usec - pv_sig__tstp_time.tv_usec);
 	if (pv_sig__toffset.tv_usec >= 1000000) {
 		pv_sig__toffset.tv_sec++;
 		pv_sig__toffset.tv_usec -= 1000000;
