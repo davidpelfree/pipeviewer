@@ -54,7 +54,7 @@ void pv_set_buffer_size(unsigned long long sz, int force)
  * returned.
  */
 long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
-		   unsigned long long allowed)
+		 unsigned long long allowed)
 {
 	static unsigned char *buf = NULL;
 	static unsigned long in_buffer = 0;

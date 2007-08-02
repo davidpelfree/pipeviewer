@@ -186,7 +186,7 @@ static int pv_crs__get_ypos(int terminalfd)
 {
 	struct termios tty;
 	struct termios old_tty;
-	char cpr[32];		 /* RATS: ignore (checked) */
+	char cpr[32];			 /* RATS: ignore (checked) */
 	int ypos;
 
 	tcgetattr(terminalfd, &tty);
@@ -195,7 +195,7 @@ static int pv_crs__get_ypos(int terminalfd)
 	tcsetattr(terminalfd, TCSANOW | TCSAFLUSH, &tty);
 	write(terminalfd, "\033[6n", 4);
 	memset(cpr, 0, sizeof(cpr));
-	read(terminalfd, cpr, 6);   /* RATS: ignore (OK) */
+	read(terminalfd, cpr, 6);	    /* RATS: ignore (OK) */
 	ypos = pv_getnum_i(cpr + 2);
 	tcsetattr(terminalfd, TCSANOW | TCSAFLUSH, &old_tty);
 

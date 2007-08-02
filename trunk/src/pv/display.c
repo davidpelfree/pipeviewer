@@ -86,8 +86,7 @@ static long pv__calc_eta(long long so_far, long long total, long elapsed)
  *
  * If "opts" is NULL, then free all allocated memory and return.
  */
-void pv_display(opts_t opts, long double esec, long long sl,
-		  long long tot)
+void pv_display(opts_t opts, long double esec, long long sl, long long tot)
 {
 	static long percentage = 0;
 	static long double prev_esec = 0;
