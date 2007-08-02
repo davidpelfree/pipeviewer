@@ -1,7 +1,7 @@
 /*
  * Parse command-line options.
  *
- * Copyright 2005 Andrew Wood, distributed under the Artistic License.
+ * Copyright 2007 Andrew Wood, distributed under the Artistic License.
  */
 
 #ifdef HAVE_CONFIG_H

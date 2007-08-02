@@ -2,7 +2,7 @@
  * Main program entry point - read the command line options, then perform
  * the appropriate actions.
  *
- * Copyright 2005 Andrew Wood, distributed under the Artistic License.
+ * Copyright 2007 Andrew Wood, distributed under the Artistic License.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -19,8 +19,8 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 
-extern struct timeval pv_sig__toffset;
-extern sig_atomic_t pv_sig__newsize;
+extern struct timeval pv_sig_toffset;
+extern sig_atomic_t pv_sig_newsize;
 
 
 /*
@@ -157,8 +157,8 @@ int pv_main_loop(opts_t opts)
 			 */
 			pv_sig_nopause();
 			gettimeofday(&start_time, NULL);
-			pv_sig__toffset.tv_sec = 0;
-			pv_sig__toffset.tv_usec = 0;
+			pv_sig_toffset.tv_sec = 0;
+			pv_sig_toffset.tv_usec = 0;
 			pv_sig_allowpause();
 
 			next_update.tv_sec = start_time.tv_sec
@@ -196,9 +196,9 @@ int pv_main_loop(opts_t opts)
 		}
 
 		init_time.tv_sec =
-		    start_time.tv_sec + pv_sig__toffset.tv_sec;
+		    start_time.tv_sec + pv_sig_toffset.tv_sec;
 		init_time.tv_usec =
-		    start_time.tv_usec + pv_sig__toffset.tv_usec;
+		    start_time.tv_usec + pv_sig_toffset.tv_usec;
 		if (init_time.tv_usec >= 1000000) {
 			init_time.tv_sec++;
 			init_time.tv_usec -= 1000000;
@@ -215,8 +215,8 @@ int pv_main_loop(opts_t opts)
 		if (final_update)
 			since_last = -1;
 
-		if (pv_sig__newsize) {
-			pv_sig__newsize = 0;
+		if (pv_sig_newsize) {
+			pv_sig_newsize = 0;
 			pv_screensize(opts);
 		}
 

@@ -1,7 +1,7 @@
 /*
  * Functions for transferring between file descriptors.
  *
- * Copyright 2005 Andrew Wood, distributed under the Artistic License.
+ * Copyright 2007 Andrew Wood, distributed under the Artistic License.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -46,7 +46,7 @@ void pv_set_buffer_size(unsigned long long sz, int force)
  * Transfer some data from "fd" to standard output, timing out after 9/100
  * of a second. If opts->rate_limit is >0, only up to "allowed" bytes can
  * be written. The variables that "eof_in" and "eof_out" point to are used
- * to flag end of input and end of output conditions respectively.
+ * to flag that we've finished reading and writing respectively.
  *
  * Returns the number of bytes written, or negative on error.
  *

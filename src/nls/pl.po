@@ -6,13 +6,95 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-02 11:44+0100\n"
+"POT-Creation-Date: 2007-08-02 22:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: src/pv/transfer.c:84
+msgid "buffer allocation failed"
+msgstr "nie uda³o siê zaalokowaæ bufora"
+
+#: src/pv/transfer.c:127
+msgid "select call failed"
+msgstr "nie uda³o siê wywo³aæ funkcji select"
+
+#: src/pv/transfer.c:151
+msgid "read failed"
+msgstr "b³±d odczytu"
+
+#: src/pv/transfer.c:198
+msgid "write failed"
+msgstr "b³±d zapisu"
+
+#: src/pv/display.c:186
+msgid "GB"
+msgstr "GB"
+
+#: src/pv/display.c:189
+msgid "MB"
+msgstr "MB"
+
+#: src/pv/display.c:192
+msgid "kB"
+msgstr "kB"
+
+#: src/pv/display.c:194
+msgid "B"
+msgstr "B"
+
+#: src/pv/display.c:224
+msgid "GB/s"
+msgstr "GB/s"
+
+#: src/pv/display.c:227
+msgid "MB/s"
+msgstr "MB/s"
+
+#: src/pv/display.c:230
+msgid "kB/s"
+msgstr "kB/s"
+
+#: src/pv/display.c:232
+msgid "B/s "
+msgstr "B/s"
+
+#: src/pv/display.c:258
+msgid "ETA"
+msgstr "ETA"
+
+# "Przewidywany czas ukoñczenia" for ETA is too long
+#: src/pv/file.c:106
+msgid "failed to close file"
+msgstr "nie uda³o siê zamkn±æ pliku"
+
+#: src/pv/file.c:125
+msgid "failed to read file"
+msgstr "nie uda³o siê odczytaæ pliku"
+
+#: src/pv/file.c:134
+msgid "failed to stat file"
+msgstr "nie uda³o siê wykonaæ operacji stat na pliku"
+
+#: src/pv/file.c:143
+msgid "failed to stat output file"
+msgstr "nie uda³o siê wykonaæ operacji stat na pliku wyj¶ciowym"
+
+#: src/pv/file.c:161
+msgid "input file is output file"
+msgstr "plik wej¶ciowy jest zarazem plikiem wyj¶ciowym"
+
+#: src/pv/cursor.c:232 src/pv/cursor.c:248 src/pv/cursor.c:309
+msgid "failed to open terminal"
+msgstr "nie uda³o siê otworzyæ terminala"
+
+#: src/pv/cursor.c:240
+#, fuzzy
+msgid "failed to lock terminal"
+msgstr "nie uda³o siê otworzyæ terminala"
 
 #: src/main/help.c:31
 #, fuzzy
@@ -160,79 +242,27 @@ msgid "Please report any bugs to %s."
 msgstr "Proszê przesy³aæ zg³oszenia b³êdów do %s."
 
 #. RATS: ignore
-#: src/main/options.c:86
+#: src/main/options.c:84
 #, c-format
 msgid "%s: option structure allocation failed (%s)"
 msgstr "%s: nie uda³o siê zaalokowaæ struktur opcji (%s)"
 
-#: src/main/options.c:99
+#: src/main/options.c:97
 #, c-format
 msgid "%s: option structure argv allocation failed (%s)"
 msgstr "%s: nie uda³o siê zaalokowaæ struktur opcji argv (%s)"
 
 #. RATS: ignore (OK)
-#: src/main/options.c:198
+#: src/main/options.c:196
 #, c-format
 msgid "Try `%s --help' for more information."
 msgstr "Spróbuj `%s --help' by uzyskaæ wiêcej informacji"
 
 #. RATS: ignore (OK)
-#: src/main/options.c:202
+#: src/main/options.c:200
 #, fuzzy, c-format
 msgid "Try `%s -h' for more information."
 msgstr "Spróbuj `%s -h' by uzyskaæ wiêcej informacji"
-
-#: src/main/transfer.c:83
-msgid "buffer allocation failed"
-msgstr "nie uda³o siê zaalokowaæ bufora"
-
-#: src/main/transfer.c:126
-msgid "select call failed"
-msgstr "nie uda³o siê wywo³aæ funkcji select"
-
-#: src/main/transfer.c:150
-msgid "read failed"
-msgstr "b³±d odczytu"
-
-#: src/main/transfer.c:197
-msgid "write failed"
-msgstr "b³±d zapisu"
-
-#: src/main/display.c:168
-msgid "GB"
-msgstr "GB"
-
-#: src/main/display.c:171
-msgid "MB"
-msgstr "MB"
-
-#: src/main/display.c:174
-msgid "kB"
-msgstr "kB"
-
-#: src/main/display.c:176
-msgid "B"
-msgstr "B"
-
-#: src/main/display.c:206
-msgid "GB/s"
-msgstr "GB/s"
-
-#: src/main/display.c:209
-msgid "MB/s"
-msgstr "MB/s"
-
-#: src/main/display.c:212
-msgid "kB/s"
-msgstr "kB/s"
-
-#: src/main/display.c:214
-msgid "B/s "
-msgstr "B/s"
-
-#: src/main/display.c:239
-msgid "ETA"
-msgstr "ETA"
 
 #: src/main/version.c:19
 #, c-format
@@ -482,33 +512,3 @@ msgid ""
 "If that scrolled by too quickly, you may want to pipe it to a\n"
 "pager such as `more' or `less', eg `%s -l | more'."
 msgstr ""
-
-# "Przewidywany czas ukoñczenia" for ETA is too long
-#: src/main/file.c:103
-msgid "failed to close file"
-msgstr "nie uda³o siê zamkn±æ pliku"
-
-#: src/main/file.c:122
-msgid "failed to read file"
-msgstr "nie uda³o siê odczytaæ pliku"
-
-#: src/main/file.c:131
-msgid "failed to stat file"
-msgstr "nie uda³o siê wykonaæ operacji stat na pliku"
-
-#: src/main/file.c:140
-msgid "failed to stat output file"
-msgstr "nie uda³o siê wykonaæ operacji stat na pliku wyj¶ciowym"
-
-#: src/main/file.c:158
-msgid "input file is output file"
-msgstr "plik wej¶ciowy jest zarazem plikiem wyj¶ciowym"
-
-#: src/main/cursor.c:208 src/main/cursor.c:224 src/main/cursor.c:298
-msgid "failed to open terminal"
-msgstr "nie uda³o siê otworzyæ terminala"
-
-#: src/main/cursor.c:216
-#, fuzzy
-msgid "failed to lock terminal"
-msgstr "nie uda³o siê otworzyæ terminala"

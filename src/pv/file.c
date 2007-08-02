@@ -1,7 +1,7 @@
 /*
  * Functions for opening and closing files.
  *
- * Copyright 2005 Andrew Wood, distributed under the Artistic License.
+ * Copyright 2007 Andrew Wood, distributed under the Artistic License.
  */
 
 #include <stdio.h>

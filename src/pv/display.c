@@ -1,7 +1,7 @@
 /*
  * Display functions.
  *
- * Copyright 2005 Andrew Wood, distributed under the Artistic License.
+ * Copyright 2007 Andrew Wood, distributed under the Artistic License.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -23,7 +23,8 @@
 
 
 /*
- * Fill in opts->width with the current terminal size, if possible.
+ * Fill in opts->width and opts->height with the current terminal size,
+ * if possible.
  */
 void pv_screensize(opts_t opts)
 {
