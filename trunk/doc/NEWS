@@ -1,4 +1,4 @@
-1.0.0 - NOT YET RELEASED
+1.0.0 - 2 August 2007
   - act more like "cat" - just skip unreadable files, don't abort
   - removed text version of manual page, and obsolete Info file generation
   - code cleanup and separation of PV internals from CLI front-end

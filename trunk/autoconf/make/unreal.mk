@@ -3,7 +3,7 @@
 #
 
 .PHONY: all help make dep depend test check \
-  clean depclean indentclean distclean cvsclean \
+  clean depclean indentclean distclean cvsclean svnclean \
   index manhtml indent update-po \
   doc dist release \
   install uninstall \
@@ -27,7 +27,7 @@ help:
 	@echo '  depclean        remove .d (dependency) files'
 	@echo '  indentclean     remove files left over from "make indent"'
 	@echo '  distclean       remove everything not distributed'
-	@echo '  cvsclean        remove everything not in CVS'
+	@echo '  cvsclean        remove everything not in CVS/CVN'
 	@echo
 	@echo '  index           generate an HTML index of source code'
 	@echo '  manhtml         output HTML man page to stdout'
@@ -88,7 +88,7 @@ distclean: clean depclean
 	rm -f *.html config.*
 	rm Makefile
 
-cvsclean: distclean
+cvsclean svnclean: distclean
 	rm -f doc/lsm
 	rm -f doc/$(package).spec
 	rm -f doc/quickref.1
@@ -131,6 +131,7 @@ dist: doc update-po
 	chmod 755 $(package)-$(version)/configure
 	chmod 755 $(package)-$(version)/debian/rules
 	rm -rf DUMMY `find $(package)-$(version) -type d -name CVS`
+	rm -rf DUMMY `find $(package)-$(version) -type d -name .svn`
 	tar cf $(package)-$(version).tar $(package)-$(version)
 	rm -rf $(package)-$(version)
 	$(DO_GZIP) $(package)-$(version).tar

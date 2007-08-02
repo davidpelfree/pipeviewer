@@ -1,3 +1,26 @@
+pv (0.9.9-2) unstable; urgency=low
+
+  * Remove debian/pv.doc-base file in debian/rules clean target.
+    This is needed so that dh_installdocs don't fill the postinst script with
+    install-docs stuff, because upstream tarball contains a debian directory.
+    (Closes: Bug#421394)
+
+ -- Cédric Delfosse <cedric@debian.org>  Thu,  3 May 2007 20:52:06 +0200
+
+pv (0.9.9-1) unstable; urgency=low
+
+  * New upstream release
+  * Remove texinfo and texi2html from Build-Depends and update debian/rules:
+    upstream has dropped support for the Texinfo manual page and the HTML page
+
+ -- Cédric Delfosse <cedric@debian.org>  Fri, 27 Apr 2007 23:17:00 +0200
+
+pv (0.9.6-1) unstable; urgency=low
+
+  * New upstream release (Closes: Bug#364469)
+
+ -- Cédric Delfosse <cedric@debian.org>  Thu, 27 Apr 2006 21:54:25 +0200
+
 pv (0.9.1-1) unstable; urgency=low
 
   * New upstream release

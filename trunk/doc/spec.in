@@ -45,6 +45,10 @@ make test
 %doc README doc/NEWS doc/TODO doc/COPYING
 
 %changelog
+* Thu Aug  2 2007 Andrew Wood <andrew.wood@ivarch.com> 1.0.0-1
+- We now act more like "cat" - just skip unreadable files, don't abort.
+- Various code cleanups were done.
+
 * Mon Feb  5 2007 Andrew Wood <andrew.wood@ivarch.com> 0.9.9-1
 - New option "-B" to set the buffer size, and a workaround for problems
 - piping to dd(1).
