@@ -85,9 +85,6 @@ static long pv__calc_eta(long long so_far, long long total, long elapsed)
  * an average over the whole transfer; otherwise the current rate is shown.
  *
  * If "opts" is NULL, then free all allocated memory and return.
- *
- * Note that this function is not thread-safe since it uses internal static
- * variables.
  */
 void pv_display(opts_t opts, long double esec, long long sl,
 		  long long tot)

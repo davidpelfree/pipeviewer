@@ -52,8 +52,6 @@ void pv_set_buffer_size(unsigned long long sz, int force)
  *
  * If "opts" is NULL, then the transfer buffer is freed, and zero is
  * returned.
- *
- * This function is not thread-safe as it uses static variables.
  */
 long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 		   unsigned long long allowed)
