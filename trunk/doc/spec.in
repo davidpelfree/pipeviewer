@@ -1,10 +1,11 @@
-Summary: Monitor the progress of data through a pipe.
+Summary: Monitor the progress of data through a pipe
 Name: @PACKAGE@
 Version: @VERSION@
 Release: 1%{?dist}
-License: Artistic
+License: Artistic 2.0
 Group: Development/Tools
 Source: http://www.ivarch.com/programs/sources/@PACKAGE@-@VERSION@.tar.gz
+Url: http://www.ivarch.com/programs/pv.shtml
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: gettext
 
@@ -45,6 +46,10 @@ make test
 %doc README doc/NEWS doc/TODO doc/COPYING
 
 %changelog
+* Sat Aug  4 2007 Andrew Wood <andrew.wood@ivarch.com> 1.0.1-1
+- Changed license from Artistic to Artistic 2.0.
+- Removed "--license" option.
+
 * Thu Aug  2 2007 Andrew Wood <andrew.wood@ivarch.com> 1.0.0-1
 - We now act more like "cat" - just skip unreadable files, don't abort.
 - Various code cleanups were done.

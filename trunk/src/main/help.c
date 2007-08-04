@@ -65,8 +65,6 @@ void display_help(void)
 		{"", 0, 0, 0},
 		{"-h", "--help", 0,
 		 _("show this help and exit")},
-		{"-l", "--license", 0,
-		 _("show the license this program is distributed under")},
 		{"-V", "--version", 0,
 		 _("show version information and exit")},
 		{0, 0, 0, 0}
