@@ -19,7 +19,6 @@
 
 
 void display_help(void);
-void display_license(void);
 void display_version(void);
 
 
@@ -51,7 +50,6 @@ opts_t opts_parse(int argc, char **argv)
 #ifdef HAVE_GETOPT_LONG
 	struct option long_options[] = {
 		{"help", 0, 0, 'h'},
-		{"license", 0, 0, 'l'},
 		{"version", 0, 0, 'V'},
 		{"progress", 0, 0, 'p'},
 		{"timer", 0, 0, 't'},
@@ -74,7 +72,7 @@ opts_t opts_parse(int argc, char **argv)
 	};
 	int option_index = 0;
 #endif
-	char *short_options = "hlVpterbfnqcWs:i:w:H:N:L:B:";
+	char *short_options = "hVpterbfnqcWs:i:w:H:N:L:B:";
 	int c, numopts;
 	opts_t opts;
 
@@ -119,11 +117,6 @@ opts_t opts_parse(int argc, char **argv)
 		switch (c) {
 		case 'h':
 			display_help();
-			opts->do_nothing = 1;
-			return opts;
-			break;
-		case 'l':
-			display_license();
 			opts->do_nothing = 1;
 			return opts;
 			break;

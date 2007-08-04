@@ -15,11 +15,11 @@ Before releasing a new version, go through this checklist:
   - make manhtml | tidy -asxhtml | sed -e '1,/<body>/d' -e '/<\/body>/,$d'
   - update HTML for todo and news
   - copy and sign tar.gz to HTML directory
-  - upload package to SourceForge
-  - create a new release on SourceForge
+  - upload package files to Google Code
   - submit new release to Freshmeat
   - upload HTML
   - check validator results for project page and manual
+  - upload package files to SourceForge
   - svn copy https://pipeviewer.googlecode.com/svn/trunk/ \
         https://pipeviewer.googlecode.com/svn/tags/v1_2_3 \
         -m 'Tagging release 1.2.3'

@@ -7,7 +7,7 @@
 [\fIFILE\fR]...
 .br
 .B @PACKAGE@
-[\fI\-h\fR|\fI\-l\fR|\fI\-V\fR]
+[\fI\-h\fR|\fI\-V\fR]
 
 
 .SH DESCRIPTION
@@ -204,10 +204,6 @@ block size of the input file's filesystem multiplied by 32 (512kb max), or
 .B \-h, \-\-help
 Print a usage message on standard output and exit successfully.
 .TP
-.B \-l, \-\-license
-Print details of the program's license on standard output and exit
-successfully.
-.TP
 .B \-V, \-\-version         
 Print version information on standard output and exit successfully.
 
@@ -289,4 +285,4 @@ by using the contact form on the web site.
 
 
 .SH LICENSE
-This is free software, distributed under the ARTISTIC license.
+This is free software, distributed under the ARTISTIC 2.0 license.
