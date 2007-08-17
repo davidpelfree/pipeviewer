@@ -80,8 +80,10 @@ void pv_calc_total_size(opts_t opts)
 				opts->size += lseek64(fd, 0, SEEK_END);
 				close(fd);
 			}
-		} else {
+		} else if (S_ISREG(sb.st_mode)) {
 			opts->size += sb.st_size;
+		} else {
+			opts->size = 0;
 		}
 	}
 }
