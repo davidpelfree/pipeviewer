@@ -147,13 +147,16 @@ int pv_next_file(opts_t opts, int filenum, int oldfd)
 
 	/*
 	 * Check that this new input file is not the same as stdout's
-	 * destination. This restriction is ignored for tty devices.
+	 * destination. This restriction is ignored for anything other
+	 * than a regular file or block device.
 	 */
 	if (isb.st_dev != osb.st_dev)
 		return fd;
 	if (isb.st_ino != osb.st_ino)
 		return fd;
 	if (isatty(fd))
+		return fd;
+	if ((!S_ISREG(isb.st_mode)) && (!S_ISBLK(isb.st_mode)))
 		return fd;
 
 	fprintf(stderr, "%s: %s: %s\n",
