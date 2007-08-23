@@ -1,8 +1,9 @@
-1.0.2 - NOT YET RELEASED
+1.0.6 - NOT YET RELEASED
   - fix for input/output equivalence check on Mac OS X
   - fix for size calculation in pipelines on Mac OS X
   - removed /debian directory at request of new Debian maintainer
   - fixed "make uninstall"
+  - new option "-l" to count lines instead of bytes
 
 1.0.1 - 4 August 2007
   - licensing change from Artistic to Artistic 2.0

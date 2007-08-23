@@ -27,6 +27,10 @@
  *
  * Any files that cannot be stat()ed or that access() says we can't read
  * will cause a warning to be output and will be removed from the list.
+ *
+ * In line mode, any files that pass the above checks will then be read to
+ * determine how many lines they contain, and the total size will be set to
+ * the total line count. Only regular files will be read.
  */
 void pv_calc_total_size(opts_t opts)
 {
@@ -85,6 +89,55 @@ void pv_calc_total_size(opts_t opts)
 		} else {
 			opts->size = 0;
 		}
+	}
+
+	if (!opts->linemode)
+		return;
+
+	opts->size = 0;
+
+	for (i = 0; i < opts->argc; i++) {
+		fd = -1;
+
+		if (strcmp(opts->argv[i], "-") == 0) {
+			rc = fstat64(STDIN_FILENO, &sb);
+			if ((rc != 0) || (!S_ISREG(sb.st_mode))) {
+				opts->size = 0;
+				return;
+			}
+			fd = dup(STDIN_FILENO);
+		} else {
+			rc = stat64(opts->argv[i], &sb);
+			if ((rc != 0) || (!S_ISREG(sb.st_mode))) {
+				opts->size = 0;
+				return;
+			}
+			fd = open64(opts->argv[i], O_RDONLY);
+		}
+
+		if (fd < 0) {
+			fprintf(stderr, "%s: %s: %s\n", opts->program_name,
+				opts->argv[i], strerror(errno));
+			opts->size = 0;
+			return;
+		}
+
+		while (1) {
+			unsigned char scanbuf[1024];	/* RATS: ignore (OK) */
+			int numread, i;
+
+			numread = read(fd, /* RATS: ignore (OK) */ scanbuf,
+				       sizeof(scanbuf));
+			if (numread <= 0)
+				break;
+			for (i = 0; i < numread; i++) {
+				if (scanbuf[i] == '\n')
+					opts->size++;
+			}
+		}
+
+		lseek64(fd, 0, SEEK_SET);
+		close(fd);
 	}
 }
 

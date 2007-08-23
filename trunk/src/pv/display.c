@@ -63,16 +63,16 @@ static long pv__calc_percentage(long long so_far, long long total)
  */
 static long pv__calc_eta(long long so_far, long long total, long elapsed)
 {
-	long long bytes_left;
+	long long amount_left;
 
 	if (so_far < 1)
 		return 0;
 
-	bytes_left = total - so_far;
-	bytes_left *= (long long) elapsed;
-	bytes_left /= so_far;
+	amount_left = total - so_far;
+	amount_left *= (long long) elapsed;
+	amount_left /= so_far;
 
-	return (long) bytes_left;
+	return (long) amount_left;
 }
 
 
@@ -84,6 +84,8 @@ static long pv__calc_eta(long long so_far, long long total, long elapsed)
  *
  * If "sl" is negative, this is the final update so the rate is given as an
  * an average over the whole transfer; otherwise the current rate is shown.
+ *
+ * In line mode, "sl" and "tot" are in lines, not bytes.
  *
  * If "opts" is NULL, then free all allocated memory and return.
  */
@@ -181,17 +183,34 @@ void pv_display(opts_t opts, long double esec, long long sl, long long tot)
 	if (opts->bytes) {
 		transferred = tot;
 
-		if (transferred >= 1000 * 1024 * 1024) {
-			transferred = transferred / (1024 * 1024 * 1024);
-			units = _("GB");
-		} else if (transferred >= 1000 * 1024) {
-			transferred = transferred / (1024 * 1024);
-			units = _("MB");
-		} else if (transferred >= 1000) {
-			transferred = transferred / 1024;
-			units = _("kB");
+		if (opts->linemode) {
+			if (transferred >= 1000 * 1000 * 1000) {
+				transferred =
+				    transferred / (1000 * 1000 * 1000);
+				units = _("G");
+			} else if (transferred >= 1000 * 1000) {
+				transferred = transferred / (1000 * 1000);
+				units = _("M");
+			} else if (transferred >= 1000) {
+				transferred = transferred / 1000;
+				units = _("k");
+			} else {
+				units = "";
+			}
 		} else {
-			units = _("B");
+			if (transferred >= 1000 * 1024 * 1024) {
+				transferred =
+				    transferred / (1024 * 1024 * 1024);
+				units = _("GB");
+			} else if (transferred >= 1000 * 1024) {
+				transferred = transferred / (1024 * 1024);
+				units = _("MB");
+			} else if (transferred >= 1000) {
+				transferred = transferred / 1024;
+				units = _("kB");
+			} else {
+				units = _("B");
+			}
 		}
 
 		/*
@@ -219,17 +238,32 @@ void pv_display(opts_t opts, long double esec, long long sl, long long tot)
 	}
 
 	if (opts->rate) {
-		if (rate >= 1000 * 1024 * 1024) {
-			rate = rate / (1024 * 1024 * 1024);
-			units = _("GB/s");
-		} else if (rate >= 1000 * 1024) {
-			rate = rate / (1024 * 1024);
-			units = _("MB/s");
-		} else if (rate >= 1000) {
-			rate = rate / 1024;
-			units = _("kB/s");
+		if (opts->linemode) {
+			if (rate >= 1000 * 1000 * 1000) {
+				rate = rate / (1000 * 1000 * 1000);
+				units = _("G/s");
+			} else if (rate >= 1000 * 1000) {
+				rate = rate / (1000 * 1000);
+				units = _("M/s");
+			} else if (rate >= 1000) {
+				rate = rate / 1000;
+				units = _("k/s");
+			} else {
+				units = _("/s ");
+			}
 		} else {
-			units = _("B/s ");
+			if (rate >= 1000 * 1024 * 1024) {
+				rate = rate / (1024 * 1024 * 1024);
+				units = _("GB/s");
+			} else if (rate >= 1000 * 1024) {
+				rate = rate / (1024 * 1024);
+				units = _("MB/s");
+			} else if (rate >= 1000) {
+				rate = rate / 1024;
+				units = _("kB/s");
+			} else {
+				units = _("B/s ");
+			}
 		}
 
 		/*

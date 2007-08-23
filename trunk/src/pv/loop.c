@@ -31,7 +31,7 @@ extern sig_atomic_t pv_sig_newsize;
  */
 int pv_main_loop(opts_t opts)
 {
-	long written;
+	long written, lineswritten;
 	long long total_written, since_last, cansend, donealready, target;
 	int eof_in, eof_out, final_update;
 	struct timeval start_time, next_update, next_reset, cur_time;
@@ -39,6 +39,21 @@ int pv_main_loop(opts_t opts)
 	long double elapsed, tilreset;
 	struct stat64 sb;
 	int fd, n;
+
+	/*
+	 * "written" is ALWAYS bytes written by the last transfer.
+	 *
+	 * "lineswritten" is the lines written by the last transfer,
+	 * but is only updated in line mode.
+	 *
+	 * "total_written" is the total bytes written since the start,
+	 * or in line mode, the total lines written since the start.
+	 *
+	 * "since_last" is the bytes written since the last display,
+	 * or in line mode, the lines written since the last display.
+	 *
+	 * The remaining variables are all unchanged by linemode.
+	 */
 
 	fd = -1;
 
@@ -97,12 +112,18 @@ int pv_main_loop(opts_t opts)
 		}
 
 		written =
-		    pv_transfer(opts, fd, &eof_in, &eof_out, cansend);
+		    pv_transfer(opts, fd, &eof_in, &eof_out, cansend,
+				&lineswritten);
 		if (written < 0)
 			return 1;
 
-		since_last += written;
-		total_written += written;
+		if (opts->linemode) {
+			since_last += lineswritten;
+			total_written += lineswritten;
+		} else {
+			since_last += written;
+			total_written += written;
+		}
 		if (opts->rate_limit > 0)
 			donealready += written;
 
@@ -136,12 +157,18 @@ int pv_main_loop(opts_t opts)
 
 		/*
 		 * If -W was given, we don't output anything until we have
-		 * read a byte, at which point we then count time as if we
-		 * started when the first byte was received
+		 * written a byte (or line, in line mode), at which point
+		 * we then count time as if we started when the first byte
+		 * was received.
 		 */
 		if (opts->wait) {
-			if (written < 1)
-				continue;   /* nothing written yet */
+			if (opts->linemode) {
+				if (lineswritten < 1)
+					continue;
+			} else {
+				if (written < 1)
+					continue;
+			}
 
 			opts->wait = 0;
 
@@ -237,7 +264,7 @@ int pv_main_loop(opts_t opts)
 	 * routines.
 	 */
 	pv_display(0, 0, 0, 0);
-	pv_transfer(0, -1, 0, 0, 0);
+	pv_transfer(0, -1, 0, 0, 0, NULL);
 
 	return 0;
 }

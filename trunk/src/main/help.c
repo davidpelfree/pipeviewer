@@ -49,6 +49,8 @@ void display_help(void)
 		 _("display nothing until first byte transferred")},
 		{"-s", "--size", _("SIZE"),
 		 _("set estimated data size to SIZE bytes")},
+		{"-l", "--line-mode", 0,
+		 _("count lines instead of bytes")},
 		{"-i", "--interval", _("SEC"),
 		 _("update every SEC seconds")},
 		{"-w", "--width", _("WIDTH"),

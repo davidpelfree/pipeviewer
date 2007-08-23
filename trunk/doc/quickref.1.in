@@ -141,6 +141,12 @@ bytes when calculating percentages and ETAs.  The same suffixes of "k", "m"
 etc can be used as with
 .BR -L .
 .TP
+.B \-l, \-\-line\-mode
+Instead of counting bytes, count lines (newline characters). The progress
+bar will only move when a new line is found, and the value passed to the
+.B \-s
+option will be interpreted as a line count.
+.TP
 .B \-i SEC, \-\-interval SEC
 Wait
 .B SEC

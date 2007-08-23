@@ -26,6 +26,7 @@ struct opts_s {           /* structure describing run-time options */
 	unsigned char cursor;          /* whether to use cursor positioning */
 	unsigned char numeric;         /* numeric output only */
 	unsigned char wait;            /* wait for transfer before display */
+	unsigned char linemode;        /* count lines instead of bytes */
 	unsigned char no_op;           /* do nothing other than pipe data */
 	unsigned long long rate_limit; /* rate limit, in bytes per second */
 	unsigned long long buffer_size;/* buffer size, in bytes (0=default) */

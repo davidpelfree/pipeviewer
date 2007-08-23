@@ -25,7 +25,7 @@ void pv_calc_total_size(opts_t);
 
 int pv_main_loop(opts_t);
 void pv_display(opts_t, long double, long long, long long);
-long pv_transfer(opts_t, int, int *, int *, unsigned long long);
+long pv_transfer(opts_t, int, int *, int *, unsigned long long, long *);
 void pv_set_buffer_size(unsigned long long, int);
 int pv_next_file(opts_t, int, int);
 
