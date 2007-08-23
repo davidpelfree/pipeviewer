@@ -50,11 +50,14 @@ The latest version can always be found here.
 
 Credit is also due to:
 
-  Cédric Delfosse <cedric@debian.org>
+  Kevin Coyner <kcoyner@debian.org>
     - Debian package maintainer
 
   Jakub Hrozek <jhrozek@redhat.com>
     - Fedora package maintainer
+
+  Cédric Delfosse <cedric@debian.org>
+    - previous Debian package maintainer
 
   Eduardo Aguiar <eduardo.oliveira@sondabrasil.com.br>
     - provided Portuguese (Brazilian) translation
