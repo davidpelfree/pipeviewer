@@ -27,7 +27,7 @@ help:
 	@echo '  depclean        remove .d (dependency) files'
 	@echo '  indentclean     remove files left over from "make indent"'
 	@echo '  distclean       remove everything not distributed'
-	@echo '  cvsclean        remove everything not in CVS/CVN'
+	@echo '  cvsclean        remove everything not in CVS/SVN'
 	@echo
 	@echo '  index           generate an HTML index of source code'
 	@echo '  manhtml         output HTML man page to stdout'
