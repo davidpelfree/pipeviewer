@@ -151,8 +151,6 @@ install: all doc
 	  "$(DESTDIR)/$(bindir)"
 	$(srcdir)/autoconf/scripts/mkinstalldirs \
 	  "$(DESTDIR)/$(mandir)/man1"
-	$(srcdir)/autoconf/scripts/mkinstalldirs \
-	  "$(DESTDIR)/$(infodir)"
 	$(INSTALL) -m 755 $(package) \
 	                  "$(DESTDIR)/$(bindir)/$(package)"
 	$(INSTALL) -m 644 doc/quickref.1 \
@@ -175,9 +173,10 @@ install: all doc
 	fi
 
 uninstall:
-	$(UNINSTALL) "$(DESTDIR)/$(mandir)/man1/$(package).1"
-	$(UNINSTALL) "$(DESTDIR)/$(mandir)/man1/$(package).1.gz"
-	if test -n "$(CATALOGS)"; then \
+	-$(UNINSTALL) "$(DESTDIR)/$(bindir)/$(package)"
+	-$(UNINSTALL) "$(DESTDIR)/$(mandir)/man1/$(package).1"
+	-$(UNINSTALL) "$(DESTDIR)/$(mandir)/man1/$(package).1.gz"
+	-if test -n "$(CATALOGS)"; then \
 	  catalogs='$(CATALOGS)'; \
 	  for cat in $$catalogs; do \
 	    name=`echo $$cat | sed 's,^.*/,,g'`; \
