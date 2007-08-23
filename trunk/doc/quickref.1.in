@@ -213,13 +213,17 @@ Andrew Wood <andrew.wood@ivarch.com>
 .br
 .I http://www.ivarch.com/
 
-Cedric Delfosse <cedric@debian.org>
+Kevin Coyner <kcoyner@debian.org>
 .br
 (Debian package maintainer)
 
 Jakub Hrozek <jhrozek@redhat.com>
 .br
 (Fedora package maintainer)
+
+Cedric Delfosse <cedric@debian.org>
+.br
+(previous Debian package maintainer)
 
 Eduardo Aguiar <eduardo.oliveira@sondabrasil.com.br>
 .br

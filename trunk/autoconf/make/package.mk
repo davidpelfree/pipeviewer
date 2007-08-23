@@ -12,7 +12,6 @@ $(srcdir)/autoconf	\
 $(srcdir)/configure	\
 $(srcdir)/doc		\
 $(srcdir)/src		\
-$(srcdir)/debian	\
 $(srcdir)/tests
 
 # EOF

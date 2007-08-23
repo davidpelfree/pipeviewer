@@ -7,7 +7,7 @@
   index manhtml indent update-po \
   doc dist release \
   install uninstall \
-  rpmbuild rpm srpm deb
+  rpmbuild rpm srpm
 
 all: $(alltarg) $(CATALOGS)
 
@@ -37,7 +37,6 @@ help:
 	@echo '  dist            create a source tarball for distribution'
 	@echo '  rpm             build a binary RPM (passes $RPMFLAGS to RPM)'
 	@echo '  srpm            build a source RPM (passes $RPMFLAGS to RPM)'
-	@echo '  deb             build a binary Debian package'
 	@echo '  release         dist+rpm+srpm'
 	@echo
 
@@ -129,7 +128,6 @@ dist: doc update-po
 	chmod 755 `find $(package)-$(version) -type d -print`
 	chmod 755 `find $(package)-$(version)/autoconf/scripts`
 	chmod 755 $(package)-$(version)/configure
-	chmod 755 $(package)-$(version)/debian/rules
 	rm -rf DUMMY `find $(package)-$(version) -type d -name CVS`
 	rm -rf DUMMY `find $(package)-$(version) -type d -name .svn`
 	tar cf $(package)-$(version).tar $(package)-$(version)
@@ -220,14 +218,6 @@ srpm:
 	rpmbuild $(RPMFLAGS) --rcfile=rpmrc -ts $(package)-$(version).tar.gz
 	mv rpm/SRPMS/*$(package)-*.rpm .
 	rm -rf rpm rpmmacros rpmrc
-
-deb: dist
-	rm -rf BUILD-DEB
-	mkdir BUILD-DEB
-	cd BUILD-DEB && tar xzf ../$(package)-$(version).tar.gz
-	cd BUILD-DEB && cd $(package)-$(version) && ./debian/rules binary
-	mv BUILD-DEB/*.deb .
-	rm -rf BUILD-DEB
 
 release: dist rpm srpm
 	zcat $(package)-$(version).tar.gz | bzip2 > $(package)-$(version).tar.bz2
