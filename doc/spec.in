@@ -46,6 +46,10 @@ make test
 %doc README doc/NEWS doc/TODO doc/COPYING
 
 %changelog
+* Thu Aug 23 2007 Andrew Wood <andrew.wood@ivarch.com> 1.0.6-1
+- New option "-l" to count lines instead of bytes, some Mac OS X fixes,
+- and packaging cleanups.
+
 * Sat Aug  4 2007 Andrew Wood <andrew.wood@ivarch.com> 1.0.1-1
 - Changed license from Artistic to Artistic 2.0.
 - Removed "--license" option.

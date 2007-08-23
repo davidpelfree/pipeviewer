@@ -62,6 +62,7 @@ opts_t opts_parse(int argc, char **argv)
 		{"cursor", 0, 0, 'c'},
 		{"wait", 0, 0, 'W'},
 		{"size", 1, 0, 's'},
+		{"line-mode", 0, 0, 'l'},
 		{"interval", 1, 0, 'i'},
 		{"width", 1, 0, 'w'},
 		{"height", 1, 0, 'H'},
@@ -72,7 +73,7 @@ opts_t opts_parse(int argc, char **argv)
 	};
 	int option_index = 0;
 #endif
-	char *short_options = "hVpterbfnqcWs:i:w:H:N:L:B:";
+	char *short_options = "hVpterbfnqcWs:li:w:H:N:L:B:";
 	int c, numopts;
 	opts_t opts;
 
@@ -164,6 +165,9 @@ opts_t opts_parse(int argc, char **argv)
 			break;
 		case 's':
 			opts->size = pv_getnum_ll(optarg);
+			break;
+		case 'l':
+			opts->linemode = 1;
 			break;
 		case 'i':
 			opts->interval = pv_getnum_d(optarg);

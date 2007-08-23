@@ -48,13 +48,14 @@ void pv_set_buffer_size(unsigned long long sz, int force)
  * be written. The variables that "eof_in" and "eof_out" point to are used
  * to flag that we've finished reading and writing respectively.
  *
- * Returns the number of bytes written, or negative on error.
+ * Returns the number of bytes written, or negative on error. In line mode,
+ * the number of lines written will be put into *lineswritten.
  *
  * If "opts" is NULL, then the transfer buffer is freed, and zero is
  * returned.
  */
 long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
-		 unsigned long long allowed)
+		 unsigned long long allowed, long *lineswritten)
 {
 	static unsigned char *buf = NULL;
 	static unsigned long in_buffer = 0;
@@ -86,6 +87,9 @@ long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 			return -1;
 		}
 	}
+
+	if ((opts->linemode) && (lineswritten != NULL))
+		*lineswritten = 0;
 
 	tv.tv_sec = 0;
 	tv.tv_usec = 90000;
@@ -161,6 +165,18 @@ long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 		}
 	}
 
+	/*
+	 * In line mode, only write up to and including the first newline,
+	 * so that we're writing output line-by-line.
+	 */
+	if (opts->linemode) {
+		int ckidx;
+		for (ckidx = 1; ckidx < to_write; ckidx++) {
+			if (buf[bytes_written + ckidx - 1] == '\n')
+				to_write = ckidx;
+		}
+	}
+
 	if (FD_ISSET(STDOUT_FILENO, &writefds)
 	    && (in_buffer > bytes_written)
 	    && (to_write > 0)) {
@@ -201,6 +217,16 @@ long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 		} else if (w == 0) {
 			*eof_out = 1;
 		} else {
+			if (opts->linemode) {
+				int nlidx;
+				for (nlidx = 0; nlidx < w; nlidx++) {
+					if (buf[bytes_written + nlidx] ==
+					    '\n') {
+						*lineswritten =
+						    1 + (*lineswritten);
+					}
+				}
+			}
 			bytes_written += w;
 			written += w;
 			if (bytes_written >= in_buffer) {
