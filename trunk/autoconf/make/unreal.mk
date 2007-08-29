@@ -35,8 +35,8 @@ help:
 	@echo '  update-po       update the .po files'
 	@echo
 	@echo '  dist            create a source tarball for distribution'
-	@echo '  rpm             build a binary RPM (passes $RPMFLAGS to RPM)'
-	@echo '  srpm            build a source RPM (passes $RPMFLAGS to RPM)'
+	@echo '  rpm             build a binary RPM (passes $$RPMFLAGS to RPM)'
+	@echo '  srpm            build a source RPM (passes $$RPMFLAGS to RPM)'
 	@echo '  release         dist+rpm+srpm'
 	@echo
 
