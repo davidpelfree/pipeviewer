@@ -1,4 +1,5 @@
-1.0.7 - NOT YET RELEASED
+1.0.8 - NOT YET RELEASED
+  - new option --remote (-R) to control an already-running process
   - new option --line-mode (-l) to count lines instead of bytes
   - fix for "-L" to be less resource intensive
   - fix for input/output equivalence check on Mac OS X
