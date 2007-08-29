@@ -20,6 +20,10 @@
 #include <sys/types.h>
 
 
+int remote_set(opts_t opts);
+void remote_sig_init(opts_t opts);
+
+
 /*
  * Process command-line arguments and set option flags, then call functions
  * to initialise, and finally enter the main loop.
@@ -42,6 +46,24 @@ int main(int argc, char **argv)
 	if (opts->do_nothing) {
 		opts_free(opts);
 		return 0;
+	}
+
+	if (opts->remote > 0) {
+		if (opts->width < 0)
+			opts->width = 80;
+		if (opts->height < 0)
+			opts->height = 25;
+		if (opts->width > 999999)
+			opts->width = 999999;
+		if (opts->height > 999999)
+			opts->height = 999999;
+		if ((opts->interval != 0) && (opts->interval < 0.1))
+			opts->interval = 0.1;
+		if (opts->interval > 600)
+			opts->interval = 600;
+		retcode = remote_set(opts);
+		opts_free(opts);
+		return retcode;
 	}
 
 	/*
@@ -125,6 +147,7 @@ int main(int argc, char **argv)
 	opts->current_file = "(stdin)";
 
 	pv_sig_init();
+	remote_sig_init(opts);
 
 	retcode = pv_main_loop(opts);
 

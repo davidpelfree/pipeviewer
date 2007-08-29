@@ -58,6 +58,7 @@ long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 		 unsigned long long allowed, long *lineswritten)
 {
 	static unsigned char *buf = NULL;
+	static unsigned long long buf_alloced = 0;
 	static unsigned long in_buffer = 0;
 	static unsigned long bytes_written = 0;
 	struct timeval tv;
@@ -78,6 +79,7 @@ long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 	}
 
 	if (buf == NULL) {
+		buf_alloced = pv__bufsize;
 		buf = (unsigned char *) malloc(pv__bufsize + 32);
 		if (buf == NULL) {
 			fprintf(stderr, "%s: %s: %s\n",
@@ -85,6 +87,21 @@ long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 				_("buffer allocation failed"),
 				strerror(errno));
 			return -1;
+		}
+	}
+
+	/*
+	 * Reallocate the buffer if the buffer size has changed mid-transfer.
+	 */
+	if (buf_alloced < pv__bufsize) {
+		unsigned char *newptr;
+		newptr =
+		    realloc( /* RATS: ignore */ buf, pv__bufsize + 32);
+		if (newptr == NULL) {
+			pv__bufsize = buf_alloced;
+		} else {
+			buf = newptr;
+			buf_alloced = pv__bufsize;
 		}
 	}
 
