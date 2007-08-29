@@ -203,6 +203,25 @@ bytes.  A suffix of "k", "m", "g", or "t" can be added to denote
 kilobytes (*1024), megabytes, and so on.  The default buffer size is the
 block size of the input file's filesystem multiplied by 32 (512kb max), or
 400kb if the block size cannot be determined.
+.TP
+.B \-R PID, \-\-remote PID
+If
+.B PID
+is an instance of
+.B @PACKAGE@
+that is already running,
+.B \-R PID
+will cause that instance to act as though it had been given
+this instance's command line instead.  For example, if
+.B @PACKAGE@ -L 123k
+is running with process ID 9876, then running
+.B @PACKAGE@ -R 9876 -L 321k
+will cause it to start using a rate limit of 321k instead of 123k.
+Note that some options cannot be changed while running, such as
+.BR \-c ,
+.BR \-l ,
+and
+.BR \-f .
 
 
 .SH GENERAL OPTIONS

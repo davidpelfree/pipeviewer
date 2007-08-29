@@ -64,6 +64,8 @@ void display_help(void)
 		 _("limit transfer to RATE bytes per second")},
 		{"-B", "--buffer-size", _("BYTES"),
 		 _("use a buffer size of BYTES")},
+		{"-R", "--remote", _("PID"),
+		 _("update settings of process PID")},
 		{"", 0, 0, 0},
 		{"-h", "--help", 0,
 		 _("show this help and exit")},

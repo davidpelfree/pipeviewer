@@ -69,11 +69,12 @@ opts_t opts_parse(int argc, char **argv)
 		{"name", 1, 0, 'N'},
 		{"rate-limit", 1, 0, 'L'},
 		{"buffer-size", 1, 0, 'B'},
+		{"remote", 1, 0, 'R'},
 		{0, 0, 0, 0}
 	};
 	int option_index = 0;
 #endif
-	char *short_options = "hVpterbfnqcWs:li:w:H:N:L:B:";
+	char *short_options = "hVpterbfnqcWs:li:w:H:N:L:B:R:";
 	int c, numopts;
 	opts_t opts;
 
@@ -186,6 +187,9 @@ opts_t opts_parse(int argc, char **argv)
 			break;
 		case 'B':
 			opts->buffer_size = pv_getnum_ll(optarg);
+			break;
+		case 'R':
+			opts->remote = pv_getnum_i(optarg);
 			break;
 		default:
 #ifdef HAVE_GETOPT_LONG
