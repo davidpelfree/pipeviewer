@@ -19,8 +19,28 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 
+#define RATE_GRANULARITY	100000	    /* usec between -L rate chunks */
+
 extern struct timeval pv_sig_toffset;
 extern sig_atomic_t pv_sig_newsize;
+
+
+/*
+ * Add the given number of microseconds (which may be negative) to the given
+ * timeval.
+ */
+static void pv_timeval_add_usec(struct timeval *val, long usec)
+{
+	val->tv_usec += usec;
+	while (val->tv_usec < 0) {
+		val->tv_sec--;
+		val->tv_usec += 1000000;
+	}
+	while (val->tv_usec >= 1000000) {
+		val->tv_sec++;
+		val->tv_usec -= 1000000;
+	}
+}
 
 
 /*
@@ -36,7 +56,7 @@ int pv_main_loop(opts_t opts)
 	int eof_in, eof_out, final_update;
 	struct timeval start_time, next_update, next_reset, cur_time;
 	struct timeval init_time;
-	long double elapsed, tilreset;
+	long double elapsed;
 	struct stat64 sb;
 	int fd, n;
 
@@ -67,16 +87,14 @@ int pv_main_loop(opts_t opts)
 	gettimeofday(&start_time, NULL);
 	gettimeofday(&cur_time, NULL);
 
-	next_update.tv_sec = start_time.tv_sec + (long) opts->interval;
-	next_update.tv_usec = start_time.tv_usec
-	    + ((opts->interval - ((long) opts->interval)) * 1000000);
-	if (next_update.tv_usec >= 1000000) {
-		next_update.tv_sec++;
-		next_update.tv_usec -= 1000000;
-	}
+	next_update.tv_sec = start_time.tv_sec;
+	next_update.tv_usec = start_time.tv_usec;
+	pv_timeval_add_usec(&next_update,
+			    (long) (1000000.0 * opts->interval));
 
-	next_reset.tv_sec = start_time.tv_sec + 1;
+	next_reset.tv_sec = start_time.tv_sec;
 	next_reset.tv_usec = start_time.tv_usec;
+	pv_timeval_add_usec(&next_reset, RATE_GRANULARITY);
 
 	cansend = 0;
 	donealready = 0;
@@ -98,14 +116,10 @@ int pv_main_loop(opts_t opts)
 
 	while ((!(eof_in && eof_out)) || (!final_update)) {
 
-		tilreset = next_reset.tv_sec - cur_time.tv_sec;
-		tilreset +=
-		    (next_reset.tv_usec - cur_time.tv_usec) / 1000000.0;
-		if (tilreset < 0)
-			tilreset = 0;
-
 		if (opts->rate_limit > 0) {
-			target = (1.03 - tilreset) * opts->rate_limit;
+			target =
+			    ((long double) (opts->rate_limit)) /
+			    (long double) (1000000 / RATE_GRANULARITY);
 			cansend = target - donealready;
 			if (target < donealready)
 				cansend = 0;
@@ -146,7 +160,7 @@ int pv_main_loop(opts_t opts)
 		if ((cur_time.tv_sec > next_reset.tv_sec)
 		    || (cur_time.tv_sec == next_reset.tv_sec
 			&& cur_time.tv_usec >= next_reset.tv_usec)) {
-			next_reset.tv_sec++;
+			pv_timeval_add_usec(&next_reset, RATE_GRANULARITY);
 			if (next_reset.tv_sec < cur_time.tv_sec)
 				next_reset.tv_sec = cur_time.tv_sec;
 			donealready = 0;
@@ -188,15 +202,11 @@ int pv_main_loop(opts_t opts)
 			pv_sig_toffset.tv_usec = 0;
 			pv_sig_allowpause();
 
-			next_update.tv_sec = start_time.tv_sec
-			    + (long) opts->interval;
-			next_update.tv_usec = start_time.tv_usec
-			    + ((opts->interval - ((long) opts->interval))
-			       * 1000000);
-			if (next_update.tv_usec >= 1000000) {
-				next_update.tv_sec++;
-				next_update.tv_usec -= 1000000;
-			}
+			next_update.tv_sec = start_time.tv_sec;
+			next_update.tv_usec = start_time.tv_usec;
+			pv_timeval_add_usec(&next_update,
+					    (long) (1000000.0 *
+						    opts->interval));
 		}
 
 		if ((cur_time.tv_sec < next_update.tv_sec)
@@ -205,15 +215,9 @@ int pv_main_loop(opts_t opts)
 			continue;
 		}
 
-		next_update.tv_sec = next_update.tv_sec
-		    + (long) opts->interval;
-		next_update.tv_usec = next_update.tv_usec
-		    + ((opts->interval - ((long) opts->interval))
-		       * 1000000);
-		if (next_update.tv_usec >= 1000000) {
-			next_update.tv_sec++;
-			next_update.tv_usec -= 1000000;
-		}
+		pv_timeval_add_usec(&next_update,
+				    (long) (1000000.0 * opts->interval));
+
 		if (next_update.tv_sec < cur_time.tv_sec) {
 			next_update.tv_sec = cur_time.tv_sec;
 			next_update.tv_usec = cur_time.tv_usec;

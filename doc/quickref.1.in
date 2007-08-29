@@ -283,6 +283,10 @@ Gert Menke
 .br
 (reported bug when piping to dd with a large input buffer size)
 
+Ville Herva <Ville.Herva@iki.fi>
+.br
+(informative bug report about rate limiting performance)
+
 
 .SH BUGS
 If you find any bugs, please contact the primary author, either by email or

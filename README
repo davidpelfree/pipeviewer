@@ -92,4 +92,7 @@ Credit is also due to:
   Gert Menke
     - reported bug when piping to dd with a large input buffer size
 
+  Ville Herva <Ville.Herva@iki.fi>
+    - informative bug report about rate limiting performance
+
 -----------------------------------------------------------------------------
