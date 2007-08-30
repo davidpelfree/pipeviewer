@@ -12,7 +12,7 @@
  * of the table being marked by a NULL msgid. The po2table.sh script will do
  * this.
  *
- * Copyright 2007 Andrew Wood, distributed under the Artistic License.
+ * Copyright 2007 Andrew Wood, distributed under the Artistic License 2.0.
  */
 
 #include "config.h"

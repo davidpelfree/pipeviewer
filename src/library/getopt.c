@@ -1,7 +1,7 @@
 /*
  * Small reimplementation of getopt().
  *
- * Copyright 2007 Andrew Wood, distributed under the Artistic License.
+ * Copyright 2007 Andrew Wood, distributed under the Artistic License 2.0.
  */
 
 #include "config.h"
