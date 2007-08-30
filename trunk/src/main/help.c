@@ -1,7 +1,7 @@
 /*
  * Output command-line help to stdout.
  *
- * Copyright 2007 Andrew Wood, distributed under the Artistic License.
+ * Copyright 2007 Andrew Wood, distributed under the Artistic License 2.0.
  */
 
 #ifdef HAVE_CONFIG_H

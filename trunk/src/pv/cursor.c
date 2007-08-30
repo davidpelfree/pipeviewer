@@ -10,7 +10,7 @@
  * terminal, so we try to use a lockfile if terminal locking doesn't work,
  * and finally abort if even that is unavailable.
  *
- * Copyright 2007 Andrew Wood, distributed under the Artistic License.
+ * Copyright 2007 Andrew Wood, distributed under the Artistic License 2.0.
  */
 
 #ifdef HAVE_CONFIG_H
