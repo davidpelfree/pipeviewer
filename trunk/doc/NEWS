@@ -1,4 +1,4 @@
-1.0.8 - NOT YET RELEASED
+1.1.0 - 30 August 2007
   - new option --remote (-R) to control an already-running process
   - new option --line-mode (-l) to count lines instead of bytes
   - fix for "-L" to be less resource intensive

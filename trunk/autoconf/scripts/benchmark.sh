@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# Benchmark the write performance of pv by looking at the number of write()
-# calls and the average size of each write, as suggested by Ville Herva
-# <Ville.Herva@iki.fi>.
+# Benchmark the read/write performance of pv by looking at the number of
+# read() and write() calls and the average amount of data transferred each
+# time, as suggested by Ville Herva <Ville.Herva@iki.fi>.
 #
 
 test_input=`mktemp /tmp/pvbench1XXXXXX`
