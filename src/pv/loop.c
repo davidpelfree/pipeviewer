@@ -5,9 +5,6 @@
  * Copyright 2007 Andrew Wood, distributed under the Artistic License 2.0.
  */
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
 #include "options.h"
 #include "pv.h"
 
@@ -18,6 +15,10 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/time.h>
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #define RATE_GRANULARITY	100000	    /* usec between -L rate chunks */
 

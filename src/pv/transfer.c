@@ -4,9 +4,6 @@
  * Copyright 2007 Andrew Wood, distributed under the Artistic License 2.0.
  */
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
 #include "options.h"
 
 #define BUFFER_SIZE	409600
@@ -27,6 +24,9 @@
 #include <fcntl.h>
 #include <signal.h>
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 static unsigned long long pv__bufsize = BUFFER_SIZE;
 

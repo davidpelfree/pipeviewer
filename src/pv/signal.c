@@ -4,9 +4,6 @@
  * Copyright 2007 Andrew Wood, distributed under the Artistic License 2.0.
  */
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
 #include "pv.h"
 
 #include <signal.h>
@@ -18,6 +15,9 @@
 #include <fcntl.h>
 #include <sys/time.h>
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 static int pv__sig_old_stderr;		 /* see pv__sig_ttou() */
 static struct timeval pv__sig_tstp_time; /* see pv__sig_tstp() / __cont() */
