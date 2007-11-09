@@ -5,9 +5,6 @@
  */
 
 #include <stdio.h>
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
 #include "options.h"
 
 #include <stdlib.h>
@@ -19,6 +16,9 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 /*
  * Try to work out the total size of all data by adding up the sizes of all

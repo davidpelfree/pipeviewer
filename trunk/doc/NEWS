@@ -1,3 +1,6 @@
+1.1.1 - NOT YET RELEASED
+  - patch from Elias Pipping correcting compilation failure on Darwin 9
+
 1.1.0 - 30 August 2007
   - new option --remote (-R) to control an already-running process
   - new option --line-mode (-l) to count lines instead of bytes

@@ -13,9 +13,6 @@
  * Copyright 2007 Andrew Wood, distributed under the Artistic License 2.0.
  */
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
 #include "options.h"
 #include "pv.h"
 
@@ -27,6 +24,10 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #ifdef HAVE_IPC
 #include <sys/types.h>
