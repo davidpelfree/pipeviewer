@@ -8,9 +8,8 @@
 #include "options.h"
 #include "pv.h"
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
+#define _GNU_SOURCE 1
+#include <features.h>
 
 #include <unistd.h>
 #include <signal.h>
@@ -19,6 +18,10 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/time.h>
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #define RATE_GRANULARITY	100000	    /* usec between -L rate chunks */
 

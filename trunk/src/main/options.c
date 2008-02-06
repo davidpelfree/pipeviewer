@@ -116,6 +116,38 @@ opts_t opts_parse(int argc, char **argv)
 		if (c < 0)
 			continue;
 
+		/*
+		 * Check that any numeric arguments are of the right type.
+		 */
+		switch (c) {
+		case 's':
+		case 'w':
+		case 'H':
+		case 'L':
+		case 'B':
+		case 'R':
+			if (pv_getnum_check(optarg, 0)) {
+				fprintf(stderr, "%s: -%c: %s\n", argv[0],
+					c, _("integer argument expected"));
+				opts_free(opts);
+				return 0;
+			}
+			break;
+		case 'i':
+			if (pv_getnum_check(optarg, 1)) {
+				fprintf(stderr, "%s: -%c: %s\n", argv[0],
+					c, _("numeric argument expected"));
+				opts_free(opts);
+				return 0;
+			}
+			break;
+		default:
+			break;
+		}
+
+		/*
+		 * Parse each command line option.
+		 */
 		switch (c) {
 		case 'h':
 			display_help();
