@@ -95,6 +95,9 @@ Credit is also due to:
   Ville Herva <Ville.Herva@iki.fi>
     - informative bug report about rate limiting performance
 
+  Elias Pipping
+    - patch to compile properly on Darwin 9
+
   Boris Lohner
     - reported problem that "-L" does not complain if given non-numeric value
 
