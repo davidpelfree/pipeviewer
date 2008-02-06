@@ -9,7 +9,7 @@
 #include "pv.h"
 
 #define _GNU_SOURCE 1
-#include <features.h>
+#include <limits.h>
 
 #include <unistd.h>
 #include <signal.h>
