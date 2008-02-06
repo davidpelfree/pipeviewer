@@ -306,6 +306,10 @@ Ville Herva <Ville.Herva@iki.fi>
 .br
 (informative bug report about rate limiting performance)
 
+Boris Lohner
+.br
+(reported problem that -L does not complain if given non-numeric value)
+
 Laszlo Ersek
 .br
 (reported shared memory leak on SIGINT with -c)

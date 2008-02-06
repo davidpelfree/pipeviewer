@@ -95,6 +95,9 @@ Credit is also due to:
   Ville Herva <Ville.Herva@iki.fi>
     - informative bug report about rate limiting performance
 
+  Boris Lohner
+    - reported problem that "-L" does not complain if given non-numeric value
+
   Laszlo Ersek <http://phptest11.atw.hu/>
     - reported shared memory leak on SIGINT with -c
 

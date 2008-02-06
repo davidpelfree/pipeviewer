@@ -146,4 +146,61 @@ int pv_getnum_i(char *str)
 	return (int) pv_getnum_ll(str);
 }
 
+
+/*
+ * Return nonzero if the given string is not a valid integer (type=0) or
+ * double (type=1).
+ */
+int pv_getnum_check(char *str, int type)
+{
+	if (!str)
+		return 1;
+
+	while ((str[0] == ' ') || (str[0] == '\t'))
+		str++;
+
+	if (!pv__isdigit(str[0]))
+		return 1;
+
+	for (; pv__isdigit(str[0]); str++);
+
+	if (str[0] == '.') {
+		if (type == 0)
+			return 1;
+		str++;
+		for (; pv__isdigit(str[0]); str++);
+	}
+
+	if (str[0] == 0)
+		return 0;
+
+	/*
+	 * Suffixes are not allowed for doubles, only for integers.
+	 */
+	if (type == 1)
+		return 1;
+
+	while ((str[0] == ' ') || (str[0] == '\t'))
+		str++;
+	switch (str[0]) {
+	case 'k':
+	case 'K':
+	case 'm':
+	case 'M':
+	case 'g':
+	case 'G':
+	case 't':
+	case 'T':
+		str++;
+		break;
+	default:
+		return 1;
+	}
+
+	if (str[0])
+		return 1;
+
+	return 0;
+}
+
 /* EOF */

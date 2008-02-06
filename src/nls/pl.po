@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-30 12:55+0100\n"
+"POT-Creation-Date: 2008-02-06 11:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -102,31 +102,31 @@ msgid "ETA"
 msgstr "ETA"
 
 # "Przewidywany czas ukoñczenia" for ETA is too long
-#: src/pv/file.c:161
+#: src/pv/file.c:164
 msgid "failed to close file"
 msgstr "nie uda³o siê zamkn±æ pliku"
 
-#: src/pv/file.c:180
+#: src/pv/file.c:183
 msgid "failed to read file"
 msgstr "nie uda³o siê odczytaæ pliku"
 
-#: src/pv/file.c:189
+#: src/pv/file.c:192
 msgid "failed to stat file"
 msgstr "nie uda³o siê wykonaæ operacji stat na pliku"
 
-#: src/pv/file.c:198
+#: src/pv/file.c:201
 msgid "failed to stat output file"
 msgstr "nie uda³o siê wykonaæ operacji stat na pliku wyj¶ciowym"
 
-#: src/pv/file.c:219
+#: src/pv/file.c:222
 msgid "input file is output file"
 msgstr "plik wej¶ciowy jest zarazem plikiem wyj¶ciowym"
 
-#: src/pv/cursor.c:232 src/pv/cursor.c:248 src/pv/cursor.c:309
+#: src/pv/cursor.c:233 src/pv/cursor.c:249 src/pv/cursor.c:310
 msgid "failed to open terminal"
 msgstr "nie uda³o siê otworzyæ terminala"
 
-#: src/pv/cursor.c:240
+#: src/pv/cursor.c:241
 #, fuzzy
 msgid "failed to lock terminal"
 msgstr "nie uda³o siê otworzyæ terminala"
@@ -294,14 +294,22 @@ msgstr "%s: nie uda³o siê zaalokowaæ struktur opcji (%s)"
 msgid "%s: option structure argv allocation failed (%s)"
 msgstr "%s: nie uda³o siê zaalokowaæ struktur opcji argv (%s)"
 
+#: src/main/options.c:131
+msgid "integer argument expected"
+msgstr ""
+
+#: src/main/options.c:139
+msgid "numeric argument expected"
+msgstr ""
+
 #. RATS: ignore (OK)
-#: src/main/options.c:197
+#: src/main/options.c:229
 #, c-format
 msgid "Try `%s --help' for more information."
 msgstr "Spróbuj `%s --help' by uzyskaæ wiêcej informacji"
 
 #. RATS: ignore (OK)
-#: src/main/options.c:201
+#: src/main/options.c:233
 #, fuzzy, c-format
 msgid "Try `%s -h' for more information."
 msgstr "Spróbuj `%s -h' by uzyskaæ wiêcej informacji"

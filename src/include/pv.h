@@ -19,6 +19,7 @@ typedef struct opts_s *opts_t;
 double pv_getnum_d(char *);
 int pv_getnum_i(char *);
 long long pv_getnum_ll(char *);
+int pv_getnum_check(char *, int);
 
 void pv_screensize(opts_t);
 void pv_calc_total_size(opts_t);
