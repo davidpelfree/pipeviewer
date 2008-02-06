@@ -306,6 +306,10 @@ Ville Herva <Ville.Herva@iki.fi>
 .br
 (informative bug report about rate limiting performance)
 
+Elias Pipping
+.br
+(patch to compile properly on Darwin 9)
+
 Boris Lohner
 .br
 (reported problem that -L does not complain if given non-numeric value)
