@@ -5,6 +5,8 @@
 
 set -e
 
+cd `dirname $0`
+
 cd autoconf
 autoconf configure.in > ../configure
 cd ..

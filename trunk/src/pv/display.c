@@ -1,7 +1,7 @@
 /*
  * Display functions.
  *
- * Copyright 2007 Andrew Wood, distributed under the Artistic License 2.0.
+ * Copyright 2008 Andrew Wood, distributed under the Artistic License 2.0.
  */
 
 #ifdef HAVE_CONFIG_H
