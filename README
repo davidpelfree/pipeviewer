@@ -35,7 +35,7 @@ all files used, all functions defined, and all TODOs marked in the code.
 Author
 ******
 
-This package is copyright (C) 2007 Andrew Wood, and is being distributed
+This package is copyright (C) 2008 Andrew Wood, and is being distributed
 under the terms of the Artistic License 2.0.  For more details, see the
 file `doc/COPYING'.
 
@@ -94,5 +94,8 @@ Credit is also due to:
 
   Ville Herva <Ville.Herva@iki.fi>
     - informative bug report about rate limiting performance
+
+  Laszlo Ersek <http://phptest11.atw.hu/>
+    - reported shared memory leak on SIGINT with -c
 
 -----------------------------------------------------------------------------

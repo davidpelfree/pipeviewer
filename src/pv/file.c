@@ -1,11 +1,15 @@
 /*
  * Functions for opening and closing files.
  *
- * Copyright 2007 Andrew Wood, distributed under the Artistic License 2.0.
+ * Copyright 2008 Andrew Wood, distributed under the Artistic License 2.0.
  */
 
 #include <stdio.h>
 #include "options.h"
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include <stdlib.h>
 #include <string.h>
@@ -15,10 +19,6 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <fcntl.h>
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
 
 /*
  * Try to work out the total size of all data by adding up the sizes of all

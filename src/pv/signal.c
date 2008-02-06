@@ -1,7 +1,7 @@
 /*
  * Signal handling functions.
  *
- * Copyright 2007 Andrew Wood, distributed under the Artistic License 2.0.
+ * Copyright 2008 Andrew Wood, distributed under the Artistic License 2.0.
  */
 
 #include "pv.h"
@@ -24,6 +24,11 @@ static struct timeval pv__sig_tstp_time; /* see pv__sig_tstp() / __cont() */
 
 struct timeval pv_sig_toffset;		 /* total time spent stopped */
 sig_atomic_t pv_sig_newsize = 0;	 /* whether we need to get term size again */
+sig_atomic_t pv_sig_abort = 0;		 /* whether we need to abort right now */
+
+#ifdef HAVE_IPC
+void pv_crs_needreinit(void);
+#endif
 
 
 /*
@@ -124,6 +129,15 @@ static void pv__sig_winch(int s)
 
 
 /*
+ * Handle termination signals by setting the abort flag.
+ */
+static void pv__sig_term(int s)
+{
+	pv_sig_abort = 1;
+}
+
+
+/*
  * Initialise signal handling.
  */
 void pv_sig_init(void)
@@ -181,6 +195,25 @@ void pv_sig_init(void)
 	sigemptyset(&(sa.sa_mask));
 	sa.sa_flags = 0;
 	sigaction(SIGWINCH, &sa, NULL);
+
+	/*
+	 * Handle SIGINT, SIGHUP, SIGTERM by setting a flag to let the
+	 * main loop know it should quit now.
+	 */
+	sa.sa_handler = pv__sig_term;
+	sigemptyset(&(sa.sa_mask));
+	sa.sa_flags = 0;
+	sigaction(SIGINT, &sa, NULL);
+
+	sa.sa_handler = pv__sig_term;
+	sigemptyset(&(sa.sa_mask));
+	sa.sa_flags = 0;
+	sigaction(SIGHUP, &sa, NULL);
+
+	sa.sa_handler = pv__sig_term;
+	sigemptyset(&(sa.sa_mask));
+	sa.sa_flags = 0;
+	sigaction(SIGTERM, &sa, NULL);
 }
 
 

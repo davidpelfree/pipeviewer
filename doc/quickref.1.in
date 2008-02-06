@@ -1,4 +1,4 @@
-.TH @UCPACKAGE@ 1 "November 2007" Linux "User Manuals"
+.TH @UCPACKAGE@ 1 "February 2008" Linux "User Manuals"
 .SH NAME
 @PACKAGE@ \- monitor the progress of data through a pipe
 .SH SYNOPSIS
@@ -305,6 +305,12 @@ Gert Menke
 Ville Herva <Ville.Herva@iki.fi>
 .br
 (informative bug report about rate limiting performance)
+
+Laszlo Ersek
+.br
+(reported shared memory leak on SIGINT with -c)
+.br
+.I http://phptest11.atw.hu/
 
 
 .SH BUGS

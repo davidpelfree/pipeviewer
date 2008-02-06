@@ -2,11 +2,15 @@
  * Main program entry point - read the command line options, then perform
  * the appropriate actions.
  *
- * Copyright 2007 Andrew Wood, distributed under the Artistic License 2.0.
+ * Copyright 2008 Andrew Wood, distributed under the Artistic License 2.0.
  */
 
 #include "options.h"
 #include "pv.h"
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include <unistd.h>
 #include <signal.h>
@@ -16,14 +20,11 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
 #define RATE_GRANULARITY	100000	    /* usec between -L rate chunks */
 
 extern struct timeval pv_sig_toffset;
 extern sig_atomic_t pv_sig_newsize;
+extern sig_atomic_t pv_sig_abort;
 
 
 /*
@@ -116,6 +117,9 @@ int pv_main_loop(opts_t opts)
 	}
 
 	while ((!(eof_in && eof_out)) || (!final_update)) {
+
+		if (pv_sig_abort)
+			break;
 
 		if (opts->rate_limit > 0) {
 			target =
