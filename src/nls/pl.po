@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-06 11:01+0000\n"
+"POT-Creation-Date: 2008-03-06 12:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,21 +14,26 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/pv/transfer.c:87
-msgid "buffer allocation failed"
-msgstr "nie uda³o siê zaalokowaæ bufora"
+# "Przewidywany czas ukoñczenia" for ETA is too long
+#: src/pv/file.c:164
+msgid "failed to close file"
+msgstr "nie uda³o siê zamkn±æ pliku"
 
-#: src/pv/transfer.c:148
-msgid "select call failed"
-msgstr "nie uda³o siê wywo³aæ funkcji select"
+#: src/pv/file.c:183
+msgid "failed to read file"
+msgstr "nie uda³o siê odczytaæ pliku"
 
-#: src/pv/transfer.c:172
-msgid "read failed"
-msgstr "b³±d odczytu"
+#: src/pv/file.c:192
+msgid "failed to stat file"
+msgstr "nie uda³o siê wykonaæ operacji stat na pliku"
 
-#: src/pv/transfer.c:231
-msgid "write failed"
-msgstr "b³±d zapisu"
+#: src/pv/file.c:201
+msgid "failed to stat output file"
+msgstr "nie uda³o siê wykonaæ operacji stat na pliku wyj¶ciowym"
+
+#: src/pv/file.c:222
+msgid "input file is output file"
+msgstr "plik wej¶ciowy jest zarazem plikiem wyj¶ciowym"
 
 #: src/pv/display.c:190
 #, fuzzy
@@ -101,27 +106,6 @@ msgstr "B/s"
 msgid "ETA"
 msgstr "ETA"
 
-# "Przewidywany czas ukoñczenia" for ETA is too long
-#: src/pv/file.c:164
-msgid "failed to close file"
-msgstr "nie uda³o siê zamkn±æ pliku"
-
-#: src/pv/file.c:183
-msgid "failed to read file"
-msgstr "nie uda³o siê odczytaæ pliku"
-
-#: src/pv/file.c:192
-msgid "failed to stat file"
-msgstr "nie uda³o siê wykonaæ operacji stat na pliku"
-
-#: src/pv/file.c:201
-msgid "failed to stat output file"
-msgstr "nie uda³o siê wykonaæ operacji stat na pliku wyj¶ciowym"
-
-#: src/pv/file.c:222
-msgid "input file is output file"
-msgstr "plik wej¶ciowy jest zarazem plikiem wyj¶ciowym"
-
 #: src/pv/cursor.c:233 src/pv/cursor.c:249 src/pv/cursor.c:310
 msgid "failed to open terminal"
 msgstr "nie uda³o siê otworzyæ terminala"
@@ -130,6 +114,22 @@ msgstr "nie uda³o siê otworzyæ terminala"
 #, fuzzy
 msgid "failed to lock terminal"
 msgstr "nie uda³o siê otworzyæ terminala"
+
+#: src/pv/transfer.c:87
+msgid "buffer allocation failed"
+msgstr "nie uda³o siê zaalokowaæ bufora"
+
+#: src/pv/transfer.c:148
+msgid "select call failed"
+msgstr "nie uda³o siê wywo³aæ funkcji select"
+
+#: src/pv/transfer.c:172
+msgid "read failed"
+msgstr "b³±d odczytu"
+
+#: src/pv/transfer.c:231
+msgid "write failed"
+msgstr "b³±d zapisu"
 
 #: src/main/help.c:31
 #, fuzzy
