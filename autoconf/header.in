@@ -52,8 +52,10 @@
 # define __USE_LARGEFILE64 1
 # define _LARGEFILE64_SOURCE 1
 #else
-# define stat64 stat
-# define fstat64 fstat
+# ifndef __APPLE__
+#   define stat64 stat
+#   define fstat64 fstat
+# endif
 # define open64 open
 # define lseek64 lseek
 #endif

@@ -98,6 +98,9 @@ Credit is also due to:
   Elias Pipping
     - patch to compile properly on Darwin 9
 
+  Patrick Collison
+    - similar patch for OS X
+
   Boris Lohner
     - reported problem that "-L" does not complain if given non-numeric value
 

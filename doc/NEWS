@@ -1,5 +1,6 @@
-1.1.3 - NOT YET RELEASED
+1.1.4 - 6 March 2008
   - patch from Elias Pipping correcting compilation failure on Darwin 9
+  - patch from Patrick Collison correcting similar problems on OS X
   - trap SIGINT/SIGHUP/SIGTERM so we clean up IPCs on exit (Laszlo Ersek)
   - abort if numeric option, eg -L, has non-numeric value (Boris Lohner)
 
