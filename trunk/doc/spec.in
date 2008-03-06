@@ -46,10 +46,10 @@ make test
 %doc README doc/NEWS doc/TODO doc/COPYING
 
 %changelog
-* Wed Feb  6 2008 Andrew Wood <andrew.wood@ivarch.com> 1.1.3-1
+* Thu Mar  6 2008 Andrew Wood <andrew.wood@ivarch.com> 1.1.4-1
 - Trap SIGINT/SIGHUP/SIGTERM so we clean up IPCs on exit (Laszlo Ersek).
 - Abort if numeric option, eg -L, has non-numeric value (Boris Lohner).
-- Compilation fix for Darwin 9.
+- Compilation fixes for Darwin 9 and OS X.
 
 * Thu Aug 30 2007 Andrew Wood <andrew.wood@ivarch.com> 1.1.0-1
 - New option "-R" to remotely control another @PACKAGE@ process.
