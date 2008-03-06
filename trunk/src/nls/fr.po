@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-06 11:01+0000\n"
+"POT-Creation-Date: 2008-03-06 12:09+0000\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Date: 1999-06-01 15:18:29+0100\n"
 "From: Andrew Wood <ivarch@ubik>\n"
@@ -19,21 +19,25 @@ msgstr ""
 "nls/intl/textdomain.c src/nls/intl-cat/cat-compat.c src/nls/intl-gett/intl-"
 "compat.c\n"
 
-#: src/pv/transfer.c:87
-msgid "buffer allocation failed"
-msgstr "l'allocation de mémoire tampon a échoué"
+#: src/pv/file.c:164
+msgid "failed to close file"
+msgstr "la fermeture du fichier a échoué"
 
-#: src/pv/transfer.c:148
-msgid "select call failed"
-msgstr "appel de sélection a échoué"
+#: src/pv/file.c:183
+msgid "failed to read file"
+msgstr "la lecture du fichier a échoué"
 
-#: src/pv/transfer.c:172
-msgid "read failed"
-msgstr "la lecture a échoué"
+#: src/pv/file.c:192
+msgid "failed to stat file"
+msgstr "échec à statuer sur le fichier"
 
-#: src/pv/transfer.c:231
-msgid "write failed"
-msgstr "l'écriture a échoué"
+#: src/pv/file.c:201
+msgid "failed to stat output file"
+msgstr "échec à statuer sur le fichier de sortie"
+
+#: src/pv/file.c:222
+msgid "input file is output file"
+msgstr "fichiers d'entré et de sortie sont les mêmes"
 
 #: src/pv/display.c:190
 #, fuzzy
@@ -106,26 +110,6 @@ msgstr "O/s "
 msgid "ETA"
 msgstr "ETA"
 
-#: src/pv/file.c:164
-msgid "failed to close file"
-msgstr "la fermeture du fichier a échoué"
-
-#: src/pv/file.c:183
-msgid "failed to read file"
-msgstr "la lecture du fichier a échoué"
-
-#: src/pv/file.c:192
-msgid "failed to stat file"
-msgstr "échec à statuer sur le fichier"
-
-#: src/pv/file.c:201
-msgid "failed to stat output file"
-msgstr "échec à statuer sur le fichier de sortie"
-
-#: src/pv/file.c:222
-msgid "input file is output file"
-msgstr "fichiers d'entré et de sortie sont les mêmes"
-
 #: src/pv/cursor.c:233 src/pv/cursor.c:249 src/pv/cursor.c:310
 msgid "failed to open terminal"
 msgstr "l'ouverture du terminal a échoué"
@@ -134,6 +118,22 @@ msgstr "l'ouverture du terminal a échoué"
 #, fuzzy
 msgid "failed to lock terminal"
 msgstr "l'ouverture du terminal a échoué"
+
+#: src/pv/transfer.c:87
+msgid "buffer allocation failed"
+msgstr "l'allocation de mémoire tampon a échoué"
+
+#: src/pv/transfer.c:148
+msgid "select call failed"
+msgstr "appel de sélection a échoué"
+
+#: src/pv/transfer.c:172
+msgid "read failed"
+msgstr "la lecture a échoué"
+
+#: src/pv/transfer.c:231
+msgid "write failed"
+msgstr "l'écriture a échoué"
 
 #: src/main/help.c:31
 #, fuzzy
