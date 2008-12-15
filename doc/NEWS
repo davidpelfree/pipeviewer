@@ -1,3 +1,6 @@
+1.1.5 - NOT YET RELEASED
+  - modified pipe test and new cksum test from Sebastian Kayser
+
 1.1.4 - 6 March 2008
   - patch from Elias Pipping correcting compilation failure on Darwin 9
   - patch from Patrick Collison correcting similar problems on OS X
