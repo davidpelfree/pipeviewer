@@ -30,7 +30,7 @@ void remote_sig_init(opts_t opts);
  */
 int main(int argc, char **argv)
 {
-	struct termios t;
+	struct termios t, t_save;
 	opts_t opts;
 	int retcode = 0;
 
@@ -139,8 +139,11 @@ int main(int argc, char **argv)
 	/*
 	 * Set terminal option TOSTOP so we get signal SIGTTOU if we try to
 	 * write to the terminal while backgrounded.
+	 *
+	 * Also, save the current terminal attributes for later restoration.
 	 */
 	tcgetattr(STDERR_FILENO, &t);
+	t_save = t;
 	t.c_lflag |= TOSTOP;
 	tcsetattr(STDERR_FILENO, TCSANOW, &t);
 
@@ -152,6 +155,9 @@ int main(int argc, char **argv)
 	retcode = pv_main_loop(opts);
 
 	opts_free(opts);
+
+	tcsetattr(STDERR_FILENO, TCSANOW, &t_save);
+
 	return retcode;
 }
 

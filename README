@@ -107,4 +107,7 @@ Credit is also due to:
   Laszlo Ersek <http://phptest11.atw.hu/>
     - reported shared memory leak on SIGINT with -c
 
+  Phil Rutschman <http://bandgap.rsnsoft.com/>
+    - provided a patch for fully restoring terminal state on exit
+
 -----------------------------------------------------------------------------

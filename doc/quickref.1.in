@@ -324,6 +324,12 @@ Laszlo Ersek
 .br
 .I http://phptest11.atw.hu/
 
+Phil Rutschman
+.br
+(provided a patch for fully restoring terminal state on exit)
+.br
+.I http://bandgap.rsnsoft.com/
+
 
 .SH BUGS
 If you find any bugs, please contact the primary author, either by email or
