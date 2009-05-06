@@ -110,4 +110,7 @@ Credit is also due to:
   Phil Rutschman <http://bandgap.rsnsoft.com/>
     - provided a patch for fully restoring terminal state on exit
 
+  Henry Precheur <http://henry.precheur.org/>
+    - reporting and suggestions for --rate-limit bug when rate is under 10
+
 -----------------------------------------------------------------------------
