@@ -48,6 +48,54 @@ static void pv_timeval_add_usec(struct timeval *val, long usec)
 }
 
 
+/* TODO: FIXME: Henry Precheur writes:
+ * 
+ * pv has a bug with --rate-limit:
+ * 
+ * pv blocks with a rate-limit between 1 and 9.
+ * 
+ * $ pv --rate-limit 1 < /dev/zero
+ * 0B 0:00:11 [   0B/s ] [<=>                         ]
+ * 
+ * It looks like pv is sending bytes to stdout every 1/10th seconds, and
+ * the `target` variable contains the number of bytes to transfert each
+ * time.
+ * 
+ * The `target` rate is calculated in pv/loop.c line 81:
+ * 
+ * >  target =
+ * >       ((long double) (opts->rate_limit)) /
+ * >                       (long double) (1000000 / RATE_GRANULARITY);
+ * 
+ * Which is equivalent to:
+ * 
+ * > target = rate_limit / 10
+ * 
+ * `target` is an int, so if rate limit is below 10 target equals 0, and pv
+ * blocks.
+ * 
+ * I would recommend to change the algorithm limiting the rate transfert to
+ * something like this:
+ * 
+ *   target = rate_limit / 10;
+ * 
+ *   iteration_counter = 0;
+ * 
+ *   while (1)
+ *   {
+ *     write_to_stdout(target);
+ *     iteration_counter++;
+ * 
+ *     
+ *     // Flush the remaining bytes
+ *     if (iteration_counter % 10)
+ *     {
+ *       write_to_stdout(rate_limit - target * 10);
+ *     }
+ *   }
+ */
+
+
 /*
  * Pipe data from a list of files to standard output, giving information
  * about the transfer on standard error according to the given options.

@@ -330,6 +330,12 @@ Phil Rutschman
 .br
 .I http://bandgap.rsnsoft.com/
 
+Henry Precheur
+.br
+(reporting and suggestions for --rate-limit bug when rate is under 10)
+.br
+.I http://henry.precheur.org/
+
 
 .SH BUGS
 If you find any bugs, please contact the primary author, either by email or
