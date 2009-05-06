@@ -1,5 +1,6 @@
 1.1.5 - NOT YET RELEASED
   - modified pipe test and new cksum test from Sebastian Kayser
+  - patch from Phil Rutschman to restore terminal properly on exit
 
 1.1.4 - 6 March 2008
   - patch from Elias Pipping correcting compilation failure on Darwin 9

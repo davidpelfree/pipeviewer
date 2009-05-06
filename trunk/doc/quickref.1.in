@@ -336,6 +336,12 @@ Henry Precheur
 .br
 .I http://henry.precheur.org/
 
+E. Rosten
+.br
+(supplied patch for block buffering in line mode)
+.br
+.I http://mi.eng.cam.ac.uk/~er258/
+
 
 .SH BUGS
 If you find any bugs, please contact the primary author, either by email or

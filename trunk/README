@@ -113,4 +113,7 @@ Credit is also due to:
   Henry Precheur <http://henry.precheur.org/>
     - reporting and suggestions for --rate-limit bug when rate is under 10
 
+  E. Rosten <http://mi.eng.cam.ac.uk/~er258/>
+    - supplied patch for block buffering in line mode
+
 -----------------------------------------------------------------------------
