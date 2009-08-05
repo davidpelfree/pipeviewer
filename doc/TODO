@@ -1,7 +1,12 @@
 Things still to do:
 
+  - fix "make install" on cygwin where DESTDIR gives // (Daniel Pape)
+  - fix -c answerback on Solaris 10 (Bob Friesenhahn)
+  - fix install on OSes without man page .gz (Bob Friesenhahn)
+  - fix exit status so we exit 1 on read/write error (Vladimir Kokarev)
   - add -m (line count, block buffer) patch (E. Rosten)
   - add -O to allow ordering of -pterb output, eg -bertp (Vladimir Pal)
+    (http://unixstuff.ru), idea by Vladimir Ermakov
   - fix rate-limit-under-10 bug (Henry Precheur)
   - fix i18n (Sebastian Kayser)
   - fix potential NULL deref in transfer.c:243 (Elias Pipping / LLVM/Clang)
