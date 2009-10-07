@@ -196,11 +196,11 @@ msgstr "ajuste la taille estimée des données à TAILLE octets"
 
 #: src/main/help.c:53
 msgid "count lines instead of bytes"
-msgstr ""
+msgstr "compte les lignes au lieu des octets"
 
 #: src/main/help.c:54
 msgid "SEC"
-msgstr ""
+msgstr "SEC"
 
 #: src/main/help.c:55
 #, fuzzy
@@ -218,12 +218,12 @@ msgstr "présumer la largeur du terminal à LARGEUR caractères"
 
 #: src/main/help.c:58
 msgid "HEIGHT"
-msgstr ""
+msgstr "HAUTEUR"
 
 #: src/main/help.c:59
 #, fuzzy
 msgid "assume terminal is HEIGHT rows high"
-msgstr "présumer la largeur du terminal à LARGEUR caractères"
+msgstr "présumer la hauteur du terminal à HAUTEUR lignes"
 
 #: src/main/help.c:60
 msgid "NAME"
@@ -245,19 +245,19 @@ msgstr "limite le taux de transfer à TAUX octets par seconde"
 
 #: src/main/help.c:65
 msgid "BYTES"
-msgstr ""
+msgstr "OCTETS"
 
 #: src/main/help.c:66
 msgid "use a buffer size of BYTES"
-msgstr ""
+msgstr "Utiliser une mémoire tampon de OCTETS octets"
 
 #: src/main/help.c:67
 msgid "PID"
-msgstr ""
+msgstr "PID"
 
 #: src/main/help.c:68
 msgid "update settings of process PID"
-msgstr ""
+msgstr "mettre-à-jour la configuration du processus PID"
 
 #: src/main/help.c:71
 #, fuzzy
@@ -300,11 +300,11 @@ msgstr "%s: l'allocation pour la structure de l'option argv a echoué (%s)"
 
 #: src/main/options.c:131
 msgid "integer argument expected"
-msgstr ""
+msgstr "Valeur entière attendue"
 
 #: src/main/options.c:139
 msgid "numeric argument expected"
-msgstr ""
+msgstr "Valeur numérique attendue"
 
 #. RATS: ignore (OK)
 #: src/main/options.c:229
@@ -335,7 +335,7 @@ msgid ""
 "terms of the Artistic License 2.0."
 msgstr ""
 "Ce programme est un logiciel libre et est distribué sous les termes\n"
-"anglophone de la Licence Artistique (Artistic License)."
+"anglophone de la Licence Artistique 2.0 (Artistic License 2.0)."
 
 #: src/main/version.c:31
 msgid ""
