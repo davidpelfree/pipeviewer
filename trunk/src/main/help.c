@@ -1,7 +1,7 @@
 /*
  * Output command-line help to stdout.
  *
- * Copyright 2008 Andrew Wood, distributed under the Artistic License 2.0.
+ * Copyright 2010 Andrew Wood, distributed under the Artistic License 2.0.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -12,6 +12,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+
+#define N_(String) (String)
 
 struct optdesc_s {
 	char *optshort;
@@ -28,49 +30,49 @@ void display_help(void)
 {
 	struct optdesc_s optlist[] = {
 		{"-p", "--progress", 0,
-		 _("show progress bar")},
+		 N_("show progress bar")},
 		{"-t", "--timer", 0,
-		 _("show elapsed time")},
+		 N_("show elapsed time")},
 		{"-e", "--eta", 0,
-		 _("show estimated time of arrival (completion)")},
+		 N_("show estimated time of arrival (completion)")},
 		{"-r", "--rate", 0,
-		 _("show data transfer rate counter")},
+		 N_("show data transfer rate counter")},
 		{"-b", "--bytes", 0,
-		 _("show number of bytes transferred")},
+		 N_("show number of bytes transferred")},
 		{"-f", "--force", 0,
-		 _("output even if standard error is not a terminal")},
+		 N_("output even if standard error is not a terminal")},
 		{"-n", "--numeric", 0,
-		 _("output percentages, not visual information")},
+		 N_("output percentages, not visual information")},
 		{"-q", "--quiet", 0,
-		 _("do not output any transfer information at all")},
+		 N_("do not output any transfer information at all")},
 		{"-c", "--cursor", 0,
-		 _("use cursor positioning escape sequences")},
+		 N_("use cursor positioning escape sequences")},
 		{"-W", "--wait", 0,
-		 _("display nothing until first byte transferred")},
-		{"-s", "--size", _("SIZE"),
-		 _("set estimated data size to SIZE bytes")},
+		 N_("display nothing until first byte transferred")},
+		{"-s", "--size", N_("SIZE"),
+		 N_("set estimated data size to SIZE bytes")},
 		{"-l", "--line-mode", 0,
-		 _("count lines instead of bytes")},
-		{"-i", "--interval", _("SEC"),
-		 _("update every SEC seconds")},
-		{"-w", "--width", _("WIDTH"),
-		 _("assume terminal is WIDTH characters wide")},
-		{"-H", "--height", _("HEIGHT"),
-		 _("assume terminal is HEIGHT rows high")},
-		{"-N", "--name", _("NAME"),
-		 _("prefix visual information with NAME")},
+		 N_("count lines instead of bytes")},
+		{"-i", "--interval", N_("SEC"),
+		 N_("update every SEC seconds")},
+		{"-w", "--width", N_("WIDTH"),
+		 N_("assume terminal is WIDTH characters wide")},
+		{"-H", "--height", N_("HEIGHT"),
+		 N_("assume terminal is HEIGHT rows high")},
+		{"-N", "--name", N_("NAME"),
+		 N_("prefix visual information with NAME")},
 		{"", 0, 0, 0},
-		{"-L", "--rate-limit", _("RATE"),
-		 _("limit transfer to RATE bytes per second")},
-		{"-B", "--buffer-size", _("BYTES"),
-		 _("use a buffer size of BYTES")},
-		{"-R", "--remote", _("PID"),
-		 _("update settings of process PID")},
+		{"-L", "--rate-limit", N_("RATE"),
+		 N_("limit transfer to RATE bytes per second")},
+		{"-B", "--buffer-size", N_("BYTES"),
+		 N_("use a buffer size of BYTES")},
+		{"-R", "--remote", N_("PID"),
+		 N_("update settings of process PID")},
 		{"", 0, 0, 0},
 		{"-h", "--help", 0,
-		 _("show this help and exit")},
+		 N_("show this help and exit")},
 		{"-V", "--version", 0,
-		 _("show version information and exit")},
+		 N_("show version information and exit")},
 		{0, 0, 0, 0}
 	};
 	int i, col1max = 0, tw = 77;
@@ -85,14 +87,18 @@ void display_help(void)
 
 	for (i = 0; optlist[i].optshort; i++) {
 		int width = 0;
+		char *param;
 
 		width = 2 + strlen(optlist[i].optshort);	/* RATS: ignore */
 #ifdef HAVE_GETOPT_LONG
 		if (optlist[i].optlong)
 			width += 2 + strlen(optlist[i].optlong);	/* RATS: ignore */
 #endif
-		if (optlist[i].param)
-			width += 1 + strlen(optlist[i].param);	/* RATS: ignore */
+		param = optlist[i].param;
+		if (param)
+			param = _(param);
+		if (param)
+			width += 1 + strlen(param);		/* RATS: ignore */
 
 		if (width > col1max)
 			col1max = width;
@@ -107,6 +113,8 @@ void display_help(void)
 	}
 
 	for (i = 0; optlist[i].optshort; i++) {
+		char *param;
+		char *description;
 		char *start;
 		char *end;
 
@@ -114,6 +122,13 @@ void display_help(void)
 			printf("\n");
 			continue;
 		}
+
+		param = optlist[i].param;
+		if (param)
+			param = _(param);
+		description = optlist[i].description;
+		if (description)
+			description = _(description);
 
 		sprintf(optbuf, "%s%s%s%s%s",	/* RATS: ignore (checked) */
 			optlist[i].optshort,
@@ -123,17 +138,17 @@ void display_help(void)
 #else
 			"", "",
 #endif
-			optlist[i].param ? " " : "",
-			optlist[i].param ? optlist[i].param : "");
+			param ? " " : "",
+			param ? param : "");
 
 		printf("  %-*s ", col1max - 2, optbuf);
 
-		if (optlist[i].description == NULL) {
+		if (description == NULL) {
 			printf("\n");
 			continue;
 		}
 
-		start = optlist[i].description;
+		start = description;
 
 		while (strlen(start) /* RATS: ignore */ >tw - col1max) {
 			end = start + tw - col1max;

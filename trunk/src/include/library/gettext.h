@@ -9,7 +9,7 @@
  *   # define N_(String) (String)
  *   #endif
  *
- * Copyright 2008 Andrew Wood, distributed under the Artistic License 2.0.
+ * Copyright 2010 Andrew Wood, distributed under the Artistic License 2.0.
  */
 
 #ifndef _LIBRARY_GETTEXT_H
@@ -23,10 +23,10 @@
 #  include <locale.h>
 # endif
 # define _(String)	gettext (String)
-# define N_(String)	gettext_noop (String)
+# define N_(String)	(String)
 #else
 # define _(String)	minigettext (String)
-# define N_(String)	minigettext_noop (String)
+# define N_(String)	(String)
 # define setlocale	minisetlocale
 # define bindtextdomain	minibindtextdomain
 # define textdomain	minitextdomain
@@ -43,7 +43,6 @@ char *minisetlocale(char *, char *);
 char *minibindtextdomain(char *, char *);
 char *minitextdomain(char *);
 char *minigettext(char *);
-char *minigettext_noop(char *);
 
 #ifdef __cplusplus
 }
