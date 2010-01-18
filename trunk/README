@@ -104,6 +104,9 @@ Credit is also due to:
   Boris Lohner
     - reported problem that "-L" does not complain if given non-numeric value
 
+  Sebastian Kayser
+    - supplied testing for SIGPIPE, demonstrated internationalisation problem
+
   Laszlo Ersek <http://phptest11.atw.hu/>
     - reported shared memory leak on SIGINT with -c
 
@@ -115,5 +118,20 @@ Credit is also due to:
 
   E. Rosten <http://mi.eng.cam.ac.uk/~er258/>
     - supplied patch for block buffering in line mode
+
+  Kjetil Torgrim Homme
+    - reported compilation error with default CFLAGS on non-GCC compilers
+
+  Alexandre de Verteuil
+    - reported bug in OS X build and supplied test environment to fix in
+
+  Martin Baum
+    - supplied patch to return nonzero exit status if terminated by signal
+
+  Sam Nelson
+    - supplied patch to fix trailing slash on DESTDIR
+
+  Daniel Pape
+    - reported Cygwin installation problem due to DESTDIR
 
 -----------------------------------------------------------------------------
