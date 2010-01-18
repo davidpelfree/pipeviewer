@@ -148,14 +148,14 @@ check test: $(alltarg)
 
 install: all doc
 	$(srcdir)/autoconf/scripts/mkinstalldirs \
-	  "$(DESTDIR)/$(bindir)"
+	  "$(DESTDIR)$(bindir)"
 	$(srcdir)/autoconf/scripts/mkinstalldirs \
-	  "$(DESTDIR)/$(mandir)/man1"
+	  "$(DESTDIR)$(mandir)/man1"
 	$(INSTALL) -m 755 $(package) \
-	                  "$(DESTDIR)/$(bindir)/$(package)"
+	                  "$(DESTDIR)$(bindir)/$(package)"
 	$(INSTALL) -m 644 doc/quickref.1 \
-	                  "$(DESTDIR)/$(mandir)/man1/$(package).1"
-	-$(DO_GZIP) "$(DESTDIR)/$(mandir)/man1/$(package).1"
+	                  "$(DESTDIR)$(mandir)/man1/$(package).1"
+	-$(DO_GZIP) "$(DESTDIR)$(mandir)/man1/$(package).1"
 	if test -n "$(CATALOGS)"; then \
 	  catalogs='$(CATALOGS)'; \
 	  for cat in $$catalogs; do \
@@ -166,16 +166,16 @@ install: all doc
 	      destdir=$(localedir); \
 	    fi; \
 	    lang=`echo $$name | sed 's/$(CATOBJEXT)$$//'`; \
-	    dir=$(DESTDIR)/$$destdir/$$lang/LC_MESSAGES; \
+	    dir=$(DESTDIR)$$destdir/$$lang/LC_MESSAGES; \
 	    $(srcdir)/autoconf/scripts/mkinstalldirs $$dir; \
 	    $(INSTALL_DATA) $$cat $$dir/$(PACKAGE)$(INSTOBJEXT); \
 	  done; \
 	fi
 
 uninstall:
-	-$(UNINSTALL) "$(DESTDIR)/$(bindir)/$(package)"
-	-$(UNINSTALL) "$(DESTDIR)/$(mandir)/man1/$(package).1"
-	-$(UNINSTALL) "$(DESTDIR)/$(mandir)/man1/$(package).1.gz"
+	-$(UNINSTALL) "$(DESTDIR)$(bindir)/$(package)"
+	-$(UNINSTALL) "$(DESTDIR)$(mandir)/man1/$(package).1"
+	-$(UNINSTALL) "$(DESTDIR)$(mandir)/man1/$(package).1.gz"
 	-if test -n "$(CATALOGS)"; then \
 	  catalogs='$(CATALOGS)'; \
 	  for cat in $$catalogs; do \
@@ -186,7 +186,7 @@ uninstall:
 	      destdir=$(localedir); \
 	    fi; \
 	    lang=`echo $$name | sed 's/$(CATOBJEXT)$$//'`; \
-	    dir=$(DESTDIR)/$$destdir/$$lang/LC_MESSAGES; \
+	    dir=$(DESTDIR)$$destdir/$$lang/LC_MESSAGES; \
 	    $(UNINSTALL) $$dir/$(PACKAGE)$(INSTOBJEXT); \
 	  done; \
 	fi

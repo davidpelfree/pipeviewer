@@ -15,7 +15,7 @@ done
 
 # Don't use dd. See http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=324308
 COUNT1=100000000
-COUNT2=`pv -B 100000 -q /dev/zero | $HEAD -c $COUNT1 | wc -c | tr -d ' '`
+COUNT2=`$PROG -B 100000 -q /dev/zero | $HEAD -c $COUNT1 | wc -c | tr -d ' '`
 
 #echo "[$COUNT1] [$COUNT2]"
 

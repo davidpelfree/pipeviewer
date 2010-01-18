@@ -18,6 +18,7 @@
 #undef HAVE_MEMCPY
 #undef HAVE_BASENAME
 #undef HAVE_SNPRINTF
+#undef HAVE_STAT64
 
 /* NLS stuff. */
 #undef ENABLE_NLS
@@ -52,9 +53,20 @@
 # define __USE_LARGEFILE64 1
 # define _LARGEFILE64_SOURCE 1
 #else
-# ifndef __APPLE__
+/*
+ * Some Macs have stat64 despite not having open64 while others don't have
+ * either, so here even if we don't have open64 or LFS is disabled, we have
+ * to check whether stat64 exists and only redefine it if it doesn't
+ * otherwise some Macs fail to compile.
+ */
+# ifdef __APPLE__
+#  ifndef HAVE_STAT64
 #   define stat64 stat
 #   define fstat64 fstat
+#  endif
+# else
+#  define stat64 stat
+#  define fstat64 fstat
 # endif
 # define open64 open
 # define lseek64 lseek
