@@ -14,7 +14,7 @@ dd if=/dev/urandom of=./chunk bs=1024 count=10240 2>/dev/null
 CKSUM1=`cksum ./chunk | awk '{print $1}'`
 
 # read through pv and test afterwards
-./pv -B 100000 -q ./chunk > ./chunk2
+$PROG -B 100000 -q ./chunk > ./chunk2
 
 CKSUM2=`cksum ./chunk2 | awk '{print $1}'`
 

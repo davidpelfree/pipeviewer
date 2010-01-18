@@ -326,6 +326,9 @@ int pv_main_loop(opts_t opts)
 	pv_display(0, 0, 0, 0);
 	pv_transfer(0, -1, 0, 0, 0, NULL);
 
+	if (pv_sig_abort)
+		return 1;
+
 	return 0;
 }
 
