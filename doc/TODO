@@ -11,7 +11,6 @@ Things still to do:
   - add -O to allow ordering of -pterb output, eg -bertp (Vladimir Pal)
     (http://unixstuff.ru), idea by Vladimir Ermakov
   - fix rate-limit-under-10 bug (Henry Precheur)
-  - fix i18n (Sebastian Kayser)
   - fix potential NULL deref in transfer.c:243 (Elias Pipping / LLVM/Clang)
   - add development support for http://clang.llvm.org/StaticAnalysis.html
   - fix cursor positioning (-c) lockfiles when O_EXLOCK is unavailable

@@ -10,7 +10,7 @@
  * terminal, so we try to use a lockfile if terminal locking doesn't work,
  * and finally abort if even that is unavailable.
  *
- * Copyright 2008 Andrew Wood, distributed under the Artistic License 2.0.
+ * Copyright 2010 Andrew Wood, distributed under the Artistic License 2.0.
  */
 
 #include "options.h"

@@ -1,7 +1,7 @@
 /*
  * Signal handling functions.
  *
- * Copyright 2008 Andrew Wood, distributed under the Artistic License 2.0.
+ * Copyright 2010 Andrew Wood, distributed under the Artistic License 2.0.
  */
 
 #include "pv.h"

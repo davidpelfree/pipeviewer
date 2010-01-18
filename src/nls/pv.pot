@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-18 21:16+0000\n"
+"POT-Creation-Date: 2010-01-18 22:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -124,134 +124,134 @@ msgstr ""
 msgid "write failed"
 msgstr ""
 
-#: src/main/help.c:31
+#: src/main/help.c:33
 msgid "show progress bar"
 msgstr ""
 
-#: src/main/help.c:33
+#: src/main/help.c:35
 msgid "show elapsed time"
 msgstr ""
 
-#: src/main/help.c:35
+#: src/main/help.c:37
 msgid "show estimated time of arrival (completion)"
 msgstr ""
 
-#: src/main/help.c:37
+#: src/main/help.c:39
 msgid "show data transfer rate counter"
 msgstr ""
 
-#: src/main/help.c:39
+#: src/main/help.c:41
 msgid "show number of bytes transferred"
 msgstr ""
 
-#: src/main/help.c:41
+#: src/main/help.c:43
 msgid "output even if standard error is not a terminal"
 msgstr ""
 
-#: src/main/help.c:43
+#: src/main/help.c:45
 msgid "output percentages, not visual information"
 msgstr ""
 
-#: src/main/help.c:45
+#: src/main/help.c:47
 msgid "do not output any transfer information at all"
 msgstr ""
 
-#: src/main/help.c:47
+#: src/main/help.c:49
 msgid "use cursor positioning escape sequences"
 msgstr ""
 
-#: src/main/help.c:49
+#: src/main/help.c:51
 msgid "display nothing until first byte transferred"
 msgstr ""
 
-#: src/main/help.c:50
+#: src/main/help.c:52
 msgid "SIZE"
 msgstr ""
 
-#: src/main/help.c:51
+#: src/main/help.c:53
 msgid "set estimated data size to SIZE bytes"
 msgstr ""
 
-#: src/main/help.c:53
+#: src/main/help.c:55
 msgid "count lines instead of bytes"
 msgstr ""
 
-#: src/main/help.c:54
+#: src/main/help.c:56
 msgid "SEC"
 msgstr ""
 
-#: src/main/help.c:55
+#: src/main/help.c:57
 msgid "update every SEC seconds"
 msgstr ""
 
-#: src/main/help.c:56
+#: src/main/help.c:58
 msgid "WIDTH"
 msgstr ""
 
-#: src/main/help.c:57
+#: src/main/help.c:59
 msgid "assume terminal is WIDTH characters wide"
 msgstr ""
 
-#: src/main/help.c:58
+#: src/main/help.c:60
 msgid "HEIGHT"
 msgstr ""
 
-#: src/main/help.c:59
+#: src/main/help.c:61
 msgid "assume terminal is HEIGHT rows high"
 msgstr ""
 
-#: src/main/help.c:60
+#: src/main/help.c:62
 msgid "NAME"
 msgstr ""
 
-#: src/main/help.c:61
+#: src/main/help.c:63
 msgid "prefix visual information with NAME"
 msgstr ""
 
-#: src/main/help.c:63
+#: src/main/help.c:65
 msgid "RATE"
 msgstr ""
 
-#: src/main/help.c:64
+#: src/main/help.c:66
 msgid "limit transfer to RATE bytes per second"
 msgstr ""
 
-#: src/main/help.c:65
+#: src/main/help.c:67
 msgid "BYTES"
 msgstr ""
 
-#: src/main/help.c:66
+#: src/main/help.c:68
 msgid "use a buffer size of BYTES"
 msgstr ""
 
-#: src/main/help.c:67
+#: src/main/help.c:69
 msgid "PID"
 msgstr ""
 
-#: src/main/help.c:68
+#: src/main/help.c:70
 msgid "update settings of process PID"
 msgstr ""
 
-#: src/main/help.c:71
+#: src/main/help.c:73
 msgid "show this help and exit"
 msgstr ""
 
-#: src/main/help.c:73
+#: src/main/help.c:75
 msgid "show version information and exit"
 msgstr ""
 
-#: src/main/help.c:79
+#: src/main/help.c:81
 #, c-format
 msgid "Usage: %s [OPTION] [FILE]..."
 msgstr ""
 
-#: src/main/help.c:83
+#: src/main/help.c:85
 msgid ""
 "Concatenate FILE(s), or standard input, to standard output,\n"
 "with monitoring."
 msgstr ""
 
-#: src/main/help.c:158
+#: src/main/help.c:173
 #, c-format
 msgid "Please report any bugs to %s."
 msgstr ""

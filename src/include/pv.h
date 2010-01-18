@@ -1,7 +1,7 @@
 /*
  * Functions used across the program.
  *
- * Copyright 2008 Andrew Wood, distributed under the Artistic License 2.0.
+ * Copyright 2010 Andrew Wood, distributed under the Artistic License 2.0.
  */
 
 #ifndef _PV_H

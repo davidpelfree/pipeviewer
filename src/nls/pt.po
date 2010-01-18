@@ -2,12 +2,11 @@
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-18 21:16+0000\n"
+"POT-Creation-Date: 2010-01-18 22:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,17 +35,14 @@ msgid "input file is output file"
 msgstr "os arquivos de entrada e saída são o mesmo"
 
 #: src/pv/display.c:190
-#, fuzzy
 msgid "G"
 msgstr "GB"
 
 #: src/pv/display.c:193
-#, fuzzy
 msgid "M"
 msgstr "MB"
 
 #: src/pv/display.c:196
-#, fuzzy
 msgid "k"
 msgstr "kB"
 
@@ -67,22 +63,18 @@ msgid "B"
 msgstr "B"
 
 #: src/pv/display.c:244
-#, fuzzy
 msgid "G/s"
 msgstr "GB/s"
 
 #: src/pv/display.c:247
-#, fuzzy
 msgid "M/s"
 msgstr "MB/s"
 
 #: src/pv/display.c:250
-#, fuzzy
 msgid "k/s"
 msgstr "kB/s"
 
 #: src/pv/display.c:252
-#, fuzzy
 msgid "/s "
 msgstr "B/s "
 
@@ -111,7 +103,6 @@ msgid "failed to open terminal"
 msgstr "erro abrindo o terminal"
 
 #: src/pv/cursor.c:241
-#, fuzzy
 msgid "failed to lock terminal"
 msgstr "erro abrindo o terminal"
 
@@ -131,146 +122,128 @@ msgstr "erro de leitura"
 msgid "write failed"
 msgstr "erro de gravação"
 
-#: src/main/help.c:31
-#, fuzzy
+#: src/main/help.c:33
 msgid "show progress bar"
 msgstr "exibe barra de progressão"
 
-#: src/main/help.c:33
-#, fuzzy
+#: src/main/help.c:35
 msgid "show elapsed time"
 msgstr "exibe tempo passado"
 
-#: src/main/help.c:35
-#, fuzzy
+#: src/main/help.c:37
 msgid "show estimated time of arrival (completion)"
 msgstr "exibe o tempo estimado de término"
 
-#: src/main/help.c:37
-#, fuzzy
+#: src/main/help.c:39
 msgid "show data transfer rate counter"
 msgstr "exibe a taxa de transferência"
 
-#: src/main/help.c:39
-#, fuzzy
+#: src/main/help.c:41
 msgid "show number of bytes transferred"
 msgstr "exibe a quantidade de bytes transferidos"
 
-#: src/main/help.c:41
-#, fuzzy
+#: src/main/help.c:43
 msgid "output even if standard error is not a terminal"
 msgstr "gera dados mesmo que a saída de erro seja redirecionada"
 
-#: src/main/help.c:43
-#, fuzzy
+#: src/main/help.c:45
 msgid "output percentages, not visual information"
 msgstr "exibe apenas as porcentagens, sem informações visuais"
 
-#: src/main/help.c:45
-#, fuzzy
+#: src/main/help.c:47
 msgid "do not output any transfer information at all"
 msgstr "executa programa sem exibir quaisquer informações"
 
-#: src/main/help.c:47
-#, fuzzy
+#: src/main/help.c:49
 msgid "use cursor positioning escape sequences"
 msgstr "utiliza caracteres de escape para posicionar o cursor"
 
-#: src/main/help.c:49
-#, fuzzy
+#: src/main/help.c:51
 msgid "display nothing until first byte transferred"
 msgstr "não exibe nada até iniciar o processamento"
 
-#: src/main/help.c:50
+#: src/main/help.c:52
 msgid "SIZE"
 msgstr ""
 
-#: src/main/help.c:51
-#, fuzzy
+#: src/main/help.c:53
 msgid "set estimated data size to SIZE bytes"
 msgstr "seta a quantidade estimada de dados em SIZE bytes"
 
-#: src/main/help.c:53
+#: src/main/help.c:55
 msgid "count lines instead of bytes"
 msgstr ""
 
-#: src/main/help.c:54
+#: src/main/help.c:56
 msgid "SEC"
 msgstr ""
 
-#: src/main/help.c:55
-#, fuzzy
+#: src/main/help.c:57
 msgid "update every SEC seconds"
 msgstr "atualiza informações a cada SEC segundos"
 
-#: src/main/help.c:56
+#: src/main/help.c:58
 msgid "WIDTH"
 msgstr ""
 
-#: src/main/help.c:57
-#, fuzzy
+#: src/main/help.c:59
 msgid "assume terminal is WIDTH characters wide"
 msgstr "assume que terminal possui WIDTH caracteres de largura"
 
-#: src/main/help.c:58
+#: src/main/help.c:60
 msgid "HEIGHT"
 msgstr ""
 
-#: src/main/help.c:59
-#, fuzzy
+#: src/main/help.c:61
 msgid "assume terminal is HEIGHT rows high"
 msgstr "assume que terminal possui WIDTH caracteres de largura"
 
-#: src/main/help.c:60
+#: src/main/help.c:62
 msgid "NAME"
 msgstr ""
 
-#: src/main/help.c:61
-#, fuzzy
+#: src/main/help.c:63
 msgid "prefix visual information with NAME"
 msgstr "exibe NAME antes das demais informações"
 
-#: src/main/help.c:63
+#: src/main/help.c:65
 msgid "RATE"
 msgstr ""
 
-#: src/main/help.c:64
-#, fuzzy
+#: src/main/help.c:66
 msgid "limit transfer to RATE bytes per second"
 msgstr "limita a transferência a RATE bytes por segundo"
 
-#: src/main/help.c:65
+#: src/main/help.c:67
 msgid "BYTES"
 msgstr ""
 
-#: src/main/help.c:66
+#: src/main/help.c:68
 msgid "use a buffer size of BYTES"
 msgstr ""
 
-#: src/main/help.c:67
+#: src/main/help.c:69
 msgid "PID"
 msgstr ""
 
-#: src/main/help.c:68
+#: src/main/help.c:70
 msgid "update settings of process PID"
 msgstr ""
 
-#: src/main/help.c:71
-#, fuzzy
+#: src/main/help.c:73
 msgid "show this help and exit"
 msgstr "exibe esta tela de ajuda e termina"
 
-#: src/main/help.c:73
-#, fuzzy
+#: src/main/help.c:75
 msgid "show version information and exit"
 msgstr "exibe a versão e termina"
 
-#: src/main/help.c:79
+#: src/main/help.c:81
 #, c-format
 msgid "Usage: %s [OPTION] [FILE]..."
 msgstr "Uso: %s [OPÇÕES] [ARQUIVOS]..."
 
-#: src/main/help.c:83
+#: src/main/help.c:85
 msgid ""
 "Concatenate FILE(s), or standard input, to standard output,\n"
 "with monitoring."
@@ -278,7 +251,7 @@ msgstr ""
 "Concatena ARQUIVO(s) ou a entrada padrão e grava na saída padrão,\n"
 "com monitoramento."
 
-#: src/main/help.c:158
+#: src/main/help.c:173
 #, c-format
 msgid "Please report any bugs to %s."
 msgstr "Por favor, reporte quaisquer defeitos para %s."
@@ -325,7 +298,6 @@ msgid "Web site: %s"
 msgstr "Site: %s"
 
 #: src/main/version.c:26
-#, fuzzy
 msgid ""
 "This program is free software, and is being distributed under the\n"
 "terms of the Artistic License 2.0."
@@ -346,11 +318,9 @@ msgstr ""
 #~ msgid "For more information, please run `%s --license'."
 #~ msgstr "Para maiores informações, por favor digite `%s --license'."
 
-#, fuzzy
 #~ msgid "For more information, please run `%s -l'."
 #~ msgstr "Para maiores informações, por favor digite `%s -l'."
 
-#, fuzzy
 #~ msgid "show the license this program is distributed under"
 #~ msgstr "exibe a licença em vigor neste programa"
 
@@ -672,7 +642,6 @@ msgstr ""
 #~ "saída\n"
 #~ "para um paginador como `more' ou `less', exemplo: `%s --license | more'."
 
-#, fuzzy
 #~ msgid ""
 #~ "If that scrolled by too quickly, you may want to pipe it to a\n"
 #~ "pager such as `more' or `less', eg `%s -l | more'."

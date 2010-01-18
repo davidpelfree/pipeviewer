@@ -5,6 +5,7 @@
   - LFS compile fix for OS X 10.4 (Alexandre de Verteuil)
   - return nonzero if exiting due to SIGTERM (Martin Baum)
   - remove DESTDIR / suffix (Sam Nelson, Daniel Pape)
+  - fix i18n especially for --help (Sebastian Kayser)
 
 1.1.4 - 6 March 2008
   - patch from Elias Pipping correcting compilation failure on Darwin 9
