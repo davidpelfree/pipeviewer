@@ -128,7 +128,7 @@ Credit is also due to:
   Martin Baum
     - supplied patch to return nonzero exit status if terminated by signal
 
-  Sam Nelson
+  Sam Nelson <http://www.siliconfuture.net/>
     - supplied patch to fix trailing slash on DESTDIR
 
   Daniel Pape
