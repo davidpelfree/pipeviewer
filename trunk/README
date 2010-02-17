@@ -134,4 +134,7 @@ Credit is also due to:
   Daniel Pape
     - reported Cygwin installation problem due to DESTDIR
 
+  Philipp Beckers
+    - ported to the Syabas PopcornHour A-100 series
+
 -----------------------------------------------------------------------------
