@@ -1,17 +1,20 @@
 Things still to do:
 
+  - document what /* RATS */ comments mean
+  - fix rate-limit-under-10 bug (Henry Precheur)
+  - fix potential NULL deref in transfer.c:243 (Elias Pipping / LLVM/Clang)
+  - fix exit status so we exit 1 on read/write error (Vladimir Kokarev, Alexander Leo)
   - clean up and document exit status for different exit reasons
+  - fix install on OSes without man page .gz (Bob Friesenhahn)
+  - integrate Sami Liedes patch for numeric with timer and bytes
+  - integrate Henry Gebhardt patches 1-4 (avgrate and SI tidyup), add tests
   - option for process title (Martin Sarsale)
     as "pv - name:FooProcess -xyz - transferred: 1.3GB - 500KB/s - running:
     10:15:30s"
   - fix -c answerback on Solaris 10 (Bob Friesenhahn)
-  - fix install on OSes without man page .gz (Bob Friesenhahn)
-  - fix exit status so we exit 1 on read/write error (Vladimir Kokarev)
   - add -m (line count, block buffer) patch (E. Rosten)
   - add -O to allow ordering of -pterb output, eg -bertp (Vladimir Pal)
     (http://unixstuff.ru), idea by Vladimir Ermakov
-  - fix rate-limit-under-10 bug (Henry Precheur)
-  - fix potential NULL deref in transfer.c:243 (Elias Pipping / LLVM/Clang)
   - add development support for http://clang.llvm.org/StaticAnalysis.html
   - fix cursor positioning (-c) lockfiles when O_EXLOCK is unavailable
   - fix cursor positioning (-c) to use semaphores instead of locking
