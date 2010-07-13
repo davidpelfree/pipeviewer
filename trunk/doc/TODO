@@ -15,6 +15,7 @@ Things still to do:
   - add -m (line count, block buffer) patch (E. Rosten)
   - add -O to allow ordering of -pterb output, eg -bertp (Vladimir Pal)
     (http://unixstuff.ru), idea by Vladimir Ermakov
+  - look at effect of O_SYNC or fsync on performance
   - add development support for http://clang.llvm.org/StaticAnalysis.html
   - fix cursor positioning (-c) lockfiles when O_EXLOCK is unavailable
   - fix cursor positioning (-c) to use semaphores instead of locking
