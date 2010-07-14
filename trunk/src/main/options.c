@@ -55,6 +55,7 @@ opts_t opts_parse(int argc, char **argv)
 		{"timer", 0, 0, 't'},
 		{"eta", 0, 0, 'e'},
 		{"rate", 0, 0, 'r'},
+		{"average-rate", 0, 0, 'a'},
 		{"bytes", 0, 0, 'b'},
 		{"force", 0, 0, 'f'},
 		{"numeric", 0, 0, 'n'},
@@ -74,7 +75,7 @@ opts_t opts_parse(int argc, char **argv)
 	};
 	int option_index = 0;
 #endif
-	char *short_options = "hVpterbfnqcWs:li:w:H:N:L:B:R:";
+	char *short_options = "hVpterabfnqcWs:li:w:H:N:L:B:R:";
 	int c, numopts;
 	opts_t opts;
 
@@ -173,6 +174,10 @@ opts_t opts_parse(int argc, char **argv)
 			break;
 		case 'r':
 			opts->rate = 1;
+			numopts++;
+			break;
+		case 'a':
+			opts->average_rate = 1;
 			numopts++;
 			break;
 		case 'b':

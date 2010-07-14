@@ -26,6 +26,7 @@ struct remote_msg {
 	unsigned char timer;		 /* timer flag */
 	unsigned char eta;		 /* ETA flag */
 	unsigned char rate;		 /* rate counter flag */
+	unsigned char average_rate;	 /* average rate counter flag */
 	unsigned char bytes;		 /* bytes transferred flag */
 	unsigned long long rate_limit;	 /* rate limit, in bytes per second */
 	unsigned long long buffer_size;	 /* buffer size, in bytes (0=default) */
@@ -92,6 +93,7 @@ int remote_set(opts_t opts)
 	msgbuf.timer = opts->timer;
 	msgbuf.eta = opts->eta;
 	msgbuf.rate = opts->rate;
+	msgbuf.average_rate = opts->average_rate;
 	msgbuf.rate_limit = opts->rate_limit;
 	msgbuf.buffer_size = opts->buffer_size;
 	msgbuf.size = opts->size;
@@ -166,6 +168,7 @@ static void remote__sig_usr1(int s)
 	remote__opts->timer = msgbuf.timer;
 	remote__opts->eta = msgbuf.eta;
 	remote__opts->rate = msgbuf.rate;
+	remote__opts->average_rate = msgbuf.average_rate;
 
 	if (msgbuf.rate_limit > 0)
 		remote__opts->rate_limit = msgbuf.rate_limit;

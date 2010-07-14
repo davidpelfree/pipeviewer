@@ -1,5 +1,6 @@
 Things still to do:
 
+  - add tests & thanks doc for Henry Gebhardt patches
   - document what /* RATS */ comments mean
   - fix rate-limit-under-10 bug (Henry Precheur)
   - fix potential NULL deref in transfer.c:243 (Elias Pipping / LLVM/Clang)
@@ -7,7 +8,6 @@ Things still to do:
   - clean up and document exit status for different exit reasons
   - fix install on OSes without man page .gz (Bob Friesenhahn)
   - integrate Sami Liedes patch for numeric with timer and bytes
-  - integrate Henry Gebhardt patches 1-4 (avgrate and SI tidyup), add tests
   - option for process title (Martin Sarsale)
     as "pv - name:FooProcess -xyz - transferred: 1.3GB - 500KB/s - running:
     10:15:30s"
