@@ -21,6 +21,7 @@ struct opts_s {           /* structure describing run-time options */
 	unsigned char timer;           /* timer flag */
 	unsigned char eta;             /* ETA flag */
 	unsigned char rate;            /* rate counter flag */
+	unsigned char average_rate;    /* average rate counter flag */
 	unsigned char bytes;           /* bytes transferred flag */
 	unsigned char force;           /* force-if-not-terminal flag */
 	unsigned char cursor;          /* whether to use cursor positioning */

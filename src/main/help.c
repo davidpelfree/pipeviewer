@@ -37,6 +37,8 @@ void display_help(void)
 		 N_("show estimated time of arrival (completion)")},
 		{"-r", "--rate", 0,
 		 N_("show data transfer rate counter")},
+		{"-a", "--average-rate", 0,
+		 N_("show data transfer average rate counter")},
 		{"-b", "--bytes", 0,
 		 N_("show number of bytes transferred")},
 		{"-f", "--force", 0,
@@ -98,7 +100,7 @@ void display_help(void)
 		if (param)
 			param = _(param);
 		if (param)
-			width += 1 + strlen(param);		/* RATS: ignore */
+			width += 1 + strlen(param);	/* RATS: ignore */
 
 		if (width > col1max)
 			col1max = width;
@@ -138,8 +140,7 @@ void display_help(void)
 #else
 			"", "",
 #endif
-			param ? " " : "",
-			param ? param : "");
+			param ? " " : "", param ? param : "");
 
 		printf("  %-*s ", col1max - 2, optbuf);
 
