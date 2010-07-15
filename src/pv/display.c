@@ -274,8 +274,14 @@ static char *pv__format(struct pv_display_state *state,
 		if (state->opts->name)
 			state->outbufsize += strlen(state->opts->name);	/* RATS: ignore */
 		state->outbuffer = malloc(state->outbufsize + 16);
-		if (state->outbuffer == NULL)
+		if (state->outbuffer == NULL) {
+			fprintf(stderr, "%s: %s: %s\n",
+				state->opts->program_name,
+				_("buffer allocation failed"),
+				strerror(errno));
+			state->opts->exit_status |= 64;
 			return NULL;
+		}
 		state->outbuffer[0] = 0;
 	}
 

@@ -70,6 +70,7 @@ void pv_calc_total_size(opts_t opts)
 			}
 			opts->argc--;
 			i--;
+			opts->exit_status |= 2;
 			continue;
 		}
 
@@ -86,6 +87,11 @@ void pv_calc_total_size(opts_t opts)
 			if (fd >= 0) {
 				opts->size += lseek64(fd, 0, SEEK_END);
 				close(fd);
+			} else {
+				fprintf(stderr, "%s: %s: %s\n",
+					opts->program_name, opts->argv[i],
+					strerror(errno));
+				opts->exit_status |= 2;
 			}
 		} else if (S_ISREG(sb.st_mode)) {
 			opts->size += sb.st_size;
@@ -122,6 +128,7 @@ void pv_calc_total_size(opts_t opts)
 			fprintf(stderr, "%s: %s: %s\n", opts->program_name,
 				opts->argv[i], strerror(errno));
 			opts->size = 0;
+			opts->exit_status |= 2;
 			return;
 		}
 
@@ -131,8 +138,15 @@ void pv_calc_total_size(opts_t opts)
 
 			numread = read(fd, /* RATS: ignore (OK) */ scanbuf,
 				       sizeof(scanbuf));
-			if (numread <= 0)
+			if (numread < 0) {
+				fprintf(stderr, "%s: %s: %s\n",
+					opts->program_name, opts->argv[i],
+					strerror(errno));
+				opts->exit_status |= 2;
 				break;
+			} else if (numread == 0) {
+				break;
+			}
 			for (i = 0; i < numread; i++) {
 				if (scanbuf[i] == '\n')
 					opts->size++;
@@ -163,15 +177,20 @@ int pv_next_file(opts_t opts, int filenum, int oldfd)
 				opts->program_name,
 				_("failed to close file"),
 				strerror(errno));
+			opts->exit_status |= 8;
 			return -1;
 		}
 	}
 
-	if (filenum >= opts->argc)
+	if (filenum >= opts->argc) {
+		opts->exit_status |= 8;
 		return -1;
+	}
 
-	if (filenum < 0)
+	if (filenum < 0) {
+		opts->exit_status |= 8;
 		return -1;
+	}
 
 	if (strcmp(opts->argv[filenum], "-") == 0) {
 		fd = STDIN_FILENO;
@@ -182,6 +201,7 @@ int pv_next_file(opts_t opts, int filenum, int oldfd)
 				opts->program_name,
 				_("failed to read file"),
 				opts->argv[filenum], strerror(errno));
+			opts->exit_status |= 2;
 			return -1;
 		}
 	}
@@ -192,6 +212,7 @@ int pv_next_file(opts_t opts, int filenum, int oldfd)
 			_("failed to stat file"),
 			opts->argv[filenum], strerror(errno));
 		close(fd);
+		opts->exit_status |= 2;
 		return -1;
 	}
 
@@ -200,6 +221,7 @@ int pv_next_file(opts_t opts, int filenum, int oldfd)
 			opts->program_name,
 			_("failed to stat output file"), strerror(errno));
 		close(fd);
+		opts->exit_status |= 2;
 		return -1;
 	}
 
@@ -221,6 +243,7 @@ int pv_next_file(opts_t opts, int filenum, int oldfd)
 		opts->program_name,
 		_("input file is output file"), opts->argv[filenum]);
 	close(fd);
+	opts->exit_status |= 4;
 	return -1;
 }
 

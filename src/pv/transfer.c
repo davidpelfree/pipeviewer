@@ -48,8 +48,9 @@ void pv_set_buffer_size(unsigned long long sz, int force)
  * be written. The variables that "eof_in" and "eof_out" point to are used
  * to flag that we've finished reading and writing respectively.
  *
- * Returns the number of bytes written, or negative on error. In line mode,
- * the number of lines written will be put into *lineswritten.
+ * Returns the number of bytes written, or negative on error (in which case
+ * opts->exit_status is updated). In line mode, the number of lines written
+ * will be put into *lineswritten.
  *
  * If "opts" is NULL, then the transfer buffer is freed, and zero is
  * returned.
@@ -86,6 +87,7 @@ long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 				opts->program_name,
 				_("buffer allocation failed"),
 				strerror(errno));
+			opts->exit_status |= 64;
 			return -1;
 		}
 	}
@@ -146,6 +148,7 @@ long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 		fprintf(stderr, "%s: %s: %s: %d: %s\n",
 			opts->program_name, opts->current_file,
 			_("select call failed"), n, strerror(errno));
+		opts->exit_status |= 16;
 		return -1;
 	}
 
@@ -170,6 +173,7 @@ long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 				opts->program_name,
 				opts->current_file,
 				_("read failed"), strerror(errno));
+			opts->exit_status |= 16;
 			*eof_in = 1;
 			if (bytes_written >= in_buffer)
 				*eof_out = 1;
@@ -229,6 +233,7 @@ long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 			fprintf(stderr, "%s: %s: %s\n",
 				opts->program_name,
 				_("write failed"), strerror(errno));
+			opts->exit_status |= 16;
 			*eof_out = 1;
 			written = -1;
 		} else if (w == 0) {

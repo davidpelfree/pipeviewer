@@ -145,4 +145,7 @@ Credit is also due to:
   Henry Gebhard <hsggebhardt@googlemail.com>
     - supplied patches to improve SI prefixes and add --average-rate
 
+  Vladimir Kokarev, Alexander Leo
+    - reported that exit status did not reflect file errors
+
 -----------------------------------------------------------------------------
