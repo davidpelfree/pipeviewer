@@ -8,6 +8,7 @@
   - fix i18n especially for --help (Sebastian Kayser)
   - refactored pv_display
   - integrated improved SI prefixes and --average-rate (Henry Gebhardt)
+  - fixed potential NULL deref in transfer (Elias Pipping / LLVM/Clang)
 
 1.1.4 - 6 March 2008
   - patch from Elias Pipping correcting compilation failure on Darwin 9
