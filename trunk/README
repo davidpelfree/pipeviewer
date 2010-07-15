@@ -101,7 +101,7 @@ Credit is also due to:
     - informative bug report about rate limiting performance
 
   Elias Pipping
-    - patch to compile properly on Darwin 9
+    - patch to compile properly on Darwin 9; potential NULL deref report
 
   Patrick Collison
     - similar patch for OS X

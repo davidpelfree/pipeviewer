@@ -313,7 +313,7 @@ Ville Herva <Ville.Herva@iki.fi>
 
 Elias Pipping
 .br
-(patch to compile properly on Darwin 9)
+(patch to compile properly on Darwin 9; potential NULL deref report)
 
 Patrick Collison
 .br

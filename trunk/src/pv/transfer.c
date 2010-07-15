@@ -234,7 +234,7 @@ long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 		} else if (w == 0) {
 			*eof_out = 1;
 		} else {
-			if (opts->linemode) {
+			if ((opts->linemode) && (lineswritten != NULL)) {
 				int nlidx;
 				for (nlidx = 0; nlidx < w; nlidx++) {
 					if (buf[bytes_written + nlidx] ==
