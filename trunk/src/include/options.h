@@ -40,6 +40,7 @@ struct opts_s {           /* structure describing run-time options */
 	int argc;                      /* number of non-option arguments */
 	char **argv;                   /* array of non-option arguments */
 	char *current_file;            /* current file being read */
+	unsigned char exit_status;     /* exit status to give (0=OK) */
 };
 
 extern opts_t opts_parse(int, char **);

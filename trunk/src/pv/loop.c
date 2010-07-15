@@ -156,7 +156,7 @@ int pv_main_loop(opts_t opts)
 
 	fd = pv_next_file(opts, n, -1);
 	if (fd < 0) {
-		return 1;
+		return opts->exit_status;
 	}
 
 	if (fstat64(fd, &sb) == 0) {
@@ -185,7 +185,7 @@ int pv_main_loop(opts_t opts)
 		    pv_transfer(opts, fd, &eof_in, &eof_out, cansend,
 				&lineswritten);
 		if (written < 0)
-			return 1;
+			return opts->exit_status;
 
 		if (opts->linemode) {
 			since_last += lineswritten;
@@ -201,7 +201,7 @@ int pv_main_loop(opts_t opts)
 			n++;
 			fd = pv_next_file(opts, n, fd);
 			if (fd < 0)
-				return 1;
+				return opts->exit_status;
 			eof_in = 0;
 			eof_out = 0;
 		}
@@ -327,9 +327,9 @@ int pv_main_loop(opts_t opts)
 	pv_transfer(0, -1, 0, 0, 0, NULL);
 
 	if (pv_sig_abort)
-		return 1;
+		opts->exit_status |= 32;
 
-	return 0;
+	return opts->exit_status;
 }
 
 /* EOF */

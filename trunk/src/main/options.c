@@ -264,6 +264,8 @@ opts_t opts_parse(int argc, char **argv)
 		opts->argv[opts->argc++] = argv[optind++];
 	}
 
+	opts->exit_status = 0;
+
 	return opts;
 }
 

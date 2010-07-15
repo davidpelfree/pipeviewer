@@ -238,6 +238,38 @@ Print a usage message on standard output and exit successfully.
 Print version information on standard output and exit successfully.
 
 
+.SH EXIT STATUS
+An exit status of 1 indicates a problem with the
+.B \-R
+option.
+
+Any other exit status is a bitmask of the following:
+
+.TP
+.B 2
+One or more files could not be accessed, 
+.BR stat (2)ed,
+or opened.
+.TP
+.B 4
+An input file was the same as the output file.
+.TP
+.B 8
+Internal error with closing a file or moving to the next file.
+.TP
+.B 16
+There was an error while transferring data from one or more input files.
+.TP
+.B 32
+A signal was caught that caused an early exit.
+.TP
+.B 64
+Memory allocation failed.
+
+A zero exit status indicates no problems.
+
+
+
 .SH AUTHORS
 Andrew Wood <andrew.wood@ivarch.com>
 .br
@@ -376,6 +408,12 @@ Daniel Pape
 Henry Gebhardt <hsggebhardt@googlemail.com>
 .br
 (supplied patches to improve SI prefixes and add --average-rate)
+
+Vladimir Kokarev
+.br
+Alexander Leo
+.br
+(reported that exit status did not reflect file errors)
 
 
 .SH BUGS

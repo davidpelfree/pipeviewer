@@ -106,21 +106,21 @@ int remote_set(opts_t opts)
 
 	msgid = remote__msgget(opts);
 	if (msgid < 0) {
-		fprintf(stderr, "%s: %s", opts->program_name,
+		fprintf(stderr, "%s: %s\n", opts->program_name,
 			strerror(errno));
-		return -1;
+		return 1;
 	}
 
 	if (msgsnd(msgid, &msgbuf, sizeof(msgbuf) - sizeof(long), 0) != 0) {
-		fprintf(stderr, "%s: %s", opts->program_name,
+		fprintf(stderr, "%s: %s\n", opts->program_name,
 			strerror(errno));
-		return -1;
+		return 1;
 	}
 
 	if (kill(opts->remote, SIGUSR1) != 0) {
-		fprintf(stderr, "%s: %s", opts->program_name,
+		fprintf(stderr, "%s: %s\n", opts->program_name,
 			strerror(errno));
-		return -1;
+		return 1;
 	}
 
 	return 0;
