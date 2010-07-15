@@ -1,4 +1,4 @@
-.TH @UCPACKAGE@ 1 "January 2010" Linux "User Manuals"
+.TH @UCPACKAGE@ 1 "July 2010" Linux "User Manuals"
 .SH NAME
 @PACKAGE@ \- monitor the progress of data through a pipe
 .SH SYNOPSIS
@@ -75,8 +75,9 @@ If no display switches are specified,
 .B @PACKAGE@
 behaves as if
 .BR \-p ", " \-t ", " \-e ", " \-r ", and " \-b
-had been given (i.e. everything is switched on). Otherwise, only those
-display types that are explicitly switched on will be shown.
+had been given (i.e. everything except average rate is switched on).
+Otherwise, only those display types that are explicitly switched on will be
+shown.
 .TP
 .B \-p, \-\-progress
 Turn the progress bar on.  If standard input is not a file and no
@@ -100,6 +101,10 @@ be determined.
 .B \-r, \-\-rate
 Turn the rate counter on.  This will display the current rate of data
 transfer.
+.TP
+.B \-a, \-\-average\-rate
+Turn the average rate counter on.  This will display the average rate of
+data transfer so far.
 .TP
 .B \-b, \-\-bytes
 Turn the total byte counter on.  This will display the total amount of
@@ -367,6 +372,10 @@ Sam Nelson
 Daniel Pape
 .br
 (reported Cygwin installation problem due to DESTDIR)
+
+Henry Gebhardt <hsggebhardt@googlemail.com>
+.br
+(supplied patches to improve SI prefixes and add --average-rate)
 
 
 .SH BUGS
