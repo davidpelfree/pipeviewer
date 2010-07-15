@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-18 23:24+0000\n"
+"POT-Creation-Date: 2010-07-15 22:02+0100\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Date: 1999-06-01 15:18:29+0100\n"
 "From: Andrew Wood <ivarch@ubik>\n"
@@ -39,67 +39,24 @@ msgstr "échec à statuer sur le fichier de sortie"
 msgid "input file is output file"
 msgstr "fichiers d'entré et de sortie sont les mêmes"
 
-#: src/pv/display.c:190
-msgid "G"
-msgstr "GO"
+#: src/pv/display.c:95
+msgid "yzafpnum kMGTPEZY"
+msgstr ""
 
-#: src/pv/display.c:193
-msgid "M"
-msgstr "MO"
-
-#: src/pv/display.c:196
-msgid "k"
-msgstr "kO"
-
-#: src/pv/display.c:204
-msgid "GB"
-msgstr "GO"
-
-#: src/pv/display.c:207
-msgid "MB"
-msgstr "MO"
-
-#: src/pv/display.c:210
-msgid "kB"
-msgstr "kO"
-
-#: src/pv/display.c:212
+#: src/pv/display.c:334
 msgid "B"
 msgstr "O"
 
-#: src/pv/display.c:244
-msgid "G/s"
-msgstr "GO/s"
+#: src/pv/display.c:371 src/pv/display.c:395
+msgid "/s"
+msgstr "/s"
 
-#: src/pv/display.c:247
-msgid "M/s"
-msgstr "MO/s"
+#: src/pv/display.c:374 src/pv/display.c:398
+#, fuzzy
+msgid "B/s"
+msgstr "O/s"
 
-#: src/pv/display.c:250
-msgid "k/s"
-msgstr "kO/s"
-
-#: src/pv/display.c:252
-msgid "/s "
-msgstr "O/s "
-
-#: src/pv/display.c:257
-msgid "GB/s"
-msgstr "GO/s"
-
-#: src/pv/display.c:260
-msgid "MB/s"
-msgstr "MO/s"
-
-#: src/pv/display.c:263
-msgid "kB/s"
-msgstr "kO/s"
-
-#: src/pv/display.c:265
-msgid "B/s "
-msgstr "O/s "
-
-#: src/pv/display.c:292
+#: src/pv/display.c:428
 msgid "ETA"
 msgstr "ETA"
 
@@ -144,111 +101,115 @@ msgid "show data transfer rate counter"
 msgstr "affiche le taux de tranfert des données"
 
 #: src/main/help.c:41
+msgid "show data transfer average rate counter"
+msgstr ""
+
+#: src/main/help.c:43
 msgid "show number of bytes transferred"
 msgstr "affiche le nombre d'octets transférés"
 
-#: src/main/help.c:43
+#: src/main/help.c:45
 msgid "output even if standard error is not a terminal"
 msgstr "imprime vers la sortie d'erreur même si ce n'est pas un terminal"
 
-#: src/main/help.c:45
+#: src/main/help.c:47
 msgid "output percentages, not visual information"
 msgstr "imprime en pourcentage, pas les informations visuelles"
 
-#: src/main/help.c:47
+#: src/main/help.c:49
 msgid "do not output any transfer information at all"
 msgstr "n'afficher aucune information de transfert"
 
-#: src/main/help.c:49
+#: src/main/help.c:51
 msgid "use cursor positioning escape sequences"
 msgstr "utiliser les séquences d'échappements de positionnement de curseur"
 
-#: src/main/help.c:51
+#: src/main/help.c:53
 msgid "display nothing until first byte transferred"
 msgstr "ne rien afficher avant qu'au moins un octet soit tranféré"
 
-#: src/main/help.c:52
+#: src/main/help.c:54
 msgid "SIZE"
 msgstr "TAILLE"
 
-#: src/main/help.c:53
+#: src/main/help.c:55
 msgid "set estimated data size to SIZE bytes"
 msgstr "ajuste la taille estimée des données à TAILLE octets"
 
-#: src/main/help.c:55
+#: src/main/help.c:57
 msgid "count lines instead of bytes"
 msgstr "compte les lignes au lieu des octets"
 
-#: src/main/help.c:56
+#: src/main/help.c:58
 msgid "SEC"
 msgstr "SEC"
 
-#: src/main/help.c:57
+#: src/main/help.c:59
 msgid "update every SEC seconds"
 msgstr "mise-à-jour toute les SEC secondes"
 
-#: src/main/help.c:58
+#: src/main/help.c:60
 msgid "WIDTH"
 msgstr "LARGEUR"
 
-#: src/main/help.c:59
+#: src/main/help.c:61
 msgid "assume terminal is WIDTH characters wide"
 msgstr "présumer la largeur du terminal à LARGEUR caractères"
 
-#: src/main/help.c:60
+#: src/main/help.c:62
 msgid "HEIGHT"
 msgstr "HAUTEUR"
 
-#: src/main/help.c:61
+#: src/main/help.c:63
 msgid "assume terminal is HEIGHT rows high"
 msgstr "présumer la hauteur du terminal à HAUTEUR lignes"
 
-#: src/main/help.c:62
+#: src/main/help.c:64
 msgid "NAME"
 msgstr "NOM"
 
-#: src/main/help.c:63
+#: src/main/help.c:65
 msgid "prefix visual information with NAME"
 msgstr "préfixer les informations visuelles avec NOM"
 
-#: src/main/help.c:65
+#: src/main/help.c:67
 msgid "RATE"
 msgstr "TAUX"
 
-#: src/main/help.c:66
+#: src/main/help.c:68
 msgid "limit transfer to RATE bytes per second"
 msgstr "limite le taux de transfer à TAUX octets par seconde"
 
-#: src/main/help.c:67
+#: src/main/help.c:69
 msgid "BYTES"
 msgstr "OCTETS"
 
-#: src/main/help.c:68
+#: src/main/help.c:70
 msgid "use a buffer size of BYTES"
 msgstr "Utiliser une mémoire tampon de OCTETS octets"
 
-#: src/main/help.c:69
+#: src/main/help.c:71
 msgid "PID"
 msgstr "PID"
 
-#: src/main/help.c:70
+#: src/main/help.c:72
 msgid "update settings of process PID"
 msgstr "mettre-à-jour la configuration du processus PID"
 
-#: src/main/help.c:73
+#: src/main/help.c:75
 msgid "show this help and exit"
 msgstr "afficher cette aide puis quitter"
 
-#: src/main/help.c:75
+#: src/main/help.c:77
 msgid "show version information and exit"
 msgstr "afficher la version puis quitter"
 
-#: src/main/help.c:81
+#: src/main/help.c:83
 #, c-format
 msgid "Usage: %s [OPTION] [FILE]..."
 msgstr "Utilisation : %s [OPTIONS] [FICHIER]..."
 
-#: src/main/help.c:85
+#: src/main/help.c:87
 msgid ""
 "Concatenate FILE(s), or standard input, to standard output,\n"
 "with monitoring."
@@ -256,38 +217,38 @@ msgstr ""
 "Concatène FICHIER(s), ou l'entrée standard, sur la sortie standard\n"
 "avec monitorage."
 
-#: src/main/help.c:173
+#: src/main/help.c:174
 #, c-format
 msgid "Please report any bugs to %s."
 msgstr "SVP rapporter touts bogues à %s."
 
 #. RATS: ignore
-#: src/main/options.c:84
+#: src/main/options.c:85
 #, c-format
 msgid "%s: option structure allocation failed (%s)"
 msgstr "%s: l'allocation pour la structure d'une option a echoué (%s)"
 
-#: src/main/options.c:97
+#: src/main/options.c:98
 #, c-format
 msgid "%s: option structure argv allocation failed (%s)"
 msgstr "%s: l'allocation pour la structure de l'option argv a echoué (%s)"
 
-#: src/main/options.c:131
+#: src/main/options.c:132
 msgid "integer argument expected"
 msgstr "Valeur entière attendue"
 
-#: src/main/options.c:139
+#: src/main/options.c:140
 msgid "numeric argument expected"
 msgstr "Valeur numérique attendue"
 
 #. RATS: ignore (OK)
-#: src/main/options.c:229
+#: src/main/options.c:234
 #, c-format
 msgid "Try `%s --help' for more information."
 msgstr "Essayez `%s --help' pour plus d'information."
 
 #. RATS: ignore (OK)
-#: src/main/options.c:233
+#: src/main/options.c:238
 #, fuzzy, c-format
 msgid "Try `%s -h' for more information."
 msgstr "Essayez `%s -h' pour plus d'information."
@@ -320,38 +281,3 @@ msgstr ""
 "SANS GARANTIE AUCUNE; ni même de garantie sous-entendu que le\n"
 "programme soit COMMERCIALISABLE ou APPLICABLE À UNE TÂCHE\n"
 "PARTICULIÈRE."
-
-#~ msgid "For more information, please run `%s --license'."
-#~ msgstr "Pour plus d'information, exécutez `%s --license'."
-
-#~ msgid "For more information, please run `%s -l'."
-#~ msgstr "Pour plus d'information, exécutez `%s -l'."
-
-#~ msgid "show the license this program is distributed under"
-#~ msgstr "affiche la license sous laquelle ce programme est distribué"
-
-#~ msgid "%s %s - Copyright (C) %s %s"
-#~ msgstr "%s %s - Copyright (C) %s %s"
-
-#~ msgid ""
-#~ "This program is Open Source software, and is being distributed under the\n"
-#~ "terms of the Artistic License."
-#~ msgstr ""
-#~ "Ce programme est un logiciel libre et est distribué sous les termes de\n"
-#~ "la version anglophone de la Licence Artistique (Artistic License)"
-
-#~ msgid ""
-#~ "If that scrolled by too quickly, you may want to pipe it to a\n"
-#~ "pager such as `more' or `less', eg `%s --license | more'."
-#~ msgstr ""
-#~ "Si le texte à défilé trop rapidement, vous voudrez peut-être\n"
-#~ "rediriger l'impression vers une visionneuse comme `more' ou `less',\n"
-#~ "i.e. `%s --license | more'."
-
-#~ msgid ""
-#~ "If that scrolled by too quickly, you may want to pipe it to a\n"
-#~ "pager such as `more' or `less', eg `%s -l | more'."
-#~ msgstr ""
-#~ "Si le texte à défilé trop rapidement, vous voudrez peut-être\n"
-#~ "rediriger l'impression vers une visionneuse comme `more' ou `less',\n"
-#~ "i.e. `%s -l | more'."
