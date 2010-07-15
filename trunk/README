@@ -31,6 +31,11 @@ profiling support (see "man gprof").  Also note that doing "make index" will
 generate an HTML code index (using "ctags" and "cproto"); this index lists
 all files used, all functions defined, and all TODOs marked in the code.
 
+Developers also note that the /* RATS */ comments are used to tell the RATS
+tool that a potential trouble spot has been checked so it doesn't need to
+warn about it. (RATS: Rough Auditing Tool for Security - home page
+http://www.fortifysoftware.com/security-resources/rats.jsp)
+
 
 Author
 ******
@@ -136,5 +141,8 @@ Credit is also due to:
 
   Philipp Beckers
     - ported to the Syabas PopcornHour A-100 series
+
+  Henry Gebhard <hsggebhardt@googlemail.com>
+    - supplied patches to improve SI prefixes and add --average-rate
 
 -----------------------------------------------------------------------------

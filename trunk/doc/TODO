@@ -1,7 +1,5 @@
 Things still to do:
 
-  - add tests & thanks doc for Henry Gebhardt patches
-  - document what /* RATS */ comments mean
   - fix rate-limit-under-10 bug (Henry Precheur)
   - fix potential NULL deref in transfer.c:243 (Elias Pipping / LLVM/Clang)
   - fix exit status so we exit 1 on read/write error (Vladimir Kokarev, Alexander Leo)
