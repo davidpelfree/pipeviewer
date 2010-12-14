@@ -46,6 +46,19 @@ make test
 %doc README doc/NEWS doc/TODO doc/COPYING
 
 %changelog
+* Tue Dec 14 2010 Andrew Wood <andrew.wood@ivarch.com> 1.2.0-1
+- Integrated improved SI prefixes and --average-rate (Henry Gebhardt).
+- Return nonzero if exiting due to SIGTERM (Martin Baum).
+- Patch from Phil Rutschman to restore terminal properly on exit.
+- Fix i18n especially for --help (Sebastian Kayser).
+- Refactored pv_display.
+- We now have a coherent, documented, exit status.
+- Modified pipe test and new cksum test from Sebastian Kayser.
+- Default CFLAGS to just "-O" for non-GCC (Kjetil Torgrim Homme).
+- LFS compile fix for OS X 10.4 (Alexandre de Verteuil).
+- Remove DESTDIR / suffix (Sam Nelson, Daniel Pape).
+- Fixed potential NULL deref in transfer (Elias Pipping / LLVM/Clang).
+
 * Thu Mar  6 2008 Andrew Wood <andrew.wood@ivarch.com> 1.1.4-1
 - Trap SIGINT/SIGHUP/SIGTERM so we clean up IPCs on exit (Laszlo Ersek).
 - Abort if numeric option, eg -L, has non-numeric value (Boris Lohner).
