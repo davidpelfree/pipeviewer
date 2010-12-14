@@ -1,15 +1,15 @@
-1.1.5 - NOT YET RELEASED
-  - modified pipe test and new cksum test from Sebastian Kayser
-  - patch from Phil Rutschman to restore terminal properly on exit
-  - default CFLAGS to just "-O" for non-GCC (Kjetil Torgrim Homme)
-  - LFS compile fix for OS X 10.4 (Alexandre de Verteuil)
+1.2.0 - 14 December 2010
+  - integrated improved SI prefixes and --average-rate (Henry Gebhardt)
   - return nonzero if exiting due to SIGTERM (Martin Baum)
-  - remove DESTDIR / suffix (Sam Nelson, Daniel Pape)
+  - patch from Phil Rutschman to restore terminal properly on exit
   - fix i18n especially for --help (Sebastian Kayser)
   - refactored pv_display
-  - integrated improved SI prefixes and --average-rate (Henry Gebhardt)
-  - fixed potential NULL deref in transfer (Elias Pipping / LLVM/Clang)
   - we now have a coherent, documented, exit status
+  - modified pipe test and new cksum test from Sebastian Kayser
+  - default CFLAGS to just "-O" for non-GCC (Kjetil Torgrim Homme)
+  - LFS compile fix for OS X 10.4 (Alexandre de Verteuil)
+  - remove DESTDIR / suffix (Sam Nelson, Daniel Pape)
+  - fixed potential NULL deref in transfer (Elias Pipping / LLVM/Clang)
 
 1.1.4 - 6 March 2008
   - patch from Elias Pipping correcting compilation failure on Darwin 9

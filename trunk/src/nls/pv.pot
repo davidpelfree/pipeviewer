@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-15 22:02+0100\n"
+"POT-Creation-Date: 2010-12-14 10:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,23 +16,23 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/pv/file.c:164
+#: src/pv/file.c:178
 msgid "failed to close file"
 msgstr ""
 
-#: src/pv/file.c:183
+#: src/pv/file.c:202
 msgid "failed to read file"
 msgstr ""
 
-#: src/pv/file.c:192
+#: src/pv/file.c:212
 msgid "failed to stat file"
 msgstr ""
 
-#: src/pv/file.c:201
+#: src/pv/file.c:222
 msgid "failed to stat output file"
 msgstr ""
 
-#: src/pv/file.c:222
+#: src/pv/file.c:244
 msgid "input file is output file"
 msgstr ""
 
@@ -40,19 +40,23 @@ msgstr ""
 msgid "yzafpnum kMGTPEZY"
 msgstr ""
 
-#: src/pv/display.c:334
+#: src/pv/display.c:280 src/pv/transfer.c:88
+msgid "buffer allocation failed"
+msgstr ""
+
+#: src/pv/display.c:340
 msgid "B"
 msgstr ""
 
-#: src/pv/display.c:371 src/pv/display.c:395
+#: src/pv/display.c:377 src/pv/display.c:401
 msgid "/s"
 msgstr ""
 
-#: src/pv/display.c:374 src/pv/display.c:398
+#: src/pv/display.c:380 src/pv/display.c:404
 msgid "B/s"
 msgstr ""
 
-#: src/pv/display.c:428
+#: src/pv/display.c:434
 msgid "ETA"
 msgstr ""
 
@@ -64,19 +68,15 @@ msgstr ""
 msgid "failed to lock terminal"
 msgstr ""
 
-#: src/pv/transfer.c:87
-msgid "buffer allocation failed"
-msgstr ""
-
-#: src/pv/transfer.c:148
+#: src/pv/transfer.c:150
 msgid "select call failed"
 msgstr ""
 
-#: src/pv/transfer.c:172
+#: src/pv/transfer.c:175
 msgid "read failed"
 msgstr ""
 
-#: src/pv/transfer.c:231
+#: src/pv/transfer.c:235
 msgid "write failed"
 msgstr ""
 

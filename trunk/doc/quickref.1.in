@@ -1,4 +1,4 @@
-.TH @UCPACKAGE@ 1 "July 2010" Linux "User Manuals"
+.TH @UCPACKAGE@ 1 "December 2010" Linux "User Manuals"
 .SH NAME
 @PACKAGE@ \- monitor the progress of data through a pipe
 .SH SYNOPSIS
@@ -53,7 +53,7 @@ program for a full-screen progress display:
 .RS
 .B (tar cf - . \e
 .br
-.B " | @PACKAGE@ -n -s `du -sb . | awk '{print $1}'` \e"
+.B " | @PACKAGE@ -n -s $(du -sb . | awk '{print $1}') \e"
 .br
 .B " | gzip -9 > out.tgz) 2>&1 \e"
 .br
