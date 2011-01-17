@@ -11,6 +11,8 @@
 
 #define MAXIMISE_BUFFER_FILL	1
 
+#define _GNU_SOURCE 1			    /* for splice() */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -68,6 +70,10 @@ long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 	int max_fd;
 	long to_write, written;
 	ssize_t r, w;
+#ifdef HAVE_SPLICE
+	static int splice_failed_fd = -1;
+	int splice_used = 0;
+#endif
 	int n;
 
 	if (opts == NULL) {
@@ -155,8 +161,30 @@ long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 	written = 0;
 
 	if (FD_ISSET(fd, &readfds)) {
+#ifdef HAVE_SPLICE
+		splice_used = 0;
+		if ((!opts->linemode) && (fd != splice_failed_fd)) {
+			r = splice(fd, NULL, STDOUT_FILENO, NULL, allowed,
+				   SPLICE_F_MORE);
+			splice_used = 1;
+			if ((r < 0) && (errno == EINVAL)) {
+				splice_failed_fd = fd;
+				splice_used = 0;
+			} else if (r > 0) {
+				written = r;
+			} else {
+				/* EOF might not really be EOF, it seems */
+				splice_used = 0;
+			}
+		}
+		if (splice_used == 0) {
+			r = read( /* RATS: ignore (checked OK) */ fd,
+				 buf + in_buffer, pv__bufsize - in_buffer);
+		}
+#else
 		r = read( /* RATS: ignore (checked OK) */ fd,
 			 buf + in_buffer, pv__bufsize - in_buffer);
+#endif				/* HAVE_SPLICE */
 		if (r < 0) {
 			/*
 			 * If a read error occurred but it was EINTR or
@@ -182,7 +210,13 @@ long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 			if (bytes_written >= in_buffer)
 				*eof_out = 1;
 		} else {
+#ifdef HAVE_SPLICE
+			if (splice_used == 0)
+				in_buffer += r;
+#else
 			in_buffer += r;
+#endif				/* HAVE_SPLICE */
+
 		}
 	}
 
@@ -199,6 +233,9 @@ long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 	}
 
 	if (FD_ISSET(STDOUT_FILENO, &writefds)
+#ifdef HAVE_SPLICE
+	    && (splice_used == 0)
+#endif				/* HAVE_SPLICE */
 	    && (in_buffer > bytes_written)
 	    && (to_write > 0)) {
 
@@ -276,7 +313,6 @@ long pv_transfer(opts_t opts, int fd, int *eof_in, int *eof_out,
 		}
 	}
 #endif				/* MAXIMISE_BUFFER_FILL */
-
 	return written;
 }
 

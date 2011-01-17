@@ -32,6 +32,8 @@
 # define N_(String) (String)
 #endif
 
+#undef HAVE_SPLICE
+
 /* The name of the program. */
 #define PROGRAM_NAME	"progname"
 

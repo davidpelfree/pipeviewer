@@ -1,6 +1,7 @@
 1.2.1 - NOT YET RELEASED
   - added Tiger build patch from Olle Jonsson
   - fix 1024-boundary display garble (Debian bug #586763)
+  - use splice(2) where available (Debian bug #601683)
 
 1.2.0 - 14 December 2010
   - integrated improved SI prefixes and --average-rate (Henry Gebhardt)

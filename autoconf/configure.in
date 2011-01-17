@@ -134,7 +134,7 @@ dnl Check for various header files and set various other macros.
 dnl
 AC_DEFINE(HAVE_CONFIG_H)
 AC_HEADER_STDC
-AC_CHECK_FUNCS(memcpy basename snprintf stat64)
+AC_CHECK_FUNCS(memcpy basename snprintf stat64 splice)
 AC_CHECK_HEADERS(limits.h sys/ipc.h sys/param.h libgen.h)
 
 test -z "$INSTALL_DATA" && INSTALL_DATA='${INSTALL} -m 644'
