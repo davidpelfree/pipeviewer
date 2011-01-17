@@ -1,6 +1,5 @@
 Things still to do:
 
-  - http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=586763 (>1GB garble)
   - fix rate-limit-under-10 bug (Henry Precheur)
   - fix install on OSes without man page .gz (Bob Friesenhahn)
   - integrate Sami Liedes patch for numeric with timer and bytes
