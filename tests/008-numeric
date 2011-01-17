@@ -1,7 +1,6 @@
 #!/bin/sh
 #
 # Check that numeric output outputs some percentages.
-#
 
 # Process 100 bytes at 100 bytes per second, updating every 0.1 seconds for
 # around 10 output lines.

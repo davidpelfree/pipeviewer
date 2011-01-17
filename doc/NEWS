@@ -1,3 +1,6 @@
+1.2.1 - NOT YET RELEASED
+  - added Tiger build patch from Olle Jonsson
+
 1.2.0 - 14 December 2010
   - integrated improved SI prefixes and --average-rate (Henry Gebhardt)
   - return nonzero if exiting due to SIGTERM (Martin Baum)
