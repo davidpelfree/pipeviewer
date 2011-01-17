@@ -90,6 +90,7 @@ static void pv__si_prefix(long double *value, char *prefix,
 	static char *pfx = NULL;
 	static char const *pfx_middle = NULL;
 	char const *i;
+	long double cutoff;
 
 	if (pfx == NULL) {
 		pfx = _("yzafpnum kMGTPEZY");
@@ -104,7 +105,7 @@ static void pv__si_prefix(long double *value, char *prefix,
 	}
 	i = pfx_middle;
 
-	*prefix = '\0';			    /* Make the prefix start empty. */
+	*prefix = ' ';			    /* Make the prefix start blank. */
 
 	/*
 	 * Force an empty prefix if the value is zero to avoid "0yB".
@@ -112,7 +113,9 @@ static void pv__si_prefix(long double *value, char *prefix,
 	if (*value == 0.0)
 		return;
 
-	while ((*value >= 1000.0) && (*(i += 1) != '\0')) {
+	cutoff = ratio * 0.97;
+
+	while ((*value > cutoff) && (*(i += 1) != '\0')) {
 		*value /= ratio;
 		*prefix = *i;
 	}
@@ -344,8 +347,13 @@ static char *pv__format(struct pv_display_state *state,
 		if (transferred > 100000)
 			transferred = 100000;
 
-		sprintf(str_transferred, "%4.3Lg%.1s%.16s", transferred,
-			si_prefix, units);
+		if (transferred > 99.9) {
+			sprintf(str_transferred, "%4ld%.1s%.16s",
+				(long) transferred, si_prefix, units);
+		} else {
+			sprintf(str_transferred, "%4.3Lg%.1s%.16s",
+				transferred, si_prefix, units);
+		}
 
 		component_count++;
 		static_portion_size += strlen(str_transferred);
@@ -387,8 +395,13 @@ static char *pv__format(struct pv_display_state *state,
 		if (rate > 100000)
 			rate = 100000;
 
-		sprintf(str_rate, "[%4.3Lg%.1s%.16s]", rate, si_prefix,
-			units);
+		if (rate > 99.9) {
+			sprintf(str_rate, "[%4ld%.1s%.16s]", (long) rate,
+				si_prefix, units);
+		} else {
+			sprintf(str_rate, "[%4.3Lg%.1s%.16s]", rate,
+				si_prefix, units);
+		}
 
 		component_count++;
 		static_portion_size += strlen(str_rate);
@@ -408,8 +421,13 @@ static char *pv__format(struct pv_display_state *state,
 		if (average_rate > 100000)
 			average_rate = 100000;
 
-		sprintf(str_average_rate, "[%4.3Lg%.1s%.16s]",
-			average_rate, si_prefix, units);
+		if (average_rate > 99.9) {
+			sprintf(str_average_rate, "[%4ld%.1s%.16s]",
+				(long) average_rate, si_prefix, units);
+		} else {
+			sprintf(str_average_rate, "[%4.3Lg%.1s%.16s]",
+				average_rate, si_prefix, units);
+		}
 
 		component_count++;
 		static_portion_size += strlen(str_average_rate);
