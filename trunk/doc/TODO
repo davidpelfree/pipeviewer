@@ -17,6 +17,7 @@ Things still to do:
   - fix cursor positioning with multiple pipelines under Cygwin
   - stats for avg/min/max/stddev throughput (Venky.N.Iyer)
   - option (-x?) to use xterm title line for status (Joachim Haga)
+  - option to enable O_DIRECT (Romain Kang)
   - if the first pv exits, should the second become IPC leader?
   - get more translations
 
