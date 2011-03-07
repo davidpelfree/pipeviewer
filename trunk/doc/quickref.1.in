@@ -200,6 +200,13 @@ Limit the transfer to a maximum of
 .B RATE
 bytes per second.  A suffix of "k", "m", "g", or "t" can be added to denote
 kilobytes (*1024), megabytes, and so on.
+.br
+.B NOTE:
+This must be more than 10 bytes (assuming an
+.B -i
+of 1 second), or
+.B @PACKAGE@
+wlll block.
 .TP
 .B \-B BYTES, \-\-buffer-size BYTES
 Use a transfer buffer size of
@@ -417,9 +424,22 @@ Alexander Leo
 
 
 .SH BUGS
-If you find any bugs, please contact the primary author, either by email or
-by using the contact form on the web site.
-
+Known bugs:
+.TP
+.B *
+A rate limit
+.BR "" ( -L )
+of under 10 causes
+.B @PACKAGE@
+to stop transferring data.
+.TP
+.B *
+The
+.B -c
+option does not seem to work correctly on Solaris 10 or Cygwin.
+.P
+If you find any other bugs, please contact the primary author, either by
+email or by using the contact form on the web site.
 
 .SH "SEE ALSO"
 .BR cat (1),
