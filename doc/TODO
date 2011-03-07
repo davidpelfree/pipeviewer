@@ -19,6 +19,9 @@ Things still to do:
   - option (-x?) to use xterm title line for status (Joachim Haga)
   - option to enable O_DIRECT (Romain Kang)
   - if the first pv exits, should the second become IPC leader?
+  - pv-ify a command line (Will Entriken) - "pv FOO | BAR | BAZ"
+  - option to calculate ETA based on the past X transfer rates
+    (re: discussion with Charles Howes, Feb 2011)
   - get more translations
 
 Any assistance would be appreciated.
