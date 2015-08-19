@@ -1,0 +1,5 @@
+Pipe Viewer (`pv`) is a terminal-based tool for monitoring the progress of data through a pipeline. It can be inserted into any normal pipeline between two processes to give a visual indication of how quickly data is passing through, how long it has taken, how near to completion it is, and an estimate of how long it will be until completion.
+
+Additional support is available for multiple instances working in tandem, to given a visual indicator of relative throughput in a complex pipeline. See the [project home page](http://www.ivarch.com/programs/pv.shtml) for more information.
+
+Source for all systems and RPMs for RPM-based i386 and x86\_64 systems are available from the project home page. Debian users can do '`apt-get install pv`' to get the latest packaged version from 'unstable' / 'testing'.
